@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class Province : MonoBehaviour
 {
-    private List<Settlement> settlements;
+    public List<Settlement> Settlements { get; private set; }
 
     public void SetUpNewSettlement()
     {
-        if (settlements == null)
-            settlements = new List<Settlement>();
+        if (Settlements == null)
+            Settlements = new List<Settlement>();
 
         var resources = new List<Resource>
         {
@@ -19,6 +19,6 @@ public class Province : MonoBehaviour
 
         var newSettlement = new Settlement(resources, new List<Institution>(5), "firstSettlement");
 
-        settlements.Add(newSettlement);
+        Settlements.Add(newSettlement);
     }
 }
