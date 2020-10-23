@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class HumanSector : Institution
+public class Community : Institution
 {
     [SerializeField] private Vector2Int humansRange = default;
     

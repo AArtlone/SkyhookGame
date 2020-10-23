@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class RD : Institution
+public class StarLabs : Institution
 {
     [SerializeField] private Vector2Int tasksCapacityRange = default;
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Factory : Institution
+public class Manufactory : Institution
 {
     [SerializeField] private Vector2Int tasksCapacityRange = default;
     [SerializeField] private Vector2Int storageCapacityRange = default;

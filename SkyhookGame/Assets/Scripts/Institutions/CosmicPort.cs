@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SpacePort : Institution
+public class CosmicPort : Institution
 {
     [SerializeField] private Vector2Int availableDocksRange = default;
     [SerializeField] private Vector2Int loadSpeedRange = default;
