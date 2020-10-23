@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class RD : Institution
 {
+    [SerializeField] private Vector2Int tasksCapacityRange = default;
+
     private List<Study> availableStudies;
     private List<Study> studiesInProgress;
 
     private int tasksCapacity;
-
-    private RDLevelUpSO levelUpSO;
 
     public override void Upgrade()
     {
@@ -21,8 +21,6 @@ public class RD : Institution
 
     protected override void InitializeMethod()
     {
-        levelUpSO = Resources.Load<RDLevelUpSO>("ScriptableObjects/RDLevelUpSO");
-
         UpdateVariables();
 
         DebugVariables();
@@ -30,7 +28,7 @@ public class RD : Institution
 
     protected override void UpdateVariables()
     {
-        tasksCapacity = levelUpSO.Evaluate(Level);
+        tasksCapacity = LevelModule.Evaluate(tasksCapacityRange);
     }
 
     protected override void DebugVariables()

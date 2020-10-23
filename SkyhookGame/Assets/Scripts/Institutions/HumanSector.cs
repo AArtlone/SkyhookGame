@@ -2,10 +2,10 @@
 
 public class HumanSector : Institution
 {
+    [SerializeField] private Vector2Int humansRange = default;
+    
     public int TotalHumans { get; private set; }
     public int AvailableHumans { get; private set; }
-
-    private HumanSectorLevelUpSO levelUpSO;
 
     public override void Upgrade()
     {
@@ -22,8 +22,6 @@ public class HumanSector : Institution
 
     protected override void InitializeMethod()
     {
-        levelUpSO = Resources.Load<HumanSectorLevelUpSO>("ScriptableObjects/HumanSectorLevelUpSO");
-
         UpdateVariables();
 
         AvailableHumans = TotalHumans;
@@ -33,7 +31,7 @@ public class HumanSector : Institution
 
     protected override void UpdateVariables()
     {
-        TotalHumans = levelUpSO.Evaluate(Level);
+        TotalHumans = LevelModule.Evaluate(humansRange);
     }
 
     protected override void DebugVariables()

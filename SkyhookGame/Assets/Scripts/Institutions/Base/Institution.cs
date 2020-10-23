@@ -2,21 +2,26 @@
 
 public abstract class Institution : MonoBehaviour
 {
-    public int Level { get; private set; } = 1;
+    [SerializeField] private LevelModule levelModule = default;
+
+    public LevelModule LevelModule { get { return levelModule; } }
 
     public InstitutionType InstitutionType { get; private set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         InitializeMethod();
     }
 
     public virtual void Upgrade()
     {
-        Level++;
+        levelModule.IncreaseLevel();
     }
 
     protected abstract void InitializeMethod();
+    /// <summary>
+    /// Updates instituion's variables based on the institution level
+    /// </summary>
     protected abstract void UpdateVariables();
     protected abstract void DebugVariables();
 }

@@ -1,18 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Settlement
+public class Settlement : MonoBehaviour
 {
-    public List<Resource> resources;
+    [SerializeField] private ExperienceModule experienceModule = default;
     
-    public List<Institution> institutions;
+    private List<Resource> resources;
+    
+    private List<Institution> institutions;
     
     public string Name { get; private set; }
-
-    public int Level { get; private set; }
-    public int Exp { get; private set; }
-
-    private SettlementLevelUpSO levelUpSO;
 
     public Settlement(List<Resource> resources, List<Institution> institutions, string name)
     {
@@ -20,24 +17,12 @@ public class Settlement
         this.institutions = institutions;
 
         Name = name;
-
-        Level = 1;
-        Exp = 0;
-
-        levelUpSO = Resources.Load<SettlementLevelUpSO>("ScriptableObjects/SettlementLevelUpSO");
     }
 
-    public void AddXp(int amountToAdd)
+    public void AddExperience(int amount)
     {
-        Exp += amountToAdd;
+        experienceModule.Increase(amount);
 
-        // TODO: check for level increase
-
-        int newLevel = levelUpSO.Evaluate(Exp);
-
-        if (newLevel > Level)
-            Level = newLevel;
-
-        Debug.Log(Level);
+        Debug.Log(experienceModule.Experience);
     }
 }

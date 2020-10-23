@@ -2,25 +2,23 @@
 
 public class Factory : Institution
 {
+    [SerializeField] private Vector2Int tasksCapacityRange = default;
+    [SerializeField] private Vector2Int storageCapacityRange = default;
+
     private int storageCapacity;
     private int tasksCapacity;
-
-    private FactoryLevelUpSO levelUpSO;
 
     public override void Upgrade()
     {
         base.Upgrade();
 
-        storageCapacity = levelUpSO.EvaluateStorageCapacity(Level);
-        tasksCapacity = levelUpSO.EvaluateTasksCapacity(Level);
+        UpdateVariables();
 
         DebugVariables();
     }
 
     protected override void InitializeMethod()
     {
-        levelUpSO = Resources.Load<FactoryLevelUpSO>("ScriptableObjects/FactoryLevelUpSO");
-
         UpdateVariables();
 
         DebugVariables();
@@ -28,8 +26,8 @@ public class Factory : Institution
 
     protected override void UpdateVariables()
     {
-        storageCapacity = levelUpSO.EvaluateStorageCapacity(Level);
-        tasksCapacity = levelUpSO.EvaluateTasksCapacity(Level);
+        storageCapacity = LevelModule.Evaluate(storageCapacityRange);
+        tasksCapacity = LevelModule.Evaluate(tasksCapacityRange);
     }
 
     protected override void DebugVariables()

@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Production : Institution
 {
+    [SerializeField] private Vector2Int incremetalRateRange = default;
+    
     private List<Resource> unlockedResources;
 
     private int incrementalRate;
-
-    private ProductionLevelUpSO levelUpSO;
 
     public override void Upgrade()
     {
@@ -20,8 +20,6 @@ public class Production : Institution
 
     protected override void InitializeMethod()
     {
-        levelUpSO = Resources.Load<ProductionLevelUpSO>("ScriptableObjects/ProductionLevelUpSO");
-
         UpdateVariables();
 
         DebugVariables();
@@ -29,7 +27,7 @@ public class Production : Institution
 
     protected override void UpdateVariables()
     {
-        incrementalRate = levelUpSO.Evaluate(Level);
+        incrementalRate = LevelModule.Evaluate(incremetalRateRange);
     }
 
     protected override void DebugVariables()

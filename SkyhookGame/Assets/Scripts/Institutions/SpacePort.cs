@@ -2,11 +2,13 @@
 
 public class SpacePort : Institution
 {
+    [SerializeField] private Vector2Int availableDocksRange = default;
+    [SerializeField] private Vector2Int loadSpeedRange = default;
+    [SerializeField] private Vector2Int unloadSpeedRange = default;
+
     private int availableDocks;
     private int loadSpeed;
     private int unloadSpeed;
-
-    private SpacePortLevelUpSO levelUpSO;
 
     public override void Upgrade()
     {
@@ -19,8 +21,6 @@ public class SpacePort : Institution
 
     protected override void InitializeMethod()
     {
-        levelUpSO = Resources.Load<SpacePortLevelUpSO>("ScriptableObjects/SpacePortLevelUpSO");
-
         UpdateVariables();
 
         DebugVariables();
@@ -28,9 +28,9 @@ public class SpacePort : Institution
 
     protected override void UpdateVariables()
     {
-        availableDocks = levelUpSO.EvaluateDocks(Level);
-        loadSpeed = levelUpSO.EvaluateLoadSpeed(Level);
-        unloadSpeed = levelUpSO.EvaluateUnLoadSpeed(Level);
+        availableDocks = LevelModule.Evaluate(availableDocksRange);
+        loadSpeed = LevelModule.Evaluate(loadSpeedRange);
+        unloadSpeed = LevelModule.Evaluate(unloadSpeedRange);
     }
 
     protected override void DebugVariables()
