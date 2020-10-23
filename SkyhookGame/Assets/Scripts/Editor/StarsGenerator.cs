@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+
 public class StarsGenerator : MonoBehaviour
 {
 	private static GameObject[] prefabs;
