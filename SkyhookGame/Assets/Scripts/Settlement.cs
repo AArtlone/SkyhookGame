@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Settlement
 {
@@ -8,8 +9,10 @@ public class Settlement
     
     public string Name { get; private set; }
 
-    public int level;
-    public int exp;
+    public int Level { get; private set; }
+    public int Exp { get; private set; }
+
+    private SettlementLevelUpSO levelUpSO;
 
     public Settlement(List<Resource> resources, List<Institution> institutions, string name)
     {
@@ -18,14 +21,23 @@ public class Settlement
 
         Name = name;
 
-        level = 1;
-        exp = 0;
+        Level = 1;
+        Exp = 0;
+
+        levelUpSO = Resources.Load<SettlementLevelUpSO>("ScriptableObjects/SettlementLevelUpSO");
     }
 
-    private void AddXp(int amountToAdd)
+    public void AddXp(int amountToAdd)
     {
-        exp += amountToAdd;
+        Exp += amountToAdd;
 
         // TODO: check for level increase
+
+        int newLevel = levelUpSO.Evaluate(Exp);
+
+        if (newLevel > Level)
+            Level = newLevel;
+
+        Debug.Log(Level);
     }
 }
