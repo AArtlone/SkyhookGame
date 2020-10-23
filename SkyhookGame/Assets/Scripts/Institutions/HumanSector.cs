@@ -1,20 +1,52 @@
-﻿public class HumanSector : Institution
+﻿using UnityEngine;
+
+public class HumanSector : Institution
 {
     public int TotalHumans { get; private set; }
     public int AvailableHumans { get; private set; }
 
-   /// <summary>
-   /// Checks if there are enough available humans
-   /// </summary>
-    public bool CheckIfCanPerform(int requiredAmount) 
-    { 
-        return AvailableHumans >= requiredAmount; 
-    }
+    private HumanSectorLevelUpSO levelUpSO;
 
     public override void Upgrade()
     {
         base.Upgrade();
 
-        // TODO: increase amount of total and available humans based on the curve
+        int previousTotalHumans = TotalHumans;
+
+        UpdateVariables();
+
+        AvailableHumans += TotalHumans - previousTotalHumans;
+
+        DebugVariables();
+    }
+
+    protected override void InitializeMethod()
+    {
+        levelUpSO = Resources.Load<HumanSectorLevelUpSO>("ScriptableObjects/HumanSectorLevelUpSO");
+
+        UpdateVariables();
+
+        AvailableHumans = TotalHumans;
+
+        DebugVariables();
+    }
+
+    protected override void UpdateVariables()
+    {
+        TotalHumans = levelUpSO.Evaluate(Level);
+    }
+
+    protected override void DebugVariables()
+    {
+        Debug.Log("New Total Humans number = " + TotalHumans);
+        Debug.Log("New Available Humans number = " + AvailableHumans);
+    }
+
+    /// <summary>
+    /// Checks if there are enough available humans
+    /// </summary>
+    public bool CheckIfCanPerform(int requiredAmount)
+    {
+        return AvailableHumans >= requiredAmount;
     }
 }

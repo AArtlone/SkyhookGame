@@ -1,11 +1,42 @@
-﻿public class SpacePort : Institution
+﻿using UnityEngine;
+
+public class SpacePort : Institution
 {
+    private int availableDocks;
+    private int loadSpeed;
+    private int unloadSpeed;
+
+    private SpacePortLevelUpSO levelUpSO;
+
     public override void Upgrade()
     {
         base.Upgrade();
 
-        //TODO: increase number of available docks based on the animation curve
+        UpdateVariables();
 
-        //TODO: increase load and unload speed based on the animation curve
+        DebugVariables();
+    }
+
+    protected override void InitializeMethod()
+    {
+        levelUpSO = Resources.Load<SpacePortLevelUpSO>("ScriptableObjects/SpacePortLevelUpSO");
+
+        UpdateVariables();
+
+        DebugVariables();
+    }
+
+    protected override void UpdateVariables()
+    {
+        availableDocks = levelUpSO.EvaluateDocks(Level);
+        loadSpeed = levelUpSO.EvaluateLoadSpeed(Level);
+        unloadSpeed = levelUpSO.EvaluateUnLoadSpeed(Level);
+    }
+
+    protected override void DebugVariables()
+    {
+        Debug.Log("New available docks number = " + availableDocks);
+        Debug.Log("New load speed = " + loadSpeed);
+        Debug.Log("New unload speed = " + unloadSpeed);
     }
 }
