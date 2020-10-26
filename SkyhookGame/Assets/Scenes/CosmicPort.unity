@@ -2531,7 +2531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preview: {fileID: 1316673131}
   upgradeView: {fileID: 1019437552}
-  docksView: {fileID: 1273335919}
+  docksView: {fileID: 1273335915}
 --- !u!1 &1268988481
 GameObject:
   m_ObjectHideFlags: 0
@@ -3085,7 +3085,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1148290198}
+      - m_Target: {fileID: 1273335919}
         m_MethodName: ShowDocksView
         m_Mode: 1
         m_Arguments:
