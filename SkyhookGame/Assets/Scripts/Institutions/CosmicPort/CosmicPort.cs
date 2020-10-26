@@ -7,31 +7,21 @@ public class CosmicPort : Institution
     [SerializeField] private Vector2Int loadSpeedRange = default;
     [SerializeField] private Vector2Int unloadSpeedRange = default;
 
+
     [Space(10f)]
-    [SerializeField] private List<Dock> allDocks = default;
+    [SerializeField] private GameObject preview = default;
+    [SerializeField] private DocksView docksView = default;
 
     private int availableDocks;
     private int loadSpeed;
     private int unloadSpeed;
 
-    private void Start()
+    protected override void Awake()
     {
-        print(availableDocks);
+        base.Awake();
 
-        if (availableDocks > allDocks.Count)
-        {
-            Debug.LogError("Number of available docks is more than all docks count. Either reduce the available docks range or add more docks to the All Docks list on " + transform.name);
-            enabled = false;
-            return;
-        }
-
-        UpdateDocksAvailability();
-    }
-
-    private void UpdateDocksAvailability()
-    {
-        for (int i = 0; i < availableDocks; i++)
-            allDocks[i].SetAvailable();
+        preview.SetActive(false);
+        docksView.gameObject.SetActive(false);
     }
 
     public override void Upgrade()
@@ -42,7 +32,7 @@ public class CosmicPort : Institution
 
         DebugVariables();
 
-        UpdateDocksAvailability();
+        docksView.UpdateDocksAvailability(availableDocks);
     }
 
     protected override void InitializeMethod()
@@ -64,5 +54,17 @@ public class CosmicPort : Institution
         Debug.Log("New available docks number = " + availableDocks);
         Debug.Log("New load speed = " + loadSpeed);
         Debug.Log("New unload speed = " + unloadSpeed);
+    }
+
+    public void ShowPreview()
+    {
+        preview.SetActive(true);
+    }
+
+    public void ShowDocksView()
+    {
+        docksView.UpdateDocksAvailability(availableDocks);
+
+        docksView.gameObject.SetActive(true);
     }
 }
