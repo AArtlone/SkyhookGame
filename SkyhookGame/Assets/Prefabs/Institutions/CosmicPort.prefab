@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 679562506693431113}
   - component: {fileID: 679562506693431114}
   m_Layer: 0
-  m_Name: SpacePort
+  m_Name: CosmicPort
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

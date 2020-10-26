@@ -5,20 +5,20 @@ public class Province : MonoBehaviour
 {
     public List<Settlement> Settlements { get; private set; }
 
-    public void SetUpNewSettlement()
-    {
-        if (Settlements == null)
-            Settlements = new List<Settlement>();
+    //public void SetUpNewSettlement()
+    //{
+    //    if (Settlements == null)
+    //        Settlements = new List<Settlement>();
 
-        var resources = new List<Resource>
-        {
-            new Resource(ResourceType.Type1, 0),
-            new Resource(ResourceType.Type2, 0),
-            new Resource(ResourceType.Type3, 0)
-        };
+    //    var resources = new List<Resource>
+    //    {
+    //        new Resource(ResourceType.Type1, 0),
+    //        new Resource(ResourceType.Type2, 0),
+    //        new Resource(ResourceType.Type3, 0)
+    //    };
 
-        var newSettlement = new Settlement(resources, new List<Institution>(5), "firstSettlement");
+    //    var newSettlement = new Settlement(resources, new List<Institution>(5), "firstSettlement");
 
-        Settlements.Add(newSettlement);
-    }
+    //    Settlements.Add(newSettlement);
+    //}
 }

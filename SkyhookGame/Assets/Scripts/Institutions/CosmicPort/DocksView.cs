@@ -25,6 +25,22 @@ public class DocksView : MonoBehaviour
         CloseBuildDockView();
     }
 
+    private void OnEnable()
+    {
+        Settlement.Instance.CosmicPort.onAvailableDocksChanged += OnAvailableDocksChanged;
+    }
+
+    private void OnDisable()
+    {
+
+        Settlement.Instance.CosmicPort.onAvailableDocksChanged -= OnAvailableDocksChanged;
+    }
+
+    public void OnAvailableDocksChanged(int value)
+    {
+        UpdateDocksAvailability(value);
+    }
+
     public void UpdateDocksAvailability(int availableDocks)
     {
         if (availableDocks > allDocks.Count)

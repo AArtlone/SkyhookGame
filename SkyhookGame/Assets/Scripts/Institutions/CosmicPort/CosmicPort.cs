@@ -1,30 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class CosmicPort : Institution
 {
+    public Action<int> onAvailableDocksChanged;
+    
     [SerializeField] private Vector2Int availableDocksRange = default;
     [SerializeField] private Vector2Int loadSpeedRange = default;
     [SerializeField] private Vector2Int unloadSpeedRange = default;
 
-
-    [Space(10f)]
-    [SerializeField] private GameObject preview = default;
-    [SerializeField] private GameObject upgradeView = default;
-    [SerializeField] private DocksView docksView = default;
-
-    private int availableDocks;
+    public int AvailableDocks { get; private set; }
     private int loadSpeed;
     private int unloadSpeed;
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        preview.SetActive(false);
-        upgradeView.SetActive(false);
-        docksView.gameObject.SetActive(false);
-    }
 
     public override void Upgrade()
     {
@@ -34,7 +21,7 @@ public class CosmicPort : Institution
 
         DebugVariables();
 
-        docksView.UpdateDocksAvailability(availableDocks);
+        onAvailableDocksChanged?.Invoke(AvailableDocks);
     }
 
     protected override void InitializeMethod()
@@ -46,22 +33,15 @@ public class CosmicPort : Institution
 
     protected override void UpdateVariables()
     {
-        availableDocks = LevelModule.Evaluate(availableDocksRange);
+        AvailableDocks = LevelModule.Evaluate(availableDocksRange);
         loadSpeed = LevelModule.Evaluate(loadSpeedRange);
         unloadSpeed = LevelModule.Evaluate(unloadSpeedRange);
     }
 
     protected override void DebugVariables()
     {
-        Debug.Log("New available docks number = " + availableDocks);
+        Debug.Log("New available docks number = " + AvailableDocks);
         Debug.Log("New load speed = " + loadSpeed);
         Debug.Log("New unload speed = " + unloadSpeed);
-    }
-
-    public void ShowDocksView()
-    {
-        docksView.UpdateDocksAvailability(availableDocks);
-
-        docksView.gameObject.SetActive(true);
     }
 }
