@@ -10,6 +10,7 @@ public class CosmicPort : Institution
 
     [Space(10f)]
     [SerializeField] private GameObject preview = default;
+    [SerializeField] private GameObject upgradeView = default;
     [SerializeField] private DocksView docksView = default;
 
     private int availableDocks;
@@ -21,6 +22,7 @@ public class CosmicPort : Institution
         base.Awake();
 
         preview.SetActive(false);
+        upgradeView.SetActive(false);
         docksView.gameObject.SetActive(false);
     }
 
@@ -54,11 +56,6 @@ public class CosmicPort : Institution
         Debug.Log("New available docks number = " + availableDocks);
         Debug.Log("New load speed = " + loadSpeed);
         Debug.Log("New unload speed = " + unloadSpeed);
-    }
-
-    public void ShowPreview()
-    {
-        preview.SetActive(true);
     }
 
     public void ShowDocksView()
