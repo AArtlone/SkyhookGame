@@ -69,13 +69,6 @@ public class DocksView : MonoBehaviour
         selectedDock = dock;
     }
 
-    public void BuildDock()
-    {
-        CloseBuildDockView();
-
-        selectedDock.StartBuilding();
-    }
-
     private void CloseBuildDockView()
     {
         buildDockView.SetActive(false);
@@ -85,4 +78,20 @@ public class DocksView : MonoBehaviour
     {
         buildDockView.SetActive(true);
     }
+
+    #region EditorButtons
+    public void BuildDock()
+    {
+        CloseBuildDockView();
+
+        selectedDock.StartBuilding();
+    }
+
+    public void ShowDocksView()
+    {
+        UpdateDocksAvailability(Settlement.Instance.CosmicPort.AvailableDocks);
+
+        gameObject.SetActive(true);
+    }
+#endregion
 }
