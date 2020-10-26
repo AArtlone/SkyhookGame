@@ -10,10 +10,6 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
 
     [SerializeField] private UpdateMethod updateMethod = default;
 
-    [Space(5f)]
-    [SerializeField] private bool backgroundImageOnThisObject = default;
-
-    [ShowIf(nameof(backgroundImageOnThisObject), false, ComparisonType.Equals)]
     [SerializeField] private Image backgroundImage = default;
     [Space(5f)]
     [ShowIf(nameof(updateMethod), nameof(UpdateMethod.Sprite), ComparisonType.Equals)]
@@ -37,8 +33,12 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
 
     private void Awake()
     {
-        if (!CheckComponents())
+        if (backgroundImage == null)
+        {
+            Debug.LogWarning("BackgroundImage is not set in the editor.");
+            enabled = false;
             return;
+        }
 
         if (!Interactable)
             return;
@@ -111,30 +111,6 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
             else
                 UpdateVisual(idleSprite);
         }
-    }
-
-    private bool CheckComponents()
-    {
-        if (!backgroundImageOnThisObject && backgroundImage == null)
-        {
-            Debug.LogWarning("BackgroundImage is not set in the editor.");
-            enabled = false;
-            return false;
-        }
-
-        if (backgroundImageOnThisObject)
-        {
-            backgroundImage = GetComponent<Image>();
-
-            if (backgroundImage != null)
-                return true;
-
-            Debug.LogError("Image component does not exist on " + gameObject.name);
-            enabled = false;
-            return false;
-        }
-
-        return true;
     }
 }
 
