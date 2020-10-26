@@ -9,19 +9,27 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
     public Action onClick;
 
     [SerializeField] private UpdateMethod updateMethod = default;
-    [Space(5f)]
+
     [SerializeField] private Image backgroundImage = default;
     [Space(5f)]
+    [ShowIf(nameof(updateMethod), nameof(UpdateMethod.Sprite), ComparisonType.Equals)]
     [SerializeField] private Sprite idleSprite = default;
+    [ShowIf(nameof(updateMethod), nameof(UpdateMethod.Sprite), ComparisonType.Equals)]
     [SerializeField] private Sprite hoverSprite = default;
+    [ShowIf(nameof(updateMethod), nameof(UpdateMethod.Sprite), ComparisonType.Equals)]
     [SerializeField] private Sprite activeSprite = default;
     [Space(5f)]
+    [ShowIf(nameof(updateMethod), nameof(UpdateMethod.Color), ComparisonType.Equals)]
     [SerializeField] private Color idleColor = default;
+    [ShowIf(nameof(updateMethod), nameof(UpdateMethod.Color), ComparisonType.Equals)]
     [SerializeField] private Color hoverColor = default;
+    [ShowIf(nameof(updateMethod), nameof(UpdateMethod.Color), ComparisonType.Equals)]
     [SerializeField] private Color activeColor = default;
 
     [Space(5f)]
     [SerializeField] private UnityEvent onClickEvent = default;
+
+    public bool Interactable { get; private set; }
 
     private void Awake()
     {
@@ -32,6 +40,9 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
             return;
         }
 
+        if (!Interactable)
+            return;
+
         if (updateMethod == UpdateMethod.Color)
             UpdateVisual(idleColor);
         else
@@ -40,6 +51,9 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
+        if (!Interactable)
+            return;
+
         if (updateMethod == UpdateMethod.Color)
             UpdateVisual(hoverColor);
         else
@@ -48,6 +62,9 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
 
     public virtual void OnPointerClick(PointerEventData eventData)
     {
+        if (!Interactable)
+            return;
+
         if (updateMethod == UpdateMethod.Color)
             UpdateVisual(activeColor);
         else
@@ -62,6 +79,9 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
+        if (!Interactable)
+            return;
+
         if (updateMethod == UpdateMethod.Color)
             UpdateVisual(idleColor);
         else
@@ -78,6 +98,19 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
         Color color = new Color(colorToUpdate.r, colorToUpdate.g, colorToUpdate.b, 1f);
 
         backgroundImage.color = color;
+    }
+
+    public void SetInteractable(bool value)
+    {
+        Interactable = value;
+
+        if (Interactable)
+        {
+            if (updateMethod == UpdateMethod.Color)
+                UpdateVisual(idleColor);
+            else
+                UpdateVisual(idleSprite);
+        }
     }
 }
 
