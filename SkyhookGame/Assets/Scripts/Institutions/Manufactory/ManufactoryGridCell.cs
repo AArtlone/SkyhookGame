@@ -28,9 +28,11 @@ public class ManufactoryGridCell : SelectableCell<ManufactoryGridCellData>
             var ship = new Ship(data.shipRecipe.shipName);
 
             Settlement.Instance.Manufactory.AddShipToStorage(ship);
+
+            print("DONE BUILDING");
         });
 
-        buildProgressBar.StartProgressBar(0, 5, callback);
+        buildProgressBar.StartProgressBar(0, 2, callback);
     }
 }
 

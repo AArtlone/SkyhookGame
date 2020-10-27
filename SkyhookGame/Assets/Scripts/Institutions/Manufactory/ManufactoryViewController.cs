@@ -1,13 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ManufactoryViewController : SelectableController<ManufactoryGridCell, ManufactoryGridCellData>
 {
     [Space(5f)]
     [SerializeField] private BuildShipView buildShipView = default;
+    
+    private void OnEnable()
+    {
+        SetStoragDataSet();
 
-    private void Awake()
+        RefreshView();
+    }
+
+    private void SetStoragDataSet()
     {
         List<ShipRecipe> shipRecipes = Settlement.Instance.Manufactory.ShipRecipes;
 
@@ -16,8 +22,6 @@ public class ManufactoryViewController : SelectableController<ManufactoryGridCel
         shipRecipes.ForEach(e => dataSet.Add(new ManufactoryGridCellData(e)));
 
         SetDataSet(dataSet);
-
-        Initialize();
     }
 
     protected override void Cell_OnCellPress(SelectableCell<ManufactoryGridCellData> cell)
