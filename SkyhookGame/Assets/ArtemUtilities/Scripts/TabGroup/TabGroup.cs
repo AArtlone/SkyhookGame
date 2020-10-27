@@ -20,7 +20,7 @@ public abstract class TabGroup : MonoBehaviour
     [ShowIf(nameof(type), nameof(TabGroupType.SpriteBased), ComparisonType.Equals)]
     [SerializeField] private Sprite activeSprite = default;
 
-    [SerializeField] private List<GameObject> pages = default;
+    [SerializeField] private List<TabPage> pages = default;
 
     //[SerializeField] private EffectBase selectEffect = default;
     
@@ -76,7 +76,12 @@ public abstract class TabGroup : MonoBehaviour
         int index = tabButton.transform.GetSiblingIndex();
 
         for (int i = 0; i < pages.Count; i++)
-            pages[i].SetActive(index == i);
+        {
+            if (index == i)
+                pages[i].ShowPage();
+            else
+                pages[i].gameObject.SetActive(false);
+        }
 
         if (type == TabGroupType.SpriteBased)
             selectedTab.Select(activeSprite);
@@ -106,6 +111,6 @@ public abstract class TabGroup : MonoBehaviour
 
     private void ResetPages()
     {
-        pages.ForEach(p => p.SetActive(false));
+        pages.ForEach(p => p.gameObject.SetActive(false));
     }
 }

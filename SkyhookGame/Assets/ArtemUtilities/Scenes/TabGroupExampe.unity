@@ -158,9 +158,9 @@ MonoBehaviour:
   hoverSprite: {fileID: 0}
   activeSprite: {fileID: 0}
   pages:
-  - {fileID: 1020819854}
-  - {fileID: 1002480346}
-  selectEffect: {fileID: 0}
+  - {fileID: 1020819856}
+  - {fileID: 1002480348}
+  - {fileID: 537294091}
 --- !u!4 &85440871
 Transform:
   m_ObjectHideFlags: 0
@@ -419,6 +419,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 537294090}
+  - component: {fileID: 537294091}
   m_Layer: 5
   m_Name: Page3
   m_TagString: Untagged
@@ -446,6 +447,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &537294091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537294089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a66b08a2c300c24e9ea6b9ee8eb6e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &558157769
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,7 +528,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Page1
+  m_Text: Page3
 --- !u!222 &558157772
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -635,6 +648,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1002480347}
+  - component: {fileID: 1002480348}
   m_Layer: 5
   m_Name: Page2
   m_TagString: Untagged
@@ -662,6 +676,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1002480348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002480346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a66b08a2c300c24e9ea6b9ee8eb6e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1020819854
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,6 +697,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1020819855}
+  - component: {fileID: 1020819856}
   m_Layer: 5
   m_Name: Page1
   m_TagString: Untagged
@@ -698,6 +725,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1020819856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020819854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a66b08a2c300c24e9ea6b9ee8eb6e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1216715697
 GameObject:
   m_ObjectHideFlags: 0
