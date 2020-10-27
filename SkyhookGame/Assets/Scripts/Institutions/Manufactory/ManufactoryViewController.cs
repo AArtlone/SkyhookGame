@@ -38,9 +38,18 @@ public class ManufactoryViewController : SelectableController<ManufactoryGridCel
 
     public void BuildShip()
     {
-        buildShipView.gameObject.SetActive(false);
+        bool canBuild = Settlement.Instance.Manufactory.CanBuild();
 
-        GetSelectedCell().StartBuilding();
+        if (canBuild)
+        {
+            buildShipView.gameObject.SetActive(false);
+
+            GetSelectedCell().StartBuilding();
+        }
+        else
+        {
+            PopUpManager.CreateSingleButtonTextPopUp("The ship cannot be built because you are at your maximum production capacity", "Ok", new System.Action(() => { }));
+        }
     }
 }
 
