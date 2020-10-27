@@ -21,19 +21,23 @@ public class ManufactoryGridCell : SelectableCell<ManufactoryGridCellData>
     {
         myButton.SetInteractable(false);
 
+        Manufactory.AddProductionProcess();
+
         var callback = new Action(() =>
         {
             myButton.SetInteractable(true);
 
             var ship = new Ship(data.shipRecipe.shipName);
 
-            Settlement.Instance.Manufactory.AddShipToStorage(ship);
+            Manufactory.DoneBuildingShip(ship);
 
             print("DONE BUILDING");
         });
 
         buildProgressBar.StartProgressBar(0, 2, callback);
     }
+
+    private Manufactory Manufactory { get { return Settlement.Instance.Manufactory; } }
 }
 
 public class ManufactoryGridCellData : SelectableCellData

@@ -12,6 +12,8 @@ public class Manufactory : Institution
 
     public List<Ship> ShipsInStorage { get; private set; } = new List<Ship>();
 
+    public int ProductionProcesses { get; private set; }
+
     private int storageCapacity;
     private int tasksCapacity;
 
@@ -43,10 +45,22 @@ public class Manufactory : Institution
         Debug.Log("New Tasks Capacity number = " + tasksCapacity);
     }
 
-    public void AddShipToStorage(Ship ship)
+    public void DoneBuildingShip(Ship ship)
     {
+        ProductionProcesses--;
+        
         ShipsInStorage.Add(ship);
 
         ManufactoryUIController.Instance.StorageViewController.RefreshData();
+    }
+
+    public void AddProductionProcess()
+    {
+        ProductionProcesses++;
+    }
+
+    public bool CanBuild()
+    {
+        return ProductionProcesses < tasksCapacity;
     }
 }
