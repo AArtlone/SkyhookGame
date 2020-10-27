@@ -365,7 +365,7 @@ MonoBehaviour:
   preview: {fileID: 1500764853}
   upgradeView: {fileID: 200788022}
   manufactoryView: {fileID: 857164638}
-  buildShipView: {fileID: 898977649}
+  storageViewController: {fileID: 967737671}
 --- !u!114 &169893554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,13 +566,14 @@ GameObject:
   m_Component:
   - component: {fileID: 231532939}
   - component: {fileID: 231532940}
+  - component: {fileID: 231532941}
   m_Layer: 5
-  m_Name: Page1
+  m_Name: ManufactoryView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &231532939
 RectTransform:
   m_ObjectHideFlags: 0
@@ -608,11 +609,19 @@ MonoBehaviour:
   cellPrefab: {fileID: 5683540373721541427, guid: c62bb6d63de677442a7743aa393d654a,
     type: 3}
   contentContainer: {fileID: 2089606790}
-  shipRecipes:
-  - {fileID: 11400000, guid: c62fc95275e98d342900fc190a00e7b0, type: 2}
-  - {fileID: 11400000, guid: c32559ce4145ebd4a89daa6f24f327fc, type: 2}
-  - {fileID: 11400000, guid: 27492c520cf8b42488f8452fc0b9e753, type: 2}
-  - {fileID: 11400000, guid: 7fe65cd604c747f4c852600d1e553841, type: 2}
+  buildShipView: {fileID: 898977649}
+--- !u!114 &231532941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231532938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86421b7dfb408424ab6e7b0d39272146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &241480312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,10 +1246,10 @@ RectTransform:
   m_Father: {fileID: 1961257487}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 67.5, y: -25}
+  m_SizeDelta: {x: 135, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &449445135
 MonoBehaviour:
@@ -2037,7 +2046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &857164640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2390,6 +2399,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1544950222593227389, guid: 730a011d2fad7a44c81db6159d5e1d43,
+        type: 3}
+      propertyPath: shipRecipes.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1544950222593227389, guid: 730a011d2fad7a44c81db6159d5e1d43,
+        type: 3}
+      propertyPath: shipRecipes.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: c62fc95275e98d342900fc190a00e7b0,
+        type: 2}
+    - target: {fileID: 1544950222593227389, guid: 730a011d2fad7a44c81db6159d5e1d43,
+        type: 3}
+      propertyPath: shipRecipes.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: c32559ce4145ebd4a89daa6f24f327fc,
+        type: 2}
+    - target: {fileID: 1544950222593227389, guid: 730a011d2fad7a44c81db6159d5e1d43,
+        type: 3}
+      propertyPath: shipRecipes.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 27492c520cf8b42488f8452fc0b9e753,
+        type: 2}
+    - target: {fileID: 1544950222593227389, guid: 730a011d2fad7a44c81db6159d5e1d43,
+        type: 3}
+      propertyPath: shipRecipes.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7fe65cd604c747f4c852600d1e553841,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 730a011d2fad7a44c81db6159d5e1d43, type: 3}
 --- !u!1 &967737669
@@ -2402,8 +2440,9 @@ GameObject:
   m_Component:
   - component: {fileID: 967737670}
   - component: {fileID: 967737671}
+  - component: {fileID: 967737672}
   m_Layer: 5
-  m_Name: Page2
+  m_Name: StorageView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2446,6 +2485,18 @@ MonoBehaviour:
     type: 3}
   contentContainer: {fileID: 1056196698}
   emptyStorageText: {fileID: 1946069805}
+--- !u!114 &967737672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967737669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86421b7dfb408424ab6e7b0d39272146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1056196697
 GameObject:
   m_ObjectHideFlags: 0
@@ -3248,10 +3299,10 @@ RectTransform:
   m_Father: {fileID: 1961257487}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 232.5, y: -25}
+  m_SizeDelta: {x: 135, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1554271406
 MonoBehaviour:
@@ -3679,8 +3730,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: BuildDock
+      - m_Target: {fileID: 231532940}
+        m_MethodName: BuildShip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4052,8 +4103,8 @@ MonoBehaviour:
   hoverSprite: {fileID: 0}
   activeSprite: {fileID: 0}
   pages:
-  - {fileID: 231532938}
-  - {fileID: 967737669}
+  - {fileID: 231532941}
+  - {fileID: 967737672}
 --- !u!114 &1961257489
 MonoBehaviour:
   m_ObjectHideFlags: 0

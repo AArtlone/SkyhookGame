@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ManufactoryUIController : Singleton<ManufactoryUIController>
 {
@@ -7,9 +6,9 @@ public class ManufactoryUIController : Singleton<ManufactoryUIController>
     [SerializeField] private GameObject preview = default;
     [SerializeField] private GameObject upgradeView = default;
     [SerializeField] private GameObject manufactoryView = default;
-    
-    [Space(5f)]
-    [SerializeField] private BuildShipView buildShipView = default;
+
+    [SerializeField] private StorageViewController storageViewController = default;
+    public StorageViewController StorageViewController { get { return storageViewController; } }
 
     protected override void Awake()
     {
@@ -18,10 +17,5 @@ public class ManufactoryUIController : Singleton<ManufactoryUIController>
         preview.SetActive(false);
         upgradeView.SetActive(false);
         manufactoryView.gameObject.SetActive(false);
-    }
-
-    public void ShowBuildShipView(ShipRecipe shipRecipe)
-    {
-        buildShipView.ShowView(shipRecipe);
     }
 }

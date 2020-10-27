@@ -4,4 +4,9 @@ using UnityEngine;
 
 public class ManufactoryTabGroup : TabGroup
 {
+    public override void SelectTab(TabButton tabButton)
+    {
+        base.SelectTab(tabButton);
+
+    }
 }

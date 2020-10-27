@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 3584405581192140944}
   - component: {fileID: 1749762699588751421}
   - component: {fileID: 4679854338317003820}
+  - component: {fileID: 2584628914101824750}
   m_Layer: 5
   m_Name: StorageCellPrefab
   m_TagString: Untagged
@@ -247,4 +248,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915976adfac18c74c9c7143ecdcd85bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myButton: {fileID: 0}
   nameText: {fileID: 4595855159132827378}
+--- !u!114 &2584628914101824750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3584405581192140942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2331eecc8bb7964cafd6989577f8973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateMethod: 1
+  backgroundImage: {fileID: 3584405581192140944}
+  idleSprite: {fileID: 0}
+  hoverSprite: {fileID: 0}
+  activeSprite: {fileID: 0}
+  idleColor: {r: 0.03137255, g: 0.21176472, b: 0.2627451, a: 0}
+  hoverColor: {r: 0.0757387, g: 0.35503155, b: 0.4339623, a: 0}
+  activeColor: {r: 0.09371662, g: 0.594362, b: 0.735849, a: 0}
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
