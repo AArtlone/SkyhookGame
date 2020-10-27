@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -11,6 +12,7 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
     [SerializeField] private UpdateMethod updateMethod = default;
 
     [SerializeField] private Image backgroundImage = default;
+    [SerializeField] private TextMeshProUGUI buttonText = default;
     [Space(5f)]
     [ShowIf(nameof(updateMethod), nameof(UpdateMethod.Sprite), ComparisonType.Equals)]
     [SerializeField] private Sprite idleSprite = default;
@@ -29,13 +31,13 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
     [Space(5f)]
     [SerializeField] private UnityEvent onClickEvent = default;
 
-    public bool Interactable { get; private set; }
+    public bool Interactable { get; private set; } = true;
 
     private void Awake()
     {
         if (backgroundImage == null)
         {
-            Debug.LogWarning("BackgroundImage is not set in the editor.");
+            Debug.LogWarning($"BackgroundImage is not set in the editor on { gameObject.name }");
             enabled = false;
             return;
         }
@@ -111,6 +113,17 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
             else
                 UpdateVisual(idleSprite);
         }
+    }
+
+    public void SetButtonText(string text)
+    {
+        if (buttonText == null)
+        {
+            Debug.LogWarning($"ButtonText object is not assigned in the editor or null on { gameObject.name }");
+            return;
+        }
+
+        buttonText.text = text;
     }
 }
 

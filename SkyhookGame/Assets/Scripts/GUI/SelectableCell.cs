@@ -15,8 +15,6 @@ public abstract class SelectableCell<T> : MonoBehaviour where T : SelectableCell
         this.data = data;
 
         myButton = GetComponent<MyButton>();
-        
-        myButton.SetInteractable(true);
 
         myButton.onClick += MyButton_OnClick;
     }
