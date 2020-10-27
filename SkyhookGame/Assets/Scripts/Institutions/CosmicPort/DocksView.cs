@@ -23,15 +23,22 @@ public class DocksView : MonoBehaviour
         }
 
         CloseBuildDockView();
+
+        print(Settlement.Instance.gameObject.name);
     }
 
     private void OnEnable()
     {
+        if (!Settlement.Exists)
+            return;
+
         Settlement.Instance.CosmicPort.onAvailableDocksChanged += OnAvailableDocksChanged;
     }
 
     private void OnDisable()
     {
+        if (!Settlement.Exists)
+            return;
 
         Settlement.Instance.CosmicPort.onAvailableDocksChanged -= OnAvailableDocksChanged;
     }

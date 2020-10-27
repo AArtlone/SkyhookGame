@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 
-public class Settlement : MonoBehaviour
+public class Settlement : Singleton<Settlement>
 {
-    public static Settlement Instance;
-
     [SerializeField] private ExperienceModule experienceModule = default;
 
     [SerializeField] private CosmicPort cosmicPort = default;
@@ -20,16 +18,9 @@ public class Settlement : MonoBehaviour
 
     //public string Name { get; private set; }
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
+        SetInstance(this);
     }
 
     public void AddExperience(int amount)
