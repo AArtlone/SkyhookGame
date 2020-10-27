@@ -33,6 +33,8 @@ public class ProgressBar : MonoBehaviour
         {
             updateProgressBar = false;
 
+            currentWaitTime = 0;
+
             gameObject.SetActive(false);
 
             callback();
@@ -44,7 +46,7 @@ public class ProgressBar : MonoBehaviour
         bar.fillAmount = value;
     }
 
-    public void StarProgressBar(float initialValue, float secondsToWait, Action callback)
+    public void StartProgressBar(float initialValue, float secondsToWait, Action callback)
     {
         gameObject.SetActive(true);
 
