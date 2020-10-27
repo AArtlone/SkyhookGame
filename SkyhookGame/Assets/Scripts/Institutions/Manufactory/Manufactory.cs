@@ -47,6 +47,6 @@ public class Manufactory : Institution
     {
         ShipsInStorage.Add(ship);
 
-        ManufactoryUIController.Instance.StorageViewController.Refresh();
+        ManufactoryUIController.Instance.StorageViewController.RefreshData();
     }
 }

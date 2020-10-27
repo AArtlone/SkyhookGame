@@ -5,20 +5,7 @@ public class StorageViewController : SelectableController<StorageGridCell, Stora
 {
     [SerializeField] private GameObject emptyStorageText = default;
 
-    private void Awake()
-    {
-        if (CheckIfStorageIsEmpty())
-        {
-            emptyStorageText.SetActive(true);
-            return;
-        }
-
-        SetStoragDataSet();
-
-        Initialize();
-    }
-
-    public void Refresh()
+    private void OnEnable()
     {
         if (CheckIfStorageIsEmpty())
         {
@@ -29,6 +16,11 @@ public class StorageViewController : SelectableController<StorageGridCell, Stora
         SetStoragDataSet();
 
         RefreshView();
+    }
+
+    public void RefreshData()
+    {
+        SetStoragDataSet();
     }
 
     private bool CheckIfStorageIsEmpty()

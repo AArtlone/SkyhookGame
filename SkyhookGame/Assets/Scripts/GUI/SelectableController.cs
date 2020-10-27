@@ -19,7 +19,7 @@ public class SelectableController<T1, T2> : MonoBehaviour
         this.dataSet = dataSet;
     }
 
-    protected virtual void Initialize()
+    private void Initialize()
     {
         if (cells == null)
             cells = new List<T1>(dataSet.Count);
@@ -38,9 +38,14 @@ public class SelectableController<T1, T2> : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Cleans up the cells list and destroys all cells, then Initializes cells again.
+    /// Use this after updating dataSet
+    /// </summary>
     protected void RefreshView()
     {
-        cells.ForEach(c => Destroy(c));
+        if (cells != null)
+            cells.ForEach(c => Destroy(c.gameObject));
 
         cells = null;
 
