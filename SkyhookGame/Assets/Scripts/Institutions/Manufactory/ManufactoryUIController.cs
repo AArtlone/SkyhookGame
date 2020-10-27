@@ -1,24 +1,27 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
-public class ManufactoryUIController : MonoBehaviour
+public class ManufactoryUIController : Singleton<ManufactoryUIController>
 {
     [Space(10f)]
     [SerializeField] private GameObject preview = default;
     [SerializeField] private GameObject upgradeView = default;
     [SerializeField] private GameObject manufactoryView = default;
-    [SerializeField] private GameObject buildShipView = default;
+    
+    [Space(5f)]
+    [SerializeField] private BuildShipView buildShipView = default;
 
-    private void Awake()
+    protected override void Awake()
     {
+        SetInstance(this);
+
         preview.SetActive(false);
         upgradeView.SetActive(false);
         manufactoryView.gameObject.SetActive(false);
     }
 
-    public void ShowBuildShipView()
+    public void ShowBuildShipView(ShipRecipe shipRecipe)
     {
-        buildShipView.SetActive(true);
-
-        //Pass ship information to the view
+        buildShipView.ShowView(shipRecipe);
     }
 }
