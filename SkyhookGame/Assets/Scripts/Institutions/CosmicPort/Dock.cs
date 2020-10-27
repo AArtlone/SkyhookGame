@@ -24,7 +24,6 @@ public class Dock : MonoBehaviour
         button.onClick -= OnDockPressed;
     }
 
-    //TODO: rename
     public void Unlock()
     {
         if (dockState != DockState.Locked)
@@ -46,7 +45,7 @@ public class Dock : MonoBehaviour
             FinishBuilding();
         });
 
-        buildProgressBar.StarProgressBar(0, 5, callback);
+        buildProgressBar.StartProgressBar(0, 5, callback);
 
         UpdateState(DockState.Building);
     }

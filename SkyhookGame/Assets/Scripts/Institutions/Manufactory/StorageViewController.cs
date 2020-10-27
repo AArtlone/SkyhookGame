@@ -5,22 +5,49 @@ public class StorageViewController : SelectableController<StorageGridCell, Stora
 {
     [SerializeField] private GameObject emptyStorageText = default;
 
-    private List<StorageGridCell> shipsInStorage = new List<StorageGridCell>();
-
     private void Awake()
     {
-        if (shipsInStorage.Count == 0)
+        if (CheckIfStorageIsEmpty())
         {
             emptyStorageText.SetActive(true);
             return;
         }
 
-        List<StorageGridCellData> dataSet = new List<StorageGridCellData>(shipsInStorage.Count);
-
-        shipsInStorage.ForEach(e => dataSet.Add(new StorageGridCellData(e.data.shipName)));
-
-        SetDataSet(dataSet);
+        SetStoragDataSet();
 
         Initialize();
     }
+
+    public void Refresh()
+    {
+        if (CheckIfStorageIsEmpty())
+        {
+            emptyStorageText.SetActive(true);
+            return;
+        }
+
+        SetStoragDataSet();
+
+        RefreshView();
+    }
+
+    private bool CheckIfStorageIsEmpty()
+    {
+        List<Ship> shipsInStorage = Manufactory.ShipsInStorage;
+
+        return (shipsInStorage.Count == 0);
+    }
+
+    private void SetStoragDataSet()
+    {
+        List<Ship> shipsInStorage = Manufactory.ShipsInStorage;
+
+        List<StorageGridCellData> dataSet = new List<StorageGridCellData>(shipsInStorage.Count);
+
+        shipsInStorage.ForEach(e => dataSet.Add(new StorageGridCellData(e.shipName)));
+
+        SetDataSet(dataSet);
+    }
+
+    private Manufactory Manufactory { get { return Settlement.Instance.Manufactory; } }
 }
