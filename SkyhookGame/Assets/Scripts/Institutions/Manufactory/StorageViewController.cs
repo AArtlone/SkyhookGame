@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class StorageViewController : SelectableController<StorageGridCell, StorageGridCellData>
+public class StorageViewController : SelectableController<StorageCell, StorageCellData>
 {
     [SerializeField] private GameObject emptyStorageText = default;
 
@@ -42,9 +42,9 @@ public class StorageViewController : SelectableController<StorageGridCell, Stora
     {
         List<Ship> shipsInStorage = Manufactory.ShipsInStorage;
 
-        List<StorageGridCellData> dataSet = new List<StorageGridCellData>(shipsInStorage.Count);
+        List<StorageCellData> dataSet = new List<StorageCellData>(shipsInStorage.Count);
 
-        shipsInStorage.ForEach(e => dataSet.Add(new StorageGridCellData(e.shipName)));
+        shipsInStorage.ForEach(e => dataSet.Add(new StorageCellData(e.shipName)));
 
         SetDataSet(dataSet);
     }

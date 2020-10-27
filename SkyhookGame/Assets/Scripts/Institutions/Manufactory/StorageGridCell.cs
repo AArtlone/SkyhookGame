@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class StorageGridCell : SelectableCell<StorageGridCellData>
+public class StorageCell : SelectableCell<StorageCellData>
 {
     [SerializeField] private TextMeshProUGUI nameText = default;
 
@@ -16,11 +16,11 @@ public class StorageGridCell : SelectableCell<StorageGridCellData>
     }
 }
 
-public class StorageGridCellData : SelectableCellData
+public class StorageCellData : SelectableCellData
 {
     public string shipName;
 
-    public StorageGridCellData(string shipName)
+    public StorageCellData(string shipName)
     {
         this.shipName = shipName;
     }
