@@ -21,7 +21,7 @@ public class ManufactoryGridCell : SelectableCell<ManufactoryGridCellData>
     {
         myButton.SetInteractable(false);
 
-        Manufactory.AddProductionProcess();
+        Manufactory.AddTask();
 
         var callback = new Action(() =>
         {
