@@ -3,31 +3,42 @@
 public abstract class IClock
 {
 	private Stopwatch stopWatch;
-	private int duration;
+	public float Duration { get; private set; }
+	private float timeLeft;
+	private float elapsedTime;
 
 	public IClock(float duration)
 	{
-		this.duration = (int)duration;
+		this.Duration = duration;
+		this.timeLeft = duration;
+
 		stopWatch = Stopwatch.StartNew();
 	}
 
 	/// <summary>
-	/// Returns the time in seconds since the clock started counting.
+	/// Returns the time in milliseconds since the clock started counting.
 	/// </summary>
-	public int ElapsedTime()
+	public float ElapsedTime()
 	{
+		if (stopWatch != null)
+			elapsedTime = stopWatch.Elapsed.Milliseconds * 0.001f + stopWatch.Elapsed.Seconds;
+
 		if (TimeLeft() <= 0)
 		{
 			stopWatch = null;
-			return duration;
+			return Duration;
 		}
 
-		return stopWatch.Elapsed.Seconds;
+		return elapsedTime;
 	}
 
-	public int TimeLeft()
+	/// <summary>
+	/// Returns the time left in milliseconds since the clock started counting.
+	/// </summary>
+	public float TimeLeft()
 	{
-		var timeLeft = duration - stopWatch.Elapsed.Seconds;
+		if (stopWatch != null)
+			timeLeft = Duration - (stopWatch.Elapsed.Milliseconds * 0.001f + stopWatch.Elapsed.Seconds);
 
 		if (timeLeft <= 0)
 		{

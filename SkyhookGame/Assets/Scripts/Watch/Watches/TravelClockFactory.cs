@@ -1,12 +1,12 @@
 ﻿public class TravelClockFactory
 {
-	public ExpeditionClock CreateExpeditionClock()
+	public ExpeditionClock CreateExpeditionClock(float duration)
 	{
-		return new ExpeditionClock(10f);
+		return new ExpeditionClock(duration);
 	}
 
-	public TripClock CreateTripClock()
+	public TripClock CreateTripClock(float duration)
 	{
-		return new TripClock(20f);
+		return new TripClock(duration);
 	}
 }
