@@ -5,11 +5,6 @@ public class StorageCell : SelectableCell<StorageCellData>
 {
     [SerializeField] private TextMeshProUGUI nameText = default;
 
-    public override void MyButton_OnClick()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public override void Refresh()
     {
         nameText.text = data.shipName;
