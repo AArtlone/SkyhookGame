@@ -19,7 +19,7 @@ public abstract class SelectableCell<T> : MonoBehaviour where T : SelectableCell
         myButton.onClick += MyButton_OnClick;
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         myButton.onClick -= MyButton_OnClick;
     }

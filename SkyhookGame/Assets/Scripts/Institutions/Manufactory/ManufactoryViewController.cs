@@ -17,7 +17,7 @@ public class ManufactoryViewController : SelectableController<ManufactoryCell, M
 
     private void SetStoragDataSet()
     {
-        List<ShipRecipe> shipRecipes = Settlement.Instance.Manufactory.ShipRecipes;
+        List<ShipRecipe> shipRecipes = Manufactory.ShipRecipes;
 
         List<ManufactoryGridCellData> dataSet = new List<ManufactoryGridCellData>(shipRecipes.Count);
 
@@ -40,8 +40,8 @@ public class ManufactoryViewController : SelectableController<ManufactoryCell, M
 
     public void BuildShip()
     {
-        bool canBuild = Settlement.Instance.Manufactory.CanBuild();
-        bool canStore = Settlement.Instance.Manufactory.CanStore();
+        bool canBuild = Manufactory.CanBuild();
+        bool canStore = Manufactory.CanStore();
 
         if (!canStore)
         {
@@ -57,7 +57,9 @@ public class ManufactoryViewController : SelectableController<ManufactoryCell, M
 
         buildShipView.gameObject.SetActive(false);
 
-        GetSelectedCell().StartBuilding();
+        Manufactory.StartBuildingShip(GetSelectedCell().data.shipRecipe);
     }
+
+    private Manufactory Manufactory { get { return Settlement.Instance.Manufactory; } }
 }
 

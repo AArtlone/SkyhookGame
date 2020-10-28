@@ -21,12 +21,19 @@ public class SelectableController<T1, T2> : MonoBehaviour
         isShowing = true;
     }
 
+    protected virtual void Cell_OnCellPress(SelectableCell<T2> cell)
+    {
+        int selectedCellIndex = cells.IndexOf(cell as T1);
+
+        selectedCell = selectedCellIndex;
+    }
+
     protected virtual void OnDisable()
     {
         isShowing = false;
     }
 
-    protected virtual void SetDataSet(List<T2> dataSet)
+    protected void SetDataSet(List<T2> dataSet)
     {
         this.dataSet = dataSet;
     }
@@ -64,13 +71,6 @@ public class SelectableController<T1, T2> : MonoBehaviour
         cells = null;
 
         Initialize();
-    }
-
-    protected virtual void Cell_OnCellPress(SelectableCell<T2> cell)
-    {
-        int selectedCellIndex = cells.IndexOf(cell as T1);
-
-        selectedCell = selectedCellIndex;
     }
 
     public T1 GetSelectedCell()

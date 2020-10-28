@@ -9,6 +9,17 @@ public class AssignShipToDockViewController : SelectableController<AssignShipToD
 
     private List<Dock> emptyDocks;
 
+    protected override void Cell_OnCellPress(SelectableCell<AssignShipToDockCellData> cell)
+    {
+        base.Cell_OnCellPress(cell);
+
+        cell.data.dock.AssignShip(shipToAssign);
+
+        gameObject.SetActive(false);
+
+        Manufactory.RemoveShipFromStorage(shipToAssign);
+    }
+
     public void ShowView(Ship shipToAssign)
     {
         this.shipToAssign = shipToAssign;
@@ -21,11 +32,17 @@ public class AssignShipToDockViewController : SelectableController<AssignShipToD
             return;
         }
 
-        emptyDocks = CosmicPort.GetEmptyDocks();
-
-        SetDocksDataSet(emptyDocks);
+        SetDocksDataSet();
 
         RefreshView();
+    }
+
+    public void RefreshData()
+    {
+        SetDocksDataSet();
+
+        if (isShowing)
+            RefreshView();
     }
 
     protected override void RefreshView()
@@ -35,24 +52,15 @@ public class AssignShipToDockViewController : SelectableController<AssignShipToD
         base.RefreshView();
     }
 
-    private void SetDocksDataSet(List<Dock> emptyDocks)
+    private void SetDocksDataSet()
     {
+        emptyDocks = CosmicPort.GetEmptyDocks();
+
         List<AssignShipToDockCellData> dataSet = new List<AssignShipToDockCellData>(emptyDocks.Count);
         
         emptyDocks.ForEach(e => dataSet.Add(new AssignShipToDockCellData(e)));
 
         SetDataSet(dataSet);
-    }
-
-    protected override void Cell_OnCellPress(SelectableCell<AssignShipToDockCellData> cell)
-    {
-        base.Cell_OnCellPress(cell);
-
-        cell.data.dock.AssignShip(shipToAssign);
-
-        gameObject.SetActive(false);
-
-        Manufactory.RemoveShipFromStorage(shipToAssign);
     }
 
     private CosmicPort CosmicPort { get { return Settlement.Instance.CosmicPort; } }

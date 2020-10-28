@@ -43,13 +43,6 @@ public class StorageViewController : SelectableController<StorageCell, StorageCe
             RefreshView();
     }
 
-    private bool CheckIfStorageIsEmpty()
-    {
-        List<Ship> shipsInStorage = Manufactory.ShipsInStorage;
-
-        return (shipsInStorage.Count == 0);
-    }
-
     private void SetStoragDataSet()
     {
         List<Ship> shipsInStorage = Manufactory.ShipsInStorage;
@@ -58,9 +51,14 @@ public class StorageViewController : SelectableController<StorageCell, StorageCe
 
         shipsInStorage.ForEach(e => dataSet.Add(new StorageCellData(e)));
 
-        print(shipsInStorage.Count);
-
         SetDataSet(dataSet);
+    }
+
+    private bool CheckIfStorageIsEmpty()
+    {
+        List<Ship> shipsInStorage = Manufactory.ShipsInStorage;
+
+        return (shipsInStorage.Count == 0);
     }
 
     private Manufactory Manufactory { get { return Settlement.Instance.Manufactory; } }

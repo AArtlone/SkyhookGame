@@ -13,11 +13,34 @@ public class Manufactory : Institution
     public List<ShipRecipe> ShipRecipes { get { return shipRecipes; } }
     public float BuildDuration { get { return buildDuration; } }
 
+    public List<ManufactoryTask> ManufactoryTasks { get; private set; } = new List<ManufactoryTask>();
     public List<Ship> ShipsInStorage { get; private set; } = new List<Ship>();
 
-    private int tasks;
     private int storageCapacity;
     private int tasksCapacity;
+
+    private List<ManufactoryTask> tasksToRemove; // A list of task to remove at the end of the frame
+
+    private void Update()
+    {
+        tasksToRemove = new List<ManufactoryTask>();
+
+        foreach (var task in ManufactoryTasks)
+        {
+            if (task.TripClock.TimeLeft() <= 0)
+            {
+                tasksToRemove.Add(task);
+
+                DoneBuildingShip(task);
+            }
+        }
+
+        tasksToRemove.ForEach(e => 
+        {
+            if (ManufactoryTasks.Contains(e))
+                ManufactoryTasks.Remove(e);
+        });
+    }
 
     public override void Upgrade()
     {
@@ -47,13 +70,14 @@ public class Manufactory : Institution
         Debug.Log("New Tasks Capacity number = " + tasksCapacity);
     }
 
-    public void DoneBuildingShip(Ship ship)
+    private void DoneBuildingShip(ManufactoryTask task)
     {
-        tasks--;
-        
+        var ship = new Ship(task.shipToProduce.shipName);
+
         ShipsInStorage.Add(ship);
 
         ManufactoryUIController.Instance.StorageViewController.RefreshData();
+        ManufactoryUIController.Instance.TasksViewController.RefreshData();
     }
 
     public void RemoveShipFromStorage(Ship ship)
@@ -63,22 +87,30 @@ public class Manufactory : Institution
 
         ShipsInStorage.Remove(ship);
 
-        ManufactoryUIController.Instance.StorageViewController.RefreshData();
+        ManufactoryUIController.StorageViewController.RefreshData();
     }
 
-    public void AddTask()
+    public void StartBuildingShip(ShipRecipe shipRecipe)
     {
-        tasks++;
+        var ship = new Ship(shipRecipe.shipName);
+
+        var manufactoryTask = new ManufactoryTask(ship);
+
+        ManufactoryTasks.Add(manufactoryTask);
+
+        ManufactoryUIController.TasksViewController.RefreshData();
     }
 
     public bool CanBuild()
     {
-        return tasks < tasksCapacity;
+        return ManufactoryTasks.Count < tasksCapacity;
     }
 
     public bool CanStore()
     {
         // We need to add the ships that are already in storage to the ships that are buing built, sine they will take the space in storage when they are done building
-        return tasks + ShipsInStorage.Count < storageCapacity;
+        return ManufactoryTasks.Count + ShipsInStorage.Count < storageCapacity;
     }
+
+    private ManufactoryUIController ManufactoryUIController { get { return ManufactoryUIController.Instance; } }
 }

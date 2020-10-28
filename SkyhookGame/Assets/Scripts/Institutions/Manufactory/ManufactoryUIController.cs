@@ -8,7 +8,9 @@ public class ManufactoryUIController : Singleton<ManufactoryUIController>
     [SerializeField] private GameObject manufactoryView = default;
 
     [SerializeField] private StorageViewController storageViewController = default;
+    [SerializeField] private ManufactoryTasksViewController tasksViewController = default;
     public StorageViewController StorageViewController { get { return storageViewController; } }
+    public ManufactoryTasksViewController TasksViewController { get { return tasksViewController; } }
 
     protected override void Awake()
     {
