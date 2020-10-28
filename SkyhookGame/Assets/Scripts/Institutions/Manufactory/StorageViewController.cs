@@ -5,15 +5,11 @@ public class StorageViewController : SelectableController<StorageCell, StorageCe
 {
     [SerializeField] private GameObject emptyStorageText = default;
 
-    [SerializeField] private AssignShipToDockView assingShipToDockView = default;
+    [SerializeField] private AssignShipToDockViewController assingShipToDockView = default;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        if (CheckIfStorageIsEmpty())
-        {
-            emptyStorageText.SetActive(true);
-            return;
-        }
+        base.OnEnable();
 
         SetStoragDataSet();
 
@@ -27,14 +23,24 @@ public class StorageViewController : SelectableController<StorageCell, StorageCe
         ShowAssignShipToDockView();
     }
 
+    protected override void RefreshView()
+    {
+        emptyStorageText.SetActive(CheckIfStorageIsEmpty());
+
+        base.RefreshView();
+    }
+
     private void ShowAssignShipToDockView()
     {
-        assingShipToDockView.ShowView();
+        assingShipToDockView.ShowView(GetSelectedCell().data.ship);
     }
 
     public void RefreshData()
     {
         SetStoragDataSet();
+
+        if (isShowing)
+            RefreshView();
     }
 
     private bool CheckIfStorageIsEmpty()
@@ -50,7 +56,9 @@ public class StorageViewController : SelectableController<StorageCell, StorageCe
 
         List<StorageCellData> dataSet = new List<StorageCellData>(shipsInStorage.Count);
 
-        shipsInStorage.ForEach(e => dataSet.Add(new StorageCellData(e.shipName)));
+        shipsInStorage.ForEach(e => dataSet.Add(new StorageCellData(e)));
+
+        print(shipsInStorage.Count);
 
         SetDataSet(dataSet);
     }

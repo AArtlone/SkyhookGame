@@ -56,6 +56,16 @@ public class Manufactory : Institution
         ManufactoryUIController.Instance.StorageViewController.RefreshData();
     }
 
+    public void RemoveShipFromStorage(Ship ship)
+    {
+        if (!ShipsInStorage.Contains(ship))
+            return;
+
+        ShipsInStorage.Remove(ship);
+
+        ManufactoryUIController.Instance.StorageViewController.RefreshData();
+    }
+
     public void AddTask()
     {
         tasks++;

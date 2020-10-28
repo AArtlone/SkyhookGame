@@ -6,8 +6,10 @@ public class ManufactoryViewController : SelectableController<ManufactoryCell, M
     [Space(5f)]
     [SerializeField] private BuildShipView buildShipView = default;
     
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         SetStoragDataSet();
 
         RefreshView();

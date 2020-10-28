@@ -50,10 +50,10 @@ public class CosmicPort : Institution
     {
         AllDocks = new List<Dock>()
         {
-            new Dock(),
-            new Dock(),
-            new Dock(),
-            new Dock()
+            new Dock("Dock 1"),
+            new Dock("Dock 2"),
+            new Dock("Dock 3"),
+            new Dock("Dock 4")
         };
 
         UpdateVariables();
