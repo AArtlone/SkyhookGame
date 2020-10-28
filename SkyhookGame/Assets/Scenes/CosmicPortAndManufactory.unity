@@ -6990,6 +6990,7 @@ MonoBehaviour:
   manufactoryView: {fileID: 974955630}
   storageViewController: {fileID: 479402434}
   tasksViewController: {fileID: 753253184}
+  assignShipToDock: {fileID: 890713314}
 --- !u!1 &1602142787
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,14 +24,16 @@ public class CosmicPort : Institution
     {
         foreach (var dock in AllDocks)
         {
-            if (dock.DockState == DockState.Building)
-            {
-                if (dock.TripClock.TimeLeft() <= 0)
-                {
-                    dock.UpdateState(DockState.Empty);
-                    CosmicPortUIController.Instance.DocksViewController.RefreshData();
-                }
-            }
+            if (dock.DockState != DockState.Building)
+                continue;
+
+            if (dock.TripClock.TimeLeft() > 0)
+                continue;
+
+            dock.UpdateState(DockState.Empty);
+
+            CosmicPortUIController.Instance.DocksViewController.RefreshData();
+            ManufactoryUIController.Instance.AssignShipToDock.RefreshData();
         }
     }
 
