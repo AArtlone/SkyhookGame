@@ -9,15 +9,12 @@ public class ProgressBar : MonoBehaviour
     private bool updateProgressBar;
 
     private Action callback;
-	private TripClock tripClock;
-	private TravelClockFactory travelFactory;
+
+    private TripClock tripClock;
 
 	private void Awake()
     {
         ResetBar(true);
-
-		var watchFactory = new WatchFactory();
-		travelFactory = watchFactory.CreateTravelFactory();
 	}
 
 	private void Update()
@@ -31,9 +28,9 @@ public class ProgressBar : MonoBehaviour
 
 			gameObject.SetActive(false);
 
-			callback();
+            callback?.Invoke();
 
-			return;
+            return;
 		}
 
 		SetFillAmount(tripClock.ElapsedTime() / tripClock.Duration);
@@ -44,15 +41,26 @@ public class ProgressBar : MonoBehaviour
         bar.fillAmount = value;
     }
 
-    public void StartProgressBar(float initialValue, float secondsToWait, Action callback)
+    public void StartProgressBar(TripClock tripClock, float initialValue)
     {
+        this.tripClock = tripClock;
+
+        gameObject.SetActive(true);
+
+        bar.fillAmount = initialValue;
+
+        updateProgressBar = true;
+    }
+
+    public void StartProgressBar(TripClock tripClock, float initialValue, Action callback)
+    {
+        this.tripClock = tripClock;
+
         gameObject.SetActive(true);
 
         this.callback = callback;
 
         bar.fillAmount = initialValue;
-
-		tripClock = travelFactory.CreateTripClock(secondsToWait);
 
         updateProgressBar = true;
     }

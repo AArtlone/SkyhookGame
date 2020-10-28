@@ -5,11 +5,21 @@ public class DocksCell : SelectableCell<DocksCellData>
 {
     [SerializeField] private ProgressBar buildProgressBar = default;
 
-    private float dockBuildTime = 0;
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+
+        data.dock.onStateChange -= Dock_OnStateChange;
+    }
+
+    private void Dock_OnStateChange(DockState state)
+    {
+        Refresh();
+    }
 
     public override void Initialize()
     {
-        dockBuildTime = Settlement.Instance.CosmicPort.DockBuildTime;
+        data.dock.onStateChange += Dock_OnStateChange;
     }
 
     public override void Refresh()
@@ -19,29 +29,18 @@ public class DocksCell : SelectableCell<DocksCellData>
         if (data.dock.DockState == DockState.Locked ||
             data.dock.DockState == DockState.Building)
             myButton.SetInteractable(false);
-    }
+        else
+            myButton.SetInteractable(true);
 
-    public void StartBuilding()
-    {
-        myButton.SetInteractable(false);
-
-        var callback = new Action(() =>
+        if (data.dock.DockState == DockState.Building)
         {
-            FinishBuilding();
-        });
+            var elapsedTime = data.dock.TripClock.ElapsedTime();
+            var duration = data.dock.TripClock.Duration;
 
-        buildProgressBar.StartProgressBar(0, dockBuildTime, callback);
+            var barValue = elapsedTime / duration;
 
-        data.dock.UpdateState(DockState.Building);
-    }
-
-    private void FinishBuilding()
-    {
-        myButton.SetInteractable(true);
-
-        data.dock.UpdateState(DockState.Empty);
-
-        Refresh();
+            buildProgressBar.StartProgressBar(data.dock.TripClock, barValue);
+        }
     }
 }
 

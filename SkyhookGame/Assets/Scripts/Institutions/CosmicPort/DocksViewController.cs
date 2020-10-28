@@ -14,28 +14,26 @@ public class DocksViewController : SelectableController<DocksCell, DocksCellData
         CosmicPort.onUpgrade += CosmicPort_OnUpgrade;
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        SetDocksDataSet();
+
+        RefreshView();
+    }
+
     private void OnDestroy()
     {
+        if (CosmicPort == null)
+            return;
+
         CosmicPort.onUpgrade -= CosmicPort_OnUpgrade;
     }
 
     private void CosmicPort_OnUpgrade()
     {
-        UpdateDataSetAndRefresh();
-    }
-
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-
-        UpdateDataSetAndRefresh();
-    }
-
-    private void UpdateDataSetAndRefresh()
-    {
         SetDocksDataSet();
-
-        RefreshView();
     }
 
     protected override void Cell_OnCellPress(SelectableCell<DocksCellData> cell)
@@ -53,6 +51,14 @@ public class DocksViewController : SelectableController<DocksCell, DocksCellData
                 // Show assign view
                 break;
         }
+    }
+
+    public void RefreshData()
+    {
+        SetDocksDataSet();
+
+        if (isShowing)
+            RefreshView();
     }
 
     private void SetDocksDataSet()
@@ -87,7 +93,7 @@ public class DocksViewController : SelectableController<DocksCell, DocksCellData
     {
         CloseBuildDockView();
 
-        selectedDock.StartBuilding();
+        CosmicPort.StartBuildingDock(selectedDock.data.dock);
     }
 
     public void ShowDocksView()
@@ -96,5 +102,12 @@ public class DocksViewController : SelectableController<DocksCell, DocksCellData
     }
 #endregion
 
-    private CosmicPort CosmicPort { get { return Settlement.Instance.CosmicPort; } }
+    private CosmicPort CosmicPort { get 
+        {
+            if (!Settlement.Exists)
+                return null;
+
+            return Settlement.Instance.CosmicPort; 
+        } 
+    }
 }

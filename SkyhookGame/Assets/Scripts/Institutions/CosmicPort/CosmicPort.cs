@@ -20,6 +20,21 @@ public class CosmicPort : Institution
     private int loadSpeed;
     private int unloadSpeed;
 
+    private void Update()
+    {
+        foreach (var dock in AllDocks)
+        {
+            if (dock.DockState == DockState.Building)
+            {
+                if (dock.TripClock.TimeLeft() <= 0)
+                {
+                    dock.UpdateState(DockState.Empty);
+                    CosmicPortUIController.Instance.DocksViewController.RefreshData();
+                }
+            }
+        }
+    }
+
     public override void Upgrade()
     {
         base.Upgrade();
@@ -61,6 +76,11 @@ public class CosmicPort : Institution
         DebugVariables();
 
         UpdateDocksAvailability();
+    }
+
+    public void StartBuildingDock(Dock dock)
+    {
+        dock.StartBuilding();
     }
 
     protected override void UpdateVariables()
