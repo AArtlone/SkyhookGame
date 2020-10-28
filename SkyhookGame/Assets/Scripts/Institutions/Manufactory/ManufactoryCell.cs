@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-public class ManufactoryGridCell : SelectableCell<ManufactoryGridCellData>
+public class ManufactoryCell : SelectableCell<ManufactoryGridCellData>
 {
     [SerializeField] private ProgressBar buildProgressBar = default;
 
@@ -34,7 +34,7 @@ public class ManufactoryGridCell : SelectableCell<ManufactoryGridCellData>
             print("DONE BUILDING");
         });
 
-        buildProgressBar.StartProgressBar(0, 2, callback);
+        buildProgressBar.StartProgressBar(0, Manufactory.BuildDuration, callback);
     }
 
     private Manufactory Manufactory { get { return Settlement.Instance.Manufactory; } }

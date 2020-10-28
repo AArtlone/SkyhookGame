@@ -8,12 +8,14 @@ public class Manufactory : Institution
 
     [SerializeField] private List<ShipRecipe> shipRecipes = default;
 
+    [SerializeField] private float buildDuration = default;
+
     public List<ShipRecipe> ShipRecipes { get { return shipRecipes; } }
+    public float BuildDuration { get { return buildDuration; } }
 
     public List<Ship> ShipsInStorage { get; private set; } = new List<Ship>();
 
-    public int tasks { get; private set; }
-
+    private int tasks;
     private int storageCapacity;
     private int tasksCapacity;
 
@@ -62,5 +64,11 @@ public class Manufactory : Institution
     public bool CanBuild()
     {
         return tasks < tasksCapacity;
+    }
+
+    public bool CanStore()
+    {
+        // We need to add the ships that are already in storage to the ships that are buing built, sine they will take the space in storage when they are done building
+        return tasks + ShipsInStorage.Count < storageCapacity;
     }
 }

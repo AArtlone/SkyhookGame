@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ManufactoryViewController : SelectableController<ManufactoryGridCell, ManufactoryGridCellData>
+public class ManufactoryViewController : SelectableController<ManufactoryCell, ManufactoryGridCellData>
 {
     [Space(5f)]
     [SerializeField] private BuildShipView buildShipView = default;
@@ -39,17 +39,23 @@ public class ManufactoryViewController : SelectableController<ManufactoryGridCel
     public void BuildShip()
     {
         bool canBuild = Settlement.Instance.Manufactory.CanBuild();
+        bool canStore = Settlement.Instance.Manufactory.CanStore();
 
-        if (canBuild)
+        if (!canStore)
         {
-            buildShipView.gameObject.SetActive(false);
-
-            GetSelectedCell().StartBuilding();
+            PopUpManager.CreateSingleButtonTextPopUp("The ship cannot be built because there wont be enough space in the storage", "Ok", new System.Action(() => { }));
+            return;
         }
-        else
+
+        if (!canBuild)
         {
             PopUpManager.CreateSingleButtonTextPopUp("The ship cannot be built because you are at your maximum production capacity", "Ok", new System.Action(() => { }));
+            return;
         }
+
+        buildShipView.gameObject.SetActive(false);
+
+        GetSelectedCell().StartBuilding();
     }
 }
 
