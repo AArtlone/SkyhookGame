@@ -30,15 +30,17 @@ public class Manufactory : Institution
             if (task.TripClock.TimeLeft() <= 0)
             {
                 tasksToRemove.Add(task);
-
-                DoneBuildingShip(task);
             }
         }
 
         tasksToRemove.ForEach(e => 
         {
             if (ManufactoryTasks.Contains(e))
+            {
+
                 ManufactoryTasks.Remove(e);
+                DoneBuildingShip(e);
+            }
         });
     }
 
