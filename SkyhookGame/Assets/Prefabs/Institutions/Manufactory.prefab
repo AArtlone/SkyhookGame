@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1544950222593227388}
   - component: {fileID: 1544950222593227389}
   m_Layer: 0
-  m_Name: Factory
+  m_Name: Manufactory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,3 +49,9 @@ MonoBehaviour:
     maxLevel: 5
   tasksCapacityRange: {x: 1, y: 5}
   storageCapacityRange: {x: 1, y: 5}
+  shipRecipes:
+  - {fileID: 11400000, guid: c62fc95275e98d342900fc190a00e7b0, type: 2}
+  - {fileID: 11400000, guid: c32559ce4145ebd4a89daa6f24f327fc, type: 2}
+  - {fileID: 11400000, guid: 27492c520cf8b42488f8452fc0b9e753, type: 2}
+  - {fileID: 11400000, guid: 7fe65cd604c747f4c852600d1e553841, type: 2}
+  buildDuration: 3

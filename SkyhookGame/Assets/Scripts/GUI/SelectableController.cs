@@ -14,6 +14,18 @@ public class SelectableController<T1, T2> : MonoBehaviour
 
     private int selectedCell;
 
+    protected bool isShowing;
+
+    protected virtual void OnEnable()
+    {
+        isShowing = true;
+    }
+
+    protected virtual void OnDisable()
+    {
+        isShowing = false;
+    }
+
     protected virtual void SetDataSet(List<T2> dataSet)
     {
         this.dataSet = dataSet;
@@ -44,7 +56,7 @@ public class SelectableController<T1, T2> : MonoBehaviour
     /// Cleans up the cells list and destroys all cells, then Initializes cells again.
     /// Use this after updating dataSet
     /// </summary>
-    protected void RefreshView()
+    protected virtual void RefreshView()
     {
         if (cells != null)
             cells.ForEach(c => Destroy(c.gameObject));

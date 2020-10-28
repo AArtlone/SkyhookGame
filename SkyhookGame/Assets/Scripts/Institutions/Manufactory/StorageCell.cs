@@ -7,16 +7,16 @@ public class StorageCell : SelectableCell<StorageCellData>
 
     public override void Refresh()
     {
-        nameText.text = data.shipName;
+        nameText.text = data.ship.shipName;
     }
 }
 
 public class StorageCellData : SelectableCellData
 {
-    public string shipName;
+    public Ship ship;
 
-    public StorageCellData(string shipName)
+    public StorageCellData(Ship ship)
     {
-        this.shipName = shipName;
+        this.ship = ship;
     }
 }

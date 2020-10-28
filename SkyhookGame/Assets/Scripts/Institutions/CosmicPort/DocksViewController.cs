@@ -24,8 +24,10 @@ public class DocksViewController : SelectableController<DocksCell, DocksCellData
         UpdateDataSetAndRefresh();
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         UpdateDataSetAndRefresh();
     }
 

@@ -1,6 +1,16 @@
 ﻿public class Dock
 {
+    public string dockName;
     public DockState DockState { get; private set; }
+
+    private Ship ship;
+
+    public Dock(string name)
+    {
+        dockName = name;
+
+        DockState = DockState.Locked;
+    }
 
     public void Unlock()
     {
@@ -16,5 +26,12 @@
             return;
 
         DockState = newState;
+    }
+
+    public void AssignShip(Ship ship)
+    {
+        this.ship = ship;
+
+        UpdateState(DockState.Occupied);
     }
 }
