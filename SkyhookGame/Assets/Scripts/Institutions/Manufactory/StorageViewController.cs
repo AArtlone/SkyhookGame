@@ -5,6 +5,8 @@ public class StorageViewController : SelectableController<StorageCell, StorageCe
 {
     [SerializeField] private GameObject emptyStorageText = default;
 
+    [SerializeField] private AssignShipToDockView assingShipToDockView = default;
+
     private void OnEnable()
     {
         if (CheckIfStorageIsEmpty())
@@ -16,6 +18,18 @@ public class StorageViewController : SelectableController<StorageCell, StorageCe
         SetStoragDataSet();
 
         RefreshView();
+    }
+
+    protected override void Cell_OnCellPress(SelectableCell<StorageCellData> cell)
+    {
+        base.Cell_OnCellPress(cell);
+
+        ShowAssignShipToDockView();
+    }
+
+    private void ShowAssignShipToDockView()
+    {
+        assingShipToDockView.ShowView();
     }
 
     public void RefreshData()

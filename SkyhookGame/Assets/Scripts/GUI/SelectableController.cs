@@ -30,6 +30,8 @@ public class SelectableController<T1, T2> : MonoBehaviour
 
             cell.SetData(data);
 
+            cell.Initialize();
+
             cell.Refresh();
 
             cell.onCellPress += Cell_OnCellPress;
