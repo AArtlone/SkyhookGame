@@ -50,3 +50,4 @@ MonoBehaviour:
   availableDocksRange: {x: 1, y: 4}
   loadSpeedRange: {x: 60, y: 1}
   unloadSpeedRange: {x: 60, y: 1}
+  dockBuildTime: 2

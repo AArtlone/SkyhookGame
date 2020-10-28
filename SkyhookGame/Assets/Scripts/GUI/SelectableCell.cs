@@ -26,6 +26,8 @@ public abstract class SelectableCell<T> : MonoBehaviour where T : SelectableCell
 
     public abstract void Refresh();
 
+    public virtual void Initialize() { }
+
     public virtual void MyButton_OnClick()
     {
         onCellPress?.Invoke(this);
