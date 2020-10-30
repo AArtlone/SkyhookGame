@@ -1,50 +1,38 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ManufactoryTasksViewController : 
-    SelectableController<ManufactoryTasksCell, ManufactoryTasksCellData>
+public class ManufactoryTasksViewController : MonoBehaviour
 {
-    [SerializeField] private GameObject noTasksText = default;
+    [SerializeField] private ManufactoryTasksSelectableController selectableController = default;
 
-    protected override void OnEnable()
+    private bool isShowing;
+
+    private void OnEnable()
     {
-        base.OnEnable();
+        isShowing = true;
 
-        SetTasksData();
-
-        RefreshView();
+        SetManufactoryTasksDataSet();
     }
 
-    public void RefreshData()
+    private void OnDisable()
     {
-        SetTasksData();
+        isShowing = false;
+    }
 
+    public void ChangeData()
+    {
         if (isShowing)
-            RefreshView();
+            SetManufactoryTasksDataSet();
     }
 
-    protected override void RefreshView()
+    private void SetManufactoryTasksDataSet()
     {
-        noTasksText.SetActive(CheckIfTasksAreEmpty());
-
-        base.RefreshView();
-    }
-
-    private void SetTasksData()
-    {
-        var manufactoryTasks = Manufactory.ManufactoryTasks;
+        var manufactoryTasks = Settlement.Instance.Manufactory.ManufactoryTasks;
 
         List<ManufactoryTasksCellData> dataSet = new List<ManufactoryTasksCellData>(manufactoryTasks.Count);
 
         manufactoryTasks.ForEach(e => dataSet.Add(new ManufactoryTasksCellData(e)));
 
-        SetDataSet(dataSet);
+        selectableController.SetDataSet(dataSet);
     }
-
-    private bool CheckIfTasksAreEmpty()
-    {
-        return Manufactory.ManufactoryTasks.Count == 0;
-    }
-
-    private Manufactory Manufactory { get { return Settlement.Instance.Manufactory; } }
 }

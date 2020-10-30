@@ -871,7 +871,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1273335919}
+      - m_Target: {fileID: 1273335920}
         m_MethodName: BuildDock
         m_Mode: 1
         m_Arguments:
@@ -1788,6 +1788,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 479402433}
+  - component: {fileID: 479402435}
   - component: {fileID: 479402434}
   m_Layer: 5
   m_Name: StorageView
@@ -1826,14 +1827,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 479402432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11563b2bef5117042a766e7fc70427ef, type: 3}
+  m_Script: {fileID: 11500000, guid: c06795bc679657d44987351613685709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cellPrefab: {fileID: 4679854338317003820, guid: 5be4e97435b0d9e4a92e9f088a824dac,
     type: 3}
   contentContainer: {fileID: 1968463618}
   emptyStorageText: {fileID: 1770546230}
-  assingShipToDockView: {fileID: 890713314}
+--- !u!114 &479402435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479402432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11563b2bef5117042a766e7fc70427ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectableController: {fileID: 479402434}
 --- !u!1 &502967726
 GameObject:
   m_ObjectHideFlags: 0
@@ -2480,7 +2493,7 @@ GameObject:
   - component: {fileID: 550612415}
   - component: {fileID: 550612416}
   m_Layer: 5
-  m_Name: GridContent
+  m_Name: ContentContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2746,6 +2759,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 559081151}
+  - component: {fileID: 559081152}
   - component: {fileID: 559081150}
   m_Layer: 5
   m_Name: ManufactoryView
@@ -2790,6 +2804,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 6.01532}
   m_SizeDelta: {x: 0, y: 12.030609}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &559081152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559081149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6991d7b7fd90f3145878148021effa06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectableController: {fileID: 559081150}
 --- !u!1 &568149455
 GameObject:
   m_ObjectHideFlags: 0
@@ -3562,7 +3589,7 @@ GameObject:
   - component: {fileID: 686903476}
   - component: {fileID: 686903477}
   m_Layer: 5
-  m_Name: GridContent
+  m_Name: ContentContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3719,6 +3746,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 753253183}
+  - component: {fileID: 753253185}
   - component: {fileID: 753253184}
   m_Layer: 5
   m_Name: TasksView
@@ -3757,13 +3785,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 753253182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e81aa3315398edc449864ab90183b42e, type: 3}
+  m_Script: {fileID: 11500000, guid: 00d44f718ec92b643b5915162b7a7091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cellPrefab: {fileID: 8018840504180590803, guid: 23a579c8ead587b4a9e2a9aaf2398f3d,
     type: 3}
   contentContainer: {fileID: 1686247451}
   noTasksText: {fileID: 670363762}
+--- !u!114 &753253185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753253182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82129e7e496b46e4f991cd3b9f0dfb78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectableController: {fileID: 753253184}
 --- !u!1 &782453740
 GameObject:
   m_ObjectHideFlags: 0
@@ -4271,6 +4312,7 @@ GameObject:
   - component: {fileID: 890713313}
   - component: {fileID: 890713316}
   - component: {fileID: 890713315}
+  - component: {fileID: 890713317}
   - component: {fileID: 890713314}
   m_Layer: 5
   m_Name: AssignShipToDockView
@@ -4355,6 +4397,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 890713312}
   m_CullTransparentMesh: 0
+--- !u!114 &890713317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890713312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64e92d06b05b76499febcb5903e3a2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectableController: {fileID: 890713314}
 --- !u!1 &896377097
 GameObject:
   m_ObjectHideFlags: 0
@@ -6004,6 +6059,7 @@ GameObject:
   - component: {fileID: 1273335916}
   - component: {fileID: 1273335918}
   - component: {fileID: 1273335917}
+  - component: {fileID: 1273335920}
   - component: {fileID: 1273335919}
   m_Layer: 5
   m_Name: DocksView
@@ -6081,12 +6137,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1273335915}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69472904c2499aa4096631a4239aeb7e, type: 3}
+  m_Script: {fileID: 11500000, guid: feff5c7e59a059140b7e9fcec7a7e78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cellPrefab: {fileID: 8285420774982431291, guid: a0c220733c644284e9d421eba643a7e9,
     type: 3}
   contentContainer: {fileID: 621325203}
+--- !u!114 &1273335920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273335915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ece924b2297034f84367d315de2ee2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectableController: {fileID: 1273335919}
   buildDockView: {fileID: 22399949}
 --- !u!1 &1316672277
 GameObject:
@@ -6546,9 +6615,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1273335919}
-        m_MethodName: ShowDocksView
-        m_Mode: 1
+      - m_Target: {fileID: 1273335915}
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6988,9 +7057,9 @@ MonoBehaviour:
   preview: {fileID: 118257126}
   upgradeView: {fileID: 297681568}
   manufactoryView: {fileID: 974955630}
-  storageViewController: {fileID: 479402434}
-  tasksViewController: {fileID: 753253184}
-  assignShipToDock: {fileID: 890713314}
+  storageViewController: {fileID: 479402435}
+  tasksViewController: {fileID: 753253185}
+  assignShipToDock: {fileID: 890713317}
 --- !u!1 &1602142787
 GameObject:
   m_ObjectHideFlags: 0
@@ -7470,7 +7539,7 @@ MonoBehaviour:
   preview: {fileID: 1316673131}
   upgradeView: {fileID: 1019437552}
   docksView: {fileID: 1273335915}
-  docksViewController: {fileID: 1273335919}
+  docksViewController: {fileID: 1273335920}
 --- !u!1 &1686247450
 GameObject:
   m_ObjectHideFlags: 0
@@ -7482,7 +7551,7 @@ GameObject:
   - component: {fileID: 1686247451}
   - component: {fileID: 1686247452}
   m_Layer: 5
-  m_Name: GridContent
+  m_Name: ContentContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8553,7 +8622,7 @@ GameObject:
   - component: {fileID: 1968463618}
   - component: {fileID: 1968463619}
   m_Layer: 5
-  m_Name: GridContent
+  m_Name: ContentContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

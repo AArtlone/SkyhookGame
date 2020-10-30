@@ -27,17 +27,16 @@ public class Manufactory : Institution
 
         foreach (var task in ManufactoryTasks)
         {
-            if (task.TripClock.TimeLeft() <= 0)
-            {
-                tasksToRemove.Add(task);
-            }
+            if (task.TripClock.TimeLeft() > 0)
+                continue;
+
+            tasksToRemove.Add(task);
         }
 
         tasksToRemove.ForEach(e => 
         {
             if (ManufactoryTasks.Contains(e))
             {
-
                 ManufactoryTasks.Remove(e);
                 DoneBuildingShip(e);
             }
@@ -78,8 +77,8 @@ public class Manufactory : Institution
 
         ShipsInStorage.Add(ship);
 
-        ManufactoryUIController.Instance.StorageViewController.RefreshData();
-        ManufactoryUIController.Instance.TasksViewController.RefreshData();
+        ManufactoryUIController.Instance.StorageViewController.ChangeData();
+        ManufactoryUIController.Instance.TasksViewController.ChangeData();
     }
 
     public void RemoveShipFromStorage(Ship ship)
@@ -89,7 +88,7 @@ public class Manufactory : Institution
 
         ShipsInStorage.Remove(ship);
 
-        ManufactoryUIController.StorageViewController.RefreshData();
+        ManufactoryUIController.StorageViewController.ChangeData();
     }
 
     public void StartBuildingShip(ShipRecipe shipRecipe)
@@ -100,7 +99,7 @@ public class Manufactory : Institution
 
         ManufactoryTasks.Add(manufactoryTask);
 
-        ManufactoryUIController.TasksViewController.RefreshData();
+        ManufactoryUIController.TasksViewController.ChangeData();
     }
 
     public bool CanBuild()

@@ -1,65 +1,38 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class StorageViewController : SelectableController<StorageCell, StorageCellData>
+public class StorageViewController : MonoBehaviour
 {
-    [SerializeField] private GameObject emptyStorageText = default;
+    [SerializeField] private StorageSelectableController selectableController = default;
 
-    [SerializeField] private AssignShipToDockViewController assingShipToDockView = default;
+    private bool isShowing;
 
-    protected override void OnEnable()
+    private void OnEnable()
     {
-        base.OnEnable();
+        isShowing = true;
 
         SetStoragDataSet();
-
-        RefreshView();
     }
 
-    protected override void Cell_OnCellPress(SelectableCell<StorageCellData> cell)
+    private void OnDisable()
     {
-        base.Cell_OnCellPress(cell);
-
-        ShowAssignShipToDockView();
+        isShowing = false;
     }
 
-    protected override void RefreshView()
+    public void ChangeData()
     {
-        emptyStorageText.SetActive(CheckIfStorageIsEmpty());
-
-        base.RefreshView();
-    }
-
-    private void ShowAssignShipToDockView()
-    {
-        assingShipToDockView.ShowView(GetSelectedCell().data.ship);
-    }
-
-    public void RefreshData()
-    {
-        SetStoragDataSet();
-
         if (isShowing)
-            RefreshView();
+            SetStoragDataSet();
     }
 
     private void SetStoragDataSet()
     {
-        List<Ship> shipsInStorage = Manufactory.ShipsInStorage;
+        List<Ship> shipsInStorage = Settlement.Instance.Manufactory.ShipsInStorage;
 
         List<StorageCellData> dataSet = new List<StorageCellData>(shipsInStorage.Count);
 
         shipsInStorage.ForEach(e => dataSet.Add(new StorageCellData(e)));
 
-        SetDataSet(dataSet);
+        selectableController.SetDataSet(dataSet);
     }
-
-    private bool CheckIfStorageIsEmpty()
-    {
-        List<Ship> shipsInStorage = Manufactory.ShipsInStorage;
-
-        return (shipsInStorage.Count == 0);
-    }
-
-    private Manufactory Manufactory { get { return Settlement.Instance.Manufactory; } }
 }

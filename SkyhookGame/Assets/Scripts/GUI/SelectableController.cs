@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SelectableController<T1, T2> : MonoBehaviour
     where T1 : SelectableCell<T2>
     where T2 : SelectableCellData
 {
+    public Action<T1> onSelectionChange;
+
     [SerializeField] private T1 cellPrefab = default;
     [SerializeField] private RectTransform contentContainer = default;
 
@@ -12,7 +15,7 @@ public class SelectableController<T1, T2> : MonoBehaviour
 
     private List<T2> dataSet;
 
-    private int selectedCell;
+    private int selectedCell = -1; // When selecting the first cell, the index will become 0. We need it to be different from the initial value to fire an event, thus -1
 
     protected bool isShowing;
 
@@ -25,7 +28,12 @@ public class SelectableController<T1, T2> : MonoBehaviour
     {
         int selectedCellIndex = cells.IndexOf(cell as T1);
 
+        if (selectedCell == selectedCellIndex)
+            return;
+
         selectedCell = selectedCellIndex;
+
+        onSelectionChange?.Invoke(GetSelectedCell());
     }
 
     protected virtual void OnDisable()
@@ -33,9 +41,25 @@ public class SelectableController<T1, T2> : MonoBehaviour
         isShowing = false;
     }
 
-    protected void SetDataSet(List<T2> dataSet)
+    public void SetDataSet(List<T2> dataSet)
     {
         this.dataSet = dataSet;
+        
+        Refresh();
+    }
+
+    /// <summary>
+    /// Cleans up the cells list and destroys all cells, then Initializes cells again.
+    /// Use this after updating dataSet
+    /// </summary>
+    protected virtual void Refresh()
+    {
+        if (cells != null)
+            cells.ForEach(c => Destroy(c.gameObject));
+
+        cells = null;
+
+        Initialize();
     }
 
     private void Initialize()
@@ -57,20 +81,6 @@ public class SelectableController<T1, T2> : MonoBehaviour
 
             cells.Add(cell);
         }
-    }
-
-    /// <summary>
-    /// Cleans up the cells list and destroys all cells, then Initializes cells again.
-    /// Use this after updating dataSet
-    /// </summary>
-    protected virtual void RefreshView()
-    {
-        if (cells != null)
-            cells.ForEach(c => Destroy(c.gameObject));
-
-        cells = null;
-
-        Initialize();
     }
 
     public T1 GetSelectedCell()

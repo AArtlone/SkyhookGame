@@ -1,68 +1,53 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class AssignShipToDockViewController : SelectableController<AssignShipToDockCell, AssignShipToDockCellData>
+public class AssignShipToDockViewController : MonoBehaviour
 {
-    [SerializeField] private GameObject noDocksText = default;
+    [SerializeField] private AssignShipToDockSelectableController selectableController = default;
 
-    private Ship shipToAssign;
+    private bool isShowing;
 
-    private List<Dock> emptyDocks;
-
-    protected override void Cell_OnCellPress(SelectableCell<AssignShipToDockCellData> cell)
+    private void OnEnable()
     {
-        base.Cell_OnCellPress(cell);
+        isShowing = true;
 
-        cell.data.dock.AssignShip(shipToAssign);
+        SetDocksDataSet();
+    }
 
-        gameObject.SetActive(false);
-
-        Manufactory.RemoveShipFromStorage(shipToAssign);
+    private void OnDisable()
+    {
+        isShowing = false;
     }
 
     public void ShowView(Ship shipToAssign)
     {
-        this.shipToAssign = shipToAssign;
+        selectableController.Smth(shipToAssign);
 
         gameObject.SetActive(true);
 
-        if (CosmicPort == null)
+        if (Settlement.Instance.CosmicPort == null)
         {
             Debug.LogError("CosmicPort is null");
             return;
         }
 
         SetDocksDataSet();
-
-        RefreshView();
     }
 
-    public void RefreshData()
+    public void ChangeData()
     {
-        SetDocksDataSet();
-
         if (isShowing)
-            RefreshView();
-    }
-
-    protected override void RefreshView()
-    {
-        noDocksText.SetActive(emptyDocks.Count == 0);
-
-        base.RefreshView();
+            SetDocksDataSet();
     }
 
     private void SetDocksDataSet()
     {
-        emptyDocks = CosmicPort.GetEmptyDocks();
+        var emptyDocks = Settlement.Instance.CosmicPort.GetEmptyDocks();
 
         List<AssignShipToDockCellData> dataSet = new List<AssignShipToDockCellData>(emptyDocks.Count);
-        
+
         emptyDocks.ForEach(e => dataSet.Add(new AssignShipToDockCellData(e)));
 
-        SetDataSet(dataSet);
+        selectableController.SetDataSet(dataSet);
     }
-
-    private CosmicPort CosmicPort { get { return Settlement.Instance.CosmicPort; } }
-    private Manufactory Manufactory { get { return Settlement.Instance.Manufactory; } }
 }

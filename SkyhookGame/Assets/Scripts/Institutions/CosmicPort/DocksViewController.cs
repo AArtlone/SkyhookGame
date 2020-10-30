@@ -1,48 +1,28 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class DocksViewController : SelectableController<DocksCell, DocksCellData>
+public class DocksViewController : MonoBehaviour
 {
+    [SerializeField] private DocksSelectableConroller selectableController = default;
+
     [SerializeField] private GameObject buildDockView = default;
 
-    private DocksCell selectedDock;
+    private bool isShowing;
 
-    private void Awake()
+    private void OnEnable()
     {
-        CloseBuildDockView();
+        isShowing = true;
+
+        SetDocksDataSet();
+
+        selectableController.onSelectionChange += SelectableController_OnSelectedDockChange;
 
         CosmicPort.onUpgrade += CosmicPort_OnUpgrade;
     }
 
-    protected override void OnEnable()
+    private void SelectableController_OnSelectedDockChange(DocksCell selectedDock)
     {
-        base.OnEnable();
-
-        SetDocksDataSet();
-
-        RefreshView();
-    }
-
-    private void OnDestroy()
-    {
-        if (CosmicPort == null)
-            return;
-
-        CosmicPort.onUpgrade -= CosmicPort_OnUpgrade;
-    }
-
-    private void CosmicPort_OnUpgrade()
-    {
-        SetDocksDataSet();
-    }
-
-    protected override void Cell_OnCellPress(SelectableCell<DocksCellData> cell)
-    {
-        base.Cell_OnCellPress(cell);
-
-        SelectDock(cell as DocksCell);
-
-        switch (cell.data.dock.DockState)
+        switch (selectedDock.data.dock.DockState)
         {
             case DockState.Unlocked:
                 ShowBuildDockView();
@@ -53,12 +33,25 @@ public class DocksViewController : SelectableController<DocksCell, DocksCellData
         }
     }
 
-    public void RefreshData()
+    private void CosmicPort_OnUpgrade()
     {
         SetDocksDataSet();
+    }
 
+    private void OnDisable()
+    {
+        isShowing = false;
+
+        if (CosmicPort == null)
+            return;
+
+        CosmicPort.onUpgrade -= CosmicPort_OnUpgrade;
+    }
+
+    public void ChangeData()
+    {
         if (isShowing)
-            RefreshView();
+            SetDocksDataSet();
     }
 
     private void SetDocksDataSet()
@@ -67,15 +60,12 @@ public class DocksViewController : SelectableController<DocksCell, DocksCellData
 
         CosmicPort.AllDocks.ForEach(e => dataSet.Add(new DocksCellData(e)));
 
-        SetDataSet(dataSet);
+        selectableController.SetDataSet(dataSet);
     }
 
-    public void SelectDock(DocksCell docksCell)
+    private void ShowBuildDockView()
     {
-        if (selectedDock == docksCell)
-            return;
-
-        selectedDock = docksCell;
+        buildDockView.SetActive(true);
     }
 
     private void CloseBuildDockView()
@@ -83,31 +73,23 @@ public class DocksViewController : SelectableController<DocksCell, DocksCellData
         buildDockView.SetActive(false);
     }
 
-    public void ShowBuildDockView()
-    {
-        buildDockView.SetActive(true);
-    }
-
     #region EditorButtons
     public void BuildDock()
     {
         CloseBuildDockView();
 
-        CosmicPort.StartBuildingDock(selectedDock.data.dock);
+        CosmicPort.StartBuildingDock(selectableController.GetSelectedCell().data.dock);
     }
+    #endregion
 
-    public void ShowDocksView()
+    private CosmicPort CosmicPort
     {
-        gameObject.SetActive(true);
-    }
-#endregion
-
-    private CosmicPort CosmicPort { get 
+        get
         {
             if (!Settlement.Exists)
                 return null;
 
-            return Settlement.Instance.CosmicPort; 
-        } 
+            return Settlement.Instance.CosmicPort;
+        }
     }
 }
