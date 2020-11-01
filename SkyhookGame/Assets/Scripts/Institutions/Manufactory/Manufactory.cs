@@ -77,8 +77,8 @@ public class Manufactory : Institution
 
         ShipsInStorage.Add(ship);
 
-        ManufactoryUIController.Instance.StorageViewController.ChangeData();
-        ManufactoryUIController.Instance.TasksViewController.ChangeData();
+        ManufactoryGUIManager.Instance.StorageViewController.ChangeData();
+        ManufactoryGUIManager.Instance.TasksViewController.ChangeData();
     }
 
     public void RemoveShipFromStorage(Ship ship)
@@ -113,5 +113,5 @@ public class Manufactory : Institution
         return ManufactoryTasks.Count + ShipsInStorage.Count < storageCapacity;
     }
 
-    private ManufactoryUIController ManufactoryUIController { get { return ManufactoryUIController.Instance; } }
+    private ManufactoryGUIManager ManufactoryUIController { get { return ManufactoryGUIManager.Instance; } }
 }

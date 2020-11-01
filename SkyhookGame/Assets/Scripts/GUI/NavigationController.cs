@@ -2,17 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class NavigationController : MonoBehaviour
+public class NavigationController : MonoBehaviour
 {
     private List<ViewController> stack = new List<ViewController>();
 
+    private Queue<NavigationQueueElement> queue = new Queue<NavigationQueueElement>();
+
     private bool isInTransition;
+
+    public void DebugStack()
+    {
+        print(stack.Count);
+        foreach (var v in stack)
+        {
+            print(v.gameObject.name);
+        }
+    }
 
     public void Push(ViewController newViewController)
     {
         if (isInTransition)
         {
-            // Add to queue
+            queue.Enqueue(new NavigationQueueElement(NavigationCommand.Push));
+
+            Debug.Log($"{newViewController.gameObject.name} is beind added to queue with {NavigationCommand.Push} command");
+            
             Debug.LogWarning("Is already in transition");
             return;
         }
@@ -57,17 +71,20 @@ public abstract class NavigationController : MonoBehaviour
         // Check if there is a transition time when using Effects
         
         newViewController.gameObject.SetActive(true);
-        
-        newViewController.Appeared();
 
         isInTransition = false;
+
+        newViewController.Appeared();
     }
 
     public void PushAndPop(ViewController newViewController)
     {
         if (isInTransition)
         {
-            // Add to queue
+            queue.Enqueue(new NavigationQueueElement(NavigationCommand.PushAndPop));
+
+            Debug.Log($"{newViewController.gameObject.name} is beind added to queue with {NavigationCommand.PushAndPop} command");
+
             Debug.LogWarning("Is already in transition");
             return;
         }
@@ -115,9 +132,14 @@ public abstract class NavigationController : MonoBehaviour
 
         newViewController.gameObject.SetActive(true);
 
-        newViewController.Appeared();
-
         isInTransition = false;
+
+        newViewController.Appeared();
+    }
+
+    private void HandleQueue()
+    {
+
     }
 
     private ViewController GetTopViewController()
@@ -127,4 +149,19 @@ public abstract class NavigationController : MonoBehaviour
 
         return stack[stack.Count - 1];
     }
+}
+
+public class NavigationQueueElement
+{
+    public NavigationCommand navCommand;
+    public NavigationQueueElement (NavigationCommand navCommand)
+    {
+        this.navCommand = navCommand;
+    }
+}
+
+public enum NavigationCommand
+{
+    Push,
+    PushAndPop
 }
