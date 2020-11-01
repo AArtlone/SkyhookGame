@@ -1,27 +1,18 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class StorageViewController : MonoBehaviour
+public class StorageViewController : ViewController
 {
     [SerializeField] private StorageSelectableController selectableController = default;
 
-    private bool isShowing;
-
-    private void OnEnable()
+    public override void WillAppear()
     {
-        isShowing = true;
-
         SetStoragDataSet();
-    }
-
-    private void OnDisable()
-    {
-        isShowing = false;
     }
 
     public void ChangeData()
     {
-        if (isShowing)
+        if (IsShowing)
             SetStoragDataSet();
     }
 

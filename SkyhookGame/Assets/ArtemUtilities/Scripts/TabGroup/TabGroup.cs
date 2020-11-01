@@ -3,32 +3,30 @@ using UnityEngine;
 
 public abstract class TabGroup : MonoBehaviour
 {
-    [SerializeField] private TabGroupType type = default;
+    [SerializeField] protected TabGroupType type = default;
 
     [ShowIf(nameof(type), nameof(TabGroupType.ColorBased), ComparisonType.Equals)]
-    [SerializeField] private Color idleColor = default;
+    [SerializeField] protected Color idleColor = default;
     [ShowIf(nameof(type), nameof(TabGroupType.ColorBased), ComparisonType.Equals)]
-    [SerializeField] private Color hoverColor = default;
+    [SerializeField] protected Color hoverColor = default;
     [ShowIf(nameof(type), nameof(TabGroupType.ColorBased), ComparisonType.Equals)]
-    [SerializeField] private Color activeColor = default;
+    [SerializeField] protected Color activeColor = default;
 
 
     [ShowIf(nameof(type), nameof(TabGroupType.SpriteBased), ComparisonType.Equals)]
-    [SerializeField] private Sprite idleSprite = default;
+    [SerializeField] protected Sprite idleSprite = default;
     [ShowIf(nameof(type), nameof(TabGroupType.SpriteBased), ComparisonType.Equals)]
-    [SerializeField] private Sprite hoverSprite = default;
+    [SerializeField] protected Sprite hoverSprite = default;
     [ShowIf(nameof(type), nameof(TabGroupType.SpriteBased), ComparisonType.Equals)]
-    [SerializeField] private Sprite activeSprite = default;
+    [SerializeField] protected Sprite activeSprite = default;
 
-    [SerializeField] private List<GameObject> pages = default;
+    [SerializeField] protected List<GameObject> pages = default;
 
-    //[SerializeField] private EffectBase selectEffect = default;
-    
     protected List<TabButton> tabButtons;
 
     protected TabButton selectedTab;
-    
-    private void Start()
+
+    private void Awake()
     {
         if (tabButtons == null)
         {
@@ -39,7 +37,10 @@ public abstract class TabGroup : MonoBehaviour
         ResetTabButtonsVisuals();
 
         ResetPages();
+    }
 
+    public virtual void Initialize()
+    {
         int index = tabButtons[0].transform.GetSiblingIndex();
 
         SelectTab(tabButtons[index]);
@@ -104,8 +105,8 @@ public abstract class TabGroup : MonoBehaviour
         }
     }
 
-    private void ResetPages()
+    protected virtual void ResetPages()
     {
-        pages.ForEach(p => p.gameObject.SetActive(false));
+        pages.ForEach(p => p.SetActive(false));
     }
 }

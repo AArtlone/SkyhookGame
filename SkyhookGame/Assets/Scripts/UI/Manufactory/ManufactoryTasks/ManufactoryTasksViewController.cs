@@ -1,27 +1,18 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ManufactoryTasksViewController : MonoBehaviour
+public class ManufactoryTasksViewController : ViewController
 {
     [SerializeField] private ManufactoryTasksSelectableController selectableController = default;
 
-    private bool isShowing;
-
-    private void OnEnable()
+    public override void WillAppear()
     {
-        isShowing = true;
-
         SetManufactoryTasksDataSet();
-    }
-
-    private void OnDisable()
-    {
-        isShowing = false;
     }
 
     public void ChangeData()
     {
-        if (isShowing)
+        if (IsShowing)
             SetManufactoryTasksDataSet();
     }
 

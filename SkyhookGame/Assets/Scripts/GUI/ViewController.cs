@@ -2,7 +2,7 @@
 
 public abstract class ViewController : MonoBehaviour
 {
-    protected bool isShowing;
+    protected bool IsShowing { get; private set; }
 
     public virtual void WillDisappear()
     {
@@ -11,7 +11,7 @@ public abstract class ViewController : MonoBehaviour
 
     public virtual void Disappeared()
     {
-        isShowing = false;
+        IsShowing = false;
     }
 
     public virtual void WillAppear()
@@ -21,6 +21,6 @@ public abstract class ViewController : MonoBehaviour
 
     public virtual void Appeared()
     {
-        isShowing = true;
+        IsShowing = true;
     }
 }
