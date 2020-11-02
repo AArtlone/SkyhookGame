@@ -64,8 +64,6 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandle
 
     public virtual void OnPointerClick(PointerEventData eventData)
     {
-        print("mouse clicked on " + gameObject.name);
-
         if (!Interactable)
             return;
 
