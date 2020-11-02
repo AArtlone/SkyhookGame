@@ -32,7 +32,7 @@ public class CosmicPort : Institution
 
             dock.UpdateState(DockState.Empty);
 
-            CosmicPortUIController.Instance.DocksViewController.ChangeData();
+            CosmicPortGUIManager.Instance.DocksViewController.ChangeData();
             ManufactoryGUIManager.Instance.AssignShipToDock.ChangeData();
         }
     }

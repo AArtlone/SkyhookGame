@@ -1,24 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class DocksViewController : MonoBehaviour
+public class DocksViewController : ViewController
 {
     [SerializeField] private DocksSelectableConroller selectableController = default;
 
     [SerializeField] private GameObject buildDockView = default;
-
-    private bool isShowing;
-
-    private void OnEnable()
-    {
-        isShowing = true;
-
-        SetDocksDataSet();
-
-        selectableController.onSelectionChange += SelectableController_OnSelectedDockChange;
-
-        CosmicPort.onUpgrade += CosmicPort_OnUpgrade;
-    }
 
     private void SelectableController_OnSelectedDockChange(DocksCell selectedDock)
     {
@@ -38,10 +25,17 @@ public class DocksViewController : MonoBehaviour
         SetDocksDataSet();
     }
 
-    private void OnDisable()
+    public override void WillAppear()
     {
-        isShowing = false;
+        SetDocksDataSet();
 
+        selectableController.onSelectionChange += SelectableController_OnSelectedDockChange;
+
+        CosmicPort.onUpgrade += CosmicPort_OnUpgrade;
+    }
+
+    public override void WillDisappear()
+    {
         if (CosmicPort == null)
             return;
 
@@ -50,7 +44,7 @@ public class DocksViewController : MonoBehaviour
 
     public void ChangeData()
     {
-        if (isShowing)
+        if (IsShowing)
             SetDocksDataSet();
     }
 
