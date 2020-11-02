@@ -22,11 +22,11 @@ public abstract class TabGroup : MonoBehaviour
 
     [SerializeField] protected List<GameObject> pages = default;
 
-    protected List<TabButton> tabButtons;
+    [SerializeField] protected List<TabButton> tabButtons = default;
 
     protected TabButton selectedTab;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         if (tabButtons == null)
         {
@@ -37,21 +37,18 @@ public abstract class TabGroup : MonoBehaviour
         ResetTabButtonsVisuals();
 
         ResetPages();
+
+        Initialize();
     }
 
-    public virtual void Initialize()
+    protected virtual void Initialize()
     {
+        //Initialize Buttons List
+        tabButtons = new List<TabButton>(tabButtons);
+
         int index = tabButtons[0].transform.GetSiblingIndex();
 
         SelectTab(tabButtons[index]);
-    }
-
-    public void Subscribe(TabButton tabButton)
-    {
-        if (tabButtons == null)
-            tabButtons = new List<TabButton>();
-
-        tabButtons.Add(tabButton);
     }
 
     public virtual void EnterTab(TabButton tabButton)

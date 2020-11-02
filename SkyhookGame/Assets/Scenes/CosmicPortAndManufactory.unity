@@ -677,6 +677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tabGroup: {fileID: 1602142789}
+  backgroundImage: {fileID: 187707530}
 --- !u!114 &187707530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5214,6 +5215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tabGroup: {fileID: 1602142789}
+  backgroundImage: {fileID: 979486189}
 --- !u!114 &979486189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7512,6 +7514,10 @@ MonoBehaviour:
   - {fileID: 559081149}
   - {fileID: 753253182}
   - {fileID: 479402432}
+  tabButtons:
+  - {fileID: 979486188}
+  - {fileID: 2125374233}
+  - {fileID: 187707529}
 --- !u!114 &1602142790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9957,6 +9963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tabGroup: {fileID: 1602142789}
+  backgroundImage: {fileID: 2125374234}
 --- !u!114 &2125374234
 MonoBehaviour:
   m_ObjectHideFlags: 0

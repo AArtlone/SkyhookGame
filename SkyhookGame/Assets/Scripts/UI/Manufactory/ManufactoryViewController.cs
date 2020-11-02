@@ -4,17 +4,26 @@ public class ManufactoryViewController : ViewController
 {
     [SerializeField] private ManufactoryTabGroup tabGroup = default;
 
-    public override void Appeared()
+    private void TabGroup_OnTabSelection(ViewController selectedView)
     {
-        base.Appeared();
-
-        tabGroup.Initialize();
+        ManufactoryGUIManager.ShowTabPage(selectedView);
     }
 
-    public override void WillDisappear()
+    public override void ViewWillAppear()
     {
-        base.WillDisappear();
+        base.ViewWillAppear();
 
-        tabGroup.ResetManufactortTabGroup();
+        tabGroup.onTabSelection += TabGroup_OnTabSelection;
     }
+
+    public override void ViewWillDisappear()
+    {
+        base.ViewWillDisappear();
+
+        ManufactoryGUIManager.HideTabPage();
+
+        tabGroup.onTabSelection -= TabGroup_OnTabSelection;
+    }
+
+    private ManufactoryGUIManager ManufactoryGUIManager { get { return ManufactoryGUIManager.Instance; } }
 }

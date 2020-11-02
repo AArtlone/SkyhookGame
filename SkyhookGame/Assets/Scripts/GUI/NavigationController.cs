@@ -54,7 +54,7 @@ public class NavigationController : MonoBehaviour
 
         if (topViewController != null && hidePreviousView)
         {
-            topViewController.WillDisappear();
+            topViewController.ViewWillDisappear();
             
             // Check if there is a transition time when using Effects
 
@@ -67,7 +67,7 @@ public class NavigationController : MonoBehaviour
 
         stack.Add(newViewController);
 
-        newViewController.WillAppear();
+        newViewController.ViewWillAppear();
 
         yield return null;
 
@@ -77,7 +77,7 @@ public class NavigationController : MonoBehaviour
 
         isInTransition = false;
 
-        newViewController.Appeared();
+        newViewController.ViewAppeared();
     }
 
     public void PushAndPop(ViewController newViewController)
@@ -112,7 +112,7 @@ public class NavigationController : MonoBehaviour
 
         if (topViewController != null)
         {
-            topViewController.WillDisappear();
+            topViewController.ViewWillDisappear();
 
             // Check if there is a transition time when using Effects
 
@@ -127,7 +127,7 @@ public class NavigationController : MonoBehaviour
 
         stack.Add(newViewController);
 
-        newViewController.WillAppear();
+        newViewController.ViewWillAppear();
 
         yield return null;
 
@@ -137,7 +137,7 @@ public class NavigationController : MonoBehaviour
 
         isInTransition = false;
 
-        newViewController.Appeared();
+        newViewController.ViewAppeared();
     }
 
     public void PopTopViewController()
@@ -170,7 +170,7 @@ public class NavigationController : MonoBehaviour
         if (topViewController == null)
             yield break;
 
-        topViewController.WillDisappear();
+        topViewController.ViewWillDisappear();
 
         // Check if there is a transition time when using Effects
 

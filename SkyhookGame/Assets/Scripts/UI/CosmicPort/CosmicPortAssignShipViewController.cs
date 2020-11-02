@@ -3,9 +3,9 @@
 public class CosmicPortAssignShipViewController : StorageViewController
 {
     [SerializeField] private DocksSelectableConroller docksSelectableConroller = default;
-    public override void WillAppear()
+    public override void ViewWillAppear()
     {
-        base.WillAppear();
+        base.ViewWillAppear();
 
         CosmicPortAssignShipSelectableController cosmicPortAssignShipSelectableController = selectableController as CosmicPortAssignShipSelectableController;
 

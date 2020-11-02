@@ -12,18 +12,18 @@ public class DocksViewController : ViewController
         SetDocksDataSet();
     }
 
-    public override void WillAppear()
+    public override void ViewWillAppear()
     {
-        base.WillAppear();
+        base.ViewWillAppear();
 
         SetDocksDataSet();
 
         CosmicPort.onUpgrade += CosmicPort_OnUpgrade;
     }
 
-    public override void WillDisappear()
+    public override void ViewWillDisappear()
     {
-        base.WillDisappear();
+        base.ViewWillDisappear();
 
         if (CosmicPort == null)
             return;

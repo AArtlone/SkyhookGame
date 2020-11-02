@@ -4,7 +4,7 @@ public abstract class ViewController : MonoBehaviour
 {
     protected bool IsShowing { get; private set; }
 
-    public virtual void WillDisappear()
+    public virtual void ViewWillDisappear()
     {
 
     }
@@ -14,12 +14,12 @@ public abstract class ViewController : MonoBehaviour
         IsShowing = false;
     }
 
-    public virtual void WillAppear()
+    public virtual void ViewWillAppear()
     {
 
     }
 
-    public virtual void Appeared()
+    public virtual void ViewAppeared()
     {
         IsShowing = true;
     }
