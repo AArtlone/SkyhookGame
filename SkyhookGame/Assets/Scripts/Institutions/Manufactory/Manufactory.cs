@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Manufactory : Institution
 {
+    public Action onShipsInStorageChange;
+    public Action onManufactoryTasksChange;
+
     [SerializeField] private Vector2Int tasksCapacityRange = default;
     [SerializeField] private Vector2Int storageCapacityRange = default;
 
@@ -77,9 +81,7 @@ public class Manufactory : Institution
 
         ShipsInStorage.Add(ship);
 
-        ManufactoryGUIManager.Instance.StorageViewController.ChangeData();
-        ManufactoryGUIManager.Instance.TasksViewController.ChangeData();
-        CosmicPortGUIManager.Instance.CosmicPortStorageViewController.ChangeData();
+        onShipsInStorageChange?.Invoke();
     }
 
     public void RemoveShipFromStorage(Ship ship)
@@ -89,7 +91,7 @@ public class Manufactory : Institution
 
         ShipsInStorage.Remove(ship);
 
-        ManufactoryUIController.StorageViewController.ChangeData();
+        onShipsInStorageChange?.Invoke();
     }
 
     public void StartBuildingShip(ShipRecipe shipRecipe)
@@ -100,7 +102,7 @@ public class Manufactory : Institution
 
         ManufactoryTasks.Add(manufactoryTask);
 
-        ManufactoryUIController.TasksViewController.ChangeData();
+        onManufactoryTasksChange?.Invoke();
     }
 
     public bool CanBuild()
@@ -114,5 +116,5 @@ public class Manufactory : Institution
         return ManufactoryTasks.Count + ShipsInStorage.Count < storageCapacity;
     }
 
-    private ManufactoryGUIManager ManufactoryUIController { get { return ManufactoryGUIManager.Instance; } }
+    private ManufactoryGUIManager ManufactoryGUIManager { get { return ManufactoryGUIManager.Instance; } }
 }

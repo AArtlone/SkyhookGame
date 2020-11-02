@@ -10,9 +10,23 @@ public class ManufactoryTasksViewController : ViewController
         base.WillAppear();
 
         SetManufactoryTasksDataSet();
+
+        Manufactory.onManufactoryTasksChange += Manufactory_OnShipsManufactoryTasksChange;
     }
 
-    public void ChangeData()
+    public override void WillDisappear()
+    {
+        base.WillDisappear();
+
+        Manufactory.onManufactoryTasksChange -= Manufactory_OnShipsManufactoryTasksChange;
+    }
+
+    private void Manufactory_OnShipsManufactoryTasksChange()
+    {
+        ChangeData();
+    }
+
+    private void ChangeData()
     {
         if (IsShowing)
             SetManufactoryTasksDataSet();
@@ -20,7 +34,7 @@ public class ManufactoryTasksViewController : ViewController
 
     private void SetManufactoryTasksDataSet()
     {
-        var manufactoryTasks = Settlement.Instance.Manufactory.ManufactoryTasks;
+        var manufactoryTasks = Manufactory.ManufactoryTasks;
 
         List<ManufactoryTasksCellData> dataSet = new List<ManufactoryTasksCellData>(manufactoryTasks.Count);
 
@@ -28,4 +42,6 @@ public class ManufactoryTasksViewController : ViewController
 
         selectableController.SetDataSet(dataSet);
     }
+
+    private Manufactory Manufactory { get { return Settlement.Instance.Manufactory; } }
 }

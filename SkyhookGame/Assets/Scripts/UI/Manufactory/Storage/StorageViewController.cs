@@ -10,9 +10,23 @@ public class StorageViewController : ViewController
         base.WillAppear();
 
         SetStoragDataSet();
+
+        Manufactory.onShipsInStorageChange += Manufactory_OnShipsInStorageChange;
     }
 
-    public void ChangeData()
+    public override void WillDisappear()
+    {
+        base.WillDisappear();
+
+        Manufactory.onShipsInStorageChange -= Manufactory_OnShipsInStorageChange;
+    }
+
+    private void Manufactory_OnShipsInStorageChange()
+    {
+        ChangeData();
+    }
+
+    private void ChangeData()
     {
         if (IsShowing)
             SetStoragDataSet();
@@ -20,7 +34,7 @@ public class StorageViewController : ViewController
 
     private void SetStoragDataSet()
     {
-        List<Ship> shipsInStorage = Settlement.Instance.Manufactory.ShipsInStorage;
+        List<Ship> shipsInStorage = Manufactory.ShipsInStorage;
 
         List<StorageCellData> dataSet = new List<StorageCellData>(shipsInStorage.Count);
 
@@ -28,4 +42,6 @@ public class StorageViewController : ViewController
 
         selectableController.SetDataSet(dataSet);
     }
+
+    private Manufactory Manufactory { get { return Settlement.Instance.Manufactory; } }
 }
