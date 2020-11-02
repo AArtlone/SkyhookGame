@@ -25,7 +25,7 @@ public class CosmicPortGUIManager : Singleton<CosmicPortGUIManager>
 
     public void ShowCosmicPortView()
     {
-        navigationController.Push(docksViewController);
+        navigationController.Push(docksViewController, true);
     }
 
     public void Back(NavigationController navController)
