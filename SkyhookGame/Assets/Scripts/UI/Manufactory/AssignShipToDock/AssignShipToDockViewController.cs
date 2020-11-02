@@ -1,29 +1,21 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class AssignShipToDockViewController : MonoBehaviour
+public class AssignShipToDockViewController : ViewController
 {
+    [SerializeField] private StorageSelectableController storageSelectableController = default;
     [SerializeField] private AssignShipToDockSelectableController selectableController = default;
 
-    private bool isShowing;
-
-    private void OnEnable()
+    public override void WillAppear()
     {
-        isShowing = true;
+        base.WillAppear();
 
-        SetDocksDataSet();
+        ShowView(storageSelectableController.GetSelectedCell().data.ship);
     }
 
-    private void OnDisable()
+    private void ShowView(Ship shipToAssign)
     {
-        isShowing = false;
-    }
-
-    public void ShowView(Ship shipToAssign)
-    {
-        selectableController.Smth(shipToAssign);
-
-        gameObject.SetActive(true);
+        selectableController.ShipToAssign(shipToAssign);
 
         if (Settlement.Instance.CosmicPort == null)
         {
@@ -36,7 +28,7 @@ public class AssignShipToDockViewController : MonoBehaviour
 
     public void ChangeData()
     {
-        if (isShowing)
+        if (IsShowing)
             SetDocksDataSet();
     }
 

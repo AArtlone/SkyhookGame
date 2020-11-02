@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ManufactoryViewController : ViewController
 {
@@ -7,6 +6,8 @@ public class ManufactoryViewController : ViewController
 
     public override void Appeared()
     {
+        base.Appeared();
+
         tabGroup.Initialize();
     }
 }

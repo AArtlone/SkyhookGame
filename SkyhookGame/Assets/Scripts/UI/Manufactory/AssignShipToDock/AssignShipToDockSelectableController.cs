@@ -6,7 +6,7 @@ public class AssignShipToDockSelectableController : SelectableController<AssignS
 
     private Ship shipToAssign;
 
-    public void Smth(Ship shipToAssign)
+    public void ShipToAssign(Ship shipToAssign)
     {
         this.shipToAssign = shipToAssign;
     }

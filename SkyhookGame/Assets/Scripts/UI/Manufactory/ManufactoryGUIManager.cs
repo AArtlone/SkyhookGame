@@ -15,11 +15,11 @@ public class ManufactoryGUIManager : Singleton<ManufactoryGUIManager>
     [SerializeField] private ManufactoryViewController manufactoryViewController = default;
     [SerializeField] private StorageViewController storageViewController = default;
     [SerializeField] private ManufactoryTasksViewController tasksViewController = default;
-    [SerializeField] private AssignShipToDockViewController assignShipToDock = default;
+    [SerializeField] private AssignShipToDockViewController assignShipToDockView = default;
 
     public StorageViewController StorageViewController { get { return storageViewController; } }
     public ManufactoryTasksViewController TasksViewController { get { return tasksViewController; } }
-    public AssignShipToDockViewController AssignShipToDock { get { return assignShipToDock; } }
+    public AssignShipToDockViewController AssignShipToDock { get { return assignShipToDockView; } }
 
     protected override void Awake()
     {
@@ -32,7 +32,12 @@ public class ManufactoryGUIManager : Singleton<ManufactoryGUIManager>
 
     public void ShowManufactoryView()
     {
-        navigationController.Push(manufactoryViewController);
+        navigationController.Push(manufactoryViewController, true);
+    }
+
+    public void ShowAssignShipToDockView()
+    {
+        navigationController.Push(assignShipToDockView, false);
     }
 
     public void DisplayTabPage(ViewController viewController)

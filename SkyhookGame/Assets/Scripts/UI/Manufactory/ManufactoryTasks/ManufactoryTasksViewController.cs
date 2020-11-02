@@ -7,6 +7,8 @@ public class ManufactoryTasksViewController : ViewController
 
     public override void WillAppear()
     {
+        base.WillAppear();
+
         SetManufactoryTasksDataSet();
     }
 

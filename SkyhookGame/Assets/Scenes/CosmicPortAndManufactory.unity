@@ -191,7 +191,7 @@ PrefabInstance:
     - target: {fileID: 1544950222593227389, guid: 730a011d2fad7a44c81db6159d5e1d43,
         type: 3}
       propertyPath: buildDuration
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 730a011d2fad7a44c81db6159d5e1d43, type: 3}
@@ -4410,6 +4410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64e92d06b05b76499febcb5903e3a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  storageSelectableController: {fileID: 479402434}
   selectableController: {fileID: 890713314}
 --- !u!1 &896377097
 GameObject:
@@ -7174,7 +7175,7 @@ MonoBehaviour:
   manufactoryViewController: {fileID: 974955634}
   storageViewController: {fileID: 479402435}
   tasksViewController: {fileID: 753253185}
-  assignShipToDock: {fileID: 890713317}
+  assignShipToDockView: {fileID: 890713317}
 --- !u!1 &1602142787
 GameObject:
   m_ObjectHideFlags: 0

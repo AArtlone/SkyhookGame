@@ -7,6 +7,8 @@ public class StorageViewController : ViewController
 
     public override void WillAppear()
     {
+        base.WillAppear();
+
         SetStoragDataSet();
     }
 

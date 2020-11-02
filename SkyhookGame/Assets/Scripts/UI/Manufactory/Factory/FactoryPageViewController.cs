@@ -7,6 +7,8 @@ public class FactoryPageViewController : ViewController
 
     public override void WillAppear()
     {
+        base.WillAppear();
+
         SetManufactoryDataSet();
     }
 

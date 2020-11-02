@@ -27,6 +27,8 @@ public class DocksViewController : ViewController
 
     public override void WillAppear()
     {
+        base.WillAppear();
+
         SetDocksDataSet();
 
         selectableController.onSelectionChange += SelectableController_OnSelectedDockChange;
@@ -36,6 +38,8 @@ public class DocksViewController : ViewController
 
     public override void WillDisappear()
     {
+        base.WillDisappear();
+
         if (CosmicPort == null)
             return;
 

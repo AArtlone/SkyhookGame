@@ -21,7 +21,7 @@ public class StorageSelectableController : SelectableController<StorageCell, Sto
 
     private void ShowAssignShipToDockView()
     {
-        ManufactoryGUIManager.Instance.AssignShipToDock.ShowView(GetSelectedCell().data.ship);
+        ManufactoryGUIManager.Instance.ShowAssignShipToDockView();
     }
 
     private bool CheckIfStorageIsEmpty()
