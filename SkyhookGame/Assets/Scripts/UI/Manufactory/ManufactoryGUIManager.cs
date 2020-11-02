@@ -13,10 +13,12 @@ public class ManufactoryGUIManager : Singleton<ManufactoryGUIManager>
 
     [Header("View Controllers")]
     [SerializeField] private ManufactoryViewController manufactoryViewController = default;
+    [SerializeField] private FactoryViewController factoryViewController = default;
     [SerializeField] private StorageViewController storageViewController = default;
     [SerializeField] private ManufactoryTasksViewController tasksViewController = default;
     [SerializeField] private AssignShipToDockViewController assignShipToDockView = default;
 
+    public FactoryViewController FactoryViewController { get { return factoryViewController; } }
     public StorageViewController StorageViewController { get { return storageViewController; } }
     public ManufactoryTasksViewController TasksViewController { get { return tasksViewController; } }
     public AssignShipToDockViewController AssignShipToDock { get { return assignShipToDockView; } }
