@@ -21,6 +21,11 @@ public class ManufactoryTabGroup : TabGroup
         base.Initialize();
     }
 
+    public void ResetManufactortTabGroup()
+    {
+        ManufactoryGUIManager.HideTabPage();
+    }
+
     public override void SelectTab(TabButton tabButton)
     {
         if (selectedTab != null)
@@ -32,11 +37,13 @@ public class ManufactoryTabGroup : TabGroup
 
         int index = tabButton.transform.GetSiblingIndex();
 
-        ManufactoryGUIManager.Instance.DisplayTabPage(viewControllers[index]);
+        ManufactoryGUIManager.DisplayTabPage(viewControllers[index]);
 
         if (type == TabGroupType.SpriteBased)
             selectedTab.Select(activeSprite);
         else
             selectedTab.Select(activeColor);
     }
+
+    private ManufactoryGUIManager ManufactoryGUIManager { get { return ManufactoryGUIManager.Instance; } }
 }

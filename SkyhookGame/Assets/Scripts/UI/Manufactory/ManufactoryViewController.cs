@@ -10,4 +10,11 @@ public class ManufactoryViewController : ViewController
 
         tabGroup.Initialize();
     }
+
+    public override void WillDisappear()
+    {
+        base.WillDisappear();
+
+        tabGroup.ResetManufactortTabGroup();
+    }
 }

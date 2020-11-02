@@ -47,6 +47,11 @@ public class ManufactoryGUIManager : Singleton<ManufactoryGUIManager>
         tabsNavigationController.PushAndPop(viewController);
     }
 
+    public void HideTabPage()
+    {
+        tabsNavigationController.PopTopViewController();
+    }
+
     public void Back(NavigationController navController)
     {
         navController.PopTopViewController();
