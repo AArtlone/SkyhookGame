@@ -57,9 +57,9 @@ public class NavigationController : MonoBehaviour
 
             yield return null;
 
-            topViewController.Disappeared();
-
             topViewController.gameObject.SetActive(false);
+
+            topViewController.Disappeared();
         }
 
         stack.Add(newViewController);
@@ -115,9 +115,9 @@ public class NavigationController : MonoBehaviour
 
             yield return null;
 
-            topViewController.Disappeared();
-
             topViewController.gameObject.SetActive(false);
+
+            topViewController.Disappeared();
 
             stack.Remove(topViewController);
         }
@@ -135,6 +135,70 @@ public class NavigationController : MonoBehaviour
         isInTransition = false;
 
         newViewController.Appeared();
+    }
+
+    public void PopTopViewController()
+    {
+        if (stack.Count == 0)
+        {
+            Debug.LogWarning("Stack is empty");
+            return;
+        }
+
+        if (isInTransition)
+        {
+            queue.Enqueue(new NavigationQueueElement(NavigationCommand.Pop));
+
+            Debug.Log($"{NavigationCommand.Pop} command is beind added to queue with.");
+
+            Debug.LogWarning("Is already in transition");
+            return;
+        }
+
+        isInTransition = true;
+
+        StartCoroutine(PopTopViewControllerCo());
+    }
+
+    private IEnumerator PopTopViewControllerCo()
+    {
+        ViewController topViewController = GetTopViewController();
+
+        if (topViewController != null)
+        {
+            topViewController.WillDisappear();
+
+            // Check if there is a transition time when using Effects
+
+            yield return null;
+
+            topViewController.gameObject.SetActive(false);
+
+            topViewController.Disappeared();
+
+            stack.Remove(topViewController);
+        }
+
+        topViewController = GetTopViewController();
+
+        if (topViewController == null)
+        {
+            isInTransition = false;
+
+            yield break;
+        }
+
+        topViewController.WillAppear();
+
+        yield return null;
+
+        // Check if there is a transition time when using Effects
+
+        topViewController.gameObject.SetActive(true);
+
+        isInTransition = false;
+
+        topViewController.Appeared();
     }
 
     private void HandleQueue()
@@ -163,5 +227,6 @@ public class NavigationQueueElement
 public enum NavigationCommand
 {
     Push,
-    PushAndPop
+    PushAndPop,
+    Pop
 }
