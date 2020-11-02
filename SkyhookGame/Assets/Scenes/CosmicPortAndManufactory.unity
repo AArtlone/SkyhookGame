@@ -2762,7 +2762,7 @@ GameObject:
   - component: {fileID: 559081152}
   - component: {fileID: 559081150}
   m_Layer: 5
-  m_Name: ManufactoryPage
+  m_Name: FactoryPage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
