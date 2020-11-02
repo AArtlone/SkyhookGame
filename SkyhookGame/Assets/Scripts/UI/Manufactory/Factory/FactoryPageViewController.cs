@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ManufactoryPageViewController : ViewController
+public class FactoryPageViewController : ViewController
 {
-    [SerializeField] private ManufactorySelectableController selectableController = default;
+    [SerializeField] private FactorySelectableController selectableController = default;
 
     public override void WillAppear()
     {
@@ -14,9 +14,9 @@ public class ManufactoryPageViewController : ViewController
     {
         List<ShipRecipe> shipRecipes = Settlement.Instance.Manufactory.ShipRecipes;
 
-        List<ManufactoryCellData> dataSet = new List<ManufactoryCellData>(shipRecipes.Count);
+        List<FactoryCellData> dataSet = new List<FactoryCellData>(shipRecipes.Count);
 
-        shipRecipes.ForEach(e => dataSet.Add(new ManufactoryCellData(e)));
+        shipRecipes.ForEach(e => dataSet.Add(new FactoryCellData(e)));
 
         selectableController.SetDataSet(dataSet);
     }

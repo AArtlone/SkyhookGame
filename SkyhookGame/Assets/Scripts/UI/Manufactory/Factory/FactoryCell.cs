@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class ManufactoryCell : SelectableCell<ManufactoryCellData>
+public class FactoryCell : SelectableCell<FactoryCellData>
 {
     [SerializeField] private TextMeshProUGUI nameText = default; 
     [SerializeField] private TextMeshProUGUI priceText = default; 
@@ -15,11 +15,11 @@ public class ManufactoryCell : SelectableCell<ManufactoryCellData>
     }
 }
 
-public class ManufactoryCellData : SelectableCellData
+public class FactoryCellData : SelectableCellData
 {
     public ShipRecipe shipRecipe;
 
-    public ManufactoryCellData(ShipRecipe shipRecipe)
+    public FactoryCellData(ShipRecipe shipRecipe)
     {
         this.shipRecipe = shipRecipe;
     }
