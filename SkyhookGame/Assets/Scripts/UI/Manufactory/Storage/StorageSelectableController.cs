@@ -12,6 +12,7 @@ public class StorageSelectableController : SelectableController<StorageCell, Sto
         OnCellPressed();
     }
 
+    // For override purpose
     protected virtual void OnCellPressed()
     {
         ShowAssignShipToDockView();

@@ -12,9 +12,9 @@ public class CosmicPortGUIManager : Singleton<CosmicPortGUIManager>
 
     [Header("View Controllers")]
     [SerializeField] private DocksViewController docksViewController = default;
-    [SerializeField] private CosmicPortStorageViewController cosmicPortStorageViewController = default;
+    [SerializeField] private CosmicPortAssignShipViewController cosmicPortStorageViewController = default;
     public DocksViewController DocksViewController { get { return docksViewController; } }
-    public CosmicPortStorageViewController CosmicPortStorageViewController { get { return cosmicPortStorageViewController; } }
+    public CosmicPortAssignShipViewController CosmicPortStorageViewController { get { return cosmicPortStorageViewController; } }
 
     protected override void Awake()
     {

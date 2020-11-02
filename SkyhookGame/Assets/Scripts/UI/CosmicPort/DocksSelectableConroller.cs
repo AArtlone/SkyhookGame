@@ -7,10 +7,10 @@
         switch (cell.data.dock.DockState)
         {
             case DockState.Unlocked:
-                CosmicPortGUIManager.Instance.DocksViewController.ShowBuildDockView();
+                DocksViewController.ShowBuildDockView();
                 break;
             case DockState.Empty:
-                CosmicPortGUIManager.Instance.DocksViewController.ShowAssignShipView();
+                DocksViewController.ShowAssignShipView();
                 break;
         }
     }

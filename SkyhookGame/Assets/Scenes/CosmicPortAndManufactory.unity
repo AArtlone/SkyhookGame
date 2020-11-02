@@ -8041,7 +8041,7 @@ GameObject:
   - component: {fileID: 1710296498}
   - component: {fileID: 1710296497}
   m_Layer: 5
-  m_Name: CosmicPortStorageView
+  m_Name: CosmicPortAssignShipView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8086,7 +8086,6 @@ MonoBehaviour:
     type: 3}
   contentContainer: {fileID: 285935491}
   emptyStorageText: {fileID: 1818670367}
-  docksSelectableConroller: {fileID: 1273335919}
 --- !u!114 &1710296498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8100,6 +8099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectableController: {fileID: 1710296497}
+  docksSelectableConroller: {fileID: 1273335919}
 --- !u!114 &1710296499
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class StorageViewController : ViewController
 {
-    [SerializeField] private StorageSelectableController selectableController = default;
+    [SerializeField] protected StorageSelectableController selectableController = default;
 
     public override void WillAppear()
     {
