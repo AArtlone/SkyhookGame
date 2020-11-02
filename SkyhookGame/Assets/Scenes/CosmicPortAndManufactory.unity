@@ -375,7 +375,7 @@ GameObject:
   - component: {fileID: 163735978}
   - component: {fileID: 163735977}
   m_Layer: 5
-  m_Name: CloseButton
+  m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1156,12 +1156,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 890713312}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1537061958}
+        m_MethodName: Back
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1089465554}
+          m_ObjectArgumentAssemblyTypeName: NavigationController, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6787,7 +6787,7 @@ GameObject:
   - component: {fileID: 1489712084}
   - component: {fileID: 1489712083}
   m_Layer: 5
-  m_Name: CloseButton
+  m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6856,12 +6856,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 974955630}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1537061958}
+        m_MethodName: Back
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1089465554}
+          m_ObjectArgumentAssemblyTypeName: NavigationController, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
