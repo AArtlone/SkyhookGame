@@ -9,6 +9,11 @@ public class StorageSelectableController : SelectableController<StorageCell, Sto
     {
         base.Cell_OnCellPress(cell);
 
+        OnCellPressed();
+    }
+
+    protected virtual void OnCellPressed()
+    {
         ShowAssignShipToDockView();
     }
 
@@ -31,5 +36,5 @@ public class StorageSelectableController : SelectableController<StorageCell, Sto
         return (shipsInStorage.Count == 0);
     }
 
-    private Manufactory Manufactory { get { return Settlement.Instance.Manufactory; } }
+    protected Manufactory Manufactory { get { return Settlement.Instance.Manufactory; } }
 }

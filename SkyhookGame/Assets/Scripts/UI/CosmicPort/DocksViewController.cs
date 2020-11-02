@@ -7,19 +7,6 @@ public class DocksViewController : ViewController
 
     [SerializeField] private GameObject buildDockView = default;
 
-    private void SelectableController_OnSelectedDockChange(DocksCell selectedDock)
-    {
-        switch (selectedDock.data.dock.DockState)
-        {
-            case DockState.Unlocked:
-                ShowBuildDockView();
-                break;
-            case DockState.Empty:
-                // Show assign view
-                break;
-        }
-    }
-
     private void CosmicPort_OnUpgrade()
     {
         SetDocksDataSet();
@@ -30,8 +17,6 @@ public class DocksViewController : ViewController
         base.WillAppear();
 
         SetDocksDataSet();
-
-        selectableController.onSelectionChange += SelectableController_OnSelectedDockChange;
 
         CosmicPort.onUpgrade += CosmicPort_OnUpgrade;
     }
@@ -61,9 +46,14 @@ public class DocksViewController : ViewController
         selectableController.SetDataSet(dataSet);
     }
 
-    private void ShowBuildDockView()
+    public void ShowBuildDockView()
     {
         buildDockView.SetActive(true);
+    }
+
+    public void ShowAssignShipView()
+    {
+        CosmicPortGUIManager.Instance.ShowCosmicPortAssignShipView();
     }
 
     private void CloseBuildDockView()

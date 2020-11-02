@@ -79,6 +79,7 @@ public class Manufactory : Institution
 
         ManufactoryGUIManager.Instance.StorageViewController.ChangeData();
         ManufactoryGUIManager.Instance.TasksViewController.ChangeData();
+        CosmicPortGUIManager.Instance.CosmicPortStorageViewController.ChangeData();
     }
 
     public void RemoveShipFromStorage(Ship ship)
