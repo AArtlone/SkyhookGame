@@ -1,14 +1,14 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-public class CSVConverterWindow : EditorWindow
+public class DSModelGeneratorWindow : EditorWindow
 {
     string modelName;
 
-    [MenuItem("Window/Example")]
-    public static void ShowTest()
+    [MenuItem("Window/DSModelGenerator")]
+    public static void ShowWindow()
     {
-        GetWindow<CSVConverterWindow>();
+        GetWindow<DSModelGeneratorWindow>();
     }
 
     private void OnGUI()
@@ -19,9 +19,7 @@ public class CSVConverterWindow : EditorWindow
         modelName = EditorGUILayout.TextField("DataModel Name", modelName);
         GUILayout.Space(5f);
 
-        if (GUILayout.Button("Test"))
-        {
+        if (GUILayout.Button("Generate Model")) 
             DSModelManager.GenerateModel(modelName);
-        }
     }
 }
