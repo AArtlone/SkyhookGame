@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public abstract class DSModelBase<T1, T2>: ScriptableObject 
@@ -18,4 +19,31 @@ public abstract class DSModelBase<T1, T2>: ScriptableObject
     {
         allRecords.Add(record);
     }
+}
+
+public abstract class DSModelWindow : EditorWindow
+{
+
+}
+
+public class CosmicPortModelWindow : DSModelWindow
+{
+    public static void ShowWindow()
+    {
+        GetWindow<CosmicPortModelWindow>();
+    }
+
+    //private void OnGUI()
+    //{
+    //    if (GUILayout.Button("Generate Model"))
+    //        GenerateModel();
+    //}
+
+    //private void GenerateModel()
+    //{
+    //    CosmicPortDSModel model = CreateInstance<CosmicPortDSModel>();
+
+    //    AssetDatabase.CreateAsset(model, "Assets/Scripts/Datasheets/CosmicPort/CosmicPortModel.asset");
+    //    AssetDatabase.SaveAssets();
+    //}
 }
