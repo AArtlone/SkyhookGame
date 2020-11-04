@@ -28,27 +28,30 @@ public abstract class ViewController : MonoBehaviour
 
     }
 
+    public virtual void ViewWillBeFocused()
+    {
+    }
+
     public virtual void ViewFocused()
     {
         IsShowing = true;
 
+        // This must be done in ViewFocused because it is called after the gameobject becomes active,
+        // which is needed to start the coroutine inside FocusTopController()
         if (hasChildNavController)
             childNavController.FocusTopController();
+    }
+
+    public virtual void ViewWillBeUnfocused()
+    {
+        // This must be done in ViewWillBeUnfocused because it is called before the gameobject becomes inactive,
+        // which is needed to start the coroutine inside UnfocusTopController()
+        if (hasChildNavController)
+            childNavController.UnfocusTopController();
     }
 
     public virtual void ViewUnfocused()
     {
         IsShowing = false;
-    }
-
-    public virtual void ViewWillBeFocused()
-    {
-
-    }
-
-    public virtual void ViewWillBeUnfocused()
-    {
-        if (hasChildNavController)
-            childNavController.UnfocusTopController();
     }
 }
