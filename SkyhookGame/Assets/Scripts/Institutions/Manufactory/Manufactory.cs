@@ -81,6 +81,8 @@ public class Manufactory : Institution
 
         ShipsInStorage.Add(ship);
 
+        onManufactoryTasksChange?.Invoke();
+
         onShipsInStorageChange?.Invoke();
     }
 

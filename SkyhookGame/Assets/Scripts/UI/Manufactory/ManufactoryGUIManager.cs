@@ -42,6 +42,11 @@ public class ManufactoryGUIManager : Singleton<ManufactoryGUIManager>
         navigationController.Push(assignShipToDockView, false);
     }
 
+    public void PopTopViewController()
+    {
+        navigationController.PopTopViewController();
+    }
+
     public void ShowTabPage(ViewController tabPageToDIsplay)
     {
         tabsNavigationController.PushAndPop(tabPageToDIsplay);
