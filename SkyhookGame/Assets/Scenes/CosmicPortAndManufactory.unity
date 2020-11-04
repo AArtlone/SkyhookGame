@@ -2040,6 +2040,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11563b2bef5117042a766e7fc70427ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasChildNavController: 0
+  childNavController: {fileID: 0}
   selectableController: {fileID: 479402434}
 --- !u!1 &502967726
 GameObject:
@@ -3009,6 +3011,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fda358eee244ab438c84471b10ef5db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasChildNavController: 0
+  childNavController: {fileID: 0}
   selectableController: {fileID: 559081150}
   buildShipView: {fileID: 1163184390}
 --- !u!1 &568149455
@@ -3998,6 +4002,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82129e7e496b46e4f991cd3b9f0dfb78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasChildNavController: 0
+  childNavController: {fileID: 0}
   selectableController: {fileID: 753253184}
 --- !u!1 &782453740
 GameObject:
@@ -4604,6 +4610,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64e92d06b05b76499febcb5903e3a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasChildNavController: 0
+  childNavController: {fileID: 0}
   storageSelectableController: {fileID: 479402434}
   selectableController: {fileID: 890713314}
 --- !u!1 &896377097
@@ -5162,6 +5170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6991d7b7fd90f3145878148021effa06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasChildNavController: 1
+  childNavController: {fileID: 961309246}
   tabGroup: {fileID: 1602142789}
 --- !u!1 &979486186
 GameObject:
@@ -6463,6 +6473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44ece924b2297034f84367d315de2ee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasChildNavController: 0
+  childNavController: {fileID: 0}
   selectableController: {fileID: 1273335919}
   buildDockView: {fileID: 22399949}
 --- !u!1 &1316672277
@@ -8104,6 +8116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9248429094459c419cd64a30ba69400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasChildNavController: 0
+  childNavController: {fileID: 0}
   selectableController: {fileID: 1710296497}
   docksSelectableConroller: {fileID: 1273335919}
 --- !u!114 &1710296499
