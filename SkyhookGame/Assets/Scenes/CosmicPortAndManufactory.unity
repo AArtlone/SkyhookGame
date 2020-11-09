@@ -5066,7 +5066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoReset: 0
-  playOnStart: 0
+  playOnStart: 1
   effectSO: {fileID: 11400000, guid: fd26a4bfcfb926b4d80596e0b8dd9171, type: 2}
 --- !u!225 &896377103
 CanvasGroup:
@@ -5093,7 +5093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoReset: 0
-  playOnStart: 0
+  playOnStart: 1
   effectSO: {fileID: 11400000, guid: 9fd1228784e4a3741a1c9b7c117fd2fb, type: 2}
 --- !u!1 &907048604
 GameObject:
@@ -10282,7 +10282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoReset: 0
-  playOnStart: 0
+  playOnStart: 1
   effectSO: {fileID: 11400000, guid: 56139ac620069c8468485bb5e6d7fb97, type: 2}
 --- !u!1001 &1917121461
 PrefabInstance:
