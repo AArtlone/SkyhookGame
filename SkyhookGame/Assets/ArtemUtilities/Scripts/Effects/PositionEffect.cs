@@ -1,7 +1,16 @@
 ﻿using UnityEngine;
 
-public class PositionEffect : Effect<Vector3>
+public class PositionEffect : EffectBase
 {
+    private Vector3EffectSO v3EffectSo;
+
+    protected override void Awake()
+    {
+        v3EffectSo = (Vector3EffectSO)effectSO;
+
+        base.Awake();
+    }
+
     protected override void ApplyEffect()
     {
         transform.localPosition = GetNextValue();
@@ -9,29 +18,20 @@ public class PositionEffect : Effect<Vector3>
 
     private Vector3 GetNextValue()
     {
-        Vector3 nextValue = Vector3.Lerp(startValue, targetValue, GetCurveValue());
+        Vector3 nextValue = Vector3.Lerp(v3EffectSo.startValue, v3EffectSo.targetValue, GetCurveValue());
 
         return nextValue;
     }
 
-    protected override void Reset()
+    protected override void ResetEffect()
     {
-        base.Reset();
+        base.ResetEffect();
 
-        transform.localPosition = startValue;
+        transform.localPosition = v3EffectSo.startValue;
     }
 
     public override void PlayEffect()
     {
-        if (useCurrentValueAsStart)
-            startValue = transform.localPosition;
-        
         base.PlayEffect();
-    }
-
-    public void SetStartAndTargetValues(Vector2 startValue, Vector2 targetValue)
-    {
-        this.startValue = startValue;
-        this.targetValue = targetValue;
     }
 }
