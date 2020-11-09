@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public abstract class ViewController : MonoBehaviour
 {
@@ -6,7 +7,23 @@ public abstract class ViewController : MonoBehaviour
     [ShowIf(nameof(hasChildNavController), true, ComparisonType.Equals)]
     [SerializeField] private NavigationController childNavController = default;
 
+
+    [SerializeField] private EffectBase effectIn = default;
+
     protected bool IsShowing { get; private set; }
+
+    public Coroutine TransitionIn()
+    {
+        return StartCoroutine(TransitionInCo());
+    }
+    public IEnumerator TransitionInCo()
+    {
+        effectIn.PlayEffect();
+
+        yield return new WaitForSeconds(effectIn.effectSO.tween.delay);
+
+        yield return new WaitForSeconds(effectIn.effectSO.tween.targetTime);
+    }
 
     public virtual void ViewWillDisappear()
     {

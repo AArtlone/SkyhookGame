@@ -3,12 +3,12 @@ using UnityEngine;
 [System.Serializable]
 public abstract class EffectBase : MonoBehaviour
 {
-    public bool autoReset;
+    public bool autoReset = true;
     public bool playOnStart;
     //public bool useCurrentValueAsStart;
 
 
-    [SerializeField] public EffectSOBase effectSO;
+    public EffectSOBase effectSO;
     
     private bool playEffect;
 

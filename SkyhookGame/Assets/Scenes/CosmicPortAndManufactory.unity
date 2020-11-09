@@ -2261,6 +2261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasChildNavController: 0
   childNavController: {fileID: 0}
+  effectIn: {fileID: 0}
   selectableController: {fileID: 479402434}
 --- !u!1 &502967726
 GameObject:
@@ -3209,6 +3210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasChildNavController: 0
   childNavController: {fileID: 0}
+  effectIn: {fileID: 0}
   selectableController: {fileID: 559081150}
   buildShipView: {fileID: 1163184390}
 --- !u!1 &579895521
@@ -4255,6 +4257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasChildNavController: 0
   childNavController: {fileID: 0}
+  effectIn: {fileID: 0}
   selectableController: {fileID: 753253184}
 --- !u!1 &782453740
 GameObject:
@@ -4918,6 +4921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasChildNavController: 0
   childNavController: {fileID: 0}
+  effectIn: {fileID: 0}
   storageSelectableController: {fileID: 479402434}
   selectableController: {fileID: 890713314}
 --- !u!1 &896377097
@@ -5067,7 +5071,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoReset: 0
   playOnStart: 1
-  effectSO: {fileID: 11400000, guid: 9fd1228784e4a3741a1c9b7c117fd2fb, type: 2}
+  effectSO: {fileID: 11400000, guid: fd26a4bfcfb926b4d80596e0b8dd9171, type: 2}
 --- !u!225 &896377103
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -5367,6 +5371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasChildNavController: 1
   childNavController: {fileID: 961309246}
+  effectIn: {fileID: 0}
   tabGroup: {fileID: 1602142789}
 --- !u!1 &979486186
 GameObject:
@@ -6605,6 +6610,8 @@ GameObject:
   - component: {fileID: 1273335917}
   - component: {fileID: 1273335920}
   - component: {fileID: 1273335919}
+  - component: {fileID: 1273335922}
+  - component: {fileID: 1273335921}
   m_Layer: 5
   m_Name: DocksView
   m_TagString: Untagged
@@ -6702,8 +6709,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasChildNavController: 0
   childNavController: {fileID: 0}
+  effectIn: {fileID: 1273335921}
   selectableController: {fileID: 1273335919}
   buildDockView: {fileID: 22399949}
+--- !u!114 &1273335921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273335915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1832642065607844a992eaeb6d4bf564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoReset: 1
+  playOnStart: 0
+  effectSO: {fileID: 11400000, guid: de216486b2f8e6443b0a00b12172c8a7, type: 2}
+--- !u!225 &1273335922
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273335915}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1275531573
 GameObject:
   m_ObjectHideFlags: 0
@@ -8932,6 +8967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasChildNavController: 0
   childNavController: {fileID: 0}
+  effectIn: {fileID: 0}
   selectableController: {fileID: 1710296497}
   docksSelectableConroller: {fileID: 1273335919}
 --- !u!114 &1710296499

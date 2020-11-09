@@ -69,11 +69,14 @@ public class NavigationController : MonoBehaviour
 
         newViewController.ViewWillAppear();
 
+
         yield return null;
 
         // Check if there is a transition time when using Effects
         
         newViewController.gameObject.SetActive(true);
+
+        yield return newViewController.TransitionIn();
 
         isInTransition = false;
 
