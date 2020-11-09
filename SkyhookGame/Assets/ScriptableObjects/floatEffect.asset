@@ -39,6 +39,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     targetTime: 2
-    delay: 1
+    delay: 0
   startValue: 1
   targetValue: 0
