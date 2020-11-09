@@ -46,6 +46,8 @@ public abstract class TabGroup : MonoBehaviour
         //Initialize Buttons List
         tabButtons = new List<TabButton>(tabButtons);
 
+        tabButtons.ForEach(button => button.SetTabGroup(this));
+
         int index = tabButtons[0].transform.GetSiblingIndex();
 
         SelectTab(tabButtons[index]);

@@ -5,18 +5,18 @@ public class StorageViewController : ViewController
 {
     [SerializeField] protected StorageSelectableController selectableController = default;
 
-    public override void ViewWillAppear()
+    public override void ViewWillBeFocused()
     {
-        base.ViewWillAppear();
+        base.ViewWillBeFocused();
 
         SetStoragDataSet();
 
         Manufactory.onShipsInStorageChange += Manufactory_OnShipsInStorageChange;
     }
 
-    public override void ViewWillDisappear()
+    public override void ViewWillBeUnfocused()
     {
-        base.ViewWillDisappear();
+        base.ViewWillBeUnfocused();
 
         Manufactory.onShipsInStorageChange -= Manufactory_OnShipsInStorageChange;
     }

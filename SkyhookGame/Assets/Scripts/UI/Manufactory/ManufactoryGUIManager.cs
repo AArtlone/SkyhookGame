@@ -34,12 +34,17 @@ public class ManufactoryGUIManager : Singleton<ManufactoryGUIManager>
 
     public void ShowManufactoryView()
     {
-        navigationController.Push(manufactoryViewController, true);
+        navigationController.Push(manufactoryViewController);
     }
 
     public void ShowAssignShipToDockView()
     {
-        navigationController.Push(assignShipToDockView, false);
+        navigationController.Push(assignShipToDockView);
+    }
+
+    public void PopTopViewController()
+    {
+        navigationController.Pop();
     }
 
     public void ShowTabPage(ViewController tabPageToDIsplay)
@@ -49,12 +54,12 @@ public class ManufactoryGUIManager : Singleton<ManufactoryGUIManager>
 
     public void HideTabPage()
     {
-        tabsNavigationController.PopTopViewController();
+        tabsNavigationController.Pop();
     }
 
     // For editor reference
     public void Back(NavigationController navController)
     {
-        navController.PopTopViewController();
+        navController.Pop();
     }
 }

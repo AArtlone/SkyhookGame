@@ -20,8 +20,6 @@ public class ManufactoryViewController : ViewController
     {
         base.ViewWillDisappear();
 
-        ManufactoryGUIManager.HideTabPage();
-
         tabGroup.onTabSelection -= TabGroup_OnTabSelection;
     }
 
