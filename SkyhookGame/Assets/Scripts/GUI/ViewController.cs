@@ -79,7 +79,7 @@ public abstract class ViewController : MonoBehaviour
 
     }
 
-    public virtual void Disappeared()
+    public virtual void ViewDisappeared()
     {
 
     }

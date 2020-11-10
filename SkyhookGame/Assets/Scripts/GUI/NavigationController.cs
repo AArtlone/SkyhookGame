@@ -10,15 +10,6 @@ public class NavigationController : MonoBehaviour
 
     private bool isInTransition;
 
-    public void DebugStack()
-    {
-        print(stack.Count);
-        foreach (var v in stack)
-        {
-            print(v.gameObject.name);
-        }
-    }
-
     public void Push(ViewController newViewController)
     {
         if (isInTransition)
@@ -48,52 +39,33 @@ public class NavigationController : MonoBehaviour
         StartCoroutine(PushViewControllerCo(newViewController));
     }
 
-    private IEnumerator PushViewControllerCo(ViewController newViewController)
+    public void Pop()
     {
-        ViewController topViewController = GetTopViewController();
-
-        if (topViewController != null)
+        print(stack.Count);
+        if (stack.Count == 0)
         {
-            topViewController.ViewWillBeUnfocused();
-            
-            // Check if there is a transition time when using Effects
-
-            yield return null;
-
-            topViewController.ViewUnfocused();
+            Debug.LogWarning("Stack is empty");
+            return;
         }
 
-        yield return TestPush(newViewController);
-    }
+        if (isInTransition)
+        {
+            queue.Enqueue(new NavigationQueueElement(NavigationCommand.Pop));
 
-    private IEnumerator TestPush(ViewController newViewController)
-    {
-        stack.Add(newViewController);
+            Debug.Log($"{NavigationCommand.Pop} command is beind added to queue with.");
 
-        // ViewWillAppear
-        newViewController.ViewWillAppear();
+            Debug.LogWarning("Is already in transition");
+            return;
+        }
 
-        // ViewWillBeFocused
-        newViewController.ViewWillBeFocused();
+        isInTransition = true;
 
-        newViewController.gameObject.SetActive(true);
+        ViewController topViewController = GetTopViewController();
 
-        print("Start TransitionIn");
+        if (topViewController == null)
+            return;
 
-        // Performing In Transitions
-        yield return newViewController.TransitionIn();
-
-        print("Done waiting for TransitionIn");
-
-        isInTransition = false;
-
-        // View has appeared
-        newViewController.ViewAppeared();
-
-        // View has been focused
-        newViewController.ViewFocused();
-
-        print(stack.Count);
+        StartCoroutine(PopCo(topViewController));
     }
 
     public void PushAndPop(ViewController newViewController)
@@ -122,94 +94,70 @@ public class NavigationController : MonoBehaviour
         StartCoroutine(PushAndPopCo(newViewController));
     }
 
+    private IEnumerator PushViewControllerCo(ViewController newViewController)
+    {
+        UnfocusTopController();
+
+        yield return PushCo(newViewController);
+    }
+
     private IEnumerator PushAndPopCo(ViewController newViewController)
     {
         ViewController topViewController = GetTopViewController();
 
         if (topViewController != null)
-        {
+            yield return PopCo(topViewController);
 
-            topViewController.ViewWillBeUnfocused();
-
-            topViewController.ViewWillDisappear();
-
-            // Check if there is a transition time when using Effects
-
-            yield return null;
-
-            topViewController.gameObject.SetActive(false);
-
-            topViewController.ViewUnfocused();
-
-            topViewController.Disappeared();
-
-            stack.Remove(topViewController);
-        }
-
-        yield return TestPush(newViewController);
+        yield return PushCo(newViewController);
     }
 
-    public void Pop()
+    private IEnumerator PopCo(ViewController topViewController)
     {
-        print(stack.Count);
-        if (stack.Count == 0)
-        {
-            Debug.LogWarning("Stack is empty");
-            return;
-        }
-
-        if (isInTransition)
-        {
-            queue.Enqueue(new NavigationQueueElement(NavigationCommand.Pop));
-
-            Debug.Log($"{NavigationCommand.Pop} command is beind added to queue with.");
-
-            Debug.LogWarning("Is already in transition");
-            return;
-        }
-
-        isInTransition = true;
-
-        StartCoroutine(PopCo());
-    }
-
-    private IEnumerator PopCo()
-    {
-        ViewController topViewController = GetTopViewController();
-
-        if (topViewController == null)
-            yield break;
-
-        topViewController.ViewWillBeUnfocused();
-
-        topViewController.ViewWillDisappear();
+        topViewController.ViewWillDisappear(); // View will disappear
+        topViewController.ViewWillBeUnfocused(); // View will be unfocused
 
         yield return topViewController.TransitionOut();
 
-        // Check if there is a transition time when using Effects
-
-        //yield return null;
-
         topViewController.gameObject.SetActive(false);
 
-        topViewController.ViewUnfocused();
+        isInTransition = false;
 
-        topViewController.Disappeared();
+        topViewController.ViewDisappeared(); // View has disappeared
+        topViewController.ViewUnfocused(); // View has been unfocused
 
         stack.Remove(topViewController);
+    }
+
+    private IEnumerator PushCo(ViewController newViewController)
+    {
+        stack.Add(newViewController);
+
+        newViewController.ViewWillAppear(); // View will appear
+        newViewController.ViewWillBeFocused(); // View will be focused
+
+        newViewController.gameObject.SetActive(true);
+
+        // Performing In Transitions
+        yield return newViewController.TransitionIn();
 
         isInTransition = false;
+
+        newViewController.ViewAppeared(); // View has appeared
+        newViewController.ViewFocused(); // View has been focused
     }
 
     public void FocusTopController()
     {
-        StartCoroutine(FocusTopControllerCo());
+        ViewController topViewController = GetTopViewController();
+
+        if (topViewController == null)
+            return;
+
+        StartCoroutine(FocusTopControllerCo(topViewController));
     }
 
-    private IEnumerator FocusTopControllerCo()
+    private IEnumerator FocusTopControllerCo(ViewController topViewController)
     {
-        var topViewController = GetTopViewController();
-
         topViewController.ViewWillBeFocused();
 
         yield return null;
@@ -219,13 +167,16 @@ public class NavigationController : MonoBehaviour
 
     public void UnfocusTopController()
     {
-        StartCoroutine(UnfocusTopControllerCo());
+        ViewController topViewController = GetTopViewController();
+
+        if (topViewController == null)
+            return;
+
+        StartCoroutine(UnfocusTopControllerCo(topViewController));
     }
 
-    private IEnumerator UnfocusTopControllerCo()
+    private IEnumerator UnfocusTopControllerCo(ViewController topViewController)
     {
-        var topViewController = GetTopViewController();
-
         topViewController.ViewWillBeUnfocused();
 
         yield return null;
@@ -244,6 +195,15 @@ public class NavigationController : MonoBehaviour
             return null;
 
         return stack[stack.Count - 1];
+    }
+
+    public void DebugStack()
+    {
+        print(stack.Count);
+        foreach (var v in stack)
+        {
+            print(v.gameObject.name);
+        }
     }
 }
 

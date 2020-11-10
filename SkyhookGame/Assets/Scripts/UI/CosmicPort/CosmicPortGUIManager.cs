@@ -5,7 +5,6 @@ public class CosmicPortGUIManager : Singleton<CosmicPortGUIManager>
     [Space(10f)]
     [SerializeField] private GameObject preview = default;
     [SerializeField] private GameObject upgradeView = default;
-    [SerializeField] private GameObject docksView = default;
 
     [Header("Navigation Controllers")]
     [SerializeField] private NavigationController navigationController = default;
@@ -24,7 +23,6 @@ public class CosmicPortGUIManager : Singleton<CosmicPortGUIManager>
         upgradeView.SetActive(false);
 
         docksViewController.gameObject.SetActive(false);
-        //docksView.gameObject.SetActive(false);
     }
 
     public void ShowCosmicPortView()
