@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class ViewController : MonoBehaviour
@@ -8,21 +10,68 @@ public abstract class ViewController : MonoBehaviour
     [SerializeField] private NavigationController childNavController = default;
 
 
-    [SerializeField] private EffectBase effectIn = default;
+    [Space(10f)]
+    [SerializeField] private List<EffectBase> inTransitions = default;
+
+    [Space(10f)]
+    [SerializeField] private List<EffectBase> outTransitions = default;
 
     protected bool IsShowing { get; private set; }
 
-    public Coroutine TransitionIn()
+    public WaitUntil TransitionIn()
     {
-        return StartCoroutine(TransitionInCo());
+        bool done = false;
+        StartCoroutine(TransitionInCo(() => { done = true; }));
+
+        return new WaitUntil(() =>
+        {
+            print("waiting");
+            return done;
+        });
     }
-    public IEnumerator TransitionInCo()
+    public WaitUntil TransitionOut()
     {
-        effectIn.PlayEffect();
+        print("Start TransitionIn");
+        bool done = false;
+        StartCoroutine(TransitionOutCo(() => { done = true; }));
 
-        yield return new WaitForSeconds(effectIn.effectSO.tween.delay);
+        return new WaitUntil(() =>
+        {
+            print("done waiting");
+            return done;
+        });
+    }
 
-        yield return new WaitForSeconds(effectIn.effectSO.tween.targetTime);
+    private IEnumerator TransitionInCo(Action callback)
+    {
+        inTransitions.ForEach(t => t.PlayEffect());
+
+        yield return new WaitForSeconds(GetInTransitionDuration());
+
+        callback.Invoke();
+    }
+
+    private IEnumerator TransitionOutCo(Action callback)
+    {
+        outTransitions.ForEach(t => t.PlayEffect());
+
+        yield return new WaitForSeconds(GetInTransitionDuration());
+
+        callback.Invoke();
+    }
+    
+    private float GetInTransitionDuration()
+    {
+        float longestTransition = 0;
+        foreach (var transition in inTransitions)
+        {
+            float totalDuration = transition.effectSO.tween.delay + transition.effectSO.tween.targetTime;
+
+            if (totalDuration > longestTransition)
+                longestTransition = totalDuration;
+        }
+
+        return longestTransition;
     }
 
     public virtual void ViewWillDisappear()

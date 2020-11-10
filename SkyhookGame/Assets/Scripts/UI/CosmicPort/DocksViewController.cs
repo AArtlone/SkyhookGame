@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class DocksViewController : ViewController
 {
+    [Space(10f)]
     [SerializeField] private DocksSelectableConroller selectableController = default;
 
     [SerializeField] private GameObject buildDockView = default;

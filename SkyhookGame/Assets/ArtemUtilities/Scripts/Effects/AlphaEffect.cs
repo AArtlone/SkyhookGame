@@ -32,7 +32,6 @@ public class AlphaEffect : EffectBase
     {
         base.ResetEffect();
 
-        print("reseting");
         if (canvasGroup == null)
         {
             Debug.LogWarning("CanvasGroup is null, returning");

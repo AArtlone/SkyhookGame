@@ -63,26 +63,37 @@ public class NavigationController : MonoBehaviour
             topViewController.ViewUnfocused();
         }
 
+        yield return TestPush(newViewController);
+    }
+
+    private IEnumerator TestPush(ViewController newViewController)
+    {
         stack.Add(newViewController);
 
-        newViewController.ViewWillBeFocused();
-
+        // ViewWillAppear
         newViewController.ViewWillAppear();
 
+        // ViewWillBeFocused
+        newViewController.ViewWillBeFocused();
 
-        yield return null;
-
-        // Check if there is a transition time when using Effects
-        
         newViewController.gameObject.SetActive(true);
 
+        print("Start TransitionIn");
+
+        // Performing In Transitions
         yield return newViewController.TransitionIn();
+
+        print("Done waiting for TransitionIn");
 
         isInTransition = false;
 
+        // View has appeared
+        newViewController.ViewAppeared();
+
+        // View has been focused
         newViewController.ViewFocused();
 
-        newViewController.ViewAppeared();
+        print(stack.Count);
     }
 
     public void PushAndPop(ViewController newViewController)
@@ -135,27 +146,12 @@ public class NavigationController : MonoBehaviour
             stack.Remove(topViewController);
         }
 
-        stack.Add(newViewController);
-
-        newViewController.ViewWillBeFocused();
-
-        newViewController.ViewWillAppear();
-
-        yield return null;
-
-        // Check if there is a transition time when using Effects
-
-        newViewController.gameObject.SetActive(true);
-
-        isInTransition = false;
-
-        newViewController.ViewFocused();
-
-        newViewController.ViewAppeared();
+        yield return TestPush(newViewController);
     }
 
     public void Pop()
     {
+        print(stack.Count);
         if (stack.Count == 0)
         {
             Debug.LogWarning("Stack is empty");
@@ -188,9 +184,11 @@ public class NavigationController : MonoBehaviour
 
         topViewController.ViewWillDisappear();
 
+        yield return topViewController.TransitionOut();
+
         // Check if there is a transition time when using Effects
 
-        yield return null;
+        //yield return null;
 
         topViewController.gameObject.SetActive(false);
 
