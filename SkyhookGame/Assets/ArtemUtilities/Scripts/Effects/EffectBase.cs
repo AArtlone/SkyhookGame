@@ -3,12 +3,13 @@ using UnityEngine;
 [System.Serializable]
 public abstract class EffectBase : MonoBehaviour
 {
-    public bool autoReset;
+    public bool autoReset = true;
     public bool playOnStart;
+    public bool playInReverse;
     //public bool useCurrentValueAsStart;
 
 
-    [SerializeField] public EffectSOBase effectSO;
+    public EffectSOBase effectSO;
     
     private bool playEffect;
 
@@ -115,6 +116,17 @@ public abstract class EffectBase : MonoBehaviour
     public virtual void PlayEffect()
     {
         playEffect = true;
+
+        // If playInReverse is set to true in the editor
+        // we set the private reverse variable to true,
+        // and set the playTime to target time,
+        // since in reverse the playTime is being decreased
+        if (playInReverse)
+        {
+            reverse = true;
+
+            playTime = effectSO.tween.targetTime;
+        }
     }
 
     protected abstract void ApplyEffect();

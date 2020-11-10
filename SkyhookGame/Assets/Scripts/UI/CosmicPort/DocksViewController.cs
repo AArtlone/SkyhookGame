@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class DocksViewController : ViewController
 {
+    [Space(10f)]
     [SerializeField] private DocksSelectableConroller selectableController = default;
 
     [SerializeField] private GameObject buildDockView = default;
@@ -16,9 +17,16 @@ public class DocksViewController : ViewController
     {
         base.ViewWillAppear();
 
-        SetDocksDataSet();
+        //SetDocksDataSet();
 
         CosmicPort.onUpgrade += CosmicPort_OnUpgrade;
+    }
+
+    public override void ViewAppeared()
+    {
+        base.ViewAppeared();
+
+        SetDocksDataSet();
     }
 
     public override void ViewWillDisappear()
