@@ -17,26 +17,30 @@ public class DocksViewController : ViewController
     {
         base.ViewWillAppear();
 
-        //SetDocksDataSet();
+        SetDocksDataSet();
+
+        selectableController.SetButtonsInteractable(false);
 
         CosmicPort.onUpgrade += CosmicPort_OnUpgrade;
-    }
-
-    public override void ViewAppeared()
-    {
-        base.ViewAppeared();
-
-        SetDocksDataSet();
     }
 
     public override void ViewWillDisappear()
     {
         base.ViewWillDisappear();
 
+        selectableController.SetButtonsInteractable(false);
+
         if (CosmicPort == null)
             return;
 
         CosmicPort.onUpgrade -= CosmicPort_OnUpgrade;
+    }
+
+    public override void ViewFocused()
+    {
+        base.ViewFocused();
+
+        selectableController.SetButtonsInteractable(true);
     }
 
     public void ChangeData()
