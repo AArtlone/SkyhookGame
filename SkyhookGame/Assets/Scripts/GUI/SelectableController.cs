@@ -81,6 +81,14 @@ public class SelectableController<T1, T2> : MonoBehaviour
         }
     }
 
+    public void SetButtonsInteractable(bool value)
+    {
+        if (cells == null || cells.Count == 0)
+            return;
+
+        cells.ForEach(c => c.myButton.SetInteractable(value));
+    }
+
     public T1 GetSelectedCell()
     {
         return cells[selectedCell];
