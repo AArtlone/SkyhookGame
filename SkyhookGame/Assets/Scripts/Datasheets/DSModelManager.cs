@@ -11,6 +11,7 @@ public class DSModelManager : MonoBehaviour
     private const string ModelFileName = "DSModel";
     private const string RecordFileName = "DSRecord";
     private const string IDFileName = "DSID";
+    private const string EditorWindowFileName = "DSEditorWindow";
 
     public static void GenerateModel(string modelName)
     {
@@ -19,13 +20,20 @@ public class DSModelManager : MonoBehaviour
 
         CreateDSModelFolder(modelName);
 
+        GenerateClasses(modelName);
+
+        AssetDatabase.Refresh();
+    }
+
+    private static void GenerateClasses(string modelName)
+    {
         GenerateModelClass(modelName);
 
         GenerateRecordClass(modelName);
 
         GenerateIDClass(modelName);
 
-        AssetDatabase.Refresh();
+        GenerateEditorWindowClass(modelName);
     }
 
     private static void CreateDSModelFolder(string modelName)
@@ -99,6 +107,68 @@ public class DSModelManager : MonoBehaviour
             outFile.WriteLine($"public enum {modelName}DSID");
             outFile.WriteLine("{");
             outFile.WriteLine("");
+            outFile.WriteLine("}");
+        }
+    }
+
+    private static void GenerateEditorWindowClass(string modelName)
+    {
+        string idFilePath = GetFilePath(modelName, EditorWindowFileName);
+
+        Debug.Log("Creating Classfile: " + idFilePath);
+
+        if (File.Exists(idFilePath))
+        {
+            Debug.LogWarning($"The {modelName}DSID class already exists");
+            return;
+        }
+
+        using (StreamWriter outFile = new StreamWriter(idFilePath))
+        {
+            outFile.WriteLine("using UnityEditor;");
+            outFile.WriteLine("using UnityEngine;");
+            
+            outFile.WriteLine("");
+            
+            outFile.WriteLine($"public class {modelName}DSEditorWindow : EditorWindow");
+            outFile.WriteLine("{");
+            
+            outFile.WriteLine($"\t[MenuItem(\"Window/{modelName}DSModelGenerator\")]");
+            outFile.WriteLine("\tpublic static void ShowWindow()");
+                outFile.WriteLine("\t{");
+                outFile.WriteLine($"\t\tGetWindow<{modelName}DSEditorWindow>();");
+                outFile.WriteLine("\t}");
+
+            outFile.WriteLine("");
+
+            outFile.WriteLine("\tprivate void OnGUI()");
+            outFile.WriteLine("\t{");
+            outFile.WriteLine("\t\tGUILayout.Space(10f);");
+            outFile.WriteLine($"\t\tif (GUILayout.Button(\"GenerateModel\"))");
+            outFile.WriteLine("\t\t\tGenerateModel();");
+            outFile.WriteLine("");
+            outFile.WriteLine("\t\tGUILayout.Space(10f);");
+            outFile.WriteLine($"\t\tif (GUILayout.Button(\"UpdateModel\"))");
+            outFile.WriteLine("\t\t\tUpdateModel();");
+            outFile.WriteLine("\t}");
+
+            outFile.WriteLine("");
+            
+            outFile.WriteLine("\tprivate void GenerateModel()");
+                outFile.WriteLine("\t{");
+                outFile.WriteLine($"\t\t{modelName}DSModel model = CreateInstance<{modelName}DSModel>();");
+                outFile.WriteLine("");
+                outFile.WriteLine($"\t\tAssetDatabase.CreateAsset(model, \"Assets/Scripts/Datasheets/{modelName}/{modelName}Model.asset\");");
+                outFile.WriteLine($"\t\tAssetDatabase.SaveAssets();");
+                outFile.WriteLine("\t}");
+
+            outFile.WriteLine("");
+
+            outFile.WriteLine("\tprivate void UpdateModel()");
+            outFile.WriteLine("\t{");
+            outFile.WriteLine("");
+            outFile.WriteLine("\t}");
+
             outFile.WriteLine("}");
         }
     }

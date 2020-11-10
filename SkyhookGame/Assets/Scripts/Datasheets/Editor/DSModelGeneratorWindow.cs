@@ -19,7 +19,7 @@ public class DSModelGeneratorWindow : EditorWindow
         modelName = EditorGUILayout.TextField("DataModel Name", modelName);
         GUILayout.Space(5f);
 
-        if (GUILayout.Button("Generate Model")) 
+        if (GUILayout.Button("Generate Model Classes")) 
             DSModelManager.GenerateModel(modelName);
     }
 }
