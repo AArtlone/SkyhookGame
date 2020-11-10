@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class DocksViewController : ViewController
 {
+    [Space(10f)]
     [SerializeField] private DocksSelectableConroller selectableController = default;
 
     [SerializeField] private GameObject buildDockView = default;
@@ -18,6 +19,8 @@ public class DocksViewController : ViewController
 
         SetDocksDataSet();
 
+        selectableController.SetButtonsInteractable(false);
+
         CosmicPort.onUpgrade += CosmicPort_OnUpgrade;
     }
 
@@ -25,10 +28,19 @@ public class DocksViewController : ViewController
     {
         base.ViewWillDisappear();
 
+        selectableController.SetButtonsInteractable(false);
+
         if (CosmicPort == null)
             return;
 
         CosmicPort.onUpgrade -= CosmicPort_OnUpgrade;
+    }
+
+    public override void ViewFocused()
+    {
+        base.ViewFocused();
+
+        selectableController.SetButtonsInteractable(true);
     }
 
     public void ChangeData()

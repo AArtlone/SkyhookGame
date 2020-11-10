@@ -1,7 +1,16 @@
 ﻿using UnityEngine;
 
-public class ScaleEffect : Effect<Vector3>
+public class ScaleEffect : EffectBase
 {
+    private Vector3EffectSO v3EffectSo;
+
+    protected override void Awake()
+    {
+        v3EffectSo = (Vector3EffectSO)effectSO;
+
+        base.Awake();
+    }
+
     protected override void ApplyEffect()
     {
         transform.localScale = GetNextValue();
@@ -9,15 +18,15 @@ public class ScaleEffect : Effect<Vector3>
 
     private Vector3 GetNextValue()
     {
-        Vector3 nextValue = Vector3.Lerp(startValue, targetValue, GetCurveValue());
+        Vector3 nextValue = Vector3.Lerp(v3EffectSo.startValue, v3EffectSo.targetValue, GetCurveValue());
 
         return nextValue;
     }
 
-    protected override void Reset()
+    protected override void ResetEffect()
     {
-        base.Reset();
-        
-        transform.localScale = startValue;
+        base.ResetEffect();
+
+        transform.localScale = v3EffectSo.startValue;
     }
 }

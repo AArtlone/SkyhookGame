@@ -1,12 +1,15 @@
-﻿using UnityEngine;
-
+﻿using System;
+using UnityEngine;
+[System.Serializable]
 public abstract class EffectBase : MonoBehaviour
 {
-    public bool autoReset;
+    public bool autoReset = true;
     public bool playOnStart;
-    public bool useCurrentValueAsStart;
-    
-    public Tween tween;
+    public bool playInReverse;
+    //public bool useCurrentValueAsStart;
+
+
+    public EffectSOBase effectSO;
     
     private bool playEffect;
 
@@ -20,21 +23,21 @@ public abstract class EffectBase : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if (tween.NeedsDelay)
+        if (effectSO.tween.NeedsDelay)
         {
             waitingForStartDelay = true;
-            delayTimeLeft = tween.delay;
+            delayTimeLeft = effectSO.tween.delay;
         }
 
         if (!autoReset)
             return;
 
-        Reset();
+        ResetEffect();
     }
 
     private void OnDisable()
     {
-        Reset();
+        ResetEffect();
     }
 
     private void Start()
@@ -73,7 +76,7 @@ public abstract class EffectBase : MonoBehaviour
         {
             playTime -= Time.deltaTime;
 
-            normTime = playTime / tween.targetTime;
+            normTime = playTime / effectSO.tween.targetTime;
 
             if (normTime <= 0)
                 EffectFinished();
@@ -82,7 +85,7 @@ public abstract class EffectBase : MonoBehaviour
         {
             playTime += Time.deltaTime;
 
-            normTime = playTime / tween.targetTime;
+            normTime = playTime / effectSO.tween.targetTime;
 
             if (normTime >= 1)
                 EffectFinished();
@@ -91,13 +94,13 @@ public abstract class EffectBase : MonoBehaviour
 
     private void EffectFinished()
     {
-        switch (tween.playStyle)
+        switch (effectSO.tween.playStyle)
         {
             case TweenPlayStyle.Once:
                 playEffect = false;
                 break;
             case TweenPlayStyle.Repeat:
-                Reset();
+                ResetEffect();
                 break;
             case TweenPlayStyle.PingPong:
                 reverse = !reverse;
@@ -105,7 +108,7 @@ public abstract class EffectBase : MonoBehaviour
         }
     }
 
-    protected virtual void Reset()
+    protected virtual void ResetEffect()
     {
         playTime = 0f;
     }
@@ -113,12 +116,23 @@ public abstract class EffectBase : MonoBehaviour
     public virtual void PlayEffect()
     {
         playEffect = true;
+
+        // If playInReverse is set to true in the editor
+        // we set the private reverse variable to true,
+        // and set the playTime to target time,
+        // since in reverse the playTime is being decreased
+        if (playInReverse)
+        {
+            reverse = true;
+
+            playTime = effectSO.tween.targetTime;
+        }
     }
 
     protected abstract void ApplyEffect();
 
     protected float GetCurveValue()
     {
-        return tween.curve.Evaluate(normTime);
+        return effectSO.tween.curve.Evaluate(normTime);
     }
 }
