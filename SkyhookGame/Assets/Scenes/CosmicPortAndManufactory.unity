@@ -1325,7 +1325,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1273335920}
+      - m_Target: {fileID: 0}
         m_MethodName: BuildDock
         m_Mode: 1
         m_Arguments:
@@ -2261,7 +2261,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasChildNavController: 0
   childNavController: {fileID: 0}
-  effectIn: {fileID: 0}
+  inTransitions: []
+  outTransitions: []
   selectableController: {fileID: 479402434}
 --- !u!1 &502967726
 GameObject:
@@ -3210,7 +3211,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasChildNavController: 0
   childNavController: {fileID: 0}
-  effectIn: {fileID: 0}
+  inTransitions: []
+  outTransitions: []
   selectableController: {fileID: 559081150}
   buildShipView: {fileID: 1163184390}
 --- !u!1 &579895521
@@ -4257,7 +4259,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasChildNavController: 0
   childNavController: {fileID: 0}
-  effectIn: {fileID: 0}
+  inTransitions: []
+  outTransitions: []
   selectableController: {fileID: 753253184}
 --- !u!1 &782453740
 GameObject:
@@ -4921,7 +4924,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasChildNavController: 0
   childNavController: {fileID: 0}
-  effectIn: {fileID: 0}
+  inTransitions: []
+  outTransitions: []
   storageSelectableController: {fileID: 479402434}
   selectableController: {fileID: 890713314}
 --- !u!1 &896377097
@@ -5071,6 +5075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoReset: 0
   playOnStart: 1
+  playInReverse: 0
   effectSO: {fileID: 11400000, guid: fd26a4bfcfb926b4d80596e0b8dd9171, type: 2}
 --- !u!225 &896377103
 CanvasGroup:
@@ -5098,6 +5103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoReset: 0
   playOnStart: 1
+  playInReverse: 0
   effectSO: {fileID: 11400000, guid: 9fd1228784e4a3741a1c9b7c117fd2fb, type: 2}
 --- !u!1 &907048604
 GameObject:
@@ -5371,7 +5377,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasChildNavController: 1
   childNavController: {fileID: 961309246}
-  effectIn: {fileID: 0}
+  inTransitions: []
+  outTransitions: []
   tabGroup: {fileID: 1602142789}
 --- !u!1 &979486186
 GameObject:
@@ -6608,17 +6615,19 @@ GameObject:
   - component: {fileID: 1273335916}
   - component: {fileID: 1273335918}
   - component: {fileID: 1273335917}
-  - component: {fileID: 1273335920}
   - component: {fileID: 1273335919}
   - component: {fileID: 1273335922}
   - component: {fileID: 1273335921}
+  - component: {fileID: 1273335925}
+  - component: {fileID: 1273335923}
+  - component: {fileID: 1273335924}
   m_Layer: 5
-  m_Name: DocksView
+  m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1273335916
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6635,13 +6644,13 @@ RectTransform:
   - {fileID: 2071762851}
   - {fileID: 22399950}
   - {fileID: 1710296496}
-  m_Father: {fileID: 1681331006}
-  m_RootOrder: 1
+  m_Father: {fileID: 1407231049}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 520}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -672}
+  m_SizeDelta: {x: 1180, y: 620}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1273335917
 MonoBehaviour:
@@ -6695,23 +6704,6 @@ MonoBehaviour:
   cellPrefab: {fileID: 8285420774982431291, guid: a0c220733c644284e9d421eba643a7e9,
     type: 3}
   contentContainer: {fileID: 621325203}
---- !u!114 &1273335920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273335915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44ece924b2297034f84367d315de2ee2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasChildNavController: 0
-  childNavController: {fileID: 0}
-  effectIn: {fileID: 1273335921}
-  selectableController: {fileID: 1273335919}
-  buildDockView: {fileID: 22399949}
 --- !u!114 &1273335921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6726,6 +6718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoReset: 1
   playOnStart: 0
+  playInReverse: 0
   effectSO: {fileID: 11400000, guid: de216486b2f8e6443b0a00b12172c8a7, type: 2}
 --- !u!225 &1273335922
 CanvasGroup:
@@ -6739,6 +6732,54 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1273335923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273335915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc42d1e36267242840580d8d3a2da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoReset: 1
+  playOnStart: 0
+  playInReverse: 0
+  effectSO: {fileID: 11400000, guid: 4b40bf955935eec4eb2f230ba3ce5845, type: 2}
+--- !u!114 &1273335924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273335915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc42d1e36267242840580d8d3a2da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoReset: 1
+  playOnStart: 0
+  playInReverse: 1
+  effectSO: {fileID: 11400000, guid: 4b40bf955935eec4eb2f230ba3ce5845, type: 2}
+--- !u!114 &1273335925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273335915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1832642065607844a992eaeb6d4bf564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoReset: 1
+  playOnStart: 0
+  playInReverse: 1
+  effectSO: {fileID: 11400000, guid: de216486b2f8e6443b0a00b12172c8a7, type: 2}
 --- !u!1 &1275531573
 GameObject:
   m_ObjectHideFlags: 0
@@ -7514,6 +7555,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404832554}
   m_CullTransparentMesh: 0
+--- !u!1 &1407231048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1407231049}
+  - component: {fileID: 1407231050}
+  m_Layer: 5
+  m_Name: DocksView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1407231049
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407231048}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1273335916}
+  m_Father: {fileID: 1681331006}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1407231050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407231048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ece924b2297034f84367d315de2ee2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasChildNavController: 0
+  childNavController: {fileID: 0}
+  inTransitions:
+  - {fileID: 1273335921}
+  - {fileID: 1273335923}
+  outTransitions:
+  - {fileID: 1273335924}
+  - {fileID: 1273335925}
+  selectableController: {fileID: 1273335919}
+  buildDockView: {fileID: 22399949}
 --- !u!1 &1488410513
 GameObject:
   m_ObjectHideFlags: 0
@@ -8638,7 +8738,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2124996531}
-  - {fileID: 1273335916}
+  - {fileID: 1407231049}
   - {fileID: 1019437553}
   m_Father: {fileID: 1148290197}
   m_RootOrder: 6
@@ -8664,7 +8764,7 @@ MonoBehaviour:
   upgradeView: {fileID: 1019437552}
   docksView: {fileID: 1273335915}
   navigationController: {fileID: 2124996532}
-  docksViewController: {fileID: 1273335920}
+  docksViewController: {fileID: 1407231050}
   cosmicPortStorageViewController: {fileID: 1710296498}
 --- !u!1 &1686247450
 GameObject:
@@ -8967,7 +9067,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasChildNavController: 0
   childNavController: {fileID: 0}
-  effectIn: {fileID: 0}
+  inTransitions: []
+  outTransitions: []
   selectableController: {fileID: 1710296497}
   docksSelectableConroller: {fileID: 1273335919}
 --- !u!114 &1710296499
@@ -10319,6 +10420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoReset: 0
   playOnStart: 1
+  playInReverse: 0
   effectSO: {fileID: 11400000, guid: 56139ac620069c8468485bb5e6d7fb97, type: 2}
 --- !u!1001 &1917121461
 PrefabInstance:

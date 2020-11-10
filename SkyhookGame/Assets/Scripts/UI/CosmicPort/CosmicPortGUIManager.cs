@@ -22,7 +22,9 @@ public class CosmicPortGUIManager : Singleton<CosmicPortGUIManager>
 
         preview.SetActive(false);
         upgradeView.SetActive(false);
-        docksView.gameObject.SetActive(false);
+
+        docksViewController.gameObject.SetActive(false);
+        //docksView.gameObject.SetActive(false);
     }
 
     public void ShowCosmicPortView()
