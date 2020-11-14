@@ -58,26 +58,21 @@ public class DSModelManager
         {
             outFile.WriteLine("using UnityEngine;");
             outFile.WriteLine("using System.Collections;");
+            
             outFile.WriteLine("");
+            
             outFile.WriteLine("[CreateAssetMenu(fileName=\"Model\", menuName=\"Datasheets/Model\")]");
+            
             outFile.WriteLine($"public class {modelName}DSModel: DSModelBase<{modelName}DSRecord, {modelName}DSID>");
             outFile.WriteLine("{");
-            outFile.WriteLine("");
+                outFile.WriteLine($"\tprotected override {modelName}DSRecord CreateRecord(string[] csvFileLine)");
+                outFile.WriteLine("\t{");
+                    outFile.WriteLine($"\t\tvar result = new {modelName}DSRecord(csvFileLine);");
+                    outFile.WriteLine("");
+                    outFile.WriteLine($"\t\treturn result;");
+            outFile.WriteLine("\t}");
+            
             outFile.WriteLine("}");
-        }
-    }
-
-    public static void AddEnumElement(string enumName)
-    {
-        string modelName = "CosmicPort";
-
-        string modelIDFilePath = GetFilePath(modelName, IDFileName);
-
-
-
-        using (StreamWriter outFile = new StreamWriter(modelIDFilePath))
-        {
-
         }
     }
 
@@ -100,7 +95,10 @@ public class DSModelManager
             outFile.WriteLine("[Serializable]");
             outFile.WriteLine($"public class {modelName}DSRecord: DSRecordBase<{modelName}DSID>");
             outFile.WriteLine("{");
-            outFile.WriteLine("");
+            outFile.WriteLine($"\tpublic {modelName}DSRecord(string[] csvFileLine)");
+            outFile.WriteLine("\t{");
+            outFile.WriteLine($"\t\trecordID = ({modelName}DSID)Enum.Parse(typeof({modelName}DSID), csvFileLine[0]);");
+            outFile.WriteLine("\t}");
             outFile.WriteLine("}");
         }
     }
@@ -117,7 +115,7 @@ public class DSModelManager
             return;
         }
 
-        string csvFilePath = "Test";
+        string csvFilePath = $"Datasheets/{modelName}";
 
         List<string> enumLinesToAdd = CSVReader.GetEnumLines(csvFilePath);
 
@@ -161,7 +159,11 @@ public class DSModelManager
             
             outFile.WriteLine($"public class {modelName}DSEditorWindow : EditorWindow");
             outFile.WriteLine("{");
-            
+
+            outFile.WriteLine($"\tprivate {modelName}DSModel model;");
+
+            outFile.WriteLine("");
+
             outFile.WriteLine($"\t[MenuItem(\"Window/{modelName}DSModelGenerator\")]");
             outFile.WriteLine("\tpublic static void ShowWindow()");
                 outFile.WriteLine("\t{");
@@ -185,17 +187,22 @@ public class DSModelManager
             
             outFile.WriteLine("\tprivate void GenerateModel()");
                 outFile.WriteLine("\t{");
-                outFile.WriteLine($"\t\t{modelName}DSModel model = CreateInstance<{modelName}DSModel>();");
+                outFile.WriteLine($"\t\tmodel = CreateInstance<{modelName}DSModel>();");
                 outFile.WriteLine("");
                 outFile.WriteLine($"\t\tAssetDatabase.CreateAsset(model, \"Assets/Scripts/Datasheets/{modelName}/{modelName}Model.asset\");");
                 outFile.WriteLine($"\t\tAssetDatabase.SaveAssets();");
-                outFile.WriteLine("\t}");
+                outFile.WriteLine("");
+                outFile.WriteLine($"\t\tUpdateModel();");
+            outFile.WriteLine("\t}");
 
             outFile.WriteLine("");
 
             outFile.WriteLine("\tprivate void UpdateModel()");
             outFile.WriteLine("\t{");
+            outFile.WriteLine("\t\tif (model == null)");
+            outFile.WriteLine("\t\t\treturn;");
             outFile.WriteLine("");
+            outFile.WriteLine($"\t\tmodel.Initialize(\"Datasheets/{modelName}\");");
             outFile.WriteLine("\t}");
 
             outFile.WriteLine("}");
