@@ -1,0 +1,4 @@
+ID,Name,Price,Availability
+Car,Car,100,TRUE
+Bike,Bike,20,FALSE
+EBike,E-Bike,50,TRUE

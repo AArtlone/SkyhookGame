@@ -1,8 +1,9 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-public class DSModelManager : MonoBehaviour
+public class DSModelManager
 {
     private const string DatasheetsPath = "Assets/Resources/Datasheets/";
 
@@ -45,7 +46,7 @@ public class DSModelManager : MonoBehaviour
     {
         string modelFilePath = GetFilePath(modelName, ModelFileName);
 
-        Debug.Log("Creating Classfile: " + modelFilePath);
+        //Debug.Log("Creating Classfile: " + modelFilePath);
 
         if (File.Exists(modelFilePath))
         {
@@ -66,11 +67,25 @@ public class DSModelManager : MonoBehaviour
         }
     }
 
+    public static void AddEnumElement(string enumName)
+    {
+        string modelName = "CosmicPort";
+
+        string modelIDFilePath = GetFilePath(modelName, IDFileName);
+
+
+
+        using (StreamWriter outFile = new StreamWriter(modelIDFilePath))
+        {
+
+        }
+    }
+
     private static void GenerateRecordClass(string modelName)
     {
         string recordFilePath = GetFilePath(modelName, RecordFileName);
 
-        Debug.Log("Creating Classfile: " + recordFilePath);
+        //Debug.Log("Creating Classfile: " + recordFilePath);
 
         if (File.Exists(recordFilePath))
         {
@@ -94,7 +109,7 @@ public class DSModelManager : MonoBehaviour
     {
         string idFilePath = GetFilePath(modelName, IDFileName);
 
-        Debug.Log("Creating Classfile: " + idFilePath);
+        //Debug.Log("Creating Classfile: " + idFilePath);
 
         if (File.Exists(idFilePath))
         {
@@ -102,11 +117,25 @@ public class DSModelManager : MonoBehaviour
             return;
         }
 
+        string csvFilePath = "Test";
+
+        List<string> enumLinesToAdd = CSVReader.GetEnumLines(csvFilePath);
+
         using (StreamWriter outFile = new StreamWriter(idFilePath))
         {
             outFile.WriteLine($"public enum {modelName}DSID");
             outFile.WriteLine("{");
-            outFile.WriteLine("");
+
+            for (int i = 0; i < enumLinesToAdd.Count; i++)
+            {
+                string line = "\t" + enumLinesToAdd[i];
+
+                if (i != enumLinesToAdd.Count - 1)
+                    line += ",";
+
+                outFile.WriteLine(line);
+            }
+
             outFile.WriteLine("}");
         }
     }
@@ -115,7 +144,7 @@ public class DSModelManager : MonoBehaviour
     {
         string idFilePath = GetFilePath(modelName, EditorWindowFileName);
 
-        Debug.Log("Creating Classfile: " + idFilePath);
+        //Debug.Log("Creating Classfile: " + idFilePath);
 
         if (File.Exists(idFilePath))
         {
