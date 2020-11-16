@@ -12,7 +12,7 @@ public class DSModelManager
     private const string ModelFileName = "DSModel";
     private const string RecordFileName = "DSRecord";
     private const string IDFileName = "DSID";
-    private const string EditorWindowFileName = "DSEditorWindow";
+    private const string EditorMenuFileName = "DSEditorMenu";
 
     public static void GenerateModel(string modelName)
     {
@@ -34,7 +34,7 @@ public class DSModelManager
 
         GenerateIDClass(modelName);
 
-        GenerateEditorWindowClass(modelName);
+        GenerateEditorMenuClass(modelName);
     }
 
     private static void CreateDSModelFolder(string modelName)
@@ -57,7 +57,6 @@ public class DSModelManager
         using (StreamWriter outFile = new StreamWriter(modelFilePath))
         {
             outFile.WriteLine("using UnityEngine;");
-            outFile.WriteLine("using System.Collections;");
             
             outFile.WriteLine("");
             
@@ -138,9 +137,9 @@ public class DSModelManager
         }
     }
 
-    private static void GenerateEditorWindowClass(string modelName)
+    private static void GenerateEditorMenuClass(string modelName)
     {
-        string idFilePath = GetFilePath(modelName, EditorWindowFileName);
+        string idFilePath = GetFilePath(modelName, EditorMenuFileName);
 
         //Debug.Log("Creating Classfile: " + idFilePath);
 
@@ -160,33 +159,13 @@ public class DSModelManager
             outFile.WriteLine($"public class {modelName}DSEditorWindow : EditorWindow");
             outFile.WriteLine("{");
 
-            outFile.WriteLine($"\tprivate {modelName}DSModel model;");
+            outFile.WriteLine($"\tprivate static {modelName}DSModel model;");
 
             outFile.WriteLine("");
 
-            outFile.WriteLine($"\t[MenuItem(\"Window/{modelName}DSModelGenerator\")]");
-            outFile.WriteLine("\tpublic static void ShowWindow()");
-                outFile.WriteLine("\t{");
-                outFile.WriteLine($"\t\tGetWindow<{modelName}DSEditorWindow>();");
-                outFile.WriteLine("\t}");
-
-            outFile.WriteLine("");
-
-            outFile.WriteLine("\tprivate void OnGUI()");
+            outFile.WriteLine($"\t[MenuItem(\"Window/{modelName}DSModelGenerator/GenerateModel\")]");
+            outFile.WriteLine("\tpublic static void GenerateModel()");
             outFile.WriteLine("\t{");
-            outFile.WriteLine("\t\tGUILayout.Space(10f);");
-            outFile.WriteLine($"\t\tif (GUILayout.Button(\"GenerateModel\"))");
-            outFile.WriteLine("\t\t\tGenerateModel();");
-            outFile.WriteLine("");
-            outFile.WriteLine("\t\tGUILayout.Space(10f);");
-            outFile.WriteLine($"\t\tif (GUILayout.Button(\"UpdateModel\"))");
-            outFile.WriteLine("\t\t\tUpdateModel();");
-            outFile.WriteLine("\t}");
-
-            outFile.WriteLine("");
-            
-            outFile.WriteLine("\tprivate void GenerateModel()");
-                outFile.WriteLine("\t{");
                 outFile.WriteLine($"\t\tmodel = CreateInstance<{modelName}DSModel>();");
                 outFile.WriteLine("");
                 outFile.WriteLine($"\t\tAssetDatabase.CreateAsset(model, \"Assets/Scripts/Datasheets/{modelName}/{modelName}Model.asset\");");
@@ -197,12 +176,13 @@ public class DSModelManager
 
             outFile.WriteLine("");
 
-            outFile.WriteLine("\tprivate void UpdateModel()");
-            outFile.WriteLine("\t{");
-            outFile.WriteLine("\t\tif (model == null)");
-            outFile.WriteLine("\t\t\treturn;");
-            outFile.WriteLine("");
-            outFile.WriteLine($"\t\tmodel.Initialize(\"Datasheets/{modelName}\");");
+            outFile.WriteLine($"\t[MenuItem(\"Window/{modelName}DSModelGenerator/UpdateModel\")]");
+            outFile.WriteLine("\tpublic static void UpdateModel()");
+                outFile.WriteLine("\t{");
+                outFile.WriteLine("\t\tif (model == null)");
+                outFile.WriteLine("\t\t\treturn;");
+                outFile.WriteLine("");
+                outFile.WriteLine($"\t\tmodel.Initialize(\"Datasheets/{modelName}\");");
             outFile.WriteLine("\t}");
 
             outFile.WriteLine("}");

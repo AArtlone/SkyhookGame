@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 [CreateAssetMenu(fileName="Model", menuName="Datasheets/Model")]
 public class ExampleDSModel: DSModelBase<ExampleDSRecord, ExampleDSID>
