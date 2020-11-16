@@ -19,6 +19,8 @@ public class DSModelManager
         if (!CheckCSVFile(modelName))
             return;
 
+        //Check if classes were already created
+
         CreateDSModelFolder(modelName);
 
         GenerateClasses(modelName);
@@ -151,25 +153,35 @@ public class DSModelManager
 
         using (StreamWriter outFile = new StreamWriter(idFilePath))
         {
+            outFile.WriteLine("using System.IO;");
             outFile.WriteLine("using UnityEditor;");
             outFile.WriteLine("using UnityEngine;");
             
             outFile.WriteLine("");
             
-            outFile.WriteLine($"public class {modelName}DSEditorWindow : EditorWindow");
+            outFile.WriteLine($"public class {modelName}DSEditorMenu : EditorWindow");
             outFile.WriteLine("{");
 
             outFile.WriteLine($"\tprivate const string CSVPath = \"Datasheets/{modelName}\";");
-            outFile.WriteLine($"\tprivate const string ModelPath = \"DSModels/{modelName}Model\";");
+            outFile.WriteLine($"\tprivate const string ModelPath = \"DSModels/{modelName}Model.asset\";");
 
             outFile.WriteLine("");
 
             outFile.WriteLine($"\t[MenuItem(\"Window/{modelName}DSModel/GenerateModel\")]");
             outFile.WriteLine("\tpublic static void GenerateModel()");
             outFile.WriteLine("\t{");
+                outFile.WriteLine("\t\tstring path = \"Assets/Resources/\" + ModelPath;");
+                outFile.WriteLine("\t\tbool exists = File.Exists(path);");
+                outFile.WriteLine("");
+                outFile.WriteLine("\t\tif (exists)");
+                outFile.WriteLine("\t\t{");
+                outFile.WriteLine("\t\t\tDebug.LogWarning(\"Model already exists at \" + path);");
+                outFile.WriteLine("\t\t\treturn;");
+                outFile.WriteLine("\t\t}");
+                outFile.WriteLine("");
                 outFile.WriteLine($"\t\t{modelName}DSModel model = CreateInstance<{modelName}DSModel>();");
                 outFile.WriteLine("");
-                outFile.WriteLine($"\t\tAssetDatabase.CreateAsset(model, \"Assets/Resources/\" + ModelPath + \".asset\");");
+                outFile.WriteLine($"\t\tAssetDatabase.CreateAsset(model, path);");
                 outFile.WriteLine($"\t\tAssetDatabase.SaveAssets();");
                 outFile.WriteLine("");
                 outFile.WriteLine($"\t\tUpdateModel();");
@@ -180,7 +192,9 @@ public class DSModelManager
             outFile.WriteLine($"\t[MenuItem(\"Window/{modelName}DSModel/UpdateModel\")]");
             outFile.WriteLine("\tpublic static void UpdateModel()");
             outFile.WriteLine("\t{");
-                outFile.WriteLine($"\t\t{modelName}DSModel model = Resources.Load<{modelName}DSModel>(ModelPath);");
+                outFile.WriteLine("\t\tstring path = ModelPath.Split(new char [] {'.'})[0];");
+                outFile.WriteLine("");
+                outFile.WriteLine($"\t\t{modelName}DSModel model = Resources.Load<{modelName}DSModel>(path);");
                 outFile.WriteLine("");
                 outFile.WriteLine("\t\tif (model == null)");
                 outFile.WriteLine("\t\t\treturn;");
