@@ -14,18 +14,21 @@ public class DSModelManager
     private const string IDFileName = "DSID";
     private const string EditorMenuFileName = "DSEditorMenu";
 
-    public static void GenerateModel(string modelName)
+    public static void GenerateModelClasses(string modelName)
     {
         if (!CheckCSVFile(modelName))
             return;
-
-        //Check if classes were already created
 
         CreateDSModelFolder(modelName);
 
         GenerateClasses(modelName);
 
         AssetDatabase.Refresh();
+    }
+
+    private static bool CheckIfModelClassesExist(string modelName)
+    {
+        return File.Exists(DatasheetsModelsPath + $"/{modelName}");
     }
 
     private static void GenerateClasses(string modelName)
@@ -41,6 +44,12 @@ public class DSModelManager
 
     private static void CreateDSModelFolder(string modelName)
     {
+        if (AssetDatabase.IsValidFolder(DatasheetsModelsPath + "/Example"))
+        {
+            Debug.LogWarning("Folder exists");
+            return;
+        }
+
         AssetDatabase.CreateFolder(DatasheetsModelsPath, modelName);
     }
 
