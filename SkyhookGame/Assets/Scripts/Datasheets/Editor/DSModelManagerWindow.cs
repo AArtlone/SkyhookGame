@@ -23,6 +23,6 @@ public class DSModelManagerWindow : EditorWindow
         GUILayout.Space(10f);
 
         if (GUILayout.Button("Generate Model Classes")) 
-            DSModelManager.GenerateModelClasses(modelName);
+            DSModelScriptGenerator.GenerateModelClasses(modelName);
     }
 }

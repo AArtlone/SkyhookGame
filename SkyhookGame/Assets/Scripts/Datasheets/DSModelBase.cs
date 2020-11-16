@@ -26,8 +26,19 @@ public abstract class DSModelBase<T1, T2>: ScriptableObject
     /// <returns></returns>
     protected abstract T1 CreateRecord(string[] csvFileLine);
 
-    public void AddRecord(T1 record)
+    public List<T1> GetAllRecords()
     {
-        allRecords.Add(record);
+        return allRecords;
+    }
+
+    public T1 GetRecordByID(T2 id)
+    {
+        foreach (var v in allRecords)
+        {
+            if (v.recordID.Equals(id))
+                return v;
+        }
+
+        return null;
     }
 }
