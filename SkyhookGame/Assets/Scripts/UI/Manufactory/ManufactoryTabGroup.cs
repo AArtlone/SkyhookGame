@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ManufactoryTabGroup : TabGroup
 {
+    public Action<ViewController> onTabSelection;
+
     private List<ViewController> viewControllers;
 
-    public override void Initialize()
+    protected override void Initialize()
     {
         viewControllers = new List<ViewController>(pages.Count);
 
@@ -21,11 +24,6 @@ public class ManufactoryTabGroup : TabGroup
         base.Initialize();
     }
 
-    public void ResetManufactortTabGroup()
-    {
-        ManufactoryGUIManager.HideTabPage();
-    }
-
     public override void SelectTab(TabButton tabButton)
     {
         if (selectedTab != null)
@@ -37,13 +35,11 @@ public class ManufactoryTabGroup : TabGroup
 
         int index = tabButton.transform.GetSiblingIndex();
 
-        ManufactoryGUIManager.DisplayTabPage(viewControllers[index]);
+        onTabSelection?.Invoke(viewControllers[index]);
 
         if (type == TabGroupType.SpriteBased)
             selectedTab.Select(activeSprite);
         else
             selectedTab.Select(activeColor);
     }
-
-    private ManufactoryGUIManager ManufactoryGUIManager { get { return ManufactoryGUIManager.Instance; } }
 }

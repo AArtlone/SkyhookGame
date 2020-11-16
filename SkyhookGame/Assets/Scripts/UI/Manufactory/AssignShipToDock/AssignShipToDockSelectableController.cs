@@ -17,7 +17,7 @@ public class AssignShipToDockSelectableController : SelectableController<AssignS
 
         cell.data.dock.AssignShip(shipToAssign);
 
-        gameObject.SetActive(false);
+        ManufactoryGUIManager.Instance.PopTopViewController();
 
         Manufactory.RemoveShipFromStorage(shipToAssign);
     }

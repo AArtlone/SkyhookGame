@@ -5,18 +5,18 @@ public class ManufactoryTasksViewController : ViewController
 {
     [SerializeField] private ManufactoryTasksSelectableController selectableController = default;
 
-    public override void WillAppear()
+    public override void ViewWillBeFocused()
     {
-        base.WillAppear();
+        base.ViewWillBeFocused();
 
         SetManufactoryTasksDataSet();
 
         Manufactory.onManufactoryTasksChange += Manufactory_OnShipsManufactoryTasksChange;
     }
 
-    public override void WillDisappear()
+    public override void ViewWillBeUnfocused()
     {
-        base.WillDisappear();
+        base.ViewWillBeUnfocused();
 
         Manufactory.onManufactoryTasksChange -= Manufactory_OnShipsManufactoryTasksChange;
     }

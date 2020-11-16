@@ -19,6 +19,8 @@ public class DocksCell : SelectableCell<DocksCellData>
 
     public override void Initialize()
     {
+        base.Initialize();
+
         data.dock.onStateChange += Dock_OnStateChange;
     }
 

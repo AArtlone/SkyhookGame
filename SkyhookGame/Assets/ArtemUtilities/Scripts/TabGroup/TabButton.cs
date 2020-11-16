@@ -8,15 +8,15 @@ public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
 {
     public Action onTabSelected;
 
-    [SerializeField] private TabGroup tabGroup = default;
+    [SerializeField] private Image backgroundImage = default;
 
-    public Image BackgroundImage { get; private set; }
+    public Image BackgroundImage { get { return backgroundImage; } }
 
-    private void Awake()
+    private TabGroup tabGroup = default;
+
+    public void SetTabGroup(TabGroup tabGroup)
     {
-        BackgroundImage = GetComponent<Image>();
-
-        tabGroup.Subscribe(this);
+        this.tabGroup = tabGroup;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

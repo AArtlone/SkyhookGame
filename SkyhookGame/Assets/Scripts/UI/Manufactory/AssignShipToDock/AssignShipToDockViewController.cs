@@ -6,9 +6,9 @@ public class AssignShipToDockViewController : ViewController
     [SerializeField] private StorageSelectableController storageSelectableController = default;
     [SerializeField] private AssignShipToDockSelectableController selectableController = default;
 
-    public override void WillAppear()
+    public override void ViewWillAppear()
     {
-        base.WillAppear();
+        base.ViewWillAppear();
 
         ShowView(storageSelectableController.GetSelectedCell().data.ship);
     }

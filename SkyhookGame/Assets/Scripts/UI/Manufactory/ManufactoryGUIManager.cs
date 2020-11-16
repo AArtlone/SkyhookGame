@@ -9,7 +9,7 @@ public class ManufactoryGUIManager : Singleton<ManufactoryGUIManager>
 
     [Header("Navigation Controllers")]
     [SerializeField] private NavigationController navigationController = default;
-    [SerializeField] private NavigationController tabsNavigationController = default;
+    [SerializeField] private NavigationController tabsNavigationController = default; //Navigation controller that is responsible for handling views of the TabGroup
 
     [Header("View Controllers")]
     [SerializeField] private ManufactoryViewController manufactoryViewController = default;
@@ -34,26 +34,32 @@ public class ManufactoryGUIManager : Singleton<ManufactoryGUIManager>
 
     public void ShowManufactoryView()
     {
-        navigationController.Push(manufactoryViewController, true);
+        navigationController.Push(manufactoryViewController);
     }
 
     public void ShowAssignShipToDockView()
     {
-        navigationController.Push(assignShipToDockView, false);
+        navigationController.Push(assignShipToDockView);
     }
 
-    public void DisplayTabPage(ViewController viewController)
+    public void PopTopViewController()
     {
-        tabsNavigationController.PushAndPop(viewController);
+        navigationController.Pop();
+    }
+
+    public void ShowTabPage(ViewController tabPageToDIsplay)
+    {
+        tabsNavigationController.PushAndPop(tabPageToDIsplay);
     }
 
     public void HideTabPage()
     {
-        tabsNavigationController.PopTopViewController();
+        tabsNavigationController.Pop();
     }
 
+    // For editor reference
     public void Back(NavigationController navController)
     {
-        navController.PopTopViewController();
+        navController.Pop();
     }
 }

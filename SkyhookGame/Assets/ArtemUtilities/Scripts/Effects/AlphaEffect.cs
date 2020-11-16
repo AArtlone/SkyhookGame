@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class AlphaEffect : Effect<float>
+public class AlphaEffect : EffectBase
 {
     private CanvasGroup canvasGroup;
+
+    private FloatEffectSO floatEffectSO;
 
     protected override void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
+
+        floatEffectSO = (FloatEffectSO)effectSO;
         
         base.Awake();
     }
@@ -19,14 +23,14 @@ public class AlphaEffect : Effect<float>
 
     private float GetNextValue()
     {
-        float nextValue = Mathf.Lerp(startValue, targetValue, GetCurveValue());
+        float nextValue = Mathf.Lerp(floatEffectSO.startValue, floatEffectSO.targetValue, GetCurveValue());
 
         return nextValue;
     }
 
-    protected override void Reset()
+    protected override void ResetEffect()
     {
-        base.Reset();
+        base.ResetEffect();
 
         if (canvasGroup == null)
         {
@@ -34,6 +38,6 @@ public class AlphaEffect : Effect<float>
             return;
         }
 
-        canvasGroup.alpha = startValue;
+        canvasGroup.alpha = floatEffectSO.startValue;
     }
 }
