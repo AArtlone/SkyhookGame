@@ -3,25 +3,28 @@ using UnityEngine;
 
 public class ExampleDSEditorWindow : EditorWindow
 {
-	private static ExampleDSModel model;
+	private const string CSVPath = "Datasheets/Example";
+	private const string ModelPath = "DSModels/ExampleModel";
 
-	[MenuItem("Window/ExampleDSModelGenerator/GenerateModel")]
+	[MenuItem("Window/ExampleDSModel/GenerateModel")]
 	public static void GenerateModel()
 	{
-		model = CreateInstance<ExampleDSModel>();
+		ExampleDSModel model = CreateInstance<ExampleDSModel>();
 
-		AssetDatabase.CreateAsset(model, "Assets/Scripts/Datasheets/Example/ExampleModel.asset");
+		AssetDatabase.CreateAsset(model, "Assets/Resources/" + ModelPath + ".asset");
 		AssetDatabase.SaveAssets();
 
 		UpdateModel();
 	}
 
-	[MenuItem("Window/ExampleDSModelGenerator/UpdateModel")]
+	[MenuItem("Window/ExampleDSModel/UpdateModel")]
 	public static void UpdateModel()
 	{
+		ExampleDSModel model = Resources.Load<ExampleDSModel>(ModelPath);
+
 		if (model == null)
 			return;
 
-		model.Initialize("Datasheets/Example");
+		model.Initialize(CSVPath);
 	}
 }

@@ -159,16 +159,17 @@ public class DSModelManager
             outFile.WriteLine($"public class {modelName}DSEditorWindow : EditorWindow");
             outFile.WriteLine("{");
 
-            outFile.WriteLine($"\tprivate static {modelName}DSModel model;");
+            outFile.WriteLine($"\tprivate const string CSVPath = \"Datasheets/{modelName}\";");
+            outFile.WriteLine($"\tprivate const string ModelPath = \"DSModels/{modelName}Model\";");
 
             outFile.WriteLine("");
 
-            outFile.WriteLine($"\t[MenuItem(\"Window/{modelName}DSModelGenerator/GenerateModel\")]");
+            outFile.WriteLine($"\t[MenuItem(\"Window/{modelName}DSModel/GenerateModel\")]");
             outFile.WriteLine("\tpublic static void GenerateModel()");
             outFile.WriteLine("\t{");
-                outFile.WriteLine($"\t\tmodel = CreateInstance<{modelName}DSModel>();");
+                outFile.WriteLine($"\t\t{modelName}DSModel model = CreateInstance<{modelName}DSModel>();");
                 outFile.WriteLine("");
-                outFile.WriteLine($"\t\tAssetDatabase.CreateAsset(model, \"Assets/Scripts/Datasheets/{modelName}/{modelName}Model.asset\");");
+                outFile.WriteLine($"\t\tAssetDatabase.CreateAsset(model, \"Assets/Resources/\" + ModelPath + \".asset\");");
                 outFile.WriteLine($"\t\tAssetDatabase.SaveAssets();");
                 outFile.WriteLine("");
                 outFile.WriteLine($"\t\tUpdateModel();");
@@ -176,13 +177,15 @@ public class DSModelManager
 
             outFile.WriteLine("");
 
-            outFile.WriteLine($"\t[MenuItem(\"Window/{modelName}DSModelGenerator/UpdateModel\")]");
+            outFile.WriteLine($"\t[MenuItem(\"Window/{modelName}DSModel/UpdateModel\")]");
             outFile.WriteLine("\tpublic static void UpdateModel()");
-                outFile.WriteLine("\t{");
+            outFile.WriteLine("\t{");
+                outFile.WriteLine($"\t\t{modelName}DSModel model = Resources.Load<{modelName}DSModel>(ModelPath);");
+                outFile.WriteLine("");
                 outFile.WriteLine("\t\tif (model == null)");
                 outFile.WriteLine("\t\t\treturn;");
                 outFile.WriteLine("");
-                outFile.WriteLine($"\t\tmodel.Initialize(\"Datasheets/{modelName}\");");
+                outFile.WriteLine($"\t\tmodel.Initialize(CSVPath);");
             outFile.WriteLine("\t}");
 
             outFile.WriteLine("}");
