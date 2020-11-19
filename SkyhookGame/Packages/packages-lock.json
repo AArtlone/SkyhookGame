@@ -1,5 +1,13 @@
 {
   "dependencies": {
+    "com.artem.myutilities": {
+      "version": "file:C:/UnityProjects/MyUtilities/MyUtilities/Packages/MyUtilities",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.textmeshpro": "2.1.1"
+      }
+    },
     "com.unity.2d.animation": {
       "version": "3.2.4",
       "depth": 0,
