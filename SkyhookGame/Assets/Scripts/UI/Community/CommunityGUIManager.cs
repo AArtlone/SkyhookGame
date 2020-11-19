@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using MyUtilities;
+using MyUtilities.GUI;
+using UnityEngine;
 
 public class CommunityGUIManager : Singleton<CommunityGUIManager>
 {
