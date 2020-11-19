@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using MyUtilities;
+using UnityEngine;
 
 public class Settlement : Singleton<Settlement>
 {

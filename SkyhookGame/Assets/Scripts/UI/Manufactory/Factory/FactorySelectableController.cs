@@ -1,4 +1,6 @@
-﻿public class FactorySelectableController : SelectableController<FactoryCell, FactoryCellData>
+﻿using MyUtilities.GUI;
+
+public class FactorySelectableController : SelectableController<FactoryCell, FactoryCellData>
 {
     protected override void Cell_OnCellPress(SelectableCell<FactoryCellData> cell)
     {

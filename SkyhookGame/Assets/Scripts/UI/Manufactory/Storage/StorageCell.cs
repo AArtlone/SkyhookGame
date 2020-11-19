@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using MyUtilities.GUI;
+using TMPro;
 using UnityEngine;
 
 public class StorageCell : SelectableCell<StorageCellData>
