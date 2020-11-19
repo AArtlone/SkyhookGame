@@ -174,7 +174,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -211,51 +211,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 625739595136120632, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
-      propertyPath: m_Name
-      value: Site
-      objectReference: {fileID: 0}
-    - target: {fileID: 748446182551396640, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
-      propertyPath: m_Name
-      value: Site
-      objectReference: {fileID: 0}
-    - target: {fileID: 1366297420655657469, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
-      propertyPath: m_Name
-      value: Site
-      objectReference: {fileID: 0}
-    - target: {fileID: 1438097873472786903, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
-      propertyPath: m_Name
-      value: Site
-      objectReference: {fileID: 0}
-    - target: {fileID: 1467370534698579704, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
-      propertyPath: siteType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3403799428731244139, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
-      propertyPath: siteType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4137413632156692314, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
-      propertyPath: m_Name
-      value: Site
-      objectReference: {fileID: 0}
-    - target: {fileID: 5065521644639643066, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
-      propertyPath: m_Name
-      value: Site
-      objectReference: {fileID: 0}
-    - target: {fileID: 5499179781191871501, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
-      propertyPath: siteType
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5582465063722602343, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -315,36 +270,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Settlement
-      objectReference: {fileID: 0}
-    - target: {fileID: 5664705822856755733, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
-      propertyPath: siteType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5940006619304688597, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
-      propertyPath: m_Name
-      value: Site
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108026191887469776, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
-      propertyPath: siteType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112687830104894270, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
-      propertyPath: m_Name
-      value: Site
-      objectReference: {fileID: 0}
-    - target: {fileID: 7570191148593873734, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
-      propertyPath: m_Name
-      value: Site
-      objectReference: {fileID: 0}
-    - target: {fileID: 7702140010727071012, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
-      propertyPath: m_Name
-      value: Site
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ab4aa54969bb7f4c80e9b44ad88281a, type: 3}
