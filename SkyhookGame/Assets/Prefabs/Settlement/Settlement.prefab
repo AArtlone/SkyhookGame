@@ -90,6 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4619615689512832020}
+  - component: {fileID: 6396753287093664671}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -106,13 +107,29 @@ Transform:
   m_GameObject: {fileID: 2130283968475366358}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.8774812, y: 4.048888, z: -1.203125}
-  m_LocalScale: {x: 1.8, y: 1.8, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 2439556615749380242}
   - {fileID: 3546427666633909632}
   m_Father: {fileID: 5582465063722602343}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6396753287093664671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130283968475366358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aad5b2401cc4874fbde07f9f091c8c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backdrop: {fileID: 8321403036110525427}
+  backdropStars: {fileID: 1214289363645309947}
+  speed: 2
+  multiplier: 1
 --- !u!1 &4918155709353208329
 GameObject:
   m_ObjectHideFlags: 0
