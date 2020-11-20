@@ -19,7 +19,7 @@ public class ShipsDSModel: DSModelBase<ShipsDSRecord, ShipsDSID>
 		List<ShipRecipe> result = new List<ShipRecipe>(shipRecords.Count);
 
         foreach (var shipRecord in shipRecords)
-			result.Add(new ShipRecipe(shipRecord.recordID, shipRecord.shipName, shipRecord.price, shipRecord.reqAluminium, shipRecord.reqPlatinum));
+			result.Add(new ShipRecipe(shipRecord.recordID, shipRecord.shipName, shipRecord.price, shipRecord.mass, shipRecord.reqAluminium, shipRecord.reqPlatinum));
 
 		return result;
 	}

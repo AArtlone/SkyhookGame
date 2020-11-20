@@ -10,11 +10,7 @@ public class Manufactory : Institution
     [SerializeField] private Vector2Int tasksCapacityRange = default;
     [SerializeField] private Vector2Int storageCapacityRange = default;
 
-    //[SerializeField] private List<ShipRecipe> shipRecipes = default;
-
     [SerializeField] private float buildDuration = default;
-
-    //public List<ShipRecipe> ShipRecipes { get { return shipRecipes; } }
     public float BuildDuration { get { return buildDuration; } }
 
     public List<ManufactoryTask> ManufactoryTasks { get; private set; } = new List<ManufactoryTask>();
@@ -77,7 +73,7 @@ public class Manufactory : Institution
 
     private void DoneBuildingShip(ManufactoryTask task)
     {
-        var ship = new Ship(task.shipToProduce.shipName);
+        var ship = task.shipToProduce;
 
         ShipsInStorage.Add(ship);
 
@@ -98,7 +94,7 @@ public class Manufactory : Institution
 
     public void StartBuildingShip(ShipRecipe shipRecipe)
     {
-        var ship = new Ship(shipRecipe.shipName);
+        var ship = new Ship(shipRecipe.shipID, shipRecipe.shipName, shipRecipe.shipMass);
 
         var manufactoryTask = new ManufactoryTask(ship);
 

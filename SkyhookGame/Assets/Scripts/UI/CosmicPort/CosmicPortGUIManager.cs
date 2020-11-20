@@ -14,6 +14,8 @@ public class CosmicPortGUIManager : Singleton<CosmicPortGUIManager>
     [Header("View Controllers")]
     [SerializeField] private DocksViewController docksViewController = default;
     [SerializeField] private CosmicPortAssignShipViewController cosmicPortStorageViewController = default;
+    [SerializeField] private SendShipViewController sendShipViewController = default;
+
     public DocksViewController DocksViewController { get { return docksViewController; } }
     public CosmicPortAssignShipViewController CosmicPortStorageViewController { get { return cosmicPortStorageViewController; } }
 
@@ -35,6 +37,13 @@ public class CosmicPortGUIManager : Singleton<CosmicPortGUIManager>
     public void ShowCosmicPortAssignShipView()
     {
         navigationController.Push(cosmicPortStorageViewController);
+    }
+
+    public void ShowSendShipView(Dock dock)
+    {
+        sendShipViewController.AssignDock(dock);
+
+        navigationController.Push(sendShipViewController);
     }
 
     public void Back()
