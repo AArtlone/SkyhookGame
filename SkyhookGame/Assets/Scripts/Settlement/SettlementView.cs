@@ -7,7 +7,7 @@ public class SettlementView : MonoBehaviour
 		Gizmos.color = Color.green;
 		for (int i = 0; i < 3; i++)
 		{
-			Gizmos.DrawWireSphere(transform.position, (float)((i + 1.3 + 3) * 1.5));
+			Gizmos.DrawWireSphere(transform.position, (float)((i + 1.3 + 3) * 1.7));
 		}
 	}
 }
