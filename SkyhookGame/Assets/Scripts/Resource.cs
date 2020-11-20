@@ -1,16 +1,15 @@
 ﻿public class Resource
 {
-    public ResourceType ResourceType { get; private set; }
+    public ResourcesDSID ResourceType { get; private set; }
 
     public int Amount { get; private set; }
 
-    public Resource(ResourceType resourceType, int amount)
+    public Resource(ResourcesDSID resourceID)
     {
-        ResourceType = resourceType;
-        Amount = amount;
+        ResourceType = resourceID;
     }
 
-    public void AddResource(int valueToAdd)
+    public void IncreaseAmount(int valueToAdd)
     {
         Amount += valueToAdd;
     }
