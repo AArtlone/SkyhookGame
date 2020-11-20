@@ -1,4 +1,4 @@
-ID,Price,Weigh,TotalWeigh
-CargoA,1000,10,20
-CargoB,2000,20,40
-Craft,5000,100,50
+ID,ShipName,Price,Weigh,TotalWeigh
+CargoA,Cargo A,1000,10,20
+CargoB,Cargo B,2000,20,40
+Craft,Craft,5000,100,50

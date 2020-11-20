@@ -10,9 +10,9 @@ public class FactoryCell : SelectableCell<FactoryCellData>
 
     public override void Refresh()
     {
-        nameText.text = data.shipRecipe.name;
+        nameText.text = data.shipRecipe.shipName;
         priceText.text = data.shipRecipe.price.ToString();
-        reqResourcesText.text = data.shipRecipe.reqResources.ToString();
+        //reqResourcesText.text = data.shipRecipe.reqResources.ToString();
     }
 }
 

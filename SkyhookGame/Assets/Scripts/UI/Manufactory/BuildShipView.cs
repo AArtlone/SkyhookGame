@@ -11,7 +11,7 @@ public class BuildShipView : MonoBehaviour
     {
         nameText.text = shipRecipe.shipName;
         priceText.text = shipRecipe.price.ToString();
-        reqResourcesText.text = shipRecipe.reqResources.ToString();
+        //reqResourcesText.text = shipRecipe.reqResources.ToString();
 
         gameObject.SetActive(true);
     }

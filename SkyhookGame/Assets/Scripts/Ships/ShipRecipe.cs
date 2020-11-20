@@ -1,9 +1,13 @@
-﻿using UnityEngine;
-
-[CreateAssetMenu(fileName = "Ship Recipe", menuName = "Ship Recipe")]
-public class ShipRecipe : ScriptableObject
+﻿public class ShipRecipe
 {
+    public ShipsDSID shipID;
     public string shipName;
     public int price;
-    public int reqResources;
+
+    public ShipRecipe(ShipsDSID shipID, string shipName, int price)
+    {
+        this.shipID = shipID;
+        this.shipName = shipName;
+        this.price = price;
+    }
 }
