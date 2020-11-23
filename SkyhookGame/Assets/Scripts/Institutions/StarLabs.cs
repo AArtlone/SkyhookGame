@@ -5,8 +5,8 @@ public class StarLabs : Institution
 {
     [SerializeField] private Vector2Int tasksCapacityRange = default;
 
-    private List<Study> availableStudies;
-    private List<Study> studiesInProgress;
+    // private List<Study> availableStudies;
+    // private List<Study> studiesInProgress;
 
     private int tasksCapacity;
 
