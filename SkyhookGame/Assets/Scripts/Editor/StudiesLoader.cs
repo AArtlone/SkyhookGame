@@ -4,6 +4,25 @@ using UnityEngine;
 
 public class StudiesLoader : MonoBehaviour
 {
+	public static StudiesLoader Instance;
+
+	public static bool Exists { get; private set; }
+
+	protected void SetInstance(StudiesLoader instance)
+	{
+		Instance = instance;
+		Exists = true;
+	}
+
+	private void OnDestroy()
+	{
+		if (Instance == this)
+		{
+			Instance = null;
+			Exists = false;
+		}
+	}
+
 	public static List<Study> studies;
 	public static void Fetch()
 	{
