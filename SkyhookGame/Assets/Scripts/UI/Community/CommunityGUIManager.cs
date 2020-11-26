@@ -7,7 +7,6 @@ public class CommunityGUIManager : Singleton<CommunityGUIManager>
 	[Space(10f)]
 	[SerializeField] private GameObject preview = default;
 	[SerializeField] private GameObject upgradeView = default;
-	[SerializeField] private GameObject communityView = default;
 
 	[Header("Navigation Controllers")]
 	[SerializeField] private NavigationController navigationController = default;
@@ -21,19 +20,14 @@ public class CommunityGUIManager : Singleton<CommunityGUIManager>
 		upgradeView.SetActive(false);
 	}
 
-	public void ShowCommunityView() {
+	public void ShowCommunityView() 
+	{
         navigationController.Push(communityViewController);
 	}
 
-	// TODO: Perhaps we can move the navigation functions to the base class
-	public void PopTopViewController()
+	// For editor reference
+	public void Back()
 	{
 		navigationController.Pop();
-	}
-
-	// For editor reference
-	public void Back(NavigationController navController)
-	{
-		navController.Pop();
 	}
 }
