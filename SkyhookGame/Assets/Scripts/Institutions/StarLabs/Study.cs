@@ -1,17 +1,20 @@
 ﻿using System.Collections.Generic;
 
-public class Study : UnityEngine.MonoBehaviour
+public class Study
 {
+	//TODO
+	public StudyType studyType;
+
 	/// <summary>
 	/// Study characteristics
 	/// </summary>
-	public string title = default;
-	public string description = default;
+	public string title;
+	public string description;
 	// As in if you can start researching it.
 	public bool locked = true;
 	// As in if you can start researching it.
 	private bool available = false;
-	private string code = default;
+	private string code;
 	private List<string> requirements = new List<string>();
 
 	/// <summary>

@@ -2,7 +2,7 @@
 using MyUtilities.GUI;
 using UnityEngine;
 
-public class ProductionGUIManager : Singleton<ProductionGUIManager>
+public class StarLabsUIManager : Singleton<StarLabsUIManager>
 {
 	[Space(10f)]
 	[SerializeField] private GameObject preview = default;
@@ -10,7 +10,7 @@ public class ProductionGUIManager : Singleton<ProductionGUIManager>
 
 	[Header("Navigation Controllers")]
 	[SerializeField] private NavigationController navigationController = default;
-    [SerializeField] private ProductionViewController productionViewController = default;
+	[SerializeField] private StarLabsViewController starLabsViewController = default;
 
 	protected override void Awake()
 	{
@@ -20,9 +20,9 @@ public class ProductionGUIManager : Singleton<ProductionGUIManager>
 		upgradeView.SetActive(false);
 	}
 
-	public void ShowProductionView() 
+	public void ShowStarLabsView()
 	{
-        navigationController.Push(productionViewController);
+		navigationController.Push(starLabsViewController);
 	}
 
 	public void Back()
