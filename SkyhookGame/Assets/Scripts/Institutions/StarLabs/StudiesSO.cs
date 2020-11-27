@@ -2,29 +2,11 @@
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-public class StudiesLoader : MonoBehaviour
+public class StudiesSO : ScriptableObject
 {
-	public static StudiesLoader Instance;
+	public List<Study> allStudies;
 
-	public static bool Exists { get; private set; }
-
-	protected void SetInstance(StudiesLoader instance)
-	{
-		Instance = instance;
-		Exists = true;
-	}
-
-	private void OnDestroy()
-	{
-		if (Instance == this)
-		{
-			Instance = null;
-			Exists = false;
-		}
-	}
-
-	public static List<Study> studies;
-	public static void Fetch()
+	public void Initialize()
 	{
 		var csv_data =
 			Resources.Load<TextAsset>("Datasheets/StarLabs/skill_trees_test_sheet").text;
@@ -48,27 +30,28 @@ public class StudiesLoader : MonoBehaviour
 		}
 		skills_strings.Sort();
 
-		studies = new List<Study>();
+		allStudies = new List<Study>();
 		foreach (var skill in skills_strings)
 		{
 			var study = new Study();
-			study.SetCode(skill.Split(new char[] {' '})[0]);
+			study.SetCode(skill.Split(new char[] { ' ' })[0]);
 			study.title = skill.Substring(study.GetCodeLength() + 1, skill.Length - study.GetCodeLength() - 1);
-			studies.Add(study);
+			allStudies.Add(study);
 		}
 
 		SetStudiesDetails();
 		CreateStudies();
 	}
 
-	static void SetStudiesDetails()
+	private void SetStudiesDetails()
 	{
 		var studies_details =
 			Resources.Load<TextAsset>("Datasheets/StarLabs/skills").text;
 
 		var entries = studies_details.Split(new string[] { "\r\n" }, System.StringSplitOptions.None);
 
-		for (var i = 0; i < entries.Length; i++) {
+		for (var i = 0; i < entries.Length; i++)
+		{
 			/// <summary>
 			/// [0] = Code
 			/// [1] = Title
@@ -77,7 +60,7 @@ public class StudiesLoader : MonoBehaviour
 			/// </summary>
 			var entry = entries[i].Split(new char[] { ',' });
 
-			foreach (var study in studies)
+			foreach (var study in allStudies)
 			{
 				if (study.GetCode() == entry[0])
 				{
@@ -88,19 +71,19 @@ public class StudiesLoader : MonoBehaviour
 		}
 	}
 
-	static void CreateStudies()
+	private void CreateStudies()
 	{
-		var current_root = studies[0];
+		var current_root = allStudies[0];
 
-		for (var i = 0; i < studies.Count; i++)
+		for (var i = 0; i < allStudies.Count; i++)
 		{
-			if (i + 1 >= studies.Count)
+			if (i + 1 >= allStudies.Count)
 			{
 				break;
 			}
 
-			var study = studies[i];
-			var next_study = studies[i + 1];
+			var study = allStudies[i];
+			var next_study = allStudies[i + 1];
 
 			if (study.GetCodeLength() < next_study.GetCodeLength())
 			{

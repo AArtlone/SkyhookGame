@@ -3,16 +3,24 @@ using UnityEngine;
 
 public class StudyTreesGenerator : MonoBehaviour
 {
+	[SerializeField] private StudiesSO studiesSO = default;
+
+	[Space(5f)]
 	[SerializeField] private StudySelectableController selectableController = default;
 	[SerializeField] private StarLabsTabGroup tabGroup = default;
 
-	private List<Study> studies = new List<Study>();
+    private void Awake()
+    {
+        if (studiesSO == null)
+        {
+			enabled = false;
+			Debug.LogError($"StudiesSO is not assigned in the editor or null on {gameObject.name}");
+			return;
+        }
+    }
 
-	private void Start()
+    private void Start()
 	{
-		StudiesLoader.Fetch();
-		studies = StudiesLoader.studies;
-
 		tabGroup.onTabSelection += TabGroup_OnTabChange;
 	}
 
@@ -27,7 +35,7 @@ public class StudyTreesGenerator : MonoBehaviour
 	{
 		List<Study> result = new List<Study>();
 
-		foreach (var study in studies)
+		foreach (var study in studiesSO.allStudies)
 		{
 			// TODO: make sure study has a StudyType
 			if (studyType.ToString() != study.title)
