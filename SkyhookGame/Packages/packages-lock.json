@@ -1,13 +1,13 @@
 {
   "dependencies": {
     "com.artem.myutilities": {
-      "version": "https://github.com/AArtlone/MyUtilitiesPackage.git",
+      "version": "https://github.com/AArtlone/MyUtilities.git#2.0.2",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.textmeshpro": "2.1.1"
       },
-      "hash": "76dae8c8fd31e8fd69ced42023856cbfe67bbbdb"
+      "hash": "bed900c5b7494d22a12bc926e277808639095a55"
     },
     "com.unity.2d.animation": {
       "version": "3.2.4",

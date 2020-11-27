@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.artem.myutilities": "https://github.com/AArtlone/MyUtilitiesPackage.git",
+    "com.artem.myutilities": "https://github.com/AArtlone/MyUtilities.git#2.0.2",
     "com.unity.2d.animation": "3.2.4",
     "com.unity.2d.pixel-perfect": "2.0.4",
     "com.unity.2d.psdimporter": "2.1.5",

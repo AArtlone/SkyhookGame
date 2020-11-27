@@ -9,7 +9,7 @@ public class ManufactoryTabGroup : TabGroup
 
     private List<ViewController> viewControllers;
 
-    protected override void Initialize()
+    public override void Initialize()
     {
         viewControllers = new List<ViewController>(pages.Count);
 
