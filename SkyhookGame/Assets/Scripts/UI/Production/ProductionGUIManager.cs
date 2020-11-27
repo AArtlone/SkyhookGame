@@ -7,7 +7,6 @@ public class ProductionGUIManager : Singleton<ProductionGUIManager>
 	[Space(10f)]
 	[SerializeField] private GameObject preview = default;
 	[SerializeField] private GameObject upgradeView = default;
-	[SerializeField] private GameObject productionView = default;
 
 	[Header("Navigation Controllers")]
 	[SerializeField] private NavigationController navigationController = default;
@@ -21,19 +20,13 @@ public class ProductionGUIManager : Singleton<ProductionGUIManager>
 		upgradeView.SetActive(false);
 	}
 
-	public void ShowProductionView() {
+	public void ShowProductionView() 
+	{
         navigationController.Push(productionViewController);
 	}
 
-	// TODO: Perhaps we can move the navigation functions to the base class
-	public void PopTopViewController()
+	public void Back()
 	{
 		navigationController.Pop();
-	}
-
-	// For editor reference
-	public void Back(NavigationController navController)
-	{
-		navController.Pop();
 	}
 }
