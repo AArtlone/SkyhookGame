@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StudiesSO : ScriptableObject
 {
-	public List<Study> allStudies;
+	public List<Study> allStudies = new List<Study>();
 
 	public void Initialize()
 	{
@@ -30,7 +30,6 @@ public class StudiesSO : ScriptableObject
 		}
 		skills_strings.Sort();
 
-		allStudies = new List<Study>();
 		foreach (var skill in skills_strings)
 		{
 			var study = new Study();

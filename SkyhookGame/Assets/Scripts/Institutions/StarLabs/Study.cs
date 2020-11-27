@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-[System.Serializable]
+[Serializable]
 public class Study
 {
 	//TODO
@@ -22,6 +23,7 @@ public class Study
 	/// Study relationships
 	/// </summary>
 	private Study parent_study = default;
+	[NonSerialized]
 	private List<Study> studies = new List<Study>();
 
 	/// <summary>
