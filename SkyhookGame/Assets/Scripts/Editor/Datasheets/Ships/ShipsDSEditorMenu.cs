@@ -7,10 +7,12 @@ public class ShipsDSEditorMenu : EditorWindow
 	private const string CSVPath = "Datasheets/Ships";
 	private const string ModelPath = "DSModels/ShipsModel.asset";
 
+	private static ShipsDSModel model;
+
 	[MenuItem("Window/ShipsDSModel/GenerateModel")]
 	public static void GenerateModel()
 	{
-		string path = "Assets/Resources/" + ModelPath;
+		string path = "Assets/ScriptableObjects/" + ModelPath;
 		bool exists = File.Exists(path);
 
 		if (exists)
@@ -19,7 +21,7 @@ public class ShipsDSEditorMenu : EditorWindow
 			return;
 		}
 
-		ShipsDSModel model = CreateInstance<ShipsDSModel>();
+		model = CreateInstance<ShipsDSModel>();
 
 		AssetDatabase.CreateAsset(model, path);
 		AssetDatabase.SaveAssets();
@@ -30,10 +32,6 @@ public class ShipsDSEditorMenu : EditorWindow
 	[MenuItem("Window/ShipsDSModel/UpdateModel")]
 	public static void UpdateModel()
 	{
-		string path = ModelPath.Split(new char [] {'.'})[0];
-
-		ShipsDSModel model = Resources.Load<ShipsDSModel>(path);
-
 		if (model == null)
 			return;
 

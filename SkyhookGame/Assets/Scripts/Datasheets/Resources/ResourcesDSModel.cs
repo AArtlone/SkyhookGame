@@ -2,8 +2,7 @@ using MyUtilities.DataSheets;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Model", menuName = "Datasheets/Model")]
-public class ResourcesDSModel : DSModelBase<ResourcesDSRecord, ResourcesDSID>
+public class ResourcesDSModel: DSModelBase<ResourcesDSRecord, ResourcesDSID>
 {
 	protected override ResourcesDSRecord CreateRecord(string[] csvFileLine)
 	{

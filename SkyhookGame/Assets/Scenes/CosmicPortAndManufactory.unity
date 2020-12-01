@@ -810,7 +810,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1a502b68532864993cac0eee48f156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundImage: {fileID: 187707530}
 --- !u!114 &187707530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2014,8 +2013,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455e55ed166575f4ab075e515f46d914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipsModel: {fileID: 11400000, guid: 1077021a01e531d4cb935dec062dc116, type: 2}
-  resourcesModel: {fileID: 11400000, guid: b3ca21ae9270c0240a9cca2ed77ed1e7, type: 2}
+  shipsModel: {fileID: 11400000, guid: eed1df2da90e63c469a03eacb671c750, type: 2}
+  resourcesModel: {fileID: 11400000, guid: 2836e2ef236707c4ea60d27c87567f60, type: 2}
 --- !u!4 &394586568
 Transform:
   m_ObjectHideFlags: 0
@@ -5701,7 +5700,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1a502b68532864993cac0eee48f156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundImage: {fileID: 979486189}
 --- !u!114 &979486189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9215,6 +9213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f3b5cd08b62f94280882136a1a5080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initializeOnAwake: 1
   type: 1
   idleColor: {r: 0.58431375, g: 0.7490196, b: 0.8745099, a: 0}
   hoverColor: {r: 0.26666668, g: 0.25882354, b: 0.3019608, a: 0}
@@ -12500,7 +12499,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1a502b68532864993cac0eee48f156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundImage: {fileID: 2125374234}
 --- !u!114 &2125374234
 MonoBehaviour:
   m_ObjectHideFlags: 0
