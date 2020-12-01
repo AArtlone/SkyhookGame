@@ -14,6 +14,9 @@ public class DocksSelectableConroller : SelectableController<DocksCell, DocksCel
             case DockState.Empty:
                 DocksViewController.ShowAssignShipView();
                 break;
+            case DockState.Occupied:
+                CosmicPortGUIManager.Instance.ShowSendShipView(GetSelectedCell().data.dock);
+                break;
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using MyUtilities;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Settlement : Singleton<Settlement>
@@ -17,11 +18,15 @@ public class Settlement : Singleton<Settlement>
     public StarLabs StarLabs { get { return starLabs; } }
     public Manufactory Manufactory { get { return manufactory; } }
 
-    //public string Name { get; private set; }
+    public ResourcesModule ResourcesModule { get; private set; }
 
     protected override void Awake()
     {
         SetInstance(this);
+        
+        ResourcesModule = new ResourcesModule();
+
+        ResourcesModule.resources.ForEach(r => r.IncreaseAmount(50));
     }
 
     public void AddExperience(int amount)

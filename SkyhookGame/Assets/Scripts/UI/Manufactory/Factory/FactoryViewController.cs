@@ -57,7 +57,7 @@ public class FactoryViewController : ViewController
 
     private void SetManufactoryDataSet()
     {
-        List<ShipRecipe> shipRecipes = Settlement.Instance.Manufactory.ShipRecipes;
+        List<ShipRecipe> shipRecipes = DSModelManager.Instance.ShipsModel.GetShipRecipes();
 
         List<FactoryCellData> dataSet = new List<FactoryCellData>(shipRecipes.Count);
 

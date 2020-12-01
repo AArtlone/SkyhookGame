@@ -1,0 +1,4 @@
+ID,ShipName,Price,Weigh,TotalWeigh,ReqAluminium,ReqPlatinum
+CargoA,Cargo A,1000,10,20,1000,1000
+CargoB,Cargo B,2000,20,40,2000,2000
+Craft,Craft,5000,100,50,5000,5000

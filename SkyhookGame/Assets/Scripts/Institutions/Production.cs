@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Production : Institution
 {
     [SerializeField] private Vector2Int incremetalRateRange = default;
-    
-    private List<Resource> unlockedResources;
 
     private int incrementalRate;
 

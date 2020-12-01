@@ -7,7 +7,7 @@ public class Dock
     public string dockName;
     public DockState DockState { get; private set; }
 
-    private Ship ship;
+    public Ship Ship { get; private set; }
 
     public TripClock TripClock { get; private set; }
     private TravelClockFactory travelFactory;
@@ -54,7 +54,7 @@ public class Dock
 
     public void AssignShip(Ship ship)
     {
-        this.ship = ship;
+        Ship = ship;
 
         UpdateState(DockState.Occupied);
     }
