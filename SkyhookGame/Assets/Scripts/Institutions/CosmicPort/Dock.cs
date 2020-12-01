@@ -1,11 +1,15 @@
 ﻿using System;
+using UnityEngine;
 
+[Serializable]
 public class Dock
 {
     public Action<DockState> onStateChange;
 
     public string dockName;
-    public DockState DockState { get; private set; }
+
+    [SerializeField] private DockState dockState;
+    public DockState DockState { get { return dockState; } }
 
     public Ship Ship { get; private set; }
 
@@ -18,7 +22,7 @@ public class Dock
     {
         dockName = name;
 
-        DockState = DockState.Locked;
+        dockState = DockState.Locked;
 
         var watchFactory = new WatchFactory();
         
@@ -47,7 +51,7 @@ public class Dock
         if (DockState == newState)
             return;
 
-        DockState = newState;
+        dockState = newState;
 
         onStateChange?.Invoke(DockState);
     }
@@ -57,5 +61,17 @@ public class Dock
         Ship = ship;
 
         UpdateState(DockState.Occupied);
+    }
+}
+
+public class DockData
+{
+    public string dockName;
+    public DockState dockState;
+
+    public DockData(string dockName, DockState dockState)
+    {
+        this.dockName = dockName;
+        this.dockState = dockState;
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CosmicPort : Institution
+public class CosmicPort : Institution, ISavable<List<Dock>>
 {
     public Action onUpgrade;
 
@@ -20,8 +21,23 @@ public class CosmicPort : Institution
     private int loadSpeed;
     private int unloadSpeed;
 
+    protected override void Awake()
+    {
+        StartCoroutine(WaitForDataLoadCo());
+    }
+
+    public IEnumerator WaitForDataLoadCo()
+    {
+        yield return PlayerDataManager.Instance.WaitForPlayerDataLoad();
+
+        InitializeMethod();
+    }
+
     private void Update()
     {
+        if (AllDocks == null)
+            return;
+
         foreach (var dock in AllDocks)
         {
             if (dock.DockState != DockState.Building)
@@ -37,6 +53,36 @@ public class CosmicPort : Institution
         }
     }
 
+    protected override void InitializeMethod()
+    {
+        var playerData = PlayerDataManager.Instance.PlayerData;
+
+        if (playerData == null)
+        {
+            Debug.LogWarning("PlayerData is null");
+            InitializeNewDocks();
+        }
+        else
+            SetSavableData(playerData.docksData);
+
+        UpdateVariables();
+
+        DebugVariables();
+
+        UpdateDocksAvailability();
+    }
+
+    private void InitializeNewDocks()
+    {
+        AllDocks = new List<Dock>()
+        {
+            new Dock("Dock 1"),
+            new Dock("Dock 2"),
+            new Dock("Dock 3"),
+            new Dock("Dock 4")
+        };
+    }
+
     public override void Upgrade()
     {
         base.Upgrade();
@@ -50,6 +96,12 @@ public class CosmicPort : Institution
 
     private void UpdateDocksAvailability()
     {
+        if (AllDocks == null)
+        {
+            Debug.LogWarning("AllDocks is null");
+            return;
+        }
+
         if (availableDocks > AllDocks.Count)
         {
             Debug.LogError("Number of available docks is more than all docks count. Either reduce the available docks range or add more docks to the All Docks list on " + transform.name);
@@ -61,23 +113,6 @@ public class CosmicPort : Institution
             AllDocks[i].Unlock();
 
         onUpgrade?.Invoke();
-    }
-
-    protected override void InitializeMethod()
-    {
-        AllDocks = new List<Dock>()
-        {
-            new Dock("Dock 1"),
-            new Dock("Dock 2"),
-            new Dock("Dock 3"),
-            new Dock("Dock 4")
-        };
-
-        UpdateVariables();
-
-        DebugVariables();
-
-        UpdateDocksAvailability();
     }
 
     public void StartBuildingDock(Dock dock)
@@ -110,5 +145,21 @@ public class CosmicPort : Institution
         }
 
         return emptyDocks;
+    }
+
+    public List<Dock> GetSavableData()
+    {
+        if (AllDocks == null)
+            return null;
+
+        return AllDocks;
+    }
+
+    public void SetSavableData(List<Dock> data)
+    {
+        AllDocks = new List<Dock>(data.Count);
+
+        foreach (var v in data)
+            AllDocks.Add(new Dock(v.dockName));
     }
 }
