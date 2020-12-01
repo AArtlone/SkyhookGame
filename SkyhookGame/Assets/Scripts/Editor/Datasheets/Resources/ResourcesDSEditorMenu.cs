@@ -7,12 +7,10 @@ public class ResourcesDSEditorMenu : EditorWindow
 	private const string CSVPath = "Datasheets/Resources";
 	private const string ModelPath = "DSModels/ResourcesModel.asset";
 
-	private static ResourcesDSModel model;
-
 	[MenuItem("Window/ResourcesDSModel/GenerateModel")]
 	public static void GenerateModel()
 	{
-		string path = "Assets/ScriptableObjects/" + ModelPath;
+		string path = "Assets/Resources/" + ModelPath;
 		bool exists = File.Exists(path);
 
 		if (exists)
@@ -21,7 +19,7 @@ public class ResourcesDSEditorMenu : EditorWindow
 			return;
 		}
 
-		model = CreateInstance<ResourcesDSModel>();
+		ResourcesDSModel model = CreateInstance<ResourcesDSModel>();
 
 		AssetDatabase.CreateAsset(model, path);
 		AssetDatabase.SaveAssets();
@@ -32,9 +30,16 @@ public class ResourcesDSEditorMenu : EditorWindow
 	[MenuItem("Window/ResourcesDSModel/UpdateModel")]
 	public static void UpdateModel()
 	{
+		string path = ModelPath.Split(new char [] {'.'})[0];
+
+		ResourcesDSModel model = Resources.Load<ResourcesDSModel>(path);
+
 		if (model == null)
 			return;
 
 		model.Initialize(CSVPath);
+
+		EditorUtility.SetDirty(model);
+		AssetDatabase.SaveAssets();
 	}
 }
