@@ -2,7 +2,7 @@
 using MyUtilities.GUI;
 using UnityEngine;
 
-public class CommunityGUIManager : Singleton<CommunityGUIManager>
+public class StarLabsUIManager : Singleton<StarLabsUIManager>
 {
 	[Space(10f)]
 	[SerializeField] private GameObject preview = default;
@@ -10,7 +10,7 @@ public class CommunityGUIManager : Singleton<CommunityGUIManager>
 
 	[Header("Navigation Controllers")]
 	[SerializeField] private NavigationController navigationController = default;
-    [SerializeField] private CommunityViewController communityViewController = default;
+	[SerializeField] private StarLabsViewController starLabsViewController = default;
 
 	protected override void Awake()
 	{
@@ -20,12 +20,11 @@ public class CommunityGUIManager : Singleton<CommunityGUIManager>
 		upgradeView.SetActive(false);
 	}
 
-	public void ShowCommunityView() 
+	public void ShowStarLabsView()
 	{
-        navigationController.Push(communityViewController);
+		navigationController.Push(starLabsViewController);
 	}
 
-	// For editor reference
 	public void Back()
 	{
 		navigationController.Pop();
