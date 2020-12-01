@@ -2013,8 +2013,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455e55ed166575f4ab075e515f46d914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipsModel: {fileID: 11400000, guid: eed1df2da90e63c469a03eacb671c750, type: 2}
-  resourcesModel: {fileID: 11400000, guid: 2836e2ef236707c4ea60d27c87567f60, type: 2}
+  shipsModel: {fileID: 11400000, guid: 59629ecbc6df3184ea28f2f7ed2140b7, type: 2}
+  resourcesModel: {fileID: 11400000, guid: 982e5f806d1ba9e44810e7d0f40a9bbf, type: 2}
 --- !u!4 &394586568
 Transform:
   m_ObjectHideFlags: 0
