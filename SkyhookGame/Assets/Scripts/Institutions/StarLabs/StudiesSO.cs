@@ -30,16 +30,58 @@ public class StudiesSO : ScriptableObject
 		}
 		skills_strings.Sort();
 
+		Study current_root = new Study();
 		foreach (var skill in skills_strings)
 		{
-			var study = new Study();
-			study.SetCode(skill.Split(new char[] { ' ' })[0]);
-			study.title = skill.Substring(study.GetCodeLength() + 1, skill.Length - study.GetCodeLength() - 1);
-			allStudies.Add(study);
+			var study_code = skill.Split(new char[] { ' ' })[0];
+			Study current_study = new Study();
+
+			current_study.SetCode(study_code);
+			current_study.title = skill.Substring(current_study.GetCodeLength() + 1, skill.Length - current_study.GetCodeLength() - 1);
+
+			if (study_code.Length == 1)
+			{
+				current_root = current_study;
+			}
+			else
+			{
+				current_study.SetParentStudy(current_root);
+			}
+
+			allStudies.Add(current_study);
 		}
 
 		SetStudiesDetails();
 		CreateStudies();
+
+		for (var i = 0; i < allStudies.Count; i++)
+		{
+			var study = allStudies[i];
+			var current_study = study;
+			while (current_study.GetParentStudy() != null)
+			{
+				current_study = current_study.GetParentStudy();
+			}
+
+			switch (current_study.title)
+			{
+			case "Production":
+				study.studyType = StudyType.Production;
+				break;
+			case "Trips":
+				study.studyType = StudyType.Trips;
+				break;
+			case "Expansion":
+				study.studyType = StudyType.Expansion;
+				break;
+			case "Skyhooks":
+				study.studyType = StudyType.Skyhooks;
+				break;
+			case "Capacity":
+				study.studyType = StudyType.Capacity;
+				break;
+			}
+		}
 	}
 
 	private void SetStudiesDetails()

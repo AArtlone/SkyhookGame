@@ -4,7 +4,6 @@ using System.Collections.Generic;
 [Serializable]
 public class Study
 {
-	//TODO
 	public StudyType studyType;
 
 	/// <summary>
@@ -84,6 +83,11 @@ public class Study
 	public Study GetParentStudy()
 	{
 		return parent_study;
+	}
+
+	public void SetParentStudy(Study study)
+	{
+		parent_study = study;
 	}
 
 	public List<string> GetRequirements()
