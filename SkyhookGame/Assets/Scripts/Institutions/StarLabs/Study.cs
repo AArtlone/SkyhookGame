@@ -75,6 +75,11 @@ public class Study
 		code = value;
 	}
 
+	public void SetTitle(string value)
+	{
+		title = value;
+	}
+
 	public bool GetAvailability()
 	{
 		return available;

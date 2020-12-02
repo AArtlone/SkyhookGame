@@ -30,25 +30,36 @@ public class StudiesSO : ScriptableObject
 		}
 		skills_strings.Sort();
 
-		Study current_root = new Study();
-		foreach (var skill in skills_strings)
+		Study currentRoot = new Study();
+		for (int i = 0; i < skills_strings.Count; i++)
 		{
-			var study_code = skill.Split(new char[] { ' ' })[0];
-			Study current_study = new Study();
+			Study currentStudy = new Study();
+			var studyCode = skills_strings[i].Split(new char[] { ' ' })[0];
+			var studyTitle = skills_strings[i].Substring(
+				studyCode.Length + 1,
+				skills_strings[i].Length - studyCode.Length - 1
+			);
 
-			current_study.SetCode(study_code);
-			current_study.title = skill.Substring(current_study.GetCodeLength() + 1, skill.Length - current_study.GetCodeLength() - 1);
+			currentStudy.SetCode(studyCode);
+			currentStudy.SetTitle(studyTitle);
 
-			if (study_code.Length == 1)
+			if (studyCode.Length == 1)
 			{
-				current_root = current_study;
+				currentRoot = currentStudy;
 			}
-			else
+			else if (
+				studyCode.Length > 1 &&
+				(studyCode.Length - 1 == allStudies[i - 1].GetCodeLength()) ||
+				studyCode.Length - 1 == currentRoot.GetCodeLength())
 			{
-				current_study.SetParentStudy(current_root);
+				if (studyCode.Length - 1 == allStudies[i - 1].GetCodeLength())
+				{
+					currentRoot = allStudies[i - 1];
+				}
+				currentStudy.SetParentStudy(currentRoot);
 			}
 
-			allStudies.Add(current_study);
+			allStudies.Add(currentStudy);
 		}
 
 		SetStudiesDetails();
@@ -57,13 +68,16 @@ public class StudiesSO : ScriptableObject
 		for (var i = 0; i < allStudies.Count; i++)
 		{
 			var study = allStudies[i];
-			var current_study = study;
-			while (current_study.GetParentStudy() != null)
+
+			// We retrieve the root of this study, if it already isn't the root,
+			// in order to find what type it is.
+			var currentStudy = study;
+			while (currentStudy.GetParentStudy() != null)
 			{
-				current_study = current_study.GetParentStudy();
+				currentStudy = currentStudy.GetParentStudy();
 			}
 
-			switch (current_study.title)
+			switch (currentStudy.title)
 			{
 			case "Production":
 				study.studyType = StudyType.Production;
