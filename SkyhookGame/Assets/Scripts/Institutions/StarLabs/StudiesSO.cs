@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class StudiesSO : ScriptableObject
 {
-	public List<Study> allStudies = new List<Study>();
+	public List<Study> allStudies;
 
 	public void Initialize()
 	{
+		allStudies = new List<Study>();
 		var csv_data =
 			Resources.Load<TextAsset>("Datasheets/StarLabs/skill_trees_test_sheet").text;
 
@@ -30,16 +32,57 @@ public class StudiesSO : ScriptableObject
 		}
 		skills_strings.Sort();
 
-		foreach (var skill in skills_strings)
+		Study currentRoot = new Study();
+		for (int i = 0; i < skills_strings.Count; i++)
 		{
-			var study = new Study();
-			study.SetCode(skill.Split(new char[] { ' ' })[0]);
-			study.title = skill.Substring(study.GetCodeLength() + 1, skill.Length - study.GetCodeLength() - 1);
-			allStudies.Add(study);
+			Study currentStudy = new Study();
+			var studyCode = skills_strings[i].Split(new char[] { ' ' })[0];
+			var studyTitle = skills_strings[i].Substring(
+				studyCode.Length + 1,
+				skills_strings[i].Length - studyCode.Length - 1
+			);
+
+			currentStudy.SetCode(studyCode);
+			currentStudy.SetTitle(studyTitle);
+
+			if (studyCode.Length == 1)
+			{
+				currentRoot = currentStudy;
+			}
+			else if (
+				studyCode.Length > 1 &&
+				(studyCode.Length - 1 == allStudies[i - 1].GetCodeLength()) ||
+				studyCode.Length - 1 == currentRoot.GetCodeLength())
+			{
+				if (studyCode.Length - 1 == allStudies[i - 1].GetCodeLength())
+				{
+					currentRoot = allStudies[i - 1];
+				}
+				currentStudy.SetParentStudy(currentRoot);
+			}
+
+			allStudies.Add(currentStudy);
 		}
 
 		SetStudiesDetails();
 		CreateStudies();
+
+		for (var i = 0; i < allStudies.Count; i++)
+		{
+			var study = allStudies[i];
+
+			// We retrieve the root of this study, if it already isn't the root,
+			// in order to find what type it is.
+			var currentStudy = study;
+			while (currentStudy.GetParentStudy() != null)
+			{
+				currentStudy = currentStudy.GetParentStudy();
+			}
+
+			// Creates the study type based on the root study's title
+			// since that title is the study type either way.
+			study.studyType = (StudyType)Enum.Parse(typeof(StudyType), currentStudy.title);
+		}
 	}
 
 	private void SetStudiesDetails()
