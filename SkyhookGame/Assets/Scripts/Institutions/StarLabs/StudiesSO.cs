@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class StudiesSO : ScriptableObject
 {
-	public List<Study> allStudies = new List<Study>();
+	public List<Study> allStudies;
 
 	public void Initialize()
 	{
+		allStudies = new List<Study>();
 		var csv_data =
 			Resources.Load<TextAsset>("Datasheets/StarLabs/skill_trees_test_sheet").text;
 
@@ -77,24 +79,9 @@ public class StudiesSO : ScriptableObject
 				currentStudy = currentStudy.GetParentStudy();
 			}
 
-			switch (currentStudy.title)
-			{
-			case "Production":
-				study.studyType = StudyType.Production;
-				break;
-			case "Trips":
-				study.studyType = StudyType.Trips;
-				break;
-			case "Expansion":
-				study.studyType = StudyType.Expansion;
-				break;
-			case "Skyhooks":
-				study.studyType = StudyType.Skyhooks;
-				break;
-			case "Capacity":
-				study.studyType = StudyType.Capacity;
-				break;
-			}
+			// Creates the study type based on the root study's title
+			// since that title is the study type either way.
+			study.studyType = (StudyType)Enum.Parse(typeof(StudyType), currentStudy.title);
 		}
 	}
 

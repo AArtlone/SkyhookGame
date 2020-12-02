@@ -38,7 +38,7 @@ public class StudyTreesGenerator : MonoBehaviour
 		foreach (var study in studiesSO.allStudies)
 		{
 			// TODO: make sure study has a StudyType
-			if (studyType.ToString() != study.title)
+			if (studyType != study.studyType)
 				continue;
 
 			result.Add(study);
