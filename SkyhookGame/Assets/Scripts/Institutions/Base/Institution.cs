@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(InstitutionTouchController))]
 public abstract class Institution : MonoBehaviour
 {
     [SerializeField] private LevelModule levelModule = default;
