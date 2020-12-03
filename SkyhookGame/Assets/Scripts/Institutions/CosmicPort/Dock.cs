@@ -1,11 +1,14 @@
 ﻿using System;
+using UnityEngine;
 
 public class Dock
 {
     public Action<DockState> onStateChange;
 
     public string dockName;
-    public DockState DockState { get; private set; }
+
+    [SerializeField] private DockState dockState;
+    public DockState DockState { get { return dockState; } }
 
     public Ship Ship { get; private set; }
 
@@ -14,15 +17,20 @@ public class Dock
 
     private float dockBuildTime;
 
-    public Dock(string name)
+    public Dock(DockData data)
     {
-        dockName = name;
+        dockName = data.dockName;
 
-        DockState = DockState.Locked;
+        dockState = data.dockState;
+
+        Ship = data.ship;
 
         var watchFactory = new WatchFactory();
         
         travelFactory = watchFactory.CreateTravelFactory();
+        
+        if (dockState == DockState.Building)
+            TripClock = travelFactory.CreateTripClock(data.buildTimeLeft);
     }
 
     public void Unlock()
@@ -47,7 +55,7 @@ public class Dock
         if (DockState == newState)
             return;
 
-        DockState = newState;
+        dockState = newState;
 
         onStateChange?.Invoke(DockState);
     }
@@ -57,5 +65,31 @@ public class Dock
         Ship = ship;
 
         UpdateState(DockState.Occupied);
+    }
+}
+
+[Serializable]
+public class DockData
+{
+    public string dockName;
+    public DockState dockState;
+    public Ship ship;
+    public float buildTimeLeft;
+
+    public DockData(string dockName)
+    {
+        this.dockName = dockName;
+        dockState = DockState.Locked;
+        ship = null;
+    }
+
+    public DockData(Dock dock)
+    {
+        dockName = dock.dockName;
+        dockState = dock.DockState;
+        ship = dock.Ship;
+        
+        if (dock.TripClock != null)
+            buildTimeLeft = dock.TripClock.TimeLeft();
     }
 }

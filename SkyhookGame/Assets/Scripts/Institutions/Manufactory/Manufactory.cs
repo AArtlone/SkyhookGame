@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,13 @@ public class Manufactory : Institution
     private int tasksCapacity;
 
     private List<ManufactoryTask> tasksToRemove; // A list of task to remove at the end of the frame
+
+    private IEnumerator Start()
+    {
+        yield return SceneLoader.Instance.WaitForLoading();
+
+        InitializeMethod();
+    }
 
     private void Update()
     {
@@ -113,6 +121,4 @@ public class Manufactory : Institution
         // We need to add the ships that are already in storage to the ships that are buing built, sine they will take the space in storage when they are done building
         return ManufactoryTasks.Count + ShipsInStorage.Count < storageCapacity;
     }
-
-    private ManufactoryGUIManager ManufactoryGUIManager { get { return ManufactoryGUIManager.Instance; } }
 }

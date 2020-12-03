@@ -9,11 +9,6 @@ public abstract class Institution : MonoBehaviour
 
     public InstitutionType InstitutionType { get; private set; }
 
-    protected virtual void Awake()
-    {
-        InitializeMethod();
-    }
-
     public virtual void Upgrade()
     {
         levelModule.IncreaseLevel();
