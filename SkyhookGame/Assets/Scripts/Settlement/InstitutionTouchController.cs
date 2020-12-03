@@ -25,28 +25,26 @@ public class InstitutionTouchController : MonoBehaviour
 
 		if (Application.isEditor)
 		{
-			if (!Input.GetMouseButtonDown(0))
-				return;
-
-			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit2D[] hits = new RaycastHit2D[1];
-			var hitsCount = Physics2D.GetRayIntersectionNonAlloc(ray, hits, 100f);
-
-			if (hitsCount == 0)
-				return;
-
-			var hitGameObject = hits[0].collider.gameObject;
-
-			if (hitGameObject.layer != 9)
-				return;
-
-			if (hitGameObject != gameObject)
-				return;
-
-			preview.SetActive(true);
+			HandleEditorInput();
 			return;
         }
 
+		HandleTouchInput();
+	}
+
+	private void HandleEditorInput()
+	{
+		if (!Input.GetMouseButtonDown(0))
+			return;
+
+		if (!HandleRaycast(Input.mousePosition))
+			return;
+
+		preview.SetActive(true);
+	}
+
+	private void HandleTouchInput()
+	{
 		if (Input.touchCount <= 0) return;
 
 		for (int i = 0; i < Input.touchCount; i++)
@@ -56,22 +54,30 @@ public class InstitutionTouchController : MonoBehaviour
 			if (touch.phase != TouchPhase.Began)
 				continue;
 
-			var ray = Camera.main.ScreenPointToRay(touch.position);
-			RaycastHit2D[] hits = new RaycastHit2D[1];
-			var hitsCount = Physics2D.GetRayIntersectionNonAlloc(ray, hits, 100f);
-
-			if (hitsCount == 0)
-				return;
-
-			var hitGameObject = hits[0].collider.gameObject;
-
-			if (hitGameObject.layer != 9)
-				return;
-
-			if (hitGameObject != gameObject)
-				return;
+			if (!HandleRaycast(touch.position))
+				continue;
 
 			preview.SetActive(true);
 		}
+	}
+
+	private bool HandleRaycast(Vector3 inputPosition)
+	{
+		var ray = Camera.main.ScreenPointToRay(inputPosition);
+		RaycastHit2D[] hits = new RaycastHit2D[1];
+		var hitsCount = Physics2D.GetRayIntersectionNonAlloc(ray, hits, 100f);
+
+		if (hitsCount == 0)
+			return false;
+
+		var hitGameObject = hits[0].collider.gameObject;
+
+		if (hitGameObject.layer != 9)
+			return false;
+
+		if (hitGameObject != gameObject)
+			return false;
+
+		return true;
 	}
 }
