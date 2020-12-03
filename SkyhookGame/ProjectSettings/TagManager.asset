@@ -8,6 +8,7 @@ TagManager:
   - PopUpContainer
   - TabGroup
   - Pages
+  - TooltipContainer
   layers:
   - Default
   - TransparentFX
