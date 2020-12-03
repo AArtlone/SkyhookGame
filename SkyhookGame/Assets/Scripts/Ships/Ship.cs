@@ -1,4 +1,5 @@
-﻿public class Ship
+﻿[System.Serializable]
+public class Ship
 {
     public ShipsDSID shipType;
     public string shipName;

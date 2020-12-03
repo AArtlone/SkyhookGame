@@ -1,21 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public class PlayerData
 {
-    public List<Dock> docksData;
+    public List<DockData> docksData;
 
-    public PlayerData(List<Dock> docks)
+    public PlayerData(List<DockData> docksData)
     {
-        docksData = docks;
+        this.docksData = docksData;
     }
-}
-
-public interface ISavable<T>
-{
-    T GetSavableData();
-
-    void SetSavableData(T data);
-
-    IEnumerator WaitForDataLoadCo();
 }

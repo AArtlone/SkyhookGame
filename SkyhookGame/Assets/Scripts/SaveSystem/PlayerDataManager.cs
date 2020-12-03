@@ -1,23 +1,19 @@
 ﻿using MyUtilities;
-using System.Collections;
 using UnityEngine;
 
 public class PlayerDataManager : Singleton<PlayerDataManager>
 {
     public PlayerData PlayerData { get; private set; }
 
-    private bool doneLoadingData;
-
     protected override void Awake()
     {
         SetInstance(this);
 
-        Application.quitting += Application_quitting;
-    }
+        print("Setting instance");
 
-    private IEnumerator Start()
-    {
-        yield return new WaitForSeconds(1f);
+        Application.quitting += Application_quitting;
+
+        SceneLoader.Instance.AddWaiter(this);
 
         LoadData();
     }
@@ -26,17 +22,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     {
         var data = new PlayerData(Settlement.Instance.CosmicPort.GetSavableData());
 
-        print(data.docksData);
-
         SaveData(data);
-    }
-
-    public WaitUntil WaitForPlayerDataLoad()
-    {
-        return new WaitUntil(() =>
-        {
-            return doneLoadingData;
-        });
     }
 
     public void SaveData(PlayerData data)
@@ -57,12 +43,12 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             if (result == null)
             {
                 Debug.LogWarning("PlayerData is null");
-                doneLoadingData = true;
+                SceneLoader.Instance.RemoveWaiter(this);
                 return;
             }
 
             PlayerData = result;
-            doneLoadingData = true;
+            SceneLoader.Instance.RemoveWaiter(this);
         });
 
         IOUtility<PlayerData>.LoadData("PlayerData", callback);

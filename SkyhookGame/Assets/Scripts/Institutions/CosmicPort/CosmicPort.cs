@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CosmicPort : Institution, ISavable<List<Dock>>
+public class CosmicPort : Institution, ISavable<List<DockData>>
 {
     public Action onUpgrade;
 
@@ -21,14 +21,9 @@ public class CosmicPort : Institution, ISavable<List<Dock>>
     private int loadSpeed;
     private int unloadSpeed;
 
-    protected override void Awake()
+    private IEnumerator Start()
     {
-        StartCoroutine(WaitForDataLoadCo());
-    }
-
-    public IEnumerator WaitForDataLoadCo()
-    {
-        yield return PlayerDataManager.Instance.WaitForPlayerDataLoad();
+        yield return SceneLoader.Instance.WaitForLoading();
 
         InitializeMethod();
     }
@@ -76,10 +71,10 @@ public class CosmicPort : Institution, ISavable<List<Dock>>
     {
         AllDocks = new List<Dock>()
         {
-            new Dock("Dock 1"),
-            new Dock("Dock 2"),
-            new Dock("Dock 3"),
-            new Dock("Dock 4")
+            new Dock(new DockData("Dock 1")),
+            new Dock(new DockData("Dock 2")),
+            new Dock(new DockData("Dock 3")),
+            new Dock(new DockData("Dock 4")),
         };
     }
 
@@ -89,7 +84,7 @@ public class CosmicPort : Institution, ISavable<List<Dock>>
 
         UpdateVariables();
 
-        DebugVariables();
+        //DebugVariables();
 
         UpdateDocksAvailability();
     }
@@ -147,19 +142,29 @@ public class CosmicPort : Institution, ISavable<List<Dock>>
         return emptyDocks;
     }
 
-    public List<Dock> GetSavableData()
+    public List<DockData> GetSavableData()
     {
         if (AllDocks == null)
             return null;
 
-        return AllDocks;
+        var saveData = new List<DockData>(AllDocks.Count);
+
+        //foreach (var dock in AllDocks)
+        //{
+        //    var dockData = new DockData(dock.dockName, dock);
+        //    saveData.Add(dockData);
+        //}
+
+
+        AllDocks.ForEach(d => saveData.Add(new DockData(d)));
+
+        return saveData;
     }
 
-    public void SetSavableData(List<Dock> data)
+    public void SetSavableData(List<DockData> data)
     {
         AllDocks = new List<Dock>(data.Count);
 
-        foreach (var v in data)
-            AllDocks.Add(new Dock(v.dockName));
+        data.ForEach(d => AllDocks.Add(new Dock(d)));
     }
 }

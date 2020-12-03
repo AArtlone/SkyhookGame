@@ -1,5 +1,5 @@
 ﻿using MyUtilities;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class Settlement : Singleton<Settlement>
@@ -23,7 +23,12 @@ public class Settlement : Singleton<Settlement>
     protected override void Awake()
     {
         SetInstance(this);
-        
+    }
+
+    private IEnumerator Start()
+    {
+        yield return SceneLoader.Instance.WaitForLoading();
+
         ResourcesModule = new ResourcesModule();
 
         ResourcesModule.resources.ForEach(r => r.IncreaseAmount(50));
