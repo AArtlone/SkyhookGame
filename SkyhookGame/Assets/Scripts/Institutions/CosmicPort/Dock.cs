@@ -20,13 +20,10 @@ public class Dock
     public Dock(DockData data)
     {
         dockName = data.dockName;
-
         dockState = data.dockState;
-
         Ship = data.ship;
 
         var watchFactory = new WatchFactory();
-        
         travelFactory = watchFactory.CreateTravelFactory();
         
         if (dockState == DockState.Building)

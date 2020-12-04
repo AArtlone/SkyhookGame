@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Manufactory : Institution
+public class Manufactory : Institution<ManufactoryData>
 {
     public Action onShipsInStorageChange;
     public Action onManufactoryTasksChange;
@@ -51,24 +51,50 @@ public class Manufactory : Institution
         });
     }
 
-    public override void Upgrade()
+    #region Institution Overrides
+    protected override ManufactoryData GetInstitutionSaveData()
     {
-        base.Upgrade();
+        var playerData = PlayerDataManager.Instance.PlayerData;
 
-        UpdateVariables();
+        var data = playerData == null ? null : playerData.settlementData.manufactoryData;
 
-        DebugVariables();
+        return data;
     }
 
-    protected override void InitializeMethod()
+    public override ManufactoryData CreatSaveData()
     {
-        UpdateVariables();
+        if (ShipsInStorage == null)
+            return null;
 
-        DebugVariables();
+        // Create ShipsInStorageData
+        var shipsData = new List<Ship>(ShipsInStorage);
+
+        var tasksData = new List<ManufactoryTaskData>(ManufactoryTasks.Count);
+        ManufactoryTasks.ForEach(t => tasksData.Add(new ManufactoryTaskData(t)));
+
+        // Create ManufactoryData
+        var saveData = new ManufactoryData(LevelModule.Level, shipsData, tasksData);
+
+        return saveData;
+    }
+
+    public override void SetSavableData(ManufactoryData data)
+    {
+        // Set Levels
+        LevelModule.SetLevel(data.institutionLevel);
+
+        // Set ManufactorTasks
+        ManufactoryTasks = new List<ManufactoryTask>(data.tasksData.Count);
+        data.tasksData.ForEach(d => ManufactoryTasks.Add(new ManufactoryTask(d)));
+
+        // Set ShipsInStorage
+        ShipsInStorage = new List<Ship>(data.shipsInStorageData);
     }
 
     protected override void UpdateVariables()
     {
+        base.UpdateVariables();
+
         storageCapacity = LevelModule.Evaluate(storageCapacityRange);
         tasksCapacity = LevelModule.Evaluate(tasksCapacityRange);
     }
@@ -78,6 +104,7 @@ public class Manufactory : Institution
         Debug.Log("New Storage Capacity number = " + storageCapacity);
         Debug.Log("New Tasks Capacity number = " + tasksCapacity);
     }
+    #endregion
 
     private void DoneBuildingShip(ManufactoryTask task)
     {
@@ -120,5 +147,19 @@ public class Manufactory : Institution
     {
         // We need to add the ships that are already in storage to the ships that are buing built, sine they will take the space in storage when they are done building
         return ManufactoryTasks.Count + ShipsInStorage.Count < storageCapacity;
+    }
+}
+
+[Serializable]
+public class ManufactoryData : InstitutionData
+{
+    public List<Ship> shipsInStorageData;
+    public List<ManufactoryTaskData> tasksData;
+
+    public ManufactoryData(int institutionLevel, List<Ship> shipsInStorageData, List<ManufactoryTaskData> tasksData)
+    {
+        this.institutionLevel = institutionLevel;
+        this.shipsInStorageData = shipsInStorageData;
+        this.tasksData = tasksData;
     }
 }
