@@ -7,6 +7,7 @@ public class CosmicPort : Institution, ISavable<List<DockData>>
 {
     public Action onUpgrade;
 
+    [Header("Cosmic Port")]
     [SerializeField] private Vector2Int availableDocksRange = default;
     [SerializeField] private Vector2Int loadSpeedRange = default;
     [SerializeField] private Vector2Int unloadSpeedRange = default;
@@ -148,13 +149,6 @@ public class CosmicPort : Institution, ISavable<List<DockData>>
             return null;
 
         var saveData = new List<DockData>(AllDocks.Count);
-
-        //foreach (var dock in AllDocks)
-        //{
-        //    var dockData = new DockData(dock.dockName, dock);
-        //    saveData.Add(dockData);
-        //}
-
 
         AllDocks.ForEach(d => saveData.Add(new DockData(d)));
 

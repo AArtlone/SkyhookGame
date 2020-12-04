@@ -3,7 +3,9 @@
 [RequireComponent(typeof(InstitutionTouchController))]
 public abstract class Institution : MonoBehaviour
 {
+    [Header("Institution")]
     [SerializeField] private LevelModule levelModule = default;
+    [SerializeField] private SpriteUpgradeModule spriteUpgradeModule = default;
 
     public LevelModule LevelModule { get { return levelModule; } }
 
@@ -12,6 +14,7 @@ public abstract class Institution : MonoBehaviour
     public virtual void Upgrade()
     {
         levelModule.IncreaseLevel();
+        spriteUpgradeModule.SetSprite(levelModule.Level);
     }
 
     protected abstract void InitializeMethod();

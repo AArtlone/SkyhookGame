@@ -5122,11 +5122,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8464918606152826345, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
         type: 3}
-      propertyPath: initial_view
-      value: 
-      objectReference: {fileID: 1316673131}
-    - target: {fileID: 8464918606152826345, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
       propertyPath: preview
       value: 
       objectReference: {fileID: 1316673131}
