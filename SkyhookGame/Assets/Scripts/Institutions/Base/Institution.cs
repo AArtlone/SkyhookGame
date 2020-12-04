@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(InstitutionTouchController))]
-public abstract class Institution : MonoBehaviour
+public abstract class Institution<T> : MonoBehaviour, ISavable<T> where T : InstitutionData
 {
     [Header("Institution")]
     [SerializeField] private LevelModule levelModule = default;
@@ -16,10 +16,37 @@ public abstract class Institution : MonoBehaviour
         levelModule.IncreaseLevel();
 
         UpdateVariables();
-        DebugVariables();
+        //DebugVariables();
     }
 
-    protected abstract void InitializeMethod();
+    protected virtual void InitializeMethod()
+    {
+        var institutionData = GetInstitutionSaveData();
+
+        if (institutionData == null)
+        {
+            Debug.LogWarning($"Institution data is null");
+            SaveDataIsNull();
+        }
+        else
+            SetSavableData(institutionData);
+
+        UpdateVariables();
+        //DebugVariables();
+    }
+
+    /// <summary>
+    /// Override this method to get the T from the PlayerData
+    /// </summary>
+    /// <returns></returns>
+    protected abstract T GetInstitutionSaveData();
+
+    protected virtual void SaveDataIsNull() { }
+
+    public abstract T CreatSaveData();
+
+    public abstract void SetSavableData(T data);
+
     /// <summary>
     /// Updates instituion's variables based on the institution level
     /// </summary>

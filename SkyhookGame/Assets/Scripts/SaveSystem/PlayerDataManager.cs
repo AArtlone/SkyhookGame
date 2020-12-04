@@ -20,7 +20,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
     private void Application_quitting()
     {
-        var settlementData = Settlement.Instance.GetSavableData();
+        var settlementData = Settlement.Instance.CreatSaveData();
         var data = new PlayerData(settlementData);
 
         SaveData(data);

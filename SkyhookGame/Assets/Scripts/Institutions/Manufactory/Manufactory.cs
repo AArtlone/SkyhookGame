@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Manufactory : Institution, ISavable<ManufactoryData>
+public class Manufactory : Institution<ManufactoryData>
 {
     public Action onShipsInStorageChange;
     public Action onManufactoryTasksChange;
@@ -51,22 +51,27 @@ public class Manufactory : Institution, ISavable<ManufactoryData>
         });
     }
 
-    protected override void InitializeMethod()
+    #region Institution Overrides
+    protected override ManufactoryData GetInstitutionSaveData()
     {
-        var manufactoryData = PlayerDataManager.Instance.PlayerData.settlementData.manufactoryData;
+        var playerData = PlayerDataManager.Instance.PlayerData;
 
-        if (manufactoryData == null)
-        {
-            Debug.LogWarning("PlayerData is null");
-        }
-        else
-        {
-            SetSavableData(manufactoryData);
-            LevelModule.SetLevel(manufactoryData.institutionLevel);
-        }
+        var data = playerData == null ? null : playerData.settlementData.manufactoryData;
 
-        UpdateVariables();
-        DebugVariables();
+        return data;
+    }
+
+    public override ManufactoryData CreatSaveData()
+    {
+        var saveData = new ManufactoryData(LevelModule.Level);
+
+        return saveData;
+    }
+
+    public override void SetSavableData(ManufactoryData data)
+    {
+        // Set Levels
+        LevelModule.SetLevel(data.institutionLevel);
     }
 
     protected override void UpdateVariables()
@@ -82,6 +87,7 @@ public class Manufactory : Institution, ISavable<ManufactoryData>
         Debug.Log("New Storage Capacity number = " + storageCapacity);
         Debug.Log("New Tasks Capacity number = " + tasksCapacity);
     }
+    #endregion
 
     private void DoneBuildingShip(ManufactoryTask task)
     {
@@ -124,19 +130,6 @@ public class Manufactory : Institution, ISavable<ManufactoryData>
     {
         // We need to add the ships that are already in storage to the ships that are buing built, sine they will take the space in storage when they are done building
         return ManufactoryTasks.Count + ShipsInStorage.Count < storageCapacity;
-    }
-
-    public ManufactoryData GetSavableData()
-    {
-        var saveData = new ManufactoryData(LevelModule.Level);
-
-        return saveData;
-    }
-
-    public void SetSavableData(ManufactoryData data)
-    {
-        // Set Levels
-        LevelModule.SetLevel(data.institutionLevel);
     }
 }
 

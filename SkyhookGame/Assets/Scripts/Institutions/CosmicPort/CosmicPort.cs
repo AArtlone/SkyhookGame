@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CosmicPort : Institution, ISavable<CosmicPortData>
+public class CosmicPort : Institution<CosmicPortData>
 {
     public Action onUpgrade;
 
@@ -49,23 +49,75 @@ public class CosmicPort : Institution, ISavable<CosmicPortData>
         }
     }
 
-    protected override void InitializeMethod()
+    #region Institution Overrides
+    public override void Upgrade()
     {
-        var cosmicPortData = PlayerDataManager.Instance.PlayerData.settlementData.cosmicPortData;
-
-        if (cosmicPortData == null)
-        {
-            Debug.LogWarning("PlayerData is null");
-            InitializeNewDocks();
-        }
-        else
-            SetSavableData(cosmicPortData);
-
-        UpdateVariables();
-        DebugVariables();
+        base.Upgrade();
 
         UpdateDocksAvailability();
     }
+
+    protected override void InitializeMethod()
+    {
+        base.InitializeMethod();
+
+        UpdateDocksAvailability();
+    }
+
+    protected override CosmicPortData GetInstitutionSaveData()
+    {
+        var playerData = PlayerDataManager.Instance.PlayerData;
+
+        var data = playerData == null ? null : playerData.settlementData.cosmicPortData;
+
+        return data;
+    }
+
+    protected override void SaveDataIsNull()
+    {
+        InitializeNewDocks();
+    }
+
+    public override CosmicPortData CreatSaveData()
+    {
+        if (AllDocks == null)
+            return null;
+
+        var docksData = new List<DockData>(AllDocks.Count);
+
+        AllDocks.ForEach(d => docksData.Add(new DockData(d)));
+
+        var saveData = new CosmicPortData(LevelModule.Level, docksData);
+
+        return saveData;
+    }
+
+    public override void SetSavableData(CosmicPortData data)
+    {
+        // Set Levels
+        LevelModule.SetLevel(data.institutionLevel);
+
+        // Set Docks
+        AllDocks = new List<Dock>(data.docksData.Count);
+        data.docksData.ForEach(d => AllDocks.Add(new Dock(d)));
+    }
+
+    protected override void UpdateVariables()
+    {
+        base.UpdateVariables();
+
+        availableDocks = LevelModule.Evaluate(availableDocksRange);
+        loadSpeed = LevelModule.Evaluate(loadSpeedRange);
+        unloadSpeed = LevelModule.Evaluate(unloadSpeedRange);
+    }
+
+    protected override void DebugVariables()
+    {
+        Debug.Log("New available docks number = " + availableDocks);
+        Debug.Log("New load speed = " + loadSpeed);
+        Debug.Log("New unload speed = " + unloadSpeed);
+    }
+    #endregion
 
     private void InitializeNewDocks()
     {
@@ -76,13 +128,6 @@ public class CosmicPort : Institution, ISavable<CosmicPortData>
             new Dock(new DockData("Dock 3")),
             new Dock(new DockData("Dock 4")),
         };
-    }
-
-    public override void Upgrade()
-    {
-        base.Upgrade();
-
-        UpdateDocksAvailability();
     }
 
     private void UpdateDocksAvailability()
@@ -111,22 +156,6 @@ public class CosmicPort : Institution, ISavable<CosmicPortData>
         dock.StartBuilding();
     }
 
-    protected override void UpdateVariables()
-    {
-        base.UpdateVariables();
-
-        availableDocks = LevelModule.Evaluate(availableDocksRange);
-        loadSpeed = LevelModule.Evaluate(loadSpeedRange);
-        unloadSpeed = LevelModule.Evaluate(unloadSpeedRange);
-    }
-
-    protected override void DebugVariables()
-    {
-        Debug.Log("New available docks number = " + availableDocks);
-        Debug.Log("New load speed = " + loadSpeed);
-        Debug.Log("New unload speed = " + unloadSpeed);
-    }
-
     public List<Dock> GetEmptyDocks()
     {
         List<Dock> emptyDocks = new List<Dock>();
@@ -138,30 +167,6 @@ public class CosmicPort : Institution, ISavable<CosmicPortData>
         }
 
         return emptyDocks;
-    }
-
-    public CosmicPortData GetSavableData()
-    {
-        if (AllDocks == null)
-            return null;
-
-        var docksData = new List<DockData>(AllDocks.Count);
-
-        AllDocks.ForEach(d => docksData.Add(new DockData(d)));
-
-        var saveData = new CosmicPortData(LevelModule.Level, docksData);
-
-        return saveData;
-    }
-
-    public void SetSavableData(CosmicPortData data)
-    {
-        // Set Levels
-        LevelModule.SetLevel(data.institutionLevel);
-        
-        // Set Docks
-        AllDocks = new List<Dock>(data.docksData.Count);
-        data.docksData.ForEach(d => AllDocks.Add(new Dock(d)));
     }
 }
 

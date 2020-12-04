@@ -1,14 +1,25 @@
 ﻿using UnityEngine;
 
-public class Production : Institution
+public class Production : Institution<ProductionData>
 {
     [SerializeField] private Vector2Int incremetalRateRange = default;
 
     private int incrementalRate;
-    protected override void InitializeMethod()
+
+    #region Institution Overrides
+    protected override ProductionData GetInstitutionSaveData()
     {
-        UpdateVariables();
-        DebugVariables();
+        throw new System.NotImplementedException();
+    }
+
+    public override ProductionData CreatSaveData()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void SetSavableData(ProductionData data)
+    {
+        throw new System.NotImplementedException();
     }
 
     protected override void UpdateVariables()
@@ -20,6 +31,15 @@ public class Production : Institution
 
     protected override void DebugVariables()
     {
-        Debug.Log("New production incremental rate = " + incrementalRate);
+    }
+    #endregion
+}
+
+[System.Serializable]
+public class ProductionData : InstitutionData
+{
+    public ProductionData(int institutionLevel)
+    {
+        this.institutionLevel = institutionLevel;
     }
 }

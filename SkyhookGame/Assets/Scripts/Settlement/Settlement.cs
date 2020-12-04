@@ -41,10 +41,10 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
         Debug.Log(experienceModule.Experience);
     }
 
-    public SettlementData GetSavableData()
+    public SettlementData CreatSaveData()
     {
-        var cosmicPortData = CosmicPort.GetSavableData();
-        var manufactoryData = Manufactory.GetSavableData();
+        var cosmicPortData = CosmicPort.CreatSaveData();
+        var manufactoryData = Manufactory.CreatSaveData();
         var settlementData = new SettlementData(cosmicPortData, manufactoryData);
         return settlementData;
     }
