@@ -63,7 +63,17 @@ public class Manufactory : Institution<ManufactoryData>
 
     public override ManufactoryData CreatSaveData()
     {
-        var saveData = new ManufactoryData(LevelModule.Level);
+        if (ShipsInStorage == null)
+            return null;
+
+        // Create ShipsInStorageData
+        var shipsData = new List<Ship>(ShipsInStorage);
+
+        var tasksData = new List<ManufactoryTaskData>(ManufactoryTasks.Count);
+        ManufactoryTasks.ForEach(t => tasksData.Add(new ManufactoryTaskData(t)));
+
+        // Create ManufactoryData
+        var saveData = new ManufactoryData(LevelModule.Level, shipsData, tasksData);
 
         return saveData;
     }
@@ -72,6 +82,13 @@ public class Manufactory : Institution<ManufactoryData>
     {
         // Set Levels
         LevelModule.SetLevel(data.institutionLevel);
+
+        // Set ManufactorTasks
+        ManufactoryTasks = new List<ManufactoryTask>(data.tasksData.Count);
+        data.tasksData.ForEach(d => ManufactoryTasks.Add(new ManufactoryTask(d)));
+
+        // Set ShipsInStorage
+        ShipsInStorage = new List<Ship>(data.shipsInStorageData);
     }
 
     protected override void UpdateVariables()
@@ -136,10 +153,13 @@ public class Manufactory : Institution<ManufactoryData>
 [Serializable]
 public class ManufactoryData : InstitutionData
 {
-    public List<DockData> docksData;
+    public List<Ship> shipsInStorageData;
+    public List<ManufactoryTaskData> tasksData;
 
-    public ManufactoryData(int institutionLevel)
+    public ManufactoryData(int institutionLevel, List<Ship> shipsInStorageData, List<ManufactoryTaskData> tasksData)
     {
         this.institutionLevel = institutionLevel;
+        this.shipsInStorageData = shipsInStorageData;
+        this.tasksData = tasksData;
     }
 }

@@ -83,10 +83,11 @@ public class CosmicPort : Institution<CosmicPortData>
         if (AllDocks == null)
             return null;
 
+        // Create DocksData
         var docksData = new List<DockData>(AllDocks.Count);
-
         AllDocks.ForEach(d => docksData.Add(new DockData(d)));
 
+        // Create CosmicPortData
         var saveData = new CosmicPortData(LevelModule.Level, docksData);
 
         return saveData;

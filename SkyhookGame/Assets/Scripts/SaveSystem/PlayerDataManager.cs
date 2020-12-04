@@ -9,8 +9,6 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     {
         SetInstance(this);
 
-        print("Setting instance");
-
         Application.quitting += Application_quitting;
 
         SceneLoader.Instance.AddWaiter(this);
