@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CosmicPort : Institution, ISavable<List<DockData>>
+public class CosmicPort : Institution, ISavable<CosmicPortData>
 {
     public Action onUpgrade;
 
@@ -59,7 +59,7 @@ public class CosmicPort : Institution, ISavable<List<DockData>>
             InitializeNewDocks();
         }
         else
-            SetSavableData(playerData.docksData);
+            SetSavableData(playerData.settlementData.cosmicPortData);
 
         UpdateVariables();
 
@@ -143,22 +143,35 @@ public class CosmicPort : Institution, ISavable<List<DockData>>
         return emptyDocks;
     }
 
-    public List<DockData> GetSavableData()
+    public CosmicPortData GetSavableData()
     {
         if (AllDocks == null)
             return null;
 
-        var saveData = new List<DockData>(AllDocks.Count);
+        var docksData = new List<DockData>(AllDocks.Count);
 
-        AllDocks.ForEach(d => saveData.Add(new DockData(d)));
+        AllDocks.ForEach(d => docksData.Add(new DockData(d)));
+
+        var saveData = new CosmicPortData(docksData);
 
         return saveData;
     }
 
-    public void SetSavableData(List<DockData> data)
+    public void SetSavableData(CosmicPortData data)
     {
-        AllDocks = new List<Dock>(data.Count);
+        AllDocks = new List<Dock>(data.docksData.Count);
 
-        data.ForEach(d => AllDocks.Add(new Dock(d)));
+        data.docksData.ForEach(d => AllDocks.Add(new Dock(d)));
+    }
+}
+
+[Serializable]
+public class CosmicPortData
+{
+    public List<DockData> docksData;
+
+    public CosmicPortData(List<DockData> docksData)
+    {
+        this.docksData = docksData;
     }
 }

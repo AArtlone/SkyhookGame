@@ -20,7 +20,9 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
     private void Application_quitting()
     {
-        var data = new PlayerData(Settlement.Instance.CosmicPort.GetSavableData());
+        //var dockData = Settlement.Instance.CosmicPort.GetSavableData();
+        var settlementData = Settlement.Instance.GetSavableData();
+        var data = new PlayerData(settlementData);
 
         SaveData(data);
     }
