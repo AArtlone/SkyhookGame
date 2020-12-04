@@ -7,19 +7,6 @@ public class Community : Institution
     public int TotalHumans { get; private set; }
     public int AvailableHumans { get; private set; }
 
-    public override void Upgrade()
-    {
-        base.Upgrade();
-
-        int previousTotalHumans = TotalHumans;
-
-        UpdateVariables();
-
-        AvailableHumans += TotalHumans - previousTotalHumans;
-
-        DebugVariables();
-    }
-
     protected override void InitializeMethod()
     {
         UpdateVariables();
@@ -31,7 +18,11 @@ public class Community : Institution
 
     protected override void UpdateVariables()
     {
+        base.UpdateVariables();
+
+        int previousTotalHumans = TotalHumans;
         TotalHumans = LevelModule.Evaluate(humansRange);
+        AvailableHumans += TotalHumans - previousTotalHumans;
     }
 
     protected override void DebugVariables()

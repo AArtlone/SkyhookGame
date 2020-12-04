@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Manufactory : Institution
+public class Manufactory : Institution, ISavable<ManufactoryData>
 {
     public Action onShipsInStorageChange;
     public Action onManufactoryTasksChange;
@@ -51,24 +51,28 @@ public class Manufactory : Institution
         });
     }
 
-    public override void Upgrade()
-    {
-        base.Upgrade();
-
-        UpdateVariables();
-
-        DebugVariables();
-    }
-
     protected override void InitializeMethod()
     {
-        UpdateVariables();
+        var manufactoryData = PlayerDataManager.Instance.PlayerData.settlementData.manufactoryData;
 
+        if (manufactoryData == null)
+        {
+            Debug.LogWarning("PlayerData is null");
+        }
+        else
+        {
+            SetSavableData(manufactoryData);
+            LevelModule.SetLevel(manufactoryData.institutionLevel);
+        }
+
+        UpdateVariables();
         DebugVariables();
     }
 
     protected override void UpdateVariables()
     {
+        base.UpdateVariables();
+
         storageCapacity = LevelModule.Evaluate(storageCapacityRange);
         tasksCapacity = LevelModule.Evaluate(tasksCapacityRange);
     }
@@ -120,5 +124,29 @@ public class Manufactory : Institution
     {
         // We need to add the ships that are already in storage to the ships that are buing built, sine they will take the space in storage when they are done building
         return ManufactoryTasks.Count + ShipsInStorage.Count < storageCapacity;
+    }
+
+    public ManufactoryData GetSavableData()
+    {
+        var saveData = new ManufactoryData(LevelModule.Level);
+
+        return saveData;
+    }
+
+    public void SetSavableData(ManufactoryData data)
+    {
+        // Set Levels
+        LevelModule.SetLevel(data.institutionLevel);
+    }
+}
+
+[Serializable]
+public class ManufactoryData : InstitutionData
+{
+    public List<DockData> docksData;
+
+    public ManufactoryData(int institutionLevel)
+    {
+        this.institutionLevel = institutionLevel;
     }
 }

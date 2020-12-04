@@ -51,18 +51,17 @@ public class CosmicPort : Institution, ISavable<CosmicPortData>
 
     protected override void InitializeMethod()
     {
-        var playerData = PlayerDataManager.Instance.PlayerData;
+        var cosmicPortData = PlayerDataManager.Instance.PlayerData.settlementData.cosmicPortData;
 
-        if (playerData == null)
+        if (cosmicPortData == null)
         {
             Debug.LogWarning("PlayerData is null");
             InitializeNewDocks();
         }
         else
-            SetSavableData(playerData.settlementData.cosmicPortData);
+            SetSavableData(cosmicPortData);
 
         UpdateVariables();
-
         DebugVariables();
 
         UpdateDocksAvailability();
@@ -82,10 +81,6 @@ public class CosmicPort : Institution, ISavable<CosmicPortData>
     public override void Upgrade()
     {
         base.Upgrade();
-
-        UpdateVariables();
-
-        //DebugVariables();
 
         UpdateDocksAvailability();
     }
@@ -118,6 +113,8 @@ public class CosmicPort : Institution, ISavable<CosmicPortData>
 
     protected override void UpdateVariables()
     {
+        base.UpdateVariables();
+
         availableDocks = LevelModule.Evaluate(availableDocksRange);
         loadSpeed = LevelModule.Evaluate(loadSpeedRange);
         unloadSpeed = LevelModule.Evaluate(unloadSpeedRange);
@@ -152,26 +149,30 @@ public class CosmicPort : Institution, ISavable<CosmicPortData>
 
         AllDocks.ForEach(d => docksData.Add(new DockData(d)));
 
-        var saveData = new CosmicPortData(docksData);
+        var saveData = new CosmicPortData(LevelModule.Level, docksData);
 
         return saveData;
     }
 
     public void SetSavableData(CosmicPortData data)
     {
+        // Set Levels
+        LevelModule.SetLevel(data.institutionLevel);
+        
+        // Set Docks
         AllDocks = new List<Dock>(data.docksData.Count);
-
         data.docksData.ForEach(d => AllDocks.Add(new Dock(d)));
     }
 }
 
 [Serializable]
-public class CosmicPortData
+public class CosmicPortData : InstitutionData
 {
     public List<DockData> docksData;
 
-    public CosmicPortData(List<DockData> docksData)
+    public CosmicPortData(int institutionLevel, List<DockData> docksData)
     {
+        this.institutionLevel = institutionLevel;
         this.docksData = docksData;
     }
 }

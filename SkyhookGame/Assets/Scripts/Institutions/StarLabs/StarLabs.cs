@@ -1,33 +1,21 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class StarLabs : Institution
 {
     [SerializeField] private Vector2Int tasksCapacityRange = default;
 
-    // private List<Study> availableStudies;
-    // private List<Study> studiesInProgress;
-
     private int tasksCapacity;
-
-    public override void Upgrade()
-    {
-        base.Upgrade();
-
-        UpdateVariables();
-
-        DebugVariables();
-    }
 
     protected override void InitializeMethod()
     {
         UpdateVariables();
-
         DebugVariables();
     }
 
     protected override void UpdateVariables()
     {
+        base.UpdateVariables();
+
         tasksCapacity = LevelModule.Evaluate(tasksCapacityRange);
     }
 

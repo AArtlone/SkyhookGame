@@ -44,7 +44,8 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
     public SettlementData GetSavableData()
     {
         var cosmicPortData = CosmicPort.GetSavableData();
-        var settlementData = new SettlementData(cosmicPortData);
+        var manufactoryData = Manufactory.GetSavableData();
+        var settlementData = new SettlementData(cosmicPortData, manufactoryData);
         return settlementData;
     }
 
@@ -58,9 +59,11 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
 public class SettlementData
 {
     public CosmicPortData cosmicPortData;
+    public ManufactoryData manufactoryData;
 
-    public SettlementData(CosmicPortData cosmicPortData)
+    public SettlementData(CosmicPortData cosmicPortData, ManufactoryData manufactoryData)
     {
         this.cosmicPortData = cosmicPortData;
+        this.manufactoryData = manufactoryData;
     }
 }

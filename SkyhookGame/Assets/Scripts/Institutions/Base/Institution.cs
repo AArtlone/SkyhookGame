@@ -14,13 +14,24 @@ public abstract class Institution : MonoBehaviour
     public virtual void Upgrade()
     {
         levelModule.IncreaseLevel();
-        spriteUpgradeModule.SetSprite(levelModule.Level);
+
+        UpdateVariables();
+        DebugVariables();
     }
 
     protected abstract void InitializeMethod();
     /// <summary>
     /// Updates instituion's variables based on the institution level
     /// </summary>
-    protected abstract void UpdateVariables();
+    protected virtual void UpdateVariables()
+    {
+        spriteUpgradeModule.SetSprite(levelModule.Level);
+    }
+
     protected abstract void DebugVariables();
+}
+
+public class InstitutionData
+{
+    public int institutionLevel;
 }
