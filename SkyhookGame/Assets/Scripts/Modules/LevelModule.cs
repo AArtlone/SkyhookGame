@@ -21,4 +21,9 @@ public class LevelModule
     {
         return animClass.Evaluate(Level, minLevel, maxLevel, range.x, range.y);
     }
+
+    public void SetLevel(int level)
+    {
+        Level = level;
+    }
 }

@@ -9,8 +9,6 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     {
         SetInstance(this);
 
-        print("Setting instance");
-
         Application.quitting += Application_quitting;
 
         SceneLoader.Instance.AddWaiter(this);
@@ -20,7 +18,8 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
     private void Application_quitting()
     {
-        var data = new PlayerData(Settlement.Instance.CosmicPort.GetSavableData());
+        var settlementData = Settlement.Instance.CreatSaveData();
+        var data = new PlayerData(settlementData);
 
         SaveData(data);
     }

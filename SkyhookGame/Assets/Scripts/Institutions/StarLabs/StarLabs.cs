@@ -1,38 +1,46 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class StarLabs : Institution
+public class StarLabs : Institution<StarLabsData>
 {
     [SerializeField] private Vector2Int tasksCapacityRange = default;
 
-    // private List<Study> availableStudies;
-    // private List<Study> studiesInProgress;
-
     private int tasksCapacity;
 
-    public override void Upgrade()
+    #region Institution Overrides
+    protected override StarLabsData GetInstitutionSaveData()
     {
-        base.Upgrade();
-
-        UpdateVariables();
-
-        DebugVariables();
+        throw new System.NotImplementedException();
     }
 
-    protected override void InitializeMethod()
+    public override StarLabsData CreatSaveData()
     {
-        UpdateVariables();
+        throw new System.NotImplementedException();
+    }
 
-        DebugVariables();
+    public override void SetSavableData(StarLabsData data)
+    {
+        throw new System.NotImplementedException();
     }
 
     protected override void UpdateVariables()
     {
+        base.UpdateVariables();
+
         tasksCapacity = LevelModule.Evaluate(tasksCapacityRange);
     }
 
     protected override void DebugVariables()
     {
         Debug.Log("New RD tasks capacity = " + tasksCapacity);
+    }
+    #endregion
+}
+
+[System.Serializable]
+public class StarLabsData : InstitutionData
+{
+    public StarLabsData(int institutionLevel)
+    {
+        this.institutionLevel = institutionLevel;
     }
 }

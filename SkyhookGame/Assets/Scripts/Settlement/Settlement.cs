@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Settlement : Singleton<Settlement>
+public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
 {
     [SerializeField] private ExperienceModule experienceModule = default;
 
@@ -39,5 +39,31 @@ public class Settlement : Singleton<Settlement>
         experienceModule.Increase(amount);
 
         Debug.Log(experienceModule.Experience);
+    }
+
+    public SettlementData CreatSaveData()
+    {
+        var cosmicPortData = CosmicPort.CreatSaveData();
+        var manufactoryData = Manufactory.CreatSaveData();
+        var settlementData = new SettlementData(cosmicPortData, manufactoryData);
+        return settlementData;
+    }
+
+    public void SetSavableData(SettlementData data)
+    {
+        CosmicPort.SetSavableData(data.cosmicPortData);
+    }
+}
+
+[System.Serializable]
+public class SettlementData
+{
+    public CosmicPortData cosmicPortData;
+    public ManufactoryData manufactoryData;
+
+    public SettlementData(CosmicPortData cosmicPortData, ManufactoryData manufactoryData)
+    {
+        this.cosmicPortData = cosmicPortData;
+        this.manufactoryData = manufactoryData;
     }
 }
