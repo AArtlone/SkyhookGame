@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Dock
@@ -71,6 +72,7 @@ public class DockData
     public string dockName;
     public DockState dockState;
     public Ship ship;
+    public List<Resource> resourcesInShip;
     public float buildTimeLeft;
 
     public DockData(string dockName)
@@ -85,6 +87,9 @@ public class DockData
         dockName = dock.dockName;
         dockState = dock.DockState;
         ship = dock.Ship;
+        
+        if (dock.Ship != null && dock.Ship.resourcesModule != null)
+            resourcesInShip = dock.Ship.resourcesModule.resources;
         
         if (dock.TripClock != null)
             buildTimeLeft = dock.TripClock.TimeLeft();

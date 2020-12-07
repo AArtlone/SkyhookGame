@@ -16,8 +16,6 @@ public class SendShipViewController : ViewController
 
     private List<ResourceAdjuster> resourceAdjusters;
 
-    private ResourcesModule resourcesModule;
-
     private Dock dock;
 
     public override void ViewWillBeFocused()
@@ -40,7 +38,7 @@ public class SendShipViewController : ViewController
     {
         this.dock = dock;
 
-        resourcesModule = new ResourcesModule();
+        dock.Ship.resourcesModule = new ResourcesModule();
 
         DestroyResourceAdjusters();
 
@@ -49,8 +47,8 @@ public class SendShipViewController : ViewController
 
     private void CreateResourceAdjusters()
     {
-        resourceAdjusters = new List<ResourceAdjuster>(resourcesModule.resources.Count);
-        resourcesModule.resources.ForEach(r => CreateResourceAdjuster(r));
+        resourceAdjusters = new List<ResourceAdjuster>(dock.Ship.resourcesModule.resources.Count);
+        dock.Ship.resourcesModule.resources.ForEach(r => CreateResourceAdjuster(r));
 
         if (dock.Ship.shipType.Equals(ShipsDSID.Craft))
         {
