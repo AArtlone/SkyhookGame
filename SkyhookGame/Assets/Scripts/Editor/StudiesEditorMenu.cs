@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public class StudiesGeneratorWindow : EditorWindow
+public class StudiesEditorMenu : EditorWindow
 {
 	private const string ModelPath = "Studies/StudiesModel.asset";
 
@@ -18,7 +18,7 @@ public class StudiesGeneratorWindow : EditorWindow
 			return;
 		}
 
-		StudiesSO model = CreateInstance<StudiesSO>();
+		StudiesModel model = CreateInstance<StudiesModel>();
 
 		AssetDatabase.CreateAsset(model, path);
 		AssetDatabase.SaveAssets();
@@ -31,11 +31,14 @@ public class StudiesGeneratorWindow : EditorWindow
 	{
 		string path = ModelPath.Split(new char[] { '.' })[0];
 
-		StudiesSO model = Resources.Load<StudiesSO>(path);
+		StudiesModel model = Resources.Load<StudiesModel>(path);
 
 		if (model == null)
 			return;
 
 		model.Initialize();
+
+		EditorUtility.SetDirty(model);
+		AssetDatabase.SaveAssets();
 	}
 }

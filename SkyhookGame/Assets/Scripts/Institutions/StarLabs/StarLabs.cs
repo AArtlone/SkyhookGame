@@ -1,25 +1,52 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class StarLabs : Institution<StarLabsData>
 {
     [SerializeField] private Vector2Int tasksCapacityRange = default;
 
+    private List<string> unlockedStudies = new List<string>();
+
     private int tasksCapacity;
+
+    private IEnumerator Start()
+    {
+        yield return SceneLoader.Instance.WaitForLoading();
+
+        InitializeMethod();
+    }
+
+    public void UnlockStudy(string type)
+    {
+        if (!unlockedStudies.Contains(type))
+            unlockedStudies.Add(type);
+    }
+
+    public bool CheckIfStudyIsUnlocked(string type)
+    {
+        return unlockedStudies.Contains(type);
+    }
 
     #region Institution Overrides
     protected override StarLabsData GetInstitutionSaveData()
     {
-        throw new System.NotImplementedException();
+        var playerData = PlayerDataManager.Instance.PlayerData;
+
+        var data = playerData == null ? null : playerData.settlementData.starLabsData;
+
+        return data;
     }
 
     public override StarLabsData CreatSaveData()
     {
-        throw new System.NotImplementedException();
+        var saveData = new StarLabsData(LevelModule.Level, unlockedStudies);
+        return saveData;
     }
 
     public override void SetSavableData(StarLabsData data)
     {
-        throw new System.NotImplementedException();
+        unlockedStudies = data.unlockedStudies;
     }
 
     protected override void UpdateVariables()
@@ -39,8 +66,11 @@ public class StarLabs : Institution<StarLabsData>
 [System.Serializable]
 public class StarLabsData : InstitutionData
 {
-    public StarLabsData(int institutionLevel)
+    public List<string> unlockedStudies;
+
+    public StarLabsData(int institutionLevel, List<string> unlockedStudies)
     {
         this.institutionLevel = institutionLevel;
+        this.unlockedStudies = unlockedStudies;
     }
 }

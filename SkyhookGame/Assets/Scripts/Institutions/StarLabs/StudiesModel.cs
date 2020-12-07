@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-public class StudiesSO : ScriptableObject
+public class StudiesModel : ScriptableObject
 {
 	public List<Study> allStudies;
 
@@ -144,4 +144,19 @@ public class StudiesSO : ScriptableObject
 			}
 		}
 	}
+
+	public List<Study> GetStudiesByType(StudyType studyType)
+    {
+		List<Study> result = new List<Study>();
+
+		foreach (var study in allStudies)
+        {
+			if (studyType != study.studyType)
+				continue;
+
+			result.Add(study);
+        }
+
+		return result;
+    }
 }

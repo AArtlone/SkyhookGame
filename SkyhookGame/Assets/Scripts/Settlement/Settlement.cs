@@ -46,10 +46,10 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
     {
         var cosmicPortData = CosmicPort.CreatSaveData();
         var manufactoryData = Manufactory.CreatSaveData();
+        var starLabsData = StarLabs.CreatSaveData();
         var resources = ResourcesModule.resources;
-        foreach (var v in resources)
-            print(v.Amount + " | " + v.ResourceType);
-        var settlementData = new SettlementData(cosmicPortData, manufactoryData, resources);
+        var settlementData = new SettlementData(cosmicPortData, manufactoryData, starLabsData, resources);
+
         return settlementData;
     }
 
@@ -64,12 +64,14 @@ public class SettlementData
 {
     public CosmicPortData cosmicPortData;
     public ManufactoryData manufactoryData;
+    public StarLabsData starLabsData;
     public List<Resource> resources;
 
-    public SettlementData(CosmicPortData cosmicPortData, ManufactoryData manufactoryData, List<Resource> resources)
+    public SettlementData(CosmicPortData cosmicPortData, ManufactoryData manufactoryData, StarLabsData starLabsData, List<Resource> resources)
     {
         this.cosmicPortData = cosmicPortData;
         this.manufactoryData = manufactoryData;
+        this.starLabsData = starLabsData;
         this.resources = resources;
     }
 }
