@@ -6,6 +6,11 @@ public class StarLabs : Institution<StarLabsData>
 
     private int tasksCapacity;
 
+    public void UnlockStudy(Study study)
+    {
+
+    }
+
     #region Institution Overrides
     protected override StarLabsData GetInstitutionSaveData()
     {

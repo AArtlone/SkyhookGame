@@ -47,9 +47,8 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
         var cosmicPortData = CosmicPort.CreatSaveData();
         var manufactoryData = Manufactory.CreatSaveData();
         var resources = ResourcesModule.resources;
-        foreach (var v in resources)
-            print(v.Amount + " | " + v.ResourceType);
         var settlementData = new SettlementData(cosmicPortData, manufactoryData, resources);
+
         return settlementData;
     }
 
