@@ -1,16 +1,22 @@
-﻿public class Resource
-{
-    public ResourcesDSID ResourceType { get; private set; }
+﻿using System;
+using UnityEngine;
 
-    public int Amount { get; private set; }
+[Serializable]
+public class Resource
+{
+    [SerializeField] private ResourcesDSID resourceType;
+    public ResourcesDSID ResourceType { get { return resourceType; } }
+
+    [SerializeField] private int amount;
+    public int Amount { get { return amount; } }
 
     public Resource(ResourcesDSID resourceID)
     {
-        ResourceType = resourceID;
+        resourceType = resourceID;
     }
 
     public void IncreaseAmount(int valueToAdd)
     {
-        Amount += valueToAdd;
+        amount += valueToAdd;
     }
 }

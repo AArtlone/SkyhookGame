@@ -1,5 +1,6 @@
 ﻿using MyUtilities;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
@@ -45,7 +46,10 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
     {
         var cosmicPortData = CosmicPort.CreatSaveData();
         var manufactoryData = Manufactory.CreatSaveData();
-        var settlementData = new SettlementData(cosmicPortData, manufactoryData);
+        var resources = ResourcesModule.resources;
+        foreach (var v in resources)
+            print(v.Amount + " | " + v.ResourceType);
+        var settlementData = new SettlementData(cosmicPortData, manufactoryData, resources);
         return settlementData;
     }
 
@@ -60,10 +64,12 @@ public class SettlementData
 {
     public CosmicPortData cosmicPortData;
     public ManufactoryData manufactoryData;
+    public List<Resource> resources;
 
-    public SettlementData(CosmicPortData cosmicPortData, ManufactoryData manufactoryData)
+    public SettlementData(CosmicPortData cosmicPortData, ManufactoryData manufactoryData, List<Resource> resources)
     {
         this.cosmicPortData = cosmicPortData;
         this.manufactoryData = manufactoryData;
+        this.resources = resources;
     }
 }
