@@ -9,7 +9,7 @@ public class StarLabsViewController : ViewController
 
     private void TabGroup_OnTabSelection(StudyType type)
     {
-        var studiesToShow = StudyTreesManager.Instance.GetStudiesByType(type);
+        var studiesToShow = DSModelManager.Instance.StudiesSO.GetStudiesByType(type);
 
         SetStudiesDataSet(studiesToShow);
     }

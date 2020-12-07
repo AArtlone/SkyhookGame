@@ -43,7 +43,7 @@ MonoBehaviour:
     description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
       dui. Donec rutrum congue leo eget malesuada.
     locked: 1
-  - studyType: 0
+  - studyType: 4
     title: 'Capacity '
     description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
       dui. Donec rutrum congue leo eget malesuada.
