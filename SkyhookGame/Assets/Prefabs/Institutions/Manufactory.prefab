@@ -132,7 +132,16 @@ MonoBehaviour:
   levelModule:
     animClass: {fileID: 11400000, guid: a3088de95fbe9524d852293908259496, type: 2}
     minLevel: 1
-    maxLevel: 5
+    maxLevel: 6
+  spriteUpgradeModule:
+    allSprites:
+    - {fileID: 21300000, guid: 1122252a46ec0df46876cf1562078b0c, type: 3}
+    - {fileID: 21300000, guid: 8f16b6040021b844d938f3463c298913, type: 3}
+    - {fileID: 21300000, guid: dee354338d7cb40478e570e7650e32fd, type: 3}
+    - {fileID: 21300000, guid: 54d3771de40654b48b79fe3d8dca8215, type: 3}
+    - {fileID: 21300000, guid: 7d2853bfd966f7840ad99dc65bc4593c, type: 3}
+    - {fileID: 21300000, guid: ec173265cc41db2409cb806100f3d0d7, type: 3}
+    spriteRenderer: {fileID: 6902073983854733537}
   tasksCapacityRange: {x: 1, y: 5}
   storageCapacityRange: {x: 1, y: 5}
   buildDuration: 3

@@ -4,6 +4,8 @@ using UnityEngine;
 [Serializable]
 public class Resource
 {
+    public Action<int> onAmountChanged;
+
     [SerializeField] private ResourcesDSID resourceType;
     public ResourcesDSID ResourceType { get { return resourceType; } }
 
@@ -18,5 +20,7 @@ public class Resource
     public void IncreaseAmount(int valueToAdd)
     {
         amount += valueToAdd;
+
+        onAmountChanged?.Invoke(amount);
     }
 }

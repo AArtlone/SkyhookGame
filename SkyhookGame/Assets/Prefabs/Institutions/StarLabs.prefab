@@ -213,7 +213,16 @@ MonoBehaviour:
   levelModule:
     animClass: {fileID: 11400000, guid: a3088de95fbe9524d852293908259496, type: 2}
     minLevel: 1
-    maxLevel: 5
+    maxLevel: 6
+  spriteUpgradeModule:
+    allSprites:
+    - {fileID: 21300000, guid: 345d5f908a8cbde44aa5d454146711b0, type: 3}
+    - {fileID: 21300000, guid: cf61c18ecd6511b4b8883bcf9c0e308e, type: 3}
+    - {fileID: 21300000, guid: 6283c786536d6fb45a5ecf786118ff2c, type: 3}
+    - {fileID: 21300000, guid: ea1304c6c27317340abd30ecb8abb358, type: 3}
+    - {fileID: 21300000, guid: 1d8f038f91e422449ba2ccf4c552ab90, type: 3}
+    - {fileID: 21300000, guid: 0ade91e3d5320ec499f6e4aa9aab6a95, type: 3}
+    spriteRenderer: {fileID: 8842969355296428207}
   tasksCapacityRange: {x: 1, y: 5}
 --- !u!114 &4243361425714438336
 MonoBehaviour:
@@ -240,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293ccab4acd432c4984d2ee79adb1cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initial_view: {fileID: 0}
+  preview: {fileID: 0}
 --- !u!61 &7256397473424232493
 BoxCollider2D:
   m_ObjectHideFlags: 0

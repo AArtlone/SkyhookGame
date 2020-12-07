@@ -14,6 +14,9 @@ public class LevelModule
 
     public void IncreaseLevel()
     {
+        if (Level >= maxLevel)
+            return;
+
         Level++;
     }
 

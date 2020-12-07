@@ -36,6 +36,8 @@ public class ResourceAdjuster : MonoBehaviour
         Amount = Mathf.Clamp(Amount, 0, resourceAmount);
         amountText.text = Amount.ToString();
 
+        Settlement.Instance.ResourcesModule.IncreaseResource(ResourceType, +increaser);
+
         onResourceChange?.Invoke();
     }
 
@@ -46,6 +48,8 @@ public class ResourceAdjuster : MonoBehaviour
         Amount += increaser;
         Amount = Mathf.Clamp(Amount, 0, resourceAmount);
         amountText.text = Amount.ToString();
+
+        Settlement.Instance.ResourcesModule.IncreaseResource(ResourceType, -increaser);
 
         onResourceChange?.Invoke();
     }

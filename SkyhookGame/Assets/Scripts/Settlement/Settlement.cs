@@ -24,14 +24,30 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
     protected override void Awake()
     {
         SetInstance(this);
+
+        SceneLoader.Instance.AddSaveDataWaiter(this);
     }
 
     private IEnumerator Start()
     {
         yield return SceneLoader.Instance.WaitForLoading();
 
-        ResourcesModule = new ResourcesModule();
+        var playerData = PlayerDataManager.Instance.PlayerData;
 
+        if (playerData == null)
+        {
+            Debug.LogWarning($"Settlement data is null");
+            SaveDataIsNull();
+        }
+        else
+            SetSavableData(playerData.settlementData);
+
+        SceneLoader.Instance.RemoveSaveDataWaiter(this);
+    }
+
+    private void SaveDataIsNull()
+    {
+        ResourcesModule = new ResourcesModule();
         ResourcesModule.resources.ForEach(r => r.IncreaseAmount(50));
     }
 
@@ -55,7 +71,7 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
 
     public void SetSavableData(SettlementData data)
     {
-        CosmicPort.SetSavableData(data.cosmicPortData);
+        ResourcesModule = new ResourcesModule(data.resources);
     }
 }
 

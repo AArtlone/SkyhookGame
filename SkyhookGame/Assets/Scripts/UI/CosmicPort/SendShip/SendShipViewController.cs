@@ -14,7 +14,7 @@ public class SendShipViewController : ViewController
 
     [SerializeField] private ResourceAdjuster resourceAdjusterPrefab = default;
 
-    private List<ResourceAdjuster> resourceAdjusters = default;
+    private List<ResourceAdjuster> resourceAdjusters;
 
     private ResourcesModule resourcesModule;
 
@@ -42,8 +42,14 @@ public class SendShipViewController : ViewController
 
         resourcesModule = new ResourcesModule();
 
-        resourceAdjusters = new List<ResourceAdjuster>(resourcesModule.resources.Count);
+        DestroyResourceAdjusters();
 
+        CreateResourceAdjusters();
+    }
+
+    private void CreateResourceAdjusters()
+    {
+        resourceAdjusters = new List<ResourceAdjuster>(resourcesModule.resources.Count);
         resourcesModule.resources.ForEach(r => CreateResourceAdjuster(r));
 
         if (dock.Ship.shipType.Equals(ShipsDSID.Craft))
@@ -67,6 +73,16 @@ public class SendShipViewController : ViewController
         resourceAdjuster.onResourceChange += ResourceAdjuster_OnResourceChange;
 
         resourceAdjusters.Add(resourceAdjuster);
+    }
+
+    private void DestroyResourceAdjusters()
+    {
+        if (resourceAdjusters == null)
+            return;
+
+        resourceAdjusters.ForEach(r => Destroy(r.gameObject));
+        
+        resourceAdjusters = null;
     }
 
     private int CalculateTotalMass()

@@ -211,7 +211,16 @@ MonoBehaviour:
   levelModule:
     animClass: {fileID: 11400000, guid: a3088de95fbe9524d852293908259496, type: 2}
     minLevel: 1
-    maxLevel: 10
+    maxLevel: 6
+  spriteUpgradeModule:
+    allSprites:
+    - {fileID: 21300000, guid: e2085ecc6be1d604db573113c9ebdc8c, type: 3}
+    - {fileID: 21300000, guid: d7b8454cc3792d047b746e85dd11ff57, type: 3}
+    - {fileID: 21300000, guid: c872a123fc5a8404fad3e8e1d8aead78, type: 3}
+    - {fileID: 21300000, guid: d621c66b0a41b514288b4cc7d395c669, type: 3}
+    - {fileID: 21300000, guid: f2edd170e33997c4aaf2897f9df170e3, type: 3}
+    - {fileID: 21300000, guid: 0766f5c6c6d0a174a98fe2a1f7f83502, type: 3}
+    spriteRenderer: {fileID: 8506242541303787785}
   humansRange: {x: 2, y: 300}
 --- !u!114 &1462534471730292021
 MonoBehaviour:

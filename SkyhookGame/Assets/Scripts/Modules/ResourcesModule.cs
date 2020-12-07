@@ -11,9 +11,13 @@ public class ResourcesModule
         foreach (var resourceID in neededResources)
         {
             var resource = new Resource(resourceID);
-
             resources.Add(resource);
         }
+    }
+
+    public ResourcesModule(List<Resource> resources)
+    {
+        this.resources = new List<Resource>(resources);
     }
 
     public ResourcesModule()

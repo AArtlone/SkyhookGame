@@ -495,57 +495,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 62
       objectReference: {fileID: 0}
-    - target: {fileID: 4696686078300364916, guid: 79b01f2daace7f54db5fdceb7fa00a06,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4696686078300364916, guid: 79b01f2daace7f54db5fdceb7fa00a06,
-        type: 3}
-      propertyPath: levelModule.maxLevel
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4696686078300364916, guid: 79b01f2daace7f54db5fdceb7fa00a06,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 4c5d80e2779289747ade36e0f7f8081e,
-        type: 3}
-    - target: {fileID: 4696686078300364916, guid: 79b01f2daace7f54db5fdceb7fa00a06,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 98a0f821770e4a14489c404fd36d8e38,
-        type: 3}
-    - target: {fileID: 4696686078300364916, guid: 79b01f2daace7f54db5fdceb7fa00a06,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: ce86b2cf4496398479a491e81db8b5c9,
-        type: 3}
-    - target: {fileID: 4696686078300364916, guid: 79b01f2daace7f54db5fdceb7fa00a06,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300000, guid: fa53e38ebdf02894282e842b3b540f19,
-        type: 3}
-    - target: {fileID: 4696686078300364916, guid: 79b01f2daace7f54db5fdceb7fa00a06,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300000, guid: 8ed22463005170d49aa4778c6142f442,
-        type: 3}
-    - target: {fileID: 4696686078300364916, guid: 79b01f2daace7f54db5fdceb7fa00a06,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[5]
-      value: 
-      objectReference: {fileID: 21300000, guid: 59adfc989f2585f4bb2d24f4c7973069,
-        type: 3}
-    - target: {fileID: 4696686078300364916, guid: 79b01f2daace7f54db5fdceb7fa00a06,
-        type: 3}
-      propertyPath: spriteUpgradeModule.spriteRenderer
-      value: 
-      objectReference: {fileID: 8508353567749694206}
     - target: {fileID: 4696686078300364917, guid: 79b01f2daace7f54db5fdceb7fa00a06,
         type: 3}
       propertyPath: m_Name
@@ -571,12 +520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653e3331826214343a85a5dea5b2d472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!212 &8508353567749694206 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 9092554299197438798, guid: 79b01f2daace7f54db5fdceb7fa00a06,
-    type: 3}
-  m_PrefabInstance: {fileID: 593493872885684656}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1300781402504473872
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -714,75 +657,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 679562506693431114, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 679562506693431114, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
-        type: 3}
-      propertyPath: levelModule.maxLevel
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 679562506693431114, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 7b80e3a91e4d96f47bd5205fab63ace6,
-        type: 3}
-    - target: {fileID: 679562506693431114, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 6516762fc01310645bda3d734185aec3,
-        type: 3}
-    - target: {fileID: 679562506693431114, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: b36cf39fee9314248b015b5080cb68ff,
-        type: 3}
-    - target: {fileID: 679562506693431114, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300000, guid: 9c33fa9a34eda264ba0b8f76b5387cec,
-        type: 3}
-    - target: {fileID: 679562506693431114, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300000, guid: 8b5a0c35957e50b42af3681a7debe6b9,
-        type: 3}
-    - target: {fileID: 679562506693431114, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[5]
-      value: 
-      objectReference: {fileID: 21300000, guid: 5c22b6171e4ffc14486b71f78fb5c2fa,
-        type: 3}
-    - target: {fileID: 679562506693431114, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
-        type: 3}
-      propertyPath: spriteUpgradeModule.spriteRenderer
-      value: 
-      objectReference: {fileID: 6024701469375291384}
     - target: {fileID: 679562506693431115, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
         type: 3}
       propertyPath: m_Name
       value: CosmicPort
       objectReference: {fileID: 0}
-    - target: {fileID: 3936704384651420045, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebd7efa49ba7a8e448ce6066860e8e0e, type: 3}
---- !u!4 &2226872234731064668 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 679562506693431113, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1695950508125159957}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2226872234731064671 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 679562506693431114, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
@@ -795,9 +676,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66bec63f5feba7e48a3d7a2fc7c89625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!212 &6024701469375291384 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 4905880216625405421, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
+--- !u!4 &2226872234731064668 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 679562506693431113, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
     type: 3}
   m_PrefabInstance: {fileID: 1695950508125159957}
   m_PrefabAsset: {fileID: 0}
@@ -1038,57 +919,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Community
       objectReference: {fileID: 0}
-    - target: {fileID: 7770400542770856743, guid: b67ae45223b23fa40ab12184c3dc19c4,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7770400542770856743, guid: b67ae45223b23fa40ab12184c3dc19c4,
-        type: 3}
-      propertyPath: levelModule.maxLevel
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7770400542770856743, guid: b67ae45223b23fa40ab12184c3dc19c4,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: e2085ecc6be1d604db573113c9ebdc8c,
-        type: 3}
-    - target: {fileID: 7770400542770856743, guid: b67ae45223b23fa40ab12184c3dc19c4,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: d7b8454cc3792d047b746e85dd11ff57,
-        type: 3}
-    - target: {fileID: 7770400542770856743, guid: b67ae45223b23fa40ab12184c3dc19c4,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: c872a123fc5a8404fad3e8e1d8aead78,
-        type: 3}
-    - target: {fileID: 7770400542770856743, guid: b67ae45223b23fa40ab12184c3dc19c4,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300000, guid: d621c66b0a41b514288b4cc7d395c669,
-        type: 3}
-    - target: {fileID: 7770400542770856743, guid: b67ae45223b23fa40ab12184c3dc19c4,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300000, guid: f2edd170e33997c4aaf2897f9df170e3,
-        type: 3}
-    - target: {fileID: 7770400542770856743, guid: b67ae45223b23fa40ab12184c3dc19c4,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[5]
-      value: 
-      objectReference: {fileID: 21300000, guid: 0766f5c6c6d0a174a98fe2a1f7f83502,
-        type: 3}
-    - target: {fileID: 7770400542770856743, guid: b67ae45223b23fa40ab12184c3dc19c4,
-        type: 3}
-      propertyPath: spriteUpgradeModule.spriteRenderer
-      value: 
-      objectReference: {fileID: 1405919917953033357}
     - target: {fileID: 7770400542770856760, guid: b67ae45223b23fa40ab12184c3dc19c4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1164,12 +994,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469d9a62a451fe74d917ce14efe88a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!212 &1405919917953033357 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 8506242541303787785, guid: b67ae45223b23fa40ab12184c3dc19c4,
-    type: 3}
-  m_PrefabInstance: {fileID: 7318043947602204036}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7717784542078329315
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1312,70 +1136,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: StarLabs
       objectReference: {fileID: 0}
-    - target: {fileID: 5987987995036042487, guid: 100671c594aeb1a4797588471858fec3,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5987987995036042487, guid: 100671c594aeb1a4797588471858fec3,
-        type: 3}
-      propertyPath: levelModule.maxLevel
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5987987995036042487, guid: 100671c594aeb1a4797588471858fec3,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 345d5f908a8cbde44aa5d454146711b0,
-        type: 3}
-    - target: {fileID: 5987987995036042487, guid: 100671c594aeb1a4797588471858fec3,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: cf61c18ecd6511b4b8883bcf9c0e308e,
-        type: 3}
-    - target: {fileID: 5987987995036042487, guid: 100671c594aeb1a4797588471858fec3,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: 6283c786536d6fb45a5ecf786118ff2c,
-        type: 3}
-    - target: {fileID: 5987987995036042487, guid: 100671c594aeb1a4797588471858fec3,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300000, guid: ea1304c6c27317340abd30ecb8abb358,
-        type: 3}
-    - target: {fileID: 5987987995036042487, guid: 100671c594aeb1a4797588471858fec3,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300000, guid: 1d8f038f91e422449ba2ccf4c552ab90,
-        type: 3}
-    - target: {fileID: 5987987995036042487, guid: 100671c594aeb1a4797588471858fec3,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[5]
-      value: 
-      objectReference: {fileID: 21300000, guid: 0ade91e3d5320ec499f6e4aa9aab6a95,
-        type: 3}
-    - target: {fileID: 5987987995036042487, guid: 100671c594aeb1a4797588471858fec3,
-        type: 3}
-      propertyPath: spriteUpgradeModule.spriteRenderer
-      value: 
-      objectReference: {fileID: 969681295577185719}
-    - target: {fileID: 7256397473424232493, guid: 100671c594aeb1a4797588471858fec3,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 100671c594aeb1a4797588471858fec3, type: 3}
---- !u!212 &969681295577185719 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 8842969355296428207, guid: 100671c594aeb1a4797588471858fec3,
-    type: 3}
-  m_PrefabInstance: {fileID: 8632707548499946776}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2653766549927717359 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5987987995036042487, guid: 100671c594aeb1a4797588471858fec3,
@@ -1401,11 +1163,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5582465063272377707}
     m_Modifications:
-    - target: {fileID: 1427854157163564694, guid: 730a011d2fad7a44c81db6159d5e1d43,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1544950222593227378, guid: 730a011d2fad7a44c81db6159d5e1d43,
         type: 3}
       propertyPath: m_Name
@@ -1466,65 +1223,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -33
       objectReference: {fileID: 0}
-    - target: {fileID: 1544950222593227389, guid: 730a011d2fad7a44c81db6159d5e1d43,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1544950222593227389, guid: 730a011d2fad7a44c81db6159d5e1d43,
-        type: 3}
-      propertyPath: levelModule.maxLevel
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1544950222593227389, guid: 730a011d2fad7a44c81db6159d5e1d43,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 1122252a46ec0df46876cf1562078b0c,
-        type: 3}
-    - target: {fileID: 1544950222593227389, guid: 730a011d2fad7a44c81db6159d5e1d43,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 8f16b6040021b844d938f3463c298913,
-        type: 3}
-    - target: {fileID: 1544950222593227389, guid: 730a011d2fad7a44c81db6159d5e1d43,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: dee354338d7cb40478e570e7650e32fd,
-        type: 3}
-    - target: {fileID: 1544950222593227389, guid: 730a011d2fad7a44c81db6159d5e1d43,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300000, guid: 54d3771de40654b48b79fe3d8dca8215,
-        type: 3}
-    - target: {fileID: 1544950222593227389, guid: 730a011d2fad7a44c81db6159d5e1d43,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300000, guid: 0f2371a71f131b34783489b512a8cb25,
-        type: 3}
-    - target: {fileID: 1544950222593227389, guid: 730a011d2fad7a44c81db6159d5e1d43,
-        type: 3}
-      propertyPath: spriteUpgradeModule.allSprites.Array.data[5]
-      value: 
-      objectReference: {fileID: 21300000, guid: fd69dca1ec5193845a41deed83e69d6a,
-        type: 3}
-    - target: {fileID: 1544950222593227389, guid: 730a011d2fad7a44c81db6159d5e1d43,
-        type: 3}
-      propertyPath: spriteUpgradeModule.spriteRenderer
-      value: 
-      objectReference: {fileID: 2627073903538442900}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 730a011d2fad7a44c81db6159d5e1d43, type: 3}
---- !u!4 &7984018444681969673 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1544950222593227388, guid: 730a011d2fad7a44c81db6159d5e1d43,
-    type: 3}
-  m_PrefabInstance: {fileID: 8916048039290600053}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7984018444681969672 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1544950222593227389, guid: 730a011d2fad7a44c81db6159d5e1d43,
@@ -1537,9 +1237,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb9c8527680405244a0c2332e1f6c6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!212 &2627073903538442900 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 6902073983854733537, guid: 730a011d2fad7a44c81db6159d5e1d43,
+--- !u!4 &7984018444681969673 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1544950222593227388, guid: 730a011d2fad7a44c81db6159d5e1d43,
     type: 3}
   m_PrefabInstance: {fileID: 8916048039290600053}
   m_PrefabAsset: {fileID: 0}
