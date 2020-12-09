@@ -50,7 +50,7 @@ public class ResourcesModule
         foreach (var resource in resources)
         {
             if (resource.ResourceType.Equals(resourceType))
-                resource.IncreaseAmount(amountToAdd);
+                resource.ChangeAmount(amountToAdd);
         }
     }
 }

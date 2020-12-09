@@ -17,9 +17,16 @@ public class Resource
         resourceType = resourceID;
     }
 
-    public void IncreaseAmount(int valueToAdd)
+    public void ChangeAmount(int valueToAdd)
     {
         amount += valueToAdd;
+
+        onAmountChanged?.Invoke(amount);
+    }
+
+    public void SetAmount(int value)
+    {
+        amount = value;
 
         onAmountChanged?.Invoke(amount);
     }

@@ -14,6 +14,10 @@ public class CosmicPort : Institution<CosmicPortData>
 
     [SerializeField] private float dockBuildTime = default;
 
+    [Space(5f)]
+    [SerializeField] private ShipPrefab shipPrefab = default;
+    [SerializeField] private Transform shipToSendContainer = default;
+
     public float DockBuildTime { get { return dockBuildTime; } }
 
     public List<Dock> AllDocks { get; private set; }
@@ -155,6 +159,21 @@ public class CosmicPort : Institution<CosmicPortData>
     public void StartBuildingDock(Dock dock)
     {
         dock.StartBuilding();
+    }
+
+    public void SendShip(Dock dock, string destination)
+    {
+        ShipPrefab ship = Instantiate(shipPrefab, shipToSendContainer);
+        ship.Launch(dock.Ship.shipType);
+
+        TripsManager.Instance.StartNewTrip(destination, GetTimeToDestination(destination), dock.Ship);
+
+        dock.RemoveShip();
+    }
+
+    private int GetTimeToDestination(string destination)
+    {
+        return 100;
     }
 
     public List<Dock> GetEmptyDocks()
