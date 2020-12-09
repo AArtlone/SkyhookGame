@@ -24,6 +24,9 @@ public class Dock
         dockState = data.dockState;
         Ship = data.ship;
 
+        if (data.resourcesInShip != null)
+            Ship.resourcesModule = new ResourcesModule(data.resourcesInShip);
+
         var watchFactory = new WatchFactory();
         travelFactory = watchFactory.CreateTravelFactory();
         

@@ -18,14 +18,18 @@ public class ResourceAdjuster : MonoBehaviour
 
     private const int increaser = 10;
 
-    public void SetUpAdjuster(ResourcesDSID type)
+    private Resource resource;
+
+    public void SetUpAdjuster(Resource resource)
     {
-        var icon = Resources.Load<Sprite>($"UI/Icons/Resources/{type}");
+        this.resource = resource;
+
+        var icon = Resources.Load<Sprite>($"UI/Icons/Resources/{resource.ResourceType}");
         this.icon.sprite = icon;
 
-        ResourceType = type;
+        ResourceType = resource.ResourceType;
 
-        Amount = 0;
+        Amount = resource.Amount;
         amountText.text = Amount.ToString();
 
         lessButton.onClick += OnLessPress;
@@ -40,11 +44,11 @@ public class ResourceAdjuster : MonoBehaviour
         int resourceAmount = Settlement.Instance.ResourcesModule.GetResourceAmount(ResourceType);
 
         Amount -= increaser;
-        //Amount = Mathf.Clamp(Amount, 0, resourceAmount);
         amountText.text = Amount.ToString();
 
         Settlement.Instance.ResourcesModule.IncreaseResource(ResourceType, +increaser);
 
+        resource.SetAmount(Amount);
         onResourceChange?.Invoke();
     }
 
@@ -56,11 +60,11 @@ public class ResourceAdjuster : MonoBehaviour
             return;
 
         Amount += increaser;
-        //Amount = Mathf.Clamp(Amount, 0, resourceAmount);
         amountText.text = Amount.ToString();
 
         Settlement.Instance.ResourcesModule.IncreaseResource(ResourceType, -increaser);
 
+        resource.SetAmount(Amount);
         onResourceChange?.Invoke();
     }
 }

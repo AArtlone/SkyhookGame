@@ -47,7 +47,8 @@ public class SendShipViewController : ViewController
     {
         this.dock = dock;
 
-        dock.Ship.resourcesModule = new ResourcesModule();
+        if (dock.Ship.resourcesModule == null)
+            dock.Ship.resourcesModule = new ResourcesModule();
 
         DestroyResourceAdjusters();
 
@@ -74,9 +75,7 @@ public class SendShipViewController : ViewController
         }
 
         ResourceAdjuster resourceAdjuster = Instantiate(resourceAdjusterPrefab, adjustersContainer);
-
-        resourceAdjuster.SetUpAdjuster(resource.ResourceType);
-
+        resourceAdjuster.SetUpAdjuster(resource);
         resourceAdjuster.onResourceChange += ResourceAdjuster_OnResourceChange;
 
         resourceAdjusters.Add(resourceAdjuster);
@@ -129,7 +128,7 @@ public class SendShipViewController : ViewController
 
     public void Btn_Send()
     {
-
+        Settlement.Instance.CosmicPort.SendShip(dock.Ship);
     }
 
     private bool CanSend()

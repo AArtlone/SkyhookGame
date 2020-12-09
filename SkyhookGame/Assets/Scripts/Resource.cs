@@ -17,7 +17,7 @@ public class Resource
         resourceType = resourceID;
     }
 
-    public void IncreaseAmount(int valueToAdd)
+    public void ChangeAmount(int valueToAdd)
     {
         amount += valueToAdd;
 

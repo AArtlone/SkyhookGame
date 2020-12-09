@@ -114,6 +114,7 @@ Transform:
   m_Children:
   - {fileID: 6614266974584281593}
   - {fileID: 5033766003484769044}
+  - {fileID: 6822669545399303289}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -146,6 +147,9 @@ MonoBehaviour:
   loadSpeedRange: {x: 60, y: 1}
   unloadSpeedRange: {x: 60, y: 1}
   dockBuildTime: 2
+  shipPrefab: {fileID: 4240652227174998169, guid: 84ef5862428158842bffd1c58f6dc27f,
+    type: 3}
+  shipToSendContainer: {fileID: 6822669545399303289}
 --- !u!114 &-6969600194453486184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +202,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preview: {fileID: 0}
+--- !u!1 &924726403882707244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6822669545399303289}
+  m_Layer: 0
+  m_Name: ShipToSendContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6822669545399303289
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924726403882707244}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 679562506693431113}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &992634100236372047
 GameObject:
   m_ObjectHideFlags: 0
