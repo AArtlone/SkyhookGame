@@ -1,9 +1,7 @@
 ﻿using MyUtilities;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class TripsManager : Singleton<TripsManager>
+public class TripsManager : PersistentSingleton<TripsManager>
 {
     private List<Trip> allTrips;
     protected override void Awake()
