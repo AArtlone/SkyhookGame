@@ -64,8 +64,13 @@ public class Dock
     public void AssignShip(Ship ship)
     {
         Ship = ship;
-
         UpdateState(DockState.Occupied);
+    }
+
+    public void RemoveShip()
+    {
+        Ship = null;
+        UpdateState(DockState.Empty);
     }
 }
 

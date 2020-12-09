@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class SendShipViewController : ViewController
 {
+    private const string MassText = "Mass: ";
+    private const string ReqFuelText = "Req Fuel: ";
+
     [Space(10f)]
     [SerializeField] private TextMeshProUGUI shipNameText = default;
     [SerializeField] private TextMeshProUGUI shipMassText = default;
@@ -16,12 +19,11 @@ public class SendShipViewController : ViewController
 
     [SerializeField] private MyButton sendButton = default;
 
-    private List<ResourceAdjuster> resourceAdjusters;
+
+    private SendShipManager sendShipManager;
 
     private Dock dock;
-
-    private const string MassText = "Mass: ";
-    private const string ReqFuelText = "Req Fuel: ";
+    private List<ResourceAdjuster> resourceAdjusters;
 
     public override void ViewWillBeFocused()
     {
@@ -30,15 +32,7 @@ public class SendShipViewController : ViewController
         shipNameText.text = dock.Ship.shipName;
         shipMassText.text = MassText + dock.Ship.shipMass.ToString();
 
-        reqFuelText.text = ReqFuelText + CalculateReqFuel().ToString();
-
-        sendButton.SetInteractable(false);
-    }
-
-    private void ResourceAdjuster_OnResourceChange()
-    {
-        shipMassText.text = MassText + CalculateTotalMass().ToString();
-        reqFuelText.text = ReqFuelText + CalculateReqFuel().ToString();
+        reqFuelText.text = ReqFuelText + sendShipManager.CalculateReqFuel().ToString();
 
         sendButton.SetInteractable(CanSend());
     }
@@ -53,6 +47,16 @@ public class SendShipViewController : ViewController
         DestroyResourceAdjusters();
 
         CreateResourceAdjusters();
+
+        sendShipManager = new SendShipManager(dock.Ship, resourceAdjusters);
+    }
+
+    private void ResourceAdjuster_OnResourceChange()
+    {
+        shipMassText.text = MassText + sendShipManager.CalculateTotalMass().ToString();
+        reqFuelText.text = ReqFuelText + sendShipManager.CalculateReqFuel().ToString();
+
+        sendButton.SetInteractable(CanSend());
     }
 
     private void CreateResourceAdjusters()
@@ -87,48 +91,14 @@ public class SendShipViewController : ViewController
             return;
 
         resourceAdjusters.ForEach(r => Destroy(r.gameObject));
-        
+
         resourceAdjusters = null;
-    }
-
-    private int CalculateTotalMass()
-    {
-        int result = dock.Ship.shipMass;
-
-        foreach (var v in resourceAdjusters)
-            result += GetResourceTotalWeight(v.Amount, v.ResourceType);
-
-        return result;
-    }
-
-    private int CalculateReqFuel()
-    {
-        int shipMass = dock.Ship.shipMass;
-        int totalCargoWeight = 0;
-
-        foreach (var v in resourceAdjusters)
-            totalCargoWeight += GetResourceTotalWeight(v.Amount, v.ResourceType);
-
-        float reqFuel = GetReqFuel(shipMass + totalCargoWeight);
-
-        return (int)reqFuel;
-    }
-
-    private float GetReqFuel(int totalWeight)
-    {
-        return .25f * totalWeight;
-    }
-
-    private int GetResourceTotalWeight(int amount, ResourcesDSID resourceType)
-    {
-        int massOfOneUnit = DSModelManager.Instance.ResourcesModel.GetOneUnitMass(resourceType);
-
-        return amount * massOfOneUnit;
     }
 
     public void Btn_Send()
     {
-        Settlement.Instance.CosmicPort.SendShip(dock.Ship);
+        CosmicPortGUIManager.Instance.Back();
+        Settlement.Instance.CosmicPort.SendShip(dock, "Moon");
     }
 
     private bool CanSend()
@@ -137,7 +107,7 @@ public class SendShipViewController : ViewController
 
         // Check if has enough fuel
         bool canSend;
-        canSend = GetCurrentFuelAmount() >= CalculateReqFuel();
+        canSend = GetCurrentFuelAmount() >= sendShipManager.CalculateReqFuel();
 
         return canSend;
     }
