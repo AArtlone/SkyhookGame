@@ -48,7 +48,12 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
     private void SaveDataIsNull()
     {
         ResourcesModule = new ResourcesModule();
-        ResourcesModule.resources.ForEach(r => r.IncreaseAmount(50));
+        ResourcesModule.resources.ForEach(r => r.IncreaseAmount(5000));
+    }
+
+    public void SetTestResources(int testAmount)
+    {
+        ResourcesModule.resources.ForEach(r => r.SetAmount(testAmount));
     }
 
     public void AddExperience(int amount)
@@ -63,7 +68,9 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
         var cosmicPortData = CosmicPort.CreatSaveData();
         var manufactoryData = Manufactory.CreatSaveData();
         var starLabsData = StarLabs.CreatSaveData();
+
         var resources = ResourcesModule.resources;
+        
         var settlementData = new SettlementData(cosmicPortData, manufactoryData, starLabsData, resources);
 
         return settlementData;

@@ -14,24 +14,33 @@ public class SendShipViewController : ViewController
 
     [SerializeField] private ResourceAdjuster resourceAdjusterPrefab = default;
 
+    [SerializeField] private MyButton sendButton = default;
+
     private List<ResourceAdjuster> resourceAdjusters;
 
     private Dock dock;
+
+    private const string MassText = "Mass: ";
+    private const string ReqFuelText = "Req Fuel: ";
 
     public override void ViewWillBeFocused()
     {
         base.ViewWillBeFocused();
 
         shipNameText.text = dock.Ship.shipName;
-        shipMassText.text = dock.Ship.shipMass.ToString();
+        shipMassText.text = MassText + dock.Ship.shipMass.ToString();
 
-        reqFuelText.text = CalculateReqFuel().ToString();
+        reqFuelText.text = ReqFuelText + CalculateReqFuel().ToString();
+
+        sendButton.SetInteractable(false);
     }
 
     private void ResourceAdjuster_OnResourceChange()
     {
-        shipMassText.text = CalculateTotalMass().ToString();
-        reqFuelText.text = CalculateReqFuel().ToString();
+        shipMassText.text = MassText + CalculateTotalMass().ToString();
+        reqFuelText.text = ReqFuelText + CalculateReqFuel().ToString();
+
+        sendButton.SetInteractable(CanSend());
     }
 
     public void AssignDock(Dock dock)
@@ -101,12 +110,14 @@ public class SendShipViewController : ViewController
         foreach (var v in resourceAdjusters)
             totalCargoWeight += GetResourceTotalWeight(v.Amount, v.ResourceType);
 
-        return GetReqFuel(shipMass + totalCargoWeight);
+        float reqFuel = GetReqFuel(shipMass + totalCargoWeight);
+
+        return (int)reqFuel;
     }
 
-    private int GetReqFuel(int totalWeight)
+    private float GetReqFuel(int totalWeight)
     {
-        return 10 * totalWeight;
+        return .25f * totalWeight;
     }
 
     private int GetResourceTotalWeight(int amount, ResourcesDSID resourceType)
@@ -114,5 +125,34 @@ public class SendShipViewController : ViewController
         int massOfOneUnit = DSModelManager.Instance.ResourcesModel.GetOneUnitMass(resourceType);
 
         return amount * massOfOneUnit;
+    }
+
+    public void Btn_Send()
+    {
+
+    }
+
+    private bool CanSend()
+    {
+        // Check if destination has empty dock
+
+        // Check if has enough fuel
+        bool canSend;
+        canSend = GetCurrentFuelAmount() >= CalculateReqFuel();
+
+        return canSend;
+    }
+
+    private int GetCurrentFuelAmount()
+    {
+        foreach (var r in resourceAdjusters)
+        {
+            if (r.ResourceType != ResourcesDSID.Fuel)
+                continue;
+
+            return r.Amount;
+        }
+
+        return 1;
     }
 }

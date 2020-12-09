@@ -23,4 +23,11 @@ public class Resource
 
         onAmountChanged?.Invoke(amount);
     }
+
+    public void SetAmount(int value)
+    {
+        amount = value;
+
+        onAmountChanged?.Invoke(amount);
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using MyUtilities.GUI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResourceAdjuster : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class ResourceAdjuster : MonoBehaviour
     [SerializeField] private MyButton lessButton = default;
     [SerializeField] private MyButton moreButton = default;
 
+    [SerializeField] private Image icon = default;
     [SerializeField] private TextMeshProUGUI amountText = default;
 
     public int Amount { get; private set; }
@@ -18,7 +20,9 @@ public class ResourceAdjuster : MonoBehaviour
 
     public void SetUpAdjuster(ResourcesDSID type)
     {
-        //TODO: Later must also update the ICON
+        var icon = Resources.Load<Sprite>($"UI/Icons/Resources/{type}");
+        this.icon.sprite = icon;
+
         ResourceType = type;
 
         Amount = 0;
@@ -30,10 +34,13 @@ public class ResourceAdjuster : MonoBehaviour
 
     private void OnLessPress()
     {
+        if (Amount == 0)
+            return;
+
         int resourceAmount = Settlement.Instance.ResourcesModule.GetResourceAmount(ResourceType);
 
         Amount -= increaser;
-        Amount = Mathf.Clamp(Amount, 0, resourceAmount);
+        //Amount = Mathf.Clamp(Amount, 0, resourceAmount);
         amountText.text = Amount.ToString();
 
         Settlement.Instance.ResourcesModule.IncreaseResource(ResourceType, +increaser);
@@ -45,8 +52,11 @@ public class ResourceAdjuster : MonoBehaviour
     {
         int resourceAmount = Settlement.Instance.ResourcesModule.GetResourceAmount(ResourceType);
 
+        if (resourceAmount < increaser)
+            return;
+
         Amount += increaser;
-        Amount = Mathf.Clamp(Amount, 0, resourceAmount);
+        //Amount = Mathf.Clamp(Amount, 0, resourceAmount);
         amountText.text = Amount.ToString();
 
         Settlement.Instance.ResourcesModule.IncreaseResource(ResourceType, -increaser);
