@@ -2,17 +2,21 @@
 
 public class ShipPrefab : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer spriteRenderer = default;
+    [SerializeField] private float targetY = default;
+    [SerializeField] private float timeToTarget = default;
 
-    private bool launched;
-    private float speed = 5f;
+    [Space(5f)]
+    [SerializeField] private SpriteRenderer spriteRenderer = default;
+    [SerializeField] private AnimationCurve movementCurve = default;
+
+    private ShipFlier shipFlier;
 
     private void Update()
     {
-        if (!launched)
+        if (!shipFlier.Launched)
             return;
 
-        transform.position += Vector3.up * speed * Time.deltaTime;
+        transform.position = new Vector2(transform.position.x, shipFlier.GetNewYValue());
     }
 
     private void OnBecameInvisible()
@@ -24,7 +28,7 @@ public class ShipPrefab : MonoBehaviour
     {
         var sprite = Resources.Load<Sprite>($"Sprites/Ships/{shipID}");
         spriteRenderer.sprite = sprite;
-        
-        launched = true;
+
+        shipFlier = new ShipFlier(transform.position.y, targetY, timeToTarget, movementCurve);
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 412673927794263203}
   - component: {fileID: 4240652227174998169}
   m_Layer: 0
-  m_Name: SettlementViewShipPrefab
+  m_Name: FlyingShipPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,4 +94,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae0b739b33147f48bc503978c2b8998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetY: 8
+  timeToTarget: 3
   spriteRenderer: {fileID: 412673927794263203}
+  movementCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 3.3828452
+      outSlope: 3.3828452
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.03494197
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
