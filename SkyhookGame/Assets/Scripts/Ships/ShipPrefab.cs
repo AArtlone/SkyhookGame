@@ -6,7 +6,8 @@ public class ShipPrefab : MonoBehaviour
     [SerializeField] private float timeToTarget = default;
 
     [Space(5f)]
-    [SerializeField] private SpriteRenderer spriteRenderer = default;
+    [SerializeField] private SpriteRenderer shipSpriteRend = default;
+    [SerializeField] private SpriteRenderer boosterSpriteRend = default;
     [SerializeField] private AnimationCurve movementCurve = default;
 
     private ShipFlier shipFlier;
@@ -24,10 +25,13 @@ public class ShipPrefab : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Launch(ShipsDSID shipID)
+    public void Launch(ShipsDSID shipID, int institutionLevel)
     {
-        var sprite = Resources.Load<Sprite>($"Sprites/Ships/{shipID}");
-        spriteRenderer.sprite = sprite;
+        var shipSprite = Resources.Load<Sprite>($"Sprites/Ships/{shipID}");
+        shipSpriteRend.sprite = shipSprite;
+
+        var boosterSprite = Resources.Load<Sprite>($"Sprites/Boosters/booster_{institutionLevel - 1}");
+        boosterSpriteRend.sprite = boosterSprite;
 
         shipFlier = new ShipFlier(transform.position.y, targetY, timeToTarget, movementCurve);
     }

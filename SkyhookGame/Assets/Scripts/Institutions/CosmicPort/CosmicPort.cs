@@ -168,7 +168,7 @@ public class CosmicPort : Institution<CosmicPortData>
     public void SendShip(Dock dock, string destination)
     {
         ShipPrefab ship = Instantiate(shipPrefab, shipToSendContainer);
-        ship.Launch(dock.Ship.shipType);
+        ship.Launch(dock.Ship.shipType, LevelModule.Level);
 
         TripsManager.Instance.StartNewTrip(destination, GetTimeToDestination(destination), dock.Ship);
 

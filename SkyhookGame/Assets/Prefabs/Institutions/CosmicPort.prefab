@@ -147,7 +147,7 @@ MonoBehaviour:
   loadSpeedRange: {x: 60, y: 1}
   unloadSpeedRange: {x: 60, y: 1}
   dockBuildTime: 2
-  shipPrefab: {fileID: 4240652227174998169, guid: 84ef5862428158842bffd1c58f6dc27f,
+  shipPrefab: {fileID: 191885771687708799, guid: 84ef5862428158842bffd1c58f6dc27f,
     type: 3}
   shipToSendContainer: {fileID: 6822669545399303289}
 --- !u!114 &-6969600194453486184
