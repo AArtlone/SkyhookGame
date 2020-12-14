@@ -3,12 +3,12 @@
 [RequireComponent(typeof(BoxCollider2D))]
 public class InstitutionTouchController : MonoBehaviour
 {
-	/// <summary>
-	/// The first panel/view that shows up for this institution
-	/// when you tap/click on it to perform actions.
-	/// </summary>
 	[Header("The view (GUI) to display when pressing this institution")]
 	[SerializeField] private GameObject preview = default;
+
+	private LayerMask layerMask = default;
+
+	private const string LayerName = "Institution";
 
     private void Awake()
     {
@@ -17,6 +17,8 @@ public class InstitutionTouchController : MonoBehaviour
 			Debug.LogWarning($"Initial_view is null on {gameObject.name}");
 			enabled = false;
         }
+
+		layerMask = 1 << LayerMask.NameToLayer(LayerName);
     }
 
     private void Update()
@@ -63,21 +65,22 @@ public class InstitutionTouchController : MonoBehaviour
 
 	private bool HandleRaycast(Vector3 inputPosition)
 	{
-		var ray = Camera.main.ScreenPointToRay(inputPosition);
-		RaycastHit2D[] hits = new RaycastHit2D[1];
-		var hitsCount = Physics2D.GetRayIntersectionNonAlloc(ray, hits, 100f);
+        var ray = Camera.main.ScreenPointToRay(inputPosition);
+        RaycastHit2D[] hits = new RaycastHit2D[1];
 
-		if (hitsCount == 0)
-			return false;
+        var hitsCount = Physics2D.GetRayIntersectionNonAlloc(ray, hits, 100f, layerMask);
 
-		var hitGameObject = hits[0].collider.gameObject;
+        if (hitsCount == 0)
+            return false;
 
-		if (hitGameObject.layer != 9)
-			return false;
+        var hitGameObject = hits[0].collider.gameObject;
 
-		if (hitGameObject != gameObject)
-			return false;
+        if (hitGameObject.layer != 9)
+            return false;
 
-		return true;
-	}
+        if (hitGameObject != gameObject)
+            return false;
+
+        return true;
+    }
 }

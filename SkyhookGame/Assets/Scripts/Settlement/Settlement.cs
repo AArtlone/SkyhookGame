@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
 {
+    [SerializeField] private Planet planet = default;
+
+    [Space(5f)]
     [SerializeField] private ExperienceModule experienceModule = default;
 
     [SerializeField] private CosmicPort cosmicPort = default;
@@ -13,6 +16,7 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
     [SerializeField] private StarLabs starLabs = default;
     [SerializeField] private Manufactory manufactory = default;
 
+    public Planet Planet { get { return planet; } }
     public CosmicPort CosmicPort { get { return cosmicPort; } }
     public Community Community { get { return community; } }
     public Production Production { get { return production; } }
