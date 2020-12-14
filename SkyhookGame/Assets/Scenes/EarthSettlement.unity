@@ -6485,6 +6485,21 @@ PrefabInstance:
       propertyPath: preview
       value: 
       objectReference: {fileID: 118257126}
+    - target: {fileID: 2544651866745794872, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544651866745794872, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428781018570789979, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.94
+      objectReference: {fileID: 0}
     - target: {fileID: 5582465063722602343, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6544,6 +6559,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Settlement
+      objectReference: {fileID: 0}
+    - target: {fileID: 6024701469375291384, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2c0571861b316b24da8da9a05b4a117f,
+        type: 3}
+    - target: {fileID: 6024701469375291384, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6534840248532652810, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
         type: 3}
