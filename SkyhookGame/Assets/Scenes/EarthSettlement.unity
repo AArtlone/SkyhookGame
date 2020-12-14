@@ -4953,6 +4953,8 @@ GameObject:
   - component: {fileID: 621452445}
   - component: {fileID: 621452447}
   - component: {fileID: 621452446}
+  - component: {fileID: 621452449}
+  - component: {fileID: 621452448}
   m_Layer: 5
   m_Name: Mars
   m_TagString: Untagged
@@ -5016,6 +5018,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 621452444}
   m_CullTransparentMesh: 0
+--- !u!114 &621452448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621452444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73599e05e4dd10f478b602777113887f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planet: 2
+--- !u!114 &621452449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621452444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2331eecc8bb7964cafd6989577f8973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateMethod: 1
+  otherBackgroundImage: 0
+  backgroundImage: {fileID: 0}
+  buttonText: {fileID: 0}
+  idleSprite: {fileID: 0}
+  hoverSprite: {fileID: 0}
+  activeSprite: {fileID: 0}
+  idleColor: {r: 1, g: 1, b: 1, a: 0}
+  hoverColor: {r: 1, g: 1, b: 1, a: 0}
+  activeColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 0}
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &629417202
 GameObject:
   m_ObjectHideFlags: 0
@@ -12493,6 +12533,8 @@ GameObject:
   - component: {fileID: 1560693762}
   - component: {fileID: 1560693764}
   - component: {fileID: 1560693763}
+  - component: {fileID: 1560693766}
+  - component: {fileID: 1560693765}
   m_Layer: 5
   m_Name: Moon
   m_TagString: Untagged
@@ -12556,6 +12598,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560693761}
   m_CullTransparentMesh: 0
+--- !u!114 &1560693765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560693761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73599e05e4dd10f478b602777113887f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planet: 1
+--- !u!114 &1560693766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560693761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2331eecc8bb7964cafd6989577f8973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateMethod: 1
+  otherBackgroundImage: 0
+  backgroundImage: {fileID: 0}
+  buttonText: {fileID: 0}
+  idleSprite: {fileID: 0}
+  hoverSprite: {fileID: 0}
+  activeSprite: {fileID: 0}
+  idleColor: {r: 1, g: 1, b: 1, a: 0}
+  hoverColor: {r: 1, g: 1, b: 1, a: 0}
+  activeColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 0}
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1590604549
 GameObject:
   m_ObjectHideFlags: 0
@@ -15327,6 +15407,8 @@ GameObject:
   - component: {fileID: 1881166674}
   - component: {fileID: 1881166676}
   - component: {fileID: 1881166675}
+  - component: {fileID: 1881166678}
+  - component: {fileID: 1881166677}
   m_Layer: 5
   m_Name: Earth
   m_TagString: Untagged
@@ -15390,6 +15472,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1881166673}
   m_CullTransparentMesh: 0
+--- !u!114 &1881166677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881166673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73599e05e4dd10f478b602777113887f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planet: 0
+--- !u!114 &1881166678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881166673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2331eecc8bb7964cafd6989577f8973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateMethod: 1
+  otherBackgroundImage: 0
+  backgroundImage: {fileID: 0}
+  buttonText: {fileID: 0}
+  idleSprite: {fileID: 0}
+  hoverSprite: {fileID: 0}
+  activeSprite: {fileID: 0}
+  idleColor: {r: 1, g: 1, b: 1, a: 0}
+  hoverColor: {r: 1, g: 1, b: 1, a: 0}
+  activeColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 0}
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1898642331
 GameObject:
   m_ObjectHideFlags: 0
@@ -16762,7 +16882,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2115410113
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16847,7 +16967,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2117387665}
   m_Layer: 5
-  m_Name: --------------- (1)
+  m_Name: ---------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
