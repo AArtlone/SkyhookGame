@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class MySceneManager : Singleton<MySceneManager>
 {
-    [SerializeField] private string loadingSceneName = default;
-    [SerializeField] private string earthSceneName = default;
-    [SerializeField] private string moonSceneName = default;
+    public const string LoadingSceneName = "LoadingScene";
+    public const string EarthSceneName = "EarthSettlement";
+    public const string MoonSceneName = "MoonSettlement";
     //[SerializeField] private string marsSceneName = default;
 
     private bool isInLoading;
@@ -28,11 +28,11 @@ public class MySceneManager : Singleton<MySceneManager>
             switch (planet)
             {
                 case Planet.Earth:
-                    LoadScene(earthSceneName);
+                    LoadScene(EarthSceneName);
                     break;
 
                 case Planet.Moon:
-                    LoadScene(moonSceneName);
+                    LoadScene(MoonSceneName);
                     break;
 
                     //case Planet.Mars:
@@ -58,7 +58,7 @@ public class MySceneManager : Singleton<MySceneManager>
 
         yield return null;
 
-        AsyncOperation loadingSceneAsync = SceneManager.LoadSceneAsync(loadingSceneName, LoadSceneMode.Additive);
+        AsyncOperation loadingSceneAsync = SceneManager.LoadSceneAsync(LoadingSceneName, LoadSceneMode.Additive);
 
         while (!loadingSceneAsync.isDone)
             yield return null;
