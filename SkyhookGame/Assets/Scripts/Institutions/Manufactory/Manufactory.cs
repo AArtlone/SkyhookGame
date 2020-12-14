@@ -55,8 +55,13 @@ public class Manufactory : Institution<ManufactoryData>
     protected override ManufactoryData GetInstitutionSaveData()
     {
         var playerData = PlayerDataManager.Instance.PlayerData;
+        SettlementData settlementData = null;
 
-        var data = playerData == null ? null : playerData.settlementData.manufactoryData;
+
+        if (playerData != null)
+            settlementData = playerData.GetSettlementData(Settlement.Instance.Planet);
+
+        var data = settlementData == null ? null : settlementData.manufactoryData;
 
         return data;
     }

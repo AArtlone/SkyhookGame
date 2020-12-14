@@ -32,8 +32,12 @@ public class StarLabs : Institution<StarLabsData>
     protected override StarLabsData GetInstitutionSaveData()
     {
         var playerData = PlayerDataManager.Instance.PlayerData;
+        SettlementData settlementData = null;
 
-        var data = playerData == null ? null : playerData.settlementData.starLabsData;
+        if (playerData != null)
+            settlementData = playerData.GetSettlementData(Settlement.Instance.Planet);
+
+        var data = settlementData == null ? null : settlementData.starLabsData;
 
         return data;
     }

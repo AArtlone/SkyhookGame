@@ -37,14 +37,18 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
         yield return SceneLoader.Instance.WaitForLoading();
 
         var playerData = PlayerDataManager.Instance.PlayerData;
+        SettlementData settlementData = null;
 
-        if (playerData == null)
+        if (playerData != null)
+            settlementData = playerData.GetSettlementData(planet);    
+
+        if (playerData == null || settlementData == null)
         {
             Debug.LogWarning($"Settlement data is null");
             SaveDataIsNull();
         }
         else
-            SetSavableData(playerData.settlementData);
+            SetSavableData(settlementData);
 
         SceneLoader.Instance.RemoveSaveDataWaiter(this);
     }
@@ -75,7 +79,7 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
 
         var resources = ResourcesModule.resources;
         
-        var settlementData = new SettlementData(cosmicPortData, manufactoryData, starLabsData, resources);
+        var settlementData = new SettlementData(planet, cosmicPortData, manufactoryData, starLabsData, resources);
 
         return settlementData;
     }
@@ -89,13 +93,15 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
 [System.Serializable]
 public class SettlementData
 {
+    public Planet planet;
     public CosmicPortData cosmicPortData;
     public ManufactoryData manufactoryData;
     public StarLabsData starLabsData;
     public List<Resource> resources;
 
-    public SettlementData(CosmicPortData cosmicPortData, ManufactoryData manufactoryData, StarLabsData starLabsData, List<Resource> resources)
+    public SettlementData(Planet planet, CosmicPortData cosmicPortData, ManufactoryData manufactoryData, StarLabsData starLabsData, List<Resource> resources)
     {
+        this.planet = planet;
         this.cosmicPortData = cosmicPortData;
         this.manufactoryData = manufactoryData;
         this.starLabsData = starLabsData;

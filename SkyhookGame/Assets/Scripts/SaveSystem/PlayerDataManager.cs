@@ -1,13 +1,17 @@
 ﻿using MyUtilities;
+using System;
 using UnityEngine;
 
-public class PlayerDataManager : Singleton<PlayerDataManager>
+public class PlayerDataManager : PersistentSingleton<PlayerDataManager>
 {
     public PlayerData PlayerData { get; private set; }
 
     protected override void Awake()
     {
         SetInstance(this);
+
+        if (WillBeDestroyed)
+            return;
 
         Application.quitting += Application_quitting;
 
@@ -18,15 +22,22 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
     private void Application_quitting()
     {
-        var settlementData = Settlement.Instance.CreatSaveData();
-        var data = new PlayerData(settlementData);
-
-        SaveData(data);
+        SaveSettlementData(Settlement.Instance.Planet, new Action(() => { SaveData(PlayerData); }));
     }
 
-    public void SaveData(PlayerData data)
+    public void SaveSettlementData(Planet planet, Action callback = null)
     {
-        System.Action<bool> callback = new System.Action<bool>((b) => 
+        if (PlayerData == null)
+            PlayerData = new PlayerData();
+
+        PlayerData.SaveSettlementData(planet, Settlement.Instance.CreatSaveData());
+
+        callback?.Invoke();
+    }
+
+    private void SaveData(PlayerData data)
+    {
+        Action<bool> callback = new Action<bool>((b) => 
         { 
             if (!b)
                 Debug.LogWarning("Failed to save PlayerData");
@@ -35,9 +46,9 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         IOUtility<PlayerData>.SaveData(data, "PlayerData", callback);
     }
 
-    public void LoadData()
+    private void LoadData()
     {
-        System.Action<PlayerData> callback = new System.Action<PlayerData>((result) =>
+        Action<PlayerData> callback = new Action<PlayerData>((result) =>
         {
             if (result == null)
             {

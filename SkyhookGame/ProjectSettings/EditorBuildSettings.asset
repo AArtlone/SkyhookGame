@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 8238bc8fb687f2b42ae89e48e037d15b
+  - enabled: 1
+    path: Assets/Scenes/EarthSettlement.unity
+    guid: c025f280358b2bd4fa84003d21ea62a4
+  - enabled: 1
+    path: Assets/Scenes/MoonSettlement.unity
+    guid: 682927307e358b442a386df45cb9a941
   m_configObjects: {}

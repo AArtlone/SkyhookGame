@@ -71,8 +71,12 @@ public class CosmicPort : Institution<CosmicPortData>
     protected override CosmicPortData GetInstitutionSaveData()
     {
         var playerData = PlayerDataManager.Instance.PlayerData;
+        SettlementData settlementData = null;
 
-        var data = playerData == null ? null : playerData.settlementData.cosmicPortData;
+        if (playerData != null)
+            settlementData = playerData.GetSettlementData(Settlement.Instance.Planet);
+        
+        var data = settlementData == null ? null : settlementData.cosmicPortData;
 
         return data;
     }

@@ -27,6 +27,8 @@ public class PlanetsOverviewViewController : ViewController
         Action button1Callback = new Action(() =>
         {
             print($"Changing to {planet} settlement");
+            
+            MySceneManager.Instance.LoadNewSettlement(planet);
         });
 
         PopUpManager.CreateDoubleButtonTextPopUp(text,
