@@ -376,6 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82dd8f6ee30dfd84fa93dd356401a304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planet: 0
   experienceModule:
     animClass: {fileID: 11400000, guid: eaff09d66f50e74409382f2f1d49eef7, type: 2}
     minLevel: 1
@@ -743,6 +744,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CosmicPort
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905880216625405421, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2c0571861b316b24da8da9a05b4a117f,
+        type: 3}
+    - target: {fileID: 4905880216625405421, guid: ebd7efa49ba7a8e448ce6066860e8e0e,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebd7efa49ba7a8e448ce6066860e8e0e, type: 3}
@@ -1217,6 +1229,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StarLabs
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097278660174601248, guid: 100671c594aeb1a4797588471858fec3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097278660174601248, guid: 100671c594aeb1a4797588471858fec3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6366106274646440259, guid: 100671c594aeb1a4797588471858fec3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.94
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 100671c594aeb1a4797588471858fec3, type: 3}

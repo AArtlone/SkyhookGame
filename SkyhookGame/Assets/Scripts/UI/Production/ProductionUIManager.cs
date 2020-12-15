@@ -2,7 +2,7 @@
 using MyUtilities.GUI;
 using UnityEngine;
 
-public class CommunityGUIManager : Singleton<CommunityGUIManager>
+public class ProductionUIManager : Singleton<ProductionUIManager>
 {
 	[Space(10f)]
 	[SerializeField] private GameObject preview = default;
@@ -10,7 +10,7 @@ public class CommunityGUIManager : Singleton<CommunityGUIManager>
 
 	[Header("Navigation Controllers")]
 	[SerializeField] private NavigationController navigationController = default;
-    [SerializeField] private CommunityViewController communityViewController = default;
+    [SerializeField] private ProductionViewController productionViewController = default;
 
 	protected override void Awake()
 	{
@@ -18,14 +18,22 @@ public class CommunityGUIManager : Singleton<CommunityGUIManager>
 
 		preview.SetActive(false);
 		upgradeView.SetActive(false);
+		productionViewController.gameObject.SetActive(false);
 	}
 
-	public void ShowCommunityView() 
+	public void Btn_ShowProductionView()
 	{
-        navigationController.Push(communityViewController);
+		preview.SetActive(false);
+		navigationController.Push(productionViewController);
 	}
 
-	// For editor reference
+
+	public void Btn_ShowUpgradeView()
+	{
+		preview.SetActive(false);
+		upgradeView.SetActive(true);
+	}
+
 	public void Back()
 	{
 		navigationController.Pop();

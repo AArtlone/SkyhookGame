@@ -2,7 +2,7 @@
 using MyUtilities.GUI;
 using UnityEngine;
 
-public class ManufactoryGUIManager : Singleton<ManufactoryGUIManager>
+public class ManufactoryUIManager : Singleton<ManufactoryUIManager>
 {
     [Space(10f)]
     [SerializeField] private GameObject preview = default;
@@ -34,9 +34,16 @@ public class ManufactoryGUIManager : Singleton<ManufactoryGUIManager>
         manufactoryView.gameObject.SetActive(false);
     }
 
-    public void ShowManufactoryView()
+    public void Btn_ShowManufactoryView()
     {
+        preview.SetActive(false);
         navigationController.Push(manufactoryViewController);
+    }
+
+    public void Btn_ShowUpgradeView()
+    {
+        preview.SetActive(false);
+        upgradeView.SetActive(true);
     }
 
     public void ShowAssignShipToDockView()
