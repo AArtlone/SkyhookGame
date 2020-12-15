@@ -31,9 +31,8 @@ public class StarLabsSelectableController : SelectableController<StudyCell, Stud
 
         PopUpManager.CreateDoubleButtonTextPopUp(text,
             button1Text,
-            button1Callback,
             button2Text,
-            new Action(() => { }));
+            button1Callback);
     }
 
     private void CreateCannotUnlockPopUp()

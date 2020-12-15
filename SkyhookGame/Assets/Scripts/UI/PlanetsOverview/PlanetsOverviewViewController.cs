@@ -33,8 +33,7 @@ public class PlanetsOverviewViewController : ViewController
 
         PopUpManager.CreateDoubleButtonTextPopUp(text,
             button1Text,
-            button1Callback,
             button2Text,
-            new Action(() => { }));
+            button1Callback);
     }
 }
