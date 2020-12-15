@@ -10,7 +10,7 @@ public class DoubleTap : MonoBehaviour
     public Action onDoubleTap;
 
     [SerializeField] private LayerMask layerMask = default;
-    [SerializeField] private GraphicRaycaster m_Raycaster = default;
+    [SerializeField] private GraphicRaycaster graphicRaycaster = default;
 
     private float touchDuration;
     private Touch touch;
@@ -20,8 +20,14 @@ public class DoubleTap : MonoBehaviour
 
     private void Awake()
     {
-        eventSystem = FindObjectOfType<EventSystem>();
+        if (graphicRaycaster == null)
+        {
+            Debug.LogError("GraphicRaycaster is not assigned in the editor");
+            enabled = false;
+            return;
+        }
 
+        eventSystem = FindObjectOfType<EventSystem>();
         onDoubleTap += OnDoubleTap;
     }
 
@@ -113,7 +119,7 @@ public class DoubleTap : MonoBehaviour
         var pointerEventData = new PointerEventData(eventSystem);
         pointerEventData.position = inputPos;
 
-        m_Raycaster.Raycast(pointerEventData, results);
+        graphicRaycaster.Raycast(pointerEventData, results);
 
         return results.Count != 0;
     }
