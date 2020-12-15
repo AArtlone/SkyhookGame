@@ -2,11 +2,7 @@
 using MyUtilities.GUI;
 using UnityEngine;
 
-public class StarLabsUIManager : InstitutionUIManager
-{
-}
-
-public abstract class InstitutionUIManager : Singleton<InstitutionUIManager>
+public class StarLabsUIManager : Singleton<StarLabsUIManager>
 {
 	[Space(10f)]
 	[SerializeField] private GameObject preview = default;
@@ -14,30 +10,23 @@ public abstract class InstitutionUIManager : Singleton<InstitutionUIManager>
 
 	[Header("Navigation Controllers")]
 	[SerializeField] private NavigationController navigationController = default;
-	[SerializeField] private StarLabsViewController institutionView = default;
+	[SerializeField] private StarLabsViewController starLabsViewController = default;
 
 	protected override void Awake()
 	{
+		SetInstance(this);
+
 		preview.SetActive(false);
 		upgradeView.SetActive(false);
+	}
 
-		SetInstance(this);
+	public void ShowStarLabsView()
+	{
+		navigationController.Push(starLabsViewController);
 	}
 
 	public void Back()
 	{
 		navigationController.Pop();
-	}
-
-	public void Btn_ShowUpgradeView()
-    {
-		preview.SetActive(false);
-		upgradeView.SetActive(true);
-	}
-
-	public void Btn_ShowInstitutionView()
-	{
-		preview.SetActive(false);
-		navigationController.Push(institutionView);
 	}
 }
