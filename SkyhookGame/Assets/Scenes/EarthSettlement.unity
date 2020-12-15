@@ -356,6 +356,11 @@ PrefabInstance:
       propertyPath: m_Raycaster
       value: 
       objectReference: {fileID: 1148290194}
+    - target: {fileID: 6419337662748248417, guid: 8cda19d7bce1c594dbd4703646885faf,
+        type: 3}
+      propertyPath: graphicRaycaster
+      value: 
+      objectReference: {fileID: 1148290194}
     - target: {fileID: 6419337662748248419, guid: 8cda19d7bce1c594dbd4703646885faf,
         type: 3}
       propertyPath: m_LocalPosition.x
