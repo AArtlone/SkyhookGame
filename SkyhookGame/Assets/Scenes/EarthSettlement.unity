@@ -293,18 +293,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &315233352 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2227880991167172130, guid: 63a9a059f38ff6f4387c31758ece86f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 142644140677559192}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67384c7aab9b9224b8ac00de31f63167, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &394586566
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,18 +786,6 @@ PrefabInstance:
       objectReference: {fileID: 1316673131}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ab4aa54969bb7f4c80e9b44ad88281a, type: 3}
---- !u!114 &917768856 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6580795037598486892, guid: 63a9a059f38ff6f4387c31758ece86f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 142644140677559192}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6293c6a1f7d8e440b4b5b0e3630c73c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &997611946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,16 +999,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 142644140552197386, guid: 63a9a059f38ff6f4387c31758ece86f4,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Btn_ShowManufactoryView
-      objectReference: {fileID: 0}
-    - target: {fileID: 142644141624861707, guid: 63a9a059f38ff6f4387c31758ece86f4,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Btn_ShowCosmicPortView
-      objectReference: {fileID: 0}
     - target: {fileID: 142644141679048457, guid: 63a9a059f38ff6f4387c31758ece86f4,
         type: 3}
       propertyPath: m_Name
@@ -1142,41 +1108,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 142644141765237560, guid: 63a9a059f38ff6f4387c31758ece86f4,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Btn_ShowStarLabsView
-      objectReference: {fileID: 0}
-    - target: {fileID: 142644141875218907, guid: 63a9a059f38ff6f4387c31758ece86f4,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 917768856}
-    - target: {fileID: 142644141875218907, guid: 63a9a059f38ff6f4387c31758ece86f4,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Btn_ShowUpgradeView
-      objectReference: {fileID: 0}
-    - target: {fileID: 142644141875218907, guid: 63a9a059f38ff6f4387c31758ece86f4,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 142644142300907758, guid: 63a9a059f38ff6f4387c31758ece86f4,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 315233352}
-    - target: {fileID: 142644142300907758, guid: 63a9a059f38ff6f4387c31758ece86f4,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Btn_ShowUpgradeView
-      objectReference: {fileID: 0}
-    - target: {fileID: 142644142300907758, guid: 63a9a059f38ff6f4387c31758ece86f4,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2227880990775214634, guid: 63a9a059f38ff6f4387c31758ece86f4,
         type: 3}
