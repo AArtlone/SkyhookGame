@@ -2,7 +2,7 @@
 using MyUtilities.GUI;
 using UnityEngine;
 
-public class CosmicPortGUIManager : Singleton<CosmicPortGUIManager>
+public class CosmicPortUIManager : Singleton<CosmicPortUIManager>
 {
     [Space(10f)]
     [SerializeField] private GameObject preview = default;
@@ -25,13 +25,19 @@ public class CosmicPortGUIManager : Singleton<CosmicPortGUIManager>
 
         preview.SetActive(false);
         upgradeView.SetActive(false);
-
         docksViewController.gameObject.SetActive(false);
     }
 
-    public void ShowCosmicPortView()
+    public void Btn_ShowCosmicPortView()
     {
+        preview.SetActive(false);
         navigationController.Push(docksViewController);
+    }
+
+    public void Btn_ShowUpgradeView()
+    {
+        preview.SetActive(false);
+        upgradeView.SetActive(true);
     }
 
     public void ShowCosmicPortAssignShipView()

@@ -97,7 +97,7 @@ public class SendShipViewController : ViewController
 
     public void Btn_Send()
     {
-        CosmicPortGUIManager.Instance.Back();
+        CosmicPortUIManager.Instance.Back();
         Settlement.Instance.CosmicPort.SendShip(dock, "Moon");
     }
 

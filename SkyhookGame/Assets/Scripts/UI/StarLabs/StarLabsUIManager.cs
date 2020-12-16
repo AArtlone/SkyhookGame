@@ -18,11 +18,19 @@ public class StarLabsUIManager : Singleton<StarLabsUIManager>
 
 		preview.SetActive(false);
 		upgradeView.SetActive(false);
+		starLabsViewController.gameObject.SetActive(false);
 	}
 
-	public void ShowStarLabsView()
+	public void Btn_ShowStarLabsView()
 	{
+		preview.SetActive(false);
 		navigationController.Push(starLabsViewController);
+	}
+
+	public void Btn_ShowUpgradeView()
+	{
+		preview.SetActive(false);
+		upgradeView.SetActive(true);
 	}
 
 	public void Back()

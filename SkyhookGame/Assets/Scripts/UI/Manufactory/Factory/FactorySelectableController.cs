@@ -6,7 +6,7 @@ public class FactorySelectableController : SelectableController<FactoryCell, Fac
     {
         base.Cell_OnCellPress(cell);
 
-        ManufactoryGUIManager.Instance.FactoryViewController.ShowBuildShipView(cell.data.shipRecipe);
+        ManufactoryUIManager.Instance.FactoryViewController.ShowBuildShipView(cell.data.shipRecipe);
     }
 }
 

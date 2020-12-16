@@ -15,10 +15,10 @@ public class DocksSelectableConroller : SelectableController<DocksCell, DocksCel
                 DocksViewController.ShowAssignShipView();
                 break;
             case DockState.Occupied:
-                CosmicPortGUIManager.Instance.ShowSendShipView(GetSelectedCell().data.dock);
+                CosmicPortUIManager.Instance.ShowSendShipView(GetSelectedCell().data.dock);
                 break;
         }
     }
 
-    private DocksViewController DocksViewController { get { return CosmicPortGUIManager.Instance.DocksViewController; } }
+    private DocksViewController DocksViewController { get { return CosmicPortUIManager.Instance.DocksViewController; } }
 }

@@ -24,5 +24,5 @@ public class ManufactoryViewController : ViewController
         tabGroup.onTabSelection -= TabGroup_OnTabSelection;
     }
 
-    private ManufactoryGUIManager ManufactoryGUIManager { get { return ManufactoryGUIManager.Instance; } }
+    private ManufactoryUIManager ManufactoryGUIManager { get { return ManufactoryUIManager.Instance; } }
 }

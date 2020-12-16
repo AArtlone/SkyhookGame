@@ -58,7 +58,7 @@ public class DocksViewController : ViewController
 
     public void ShowAssignShipView()
     {
-        CosmicPortGUIManager.Instance.ShowCosmicPortAssignShipView();
+        CosmicPortUIManager.Instance.ShowCosmicPortAssignShipView();
     }
 
     private void CloseBuildDockView()
