@@ -13,17 +13,21 @@ public class SendShipViewController : ViewController
     [SerializeField] private TextMeshProUGUI shipMassText = default;
     [SerializeField] private TextMeshProUGUI reqFuelText = default;
 
+    [Space(10f)]
     [SerializeField] private RectTransform adjustersContainer = default;
-
     [SerializeField] private ResourceAdjuster resourceAdjusterPrefab = default;
 
+    [Space(10f)]
     [SerializeField] private MyButton sendButton = default;
+    [SerializeField] private SendShipViewTabGroup tabGroup= default;
 
 
     private SendShipManager sendShipManager;
 
     private Dock dock;
     private List<ResourceAdjuster> resourceAdjusters;
+
+    private Planet selectedDestination;
 
     public override void ViewWillBeFocused()
     {
@@ -35,6 +39,15 @@ public class SendShipViewController : ViewController
         reqFuelText.text = ReqFuelText + sendShipManager.CalculateReqFuel().ToString();
 
         sendButton.SetInteractable(CanSend());
+
+        tabGroup.onDestinationChanged += TabGroup_OnDestinationChanged;
+    }
+
+    public override void ViewWillBeUnfocused()
+    {
+        base.ViewWillBeUnfocused();
+
+        tabGroup.onDestinationChanged -= TabGroup_OnDestinationChanged;
     }
 
     public void AssignDock(Dock dock)
@@ -49,6 +62,12 @@ public class SendShipViewController : ViewController
         CreateResourceAdjusters();
 
         sendShipManager = new SendShipManager(dock.Ship, resourceAdjusters);
+    }
+
+    private void TabGroup_OnDestinationChanged(Planet newDestination)
+    {
+        if (selectedDestination != newDestination)
+            selectedDestination = newDestination;
     }
 
     private void ResourceAdjuster_OnResourceChange()
@@ -98,7 +117,7 @@ public class SendShipViewController : ViewController
     public void Btn_Send()
     {
         CosmicPortUIManager.Instance.Back();
-        Settlement.Instance.CosmicPort.SendShip(dock, "Moon");
+        Settlement.Instance.CosmicPort.SendShip(dock, selectedDestination);
     }
 
     private bool CanSend()

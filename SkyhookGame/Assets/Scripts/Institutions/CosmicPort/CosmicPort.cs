@@ -165,7 +165,7 @@ public class CosmicPort : Institution<CosmicPortData>
         dock.StartBuilding();
     }
 
-    public void SendShip(Dock dock, string destination)
+    public void SendShip(Dock dock, Planet destination)
     {
         ShipPrefab ship = Instantiate(shipPrefab, shipToSendContainer);
         ship.Launch(dock.Ship.shipType, LevelModule.Level);
@@ -175,9 +175,9 @@ public class CosmicPort : Institution<CosmicPortData>
         dock.RemoveShip();
     }
 
-    private int GetTimeToDestination(string destination)
+    private int GetTimeToDestination(Planet destination)
     {
-        return 100;
+        return 10;
     }
 
     public List<Dock> GetEmptyDocks()

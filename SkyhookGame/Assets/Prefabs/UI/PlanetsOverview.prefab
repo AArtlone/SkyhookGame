@@ -430,7 +430,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327320409880817260}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -490,6 +490,7 @@ RectTransform:
   m_Children:
   - {fileID: 327320409241288095}
   - {fileID: 327320410253187856}
+  - {fileID: 3441138484822126250}
   m_Father: {fileID: 327320409880817261}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -551,6 +552,14 @@ MonoBehaviour:
   childNavController: {fileID: 0}
   inTransitions: []
   outTransitions: []
+  planetsOverviewTripsManager:
+    allPlanets:
+    - {fileID: 327320409804907847}
+    - {fileID: 327320409484442135}
+    - {fileID: 327320410691660466}
+    shipsContainer: {fileID: 3441138484822126250}
+    planetOverviewShipPrefab: {fileID: 5575546343143389274, guid: 30c422f6e742b2247bb8bca1622d08de,
+      type: 3}
 --- !u!1 &327320409999869262
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,3 +845,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planet: 2
+--- !u!1 &2172459242468797419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3441138484822126250}
+  m_Layer: 5
+  m_Name: ShipsContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3441138484822126250
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2172459242468797419}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 327320409972076243}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}

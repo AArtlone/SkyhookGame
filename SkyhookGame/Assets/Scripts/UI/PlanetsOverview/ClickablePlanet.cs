@@ -8,6 +8,8 @@ public class ClickablePlanet : MonoBehaviour
     
     private MyButton myButton = default;
 
+    public Planet Planet { get { return planet; } }
+
     private void Awake()
     {
         myButton = GetComponent<MyButton>();
