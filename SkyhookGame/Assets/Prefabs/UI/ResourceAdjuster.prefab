@@ -59,13 +59,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2735849, g: 0.26197046, b: 0.26197046, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 58836643972a11b428eef607915271ad, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -94,9 +94,9 @@ MonoBehaviour:
   idleSprite: {fileID: 0}
   hoverSprite: {fileID: 0}
   activeSprite: {fileID: 0}
-  idleColor: {r: 0.27450982, g: 0.2627451, b: 0.2627451, a: 0}
-  hoverColor: {r: 0.27450982, g: 0.2627451, b: 0.2627451, a: 0}
-  activeColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 0}
+  idleColor: {r: 1, g: 1, b: 1, a: 0}
+  hoverColor: {r: 1, g: 1, b: 1, a: 0}
+  activeColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 0}
   onClickEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -366,13 +366,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2735849, g: 0.26197046, b: 0.26197046, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 0344cb7eac4251a4296fe1754981a20f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -401,9 +401,9 @@ MonoBehaviour:
   idleSprite: {fileID: 0}
   hoverSprite: {fileID: 0}
   activeSprite: {fileID: 0}
-  idleColor: {r: 0.27450982, g: 0.2627451, b: 0.2627451, a: 0}
-  hoverColor: {r: 0.27450982, g: 0.2627451, b: 0.2627451, a: 0}
-  activeColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 0}
+  idleColor: {r: 1, g: 1, b: 1, a: 0}
+  hoverColor: {r: 1, g: 1, b: 1, a: 0}
+  activeColor: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 0}
   onClickEvent:
     m_PersistentCalls:
       m_Calls: []
