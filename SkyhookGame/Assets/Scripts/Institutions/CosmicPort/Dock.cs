@@ -12,6 +12,7 @@ public class Dock
     public DockState DockState { get { return dockState; } }
 
     public Ship Ship { get; private set; }
+    public Planet Destination { get; private set; }
 
     public TripClock TripClock { get; private set; }
     private TravelClockFactory travelFactory;
@@ -23,6 +24,7 @@ public class Dock
         dockName = data.dockName;
         dockState = data.dockState;
         Ship = data.ship;
+        Destination = data.destination;
 
         if (data.resourcesInShip != null)
             Ship.resourcesModule = new ResourcesModule(data.resourcesInShip);
@@ -61,6 +63,12 @@ public class Dock
         onStateChange?.Invoke(DockState);
     }
 
+    public void SetDestination(Planet newDestination)
+    {
+        if (Destination != newDestination)
+            Destination = newDestination;
+    }
+
     public void AssignShip(Ship ship)
     {
         Ship = ship;
@@ -70,6 +78,7 @@ public class Dock
     public void RemoveShip()
     {
         Ship = null;
+        Destination = default;
         UpdateState(DockState.Empty);
     }
 }
@@ -80,6 +89,7 @@ public class DockData
     public string dockName;
     public DockState dockState;
     public Ship ship;
+    public Planet destination;
     public List<Resource> resourcesInShip;
     public float buildTimeLeft;
 
@@ -95,6 +105,7 @@ public class DockData
         dockName = dock.dockName;
         dockState = dock.DockState;
         ship = dock.Ship;
+        destination = dock.Destination;
         
         if (dock.Ship != null && dock.Ship.resourcesModule != null)
             resourcesInShip = dock.Ship.resourcesModule.resources;

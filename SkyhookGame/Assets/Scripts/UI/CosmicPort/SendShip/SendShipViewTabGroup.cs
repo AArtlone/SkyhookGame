@@ -8,6 +8,8 @@ public class SendShipViewTabGroup : TabGroup
     public System.Action<Planet> onDestinationChanged;
     
     private List<Planet> displayedDestinations;
+
+    public bool IsInitialized { get; private set; }
     
     public override void Initialize()
     {
@@ -25,11 +27,10 @@ public class SendShipViewTabGroup : TabGroup
 
             Sprite icon = Resources.Load<Sprite>($"Sprites/PlanetIcons/{displayedDestinations[i]}");
             
-            _button.SetIcon(icon);
+            _button.SetData(icon, displayedDestinations[i]);
         }
 
-        int selectedTabIndex = selectedTab.transform.GetSiblingIndex();
-        onDestinationChanged?.Invoke(displayedDestinations[selectedTabIndex]);
+        IsInitialized = true;
     }
 
     public override void SelectTab(TabButton tabButton)
@@ -53,6 +54,37 @@ public class SendShipViewTabGroup : TabGroup
             selectedTab.Select(activeSprite);
         else
             selectedTab.Select(activeColor);
+    }
+
+    public void SelectDestination(Planet destination)
+    {
+        var correspondingTabButton = Smth(destination);
+
+        if (correspondingTabButton == null)
+        {
+            Debug.LogWarning("Smth is very wrong");
+            return;
+        }
+
+        SelectTab(correspondingTabButton);
+    }
+
+    public void SelectFirstDestination()
+    {
+        SelectTab(tabButtons[0]);
+    }
+
+    private TabButton Smth(Planet destination)
+    {
+        foreach (var v in tabButtons)
+        {
+            SendShipViewTabButton _button = (SendShipViewTabButton)v;
+
+            if (_button.assignedPlanet == destination)
+                return v;
+        }
+
+        return null;
     }
 
     public void HideTabs()

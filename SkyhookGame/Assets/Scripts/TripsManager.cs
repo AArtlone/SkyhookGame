@@ -42,7 +42,6 @@ public class TripsManager : PersistentSingleton<TripsManager>
         AllTrips.Remove(tripToFinish);
 
         tripToFinish.Arrived();
-        //onTripFinished?.Invoke(tripToFinish);
     }
 
     public void StartNewTrip(Planet planetOfOrigin, Planet destination, int timeToDestination, Ship ship)

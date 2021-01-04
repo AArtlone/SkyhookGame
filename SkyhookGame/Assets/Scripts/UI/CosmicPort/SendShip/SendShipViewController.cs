@@ -19,7 +19,7 @@ public class SendShipViewController : ViewController
 
     [Space(10f)]
     [SerializeField] private MyButton sendButton = default;
-    [SerializeField] private SendShipViewTabGroup tabGroup= default;
+    [SerializeField] private SendShipViewTabGroup tabGroup = default;
 
 
     private SendShipManager sendShipManager;
@@ -41,6 +41,21 @@ public class SendShipViewController : ViewController
         sendButton.SetInteractable(CanSend());
 
         tabGroup.onDestinationChanged += TabGroup_OnDestinationChanged;
+
+        if (!tabGroup.IsInitialized)
+            tabGroup.Initialize();
+
+        if (dock.Destination != Settlement.Instance.Planet)
+            tabGroup.SelectDestination(dock.Destination);
+        else
+            tabGroup.SelectFirstDestination();
+    }
+
+    public override void ViewFocused()
+    {
+        base.ViewFocused();
+
+        print(selectedDestination + " | " + dock.Destination);
     }
 
     public override void ViewWillBeUnfocused()
@@ -67,7 +82,12 @@ public class SendShipViewController : ViewController
     private void TabGroup_OnDestinationChanged(Planet newDestination)
     {
         if (selectedDestination != newDestination)
+        {
             selectedDestination = newDestination;
+            dock.SetDestination(newDestination);
+
+            print(selectedDestination + " | " + dock.Destination);
+        }
     }
 
     private void ResourceAdjuster_OnResourceChange()
@@ -117,6 +137,7 @@ public class SendShipViewController : ViewController
     public void Btn_Send()
     {
         CosmicPortUIManager.Instance.Back();
+
         Settlement.Instance.CosmicPort.SendShip(dock, selectedDestination);
     }
 

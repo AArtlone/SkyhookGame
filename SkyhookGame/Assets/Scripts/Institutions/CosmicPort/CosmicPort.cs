@@ -23,6 +23,8 @@ public class CosmicPort : Institution<CosmicPortData>
 
     public List<Dock> AllDocks { get; private set; }
 
+    private CosmicPortLandLaunchManager landLaunchManager;
+
     private int availableDocks;
     private int loadSpeed;
     private int unloadSpeed;
@@ -65,6 +67,8 @@ public class CosmicPort : Institution<CosmicPortData>
     protected override void InitializeMethod()
     {
         base.InitializeMethod();
+
+        landLaunchManager = new CosmicPortLandLaunchManager();
 
         UpdateDocksAvailability();
     }
@@ -168,12 +172,27 @@ public class CosmicPort : Institution<CosmicPortData>
 
     public void SendShip(Dock dock, Planet destination)
     {
+        if (landLaunchManager.IsLandingOrLaunching)
+        {
+            landLaunchManager.AddToQueue(LandOrLaunch.Launch, dock, destination);
+            return;
+        }
+
         ShipPrefab ship = Instantiate(shipPrefab, shipToSendContainer);
         ship.Launch(dock.Ship.shipType, LevelModule.Level);
+
+        landLaunchManager.SetToBusy();
 
         TripsManager.Instance.StartNewTrip(Settlement.Instance.Planet, destination, GetTimeToDestination(destination), dock.Ship);
 
         dock.RemoveShip();
+
+        Invoke(nameof(HandleNextQueueElement), 4f);
+    }
+
+    private void HandleNextQueueElement()
+    {
+        landLaunchManager.HandleNextQueueElement();
     }
 
     private int GetTimeToDestination(Planet destination)
