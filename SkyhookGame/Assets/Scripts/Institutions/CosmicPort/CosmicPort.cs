@@ -13,6 +13,7 @@ public class CosmicPort : Institution<CosmicPortData>
     [SerializeField] private Vector2Int unloadSpeedRange = default;
 
     [SerializeField] private float dockBuildTime = default;
+    [SerializeField] private int timeToFly = default;
 
     [Space(5f)]
     [SerializeField] private ShipPrefab shipPrefab = default;
@@ -170,14 +171,14 @@ public class CosmicPort : Institution<CosmicPortData>
         ShipPrefab ship = Instantiate(shipPrefab, shipToSendContainer);
         ship.Launch(dock.Ship.shipType, LevelModule.Level);
 
-        TripsManager.Instance.StartNewTrip(destination, GetTimeToDestination(destination), dock.Ship);
+        TripsManager.Instance.StartNewTrip(Settlement.Instance.Planet, destination, GetTimeToDestination(destination), dock.Ship);
 
         dock.RemoveShip();
     }
 
     private int GetTimeToDestination(Planet destination)
     {
-        return 10;
+        return timeToFly;
     }
 
     public List<Dock> GetEmptyDocks()

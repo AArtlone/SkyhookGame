@@ -38,23 +38,27 @@ public class TripsManager : PersistentSingleton<TripsManager>
     private void FinishTrip(Trip tripToFinish)
     {
         print("Trips has finished " + tripToFinish.destination);
-        
-        onTripFinished?.Invoke(tripToFinish);
-        
+
         AllTrips.Remove(tripToFinish);
+
+        tripToFinish.Arrived();
+        //onTripFinished?.Invoke(tripToFinish);
     }
 
-    public void StartNewTrip(Planet destination, int timeToDestination, Ship ship)
+    public void StartNewTrip(Planet planetOfOrigin, Planet destination, int timeToDestination, Ship ship)
     {
         if (AllTrips == null)
             AllTrips = new List<Trip>();
 
-        AllTrips.Add(new Trip(destination, timeToDestination, ship));
+        AllTrips.Add(new Trip(planetOfOrigin, destination, timeToDestination, ship));
     }
 }
 
 public class Trip
 {
+    public System.Action onArrived;
+
+    public Planet planetOfOrigin;
     public Planet destination;
     public int timeToDestination;
     public Ship ship;
@@ -62,8 +66,9 @@ public class Trip
     public TripClock TripClock { get; private set; }
     private TravelClockFactory travelFactory;
 
-    public Trip (Planet destination, int timeToDestination, Ship ship)
+    public Trip (Planet planetOfOrigin, Planet destination, int timeToDestination, Ship ship)
     {
+        this.planetOfOrigin = planetOfOrigin;
         this.destination = destination;
         this.timeToDestination = timeToDestination;
         this.ship = ship;
@@ -73,5 +78,10 @@ public class Trip
         travelFactory = watchFactory.CreateTravelFactory();
 
         TripClock = travelFactory.CreateTripClock(timeToDestination);
+    }
+
+    public void Arrived()
+    {
+        onArrived?.Invoke();
     }
 }
