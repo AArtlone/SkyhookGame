@@ -13,11 +13,11 @@ public class CosmicPort : Institution<CosmicPortData>
     [SerializeField] private Vector2Int unloadSpeedRange = default;
 
     [SerializeField] private float dockBuildTime = default;
-    [SerializeField] private int timeToFly = default;
 
     [Space(5f)]
     [SerializeField] private ShipPrefab shipPrefab = default;
-    [SerializeField] private Transform shipToSendContainer = default;
+    [SerializeField] private Transform shipToLaunchContainer = default;
+    [SerializeField] private Transform shipToLandContainer = default;
 
     public float DockBuildTime { get { return dockBuildTime; } }
 
@@ -38,6 +38,12 @@ public class CosmicPort : Institution<CosmicPortData>
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            var shipToLand = new Ship(ShipsDSID.CargoA, "SomeShip", 100);
+            LandShip(shipToLand);
+        }
+
         if (AllDocks == null)
             return;
 
@@ -68,7 +74,7 @@ public class CosmicPort : Institution<CosmicPortData>
     {
         base.InitializeMethod();
 
-        landLaunchManager = new CosmicPortLandLaunchManager();
+        landLaunchManager = new CosmicPortLandLaunchManager(this, shipPrefab, shipToLaunchContainer, shipToLandContainer);
 
         UpdateDocksAvailability();
     }
@@ -170,34 +176,14 @@ public class CosmicPort : Institution<CosmicPortData>
         dock.StartBuilding();
     }
 
-    public void SendShip(Dock dock, Planet destination)
+    public void LaunchShip(Dock dock, Planet destination)
     {
-        if (landLaunchManager.IsLandingOrLaunching)
-        {
-            landLaunchManager.AddToQueue(LandOrLaunch.Launch, dock, destination);
-            return;
-        }
-
-        ShipPrefab ship = Instantiate(shipPrefab, shipToSendContainer);
-        ship.Launch(dock.Ship.shipType, LevelModule.Level);
-
-        landLaunchManager.SetToBusy();
-
-        TripsManager.Instance.StartNewTrip(Settlement.Instance.Planet, destination, GetTimeToDestination(destination), dock.Ship);
-
-        dock.RemoveShip();
-
-        Invoke(nameof(HandleNextQueueElement), 4f);
+        landLaunchManager.LaunchShip(dock, destination, LevelModule.Level);
     }
 
-    private void HandleNextQueueElement()
+    public void LandShip(Ship ship)
     {
-        landLaunchManager.HandleNextQueueElement();
-    }
-
-    private int GetTimeToDestination(Planet destination)
-    {
-        return timeToFly;
+        landLaunchManager.LandShip(ship);
     }
 
     public List<Dock> GetEmptyDocks()

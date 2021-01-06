@@ -38,6 +38,11 @@ public class ShipFlier
     {
         return animationCurve.Evaluate(normTime);
     }
+
+    public bool ReachedDestination()
+    {
+        return flyTime >= timeToTarget;
+    }
 }
 
 public class ShipFlierV2

@@ -72,7 +72,6 @@ public class Trip
         this.timeToDestination = timeToDestination;
         this.ship = ship;
 
-
         var watchFactory = new WatchFactory();
         travelFactory = watchFactory.CreateTravelFactory();
 
@@ -82,5 +81,10 @@ public class Trip
     public void Arrived()
     {
         onArrived?.Invoke();
+
+        if (destination == Settlement.Instance.Planet)
+        {
+            Settlement.Instance.CosmicPort.LandShip(ship);
+        }
     }
 }

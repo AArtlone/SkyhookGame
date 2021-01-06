@@ -40,7 +40,7 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
         SettlementData settlementData = null;
 
         if (playerData != null)
-            settlementData = playerData.GetSettlementData(planet);    
+            settlementData = playerData.GetSettlementData(planet);
 
         if (playerData == null || settlementData == null)
         {
@@ -69,6 +69,12 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
         experienceModule.Increase(amount);
 
         Debug.Log(experienceModule.Experience);
+    }
+
+    public void ReceiveResources(ResourcesModule resourcesToReceive)
+    {
+        foreach (var resource in resourcesToReceive.resources)
+            ResourcesModule.IncreaseResource(resource.ResourceType, resource.Amount);
     }
 
     public SettlementData CreatSaveData()

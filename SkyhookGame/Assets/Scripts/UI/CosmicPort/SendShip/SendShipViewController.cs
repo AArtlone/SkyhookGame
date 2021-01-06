@@ -38,7 +38,7 @@ public class SendShipViewController : ViewController
 
         reqFuelText.text = ReqFuelText + sendShipManager.CalculateReqFuel().ToString();
 
-        sendButton.SetInteractable(CanSend());
+        sendButton.SetInteractable(sendShipManager.CanSend(GetCurrentFuelAmount()));
 
         tabGroup.onDestinationChanged += TabGroup_OnDestinationChanged;
 
@@ -49,13 +49,6 @@ public class SendShipViewController : ViewController
             tabGroup.SelectDestination(dock.Destination);
         else
             tabGroup.SelectFirstDestination();
-    }
-
-    public override void ViewFocused()
-    {
-        base.ViewFocused();
-
-        print(selectedDestination + " | " + dock.Destination);
     }
 
     public override void ViewWillBeUnfocused()
@@ -85,8 +78,6 @@ public class SendShipViewController : ViewController
         {
             selectedDestination = newDestination;
             dock.SetDestination(newDestination);
-
-            print(selectedDestination + " | " + dock.Destination);
         }
     }
 
@@ -95,7 +86,7 @@ public class SendShipViewController : ViewController
         shipMassText.text = MassText + sendShipManager.CalculateTotalMass().ToString();
         reqFuelText.text = ReqFuelText + sendShipManager.CalculateReqFuel().ToString();
 
-        sendButton.SetInteractable(CanSend());
+        sendButton.SetInteractable(sendShipManager.CanSend(GetCurrentFuelAmount()));
     }
 
     private void CreateResourceAdjusters()
@@ -136,20 +127,12 @@ public class SendShipViewController : ViewController
 
     public void Btn_Send()
     {
+        // We need to substract the required fuel from the total fuel
+        dock.Ship.resourcesModule.IncreaseResource(ResourcesDSID.Fuel, -sendShipManager.CalculateReqFuel());
+
         CosmicPortUIManager.Instance.Back();
 
-        Settlement.Instance.CosmicPort.SendShip(dock, selectedDestination);
-    }
-
-    private bool CanSend()
-    {
-        // Check if destination has empty dock
-
-        // Check if has enough fuel
-        bool canSend;
-        canSend = GetCurrentFuelAmount() >= sendShipManager.CalculateReqFuel();
-
-        return canSend;
+        Settlement.Instance.CosmicPort.LaunchShip(dock, selectedDestination);
     }
 
     private int GetCurrentFuelAmount()

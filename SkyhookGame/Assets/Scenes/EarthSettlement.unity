@@ -719,11 +719,6 @@ PrefabInstance:
       propertyPath: preview
       value: 
       objectReference: {fileID: 118257126}
-    - target: {fileID: 2226872234731064671, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-        type: 3}
-      propertyPath: timeToFly
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 5582465063722602343, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
         type: 3}
       propertyPath: m_LocalPosition.x
