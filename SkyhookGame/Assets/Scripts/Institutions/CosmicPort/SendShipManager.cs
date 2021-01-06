@@ -47,10 +47,8 @@ public class SendShipManager
         return amount * massOfOneUnit;
     }
 
-    public bool CanSend(int currentFuelAmount)
+    public bool CanLaunch(int currentFuelAmount)
     {
-        // Check if destination has empty dock
-
         // Check if has enough fuel
         bool canSend;
         canSend = currentFuelAmount >= CalculateReqFuel();

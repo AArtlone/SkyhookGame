@@ -40,8 +40,9 @@ public class CosmicPort : Institution<CosmicPortData>
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            var shipToLand = new Ship(ShipsDSID.CargoA, "SomeShip", 100);
-            LandShip(shipToLand);
+            AllDocks.ForEach(d => Debug.Log(d.DockID));
+            //var shipToLand = new Ship(ShipsDSID.CargoA, "SomeShip", 100);
+            //LandShip(shipToLand);
         }
 
         if (AllDocks == null)
@@ -143,10 +144,10 @@ public class CosmicPort : Institution<CosmicPortData>
     {
         AllDocks = new List<Dock>()
         {
-            new Dock(new DockData("Dock 1")),
-            new Dock(new DockData("Dock 2")),
-            new Dock(new DockData("Dock 3")),
-            new Dock(new DockData("Dock 4")),
+            new Dock(new DockData("Dock 1", DockID.A)),
+            new Dock(new DockData("Dock 2", DockID.B)),
+            new Dock(new DockData("Dock 3", DockID.C)),
+            new Dock(new DockData("Dock 4", DockID.D)),
         };
     }
 
@@ -176,14 +177,19 @@ public class CosmicPort : Institution<CosmicPortData>
         dock.StartBuilding();
     }
 
-    public void LaunchShip(Dock dock, Planet destination)
+    public void LaunchShip(Dock launchingDock, Dock destinationDock, Planet destination)
     {
-        landLaunchManager.LaunchShip(dock, destination, LevelModule.Level);
+        landLaunchManager.LaunchShip(launchingDock, destinationDock, destination, LevelModule.Level);
     }
 
-    public void LandShip(Ship ship)
+    //public void LandShip(Ship ship)
+    //{
+    //    landLaunchManager.LandShip(ship);
+    //}
+
+    public void TestLandShip(Trip trip)
     {
-        landLaunchManager.LandShip(ship);
+        landLaunchManager.LandShip(trip);
     }
 
     public List<Dock> GetEmptyDocks()

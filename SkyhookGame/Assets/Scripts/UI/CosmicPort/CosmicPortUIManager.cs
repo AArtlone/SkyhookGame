@@ -61,4 +61,9 @@ public class CosmicPortUIManager : Singleton<CosmicPortUIManager>
     {
         navController.Pop();
     }
+
+    public void Btn_UpgradeInstitution()
+    {
+        Settlement.Instance.CosmicPort.Upgrade();
+    }
 }

@@ -26,50 +26,62 @@ public class CosmicPortLandLaunchManager
         this.landShipContainer = landShipContainer;
     }
 
-    public void LaunchShip(Dock dock, Planet destination, int level)
+    public void LaunchShip(Dock launchingDock, Dock destinationDock, Planet destination, int level)
     {
         if (IsLandingOrLaunching)
         {
-            AddToQueue(LandOrLaunch.Launch, dock, destination);
+            AddToQueue(LandOrLaunch.Launch, launchingDock, destinationDock, destination);
             return;
         }
 
         ShipPrefab ship = Object.Instantiate(shipPrefab, launchShipContainer);
-        ship.Launch(dock.Ship.shipType, level, landShipContainer.position.y);
+        ship.Launch(launchingDock.Ship.shipType, level, landShipContainer.position.y);
 
         SetToBusy();
 
-        TripsManager.Instance.StartNewTrip(Settlement.Instance.Planet, destination, GetTimeToDestination(destination), dock.Ship);
+        TripsManager.Instance.StartNewTrip(Settlement.Instance.Planet, destination, GetTimeToDestination(destination), launchingDock.Ship, destinationDock);
 
-        dock.RemoveShip();
+        launchingDock.RemoveShip();
 
         mono.StartCoroutine(HandleNextQueueElementCo());
     }
 
-    public void LandShip(Ship shipToLand)
+    public void LandShip(Trip trip)
     {
         if (IsLandingOrLaunching)
         {
-            AddToQueue(LandOrLaunch.Land, shipToLand);
+            AddToQueue(LandOrLaunch.Land, trip);
             return;
         }
 
         spawnedShipPrefab = Object.Instantiate(shipPrefab, landShipContainer);
-        spawnedShipPrefab.Land(shipToLand, launchShipContainer.position.y);
+        spawnedShipPrefab.TestLand(trip, launchShipContainer.position.y);
         spawnedShipPrefab.onLanded += OnLanded;
 
         SetToBusy();
 
         mono.StartCoroutine(HandleNextQueueElementCo());
     }
-    private void OnLanded(Ship ship)
+
+    private void OnLanded(Trip trip)
     {
         spawnedShipPrefab.onLanded -= OnLanded;
 
-        if (ship.resourcesModule == null)
+        foreach (var dock in Settlement.Instance.CosmicPort.AllDocks)
+        {
+            if (dock.DockID != trip.destinationDock.DockID)
+                continue;
+
+            dock.ReceiveShip(trip.ship);
+        }
+
+
+        if (trip.ship.resourcesModule == null)
             return;
 
-        Settlement.Instance.ReceiveResources(ship.resourcesModule);
+        Settlement.Instance.ReceiveResources(trip.ship.resourcesModule);
+
+        trip.ship.resourcesModule = null;
     }
 
     private IEnumerator HandleNextQueueElementCo()
@@ -79,7 +91,7 @@ public class CosmicPortLandLaunchManager
         HandleNextQueueElement();
     }
 
-    public void HandleNextQueueElement()
+    private void HandleNextQueueElement()
     {
         IsLandingOrLaunching = false;
 
@@ -93,26 +105,26 @@ public class CosmicPortLandLaunchManager
 
         if (nextElement.landOrLaunch == LandOrLaunch.Land)
         {
-            LandShip(nextElement.ship);
+            LandShip(nextElement.trip);
             shipsQueue.Dequeue();
         }
         else
         {
             int cosmicPortLevel = Settlement.Instance.CosmicPort.LevelModule.Level;
-            LaunchShip(nextElement.dock, nextElement.destination, cosmicPortLevel);
+            LaunchShip(nextElement.launchDock, nextElement.destinationDock, nextElement.destination, cosmicPortLevel);
 
             shipsQueue.Dequeue();
         }
     }
 
-    public void AddToQueue(LandOrLaunch landOrLaunch, Dock dock, Planet destination)
+    public void AddToQueue(LandOrLaunch landOrLaunch, Dock launchDock, Dock destinationDock, Planet destination)
     {
-        shipsQueue.Enqueue(new CosmicPortQueueElement(landOrLaunch, dock, destination));
+        shipsQueue.Enqueue(new CosmicPortQueueElement(landOrLaunch, launchDock, destinationDock, destination));
     }
 
-    public void AddToQueue(LandOrLaunch landOrLaunch, Ship ship)
+    public void AddToQueue(LandOrLaunch landOrLaunch, Trip trip)
     {
-        shipsQueue.Enqueue(new CosmicPortQueueElement(landOrLaunch, ship));
+        shipsQueue.Enqueue(new CosmicPortQueueElement(landOrLaunch, trip));
     }
 
     public void SetToBusy()
@@ -129,21 +141,23 @@ public class CosmicPortLandLaunchManager
 public class CosmicPortQueueElement
 {
     public LandOrLaunch landOrLaunch;
-    public Dock dock;
+    public Dock launchDock;
+    public Dock destinationDock;
     public Planet destination;
-    public Ship ship;
+    public Trip trip;
 
-    public CosmicPortQueueElement(LandOrLaunch landOrLaunch, Dock dock, Planet destination)
+    public CosmicPortQueueElement(LandOrLaunch landOrLaunch, Dock launchDock, Dock destinationDock, Planet destination)
     {
         this.landOrLaunch = landOrLaunch;
-        this.dock = dock;
+        this.launchDock = launchDock;
+        this.destinationDock = destinationDock;
         this.destination = destination;
     }
 
-    public CosmicPortQueueElement(LandOrLaunch landOrLaunch, Ship ship)
+    public CosmicPortQueueElement(LandOrLaunch landOrLaunch, Trip trip)
     {
         this.landOrLaunch = landOrLaunch;
-        this.ship = ship;
+        this.trip = trip;
     }
 }
 

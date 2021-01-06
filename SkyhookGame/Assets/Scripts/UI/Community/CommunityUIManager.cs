@@ -37,4 +37,9 @@ public class CommunityUIManager : Singleton<CommunityUIManager>
 	{
 		navigationController.Pop();
 	}
+
+	public void Btn_UpgradeInstitution()
+	{
+		Settlement.Instance.Community.Upgrade();
+	}
 }

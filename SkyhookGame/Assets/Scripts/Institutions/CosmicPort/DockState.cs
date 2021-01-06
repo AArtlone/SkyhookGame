@@ -4,5 +4,6 @@
     Unlocked,
     Building,
     Empty,
-    Occupied
+    Occupied,
+    Reserved
 }

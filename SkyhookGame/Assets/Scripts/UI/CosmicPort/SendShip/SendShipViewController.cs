@@ -38,7 +38,7 @@ public class SendShipViewController : ViewController
 
         reqFuelText.text = ReqFuelText + sendShipManager.CalculateReqFuel().ToString();
 
-        sendButton.SetInteractable(sendShipManager.CanSend(GetCurrentFuelAmount()));
+        sendButton.SetInteractable(sendShipManager.CanLaunch(GetCurrentFuelAmount()));
 
         tabGroup.onDestinationChanged += TabGroup_OnDestinationChanged;
 
@@ -86,7 +86,7 @@ public class SendShipViewController : ViewController
         shipMassText.text = MassText + sendShipManager.CalculateTotalMass().ToString();
         reqFuelText.text = ReqFuelText + sendShipManager.CalculateReqFuel().ToString();
 
-        sendButton.SetInteractable(sendShipManager.CanSend(GetCurrentFuelAmount()));
+        sendButton.SetInteractable(sendShipManager.CanLaunch(GetCurrentFuelAmount()));
     }
 
     private void CreateResourceAdjusters()
@@ -127,12 +127,41 @@ public class SendShipViewController : ViewController
 
     public void Btn_Send()
     {
-        // We need to substract the required fuel from the total fuel
-        dock.Ship.resourcesModule.IncreaseResource(ResourcesDSID.Fuel, -sendShipManager.CalculateReqFuel());
+        List<Dock> destinationDocks = PlayerDataManager.Instance.GetDocksByPlanet(selectedDestination);
 
-        CosmicPortUIManager.Instance.Back();
+        foreach (var destinationDock in destinationDocks)
+        {
+            if (destinationDock.DockState == DockState.Empty)
+            {
+                // We need to substract the required fuel from the total fuel
+                dock.Ship.resourcesModule.IncreaseResource(ResourcesDSID.Fuel, -sendShipManager.CalculateReqFuel());
 
-        Settlement.Instance.CosmicPort.LaunchShip(dock, selectedDestination);
+                CosmicPortUIManager.Instance.Back();
+
+                Settlement.Instance.CosmicPort.LaunchShip(dock, destinationDock, selectedDestination);
+
+                // reserve this dock
+                destinationDock.UpdateState(DockState.Reserved);
+                ReserveDock(destinationDocks);
+
+                return;
+            }
+        }
+
+        string text = "No docks can receive the ship";
+        PopUpManager.CreateSingleButtonTextPopUp(text, "Ok");
+        return;
+    }
+
+    private void ReserveDock(List<Dock> docksToSave)
+    {
+        int cosmicPortLevel = Settlement.Instance.CosmicPort.LevelModule.Level;
+        var newDocksData = new List<DockData>(docksToSave.Count);
+        docksToSave.ForEach(d => newDocksData.Add(new DockData(d)));
+
+        var cosmicPortData = new CosmicPortData(cosmicPortLevel, newDocksData);
+
+        PlayerDataManager.Instance.PlayerData.SaveCosmicPortData(selectedDestination, cosmicPortData);
     }
 
     private int GetCurrentFuelAmount()
@@ -146,5 +175,15 @@ public class SendShipViewController : ViewController
         }
 
         return 1;
+    }
+}
+
+public class SomeManager : MyUtilities.PersistentSingleton<SomeManager>
+{
+    private Dictionary<Planet, List<Dock>> allDocks;
+
+    protected override void Awake()
+    {
+        SetInstance(this);
     }
 }

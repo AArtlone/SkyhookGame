@@ -11,6 +11,8 @@ public class Dock
     [SerializeField] private DockState dockState;
     public DockState DockState { get { return dockState; } }
 
+    public DockID DockID { get; private set; }
+
     public Ship Ship { get; private set; }
     public Planet Destination { get; private set; }
 
@@ -23,6 +25,7 @@ public class Dock
     {
         dockName = data.dockName;
         dockState = data.dockState;
+        DockID = data.dockID;
         Ship = data.ship;
         Destination = data.destination;
 
@@ -69,6 +72,12 @@ public class Dock
             Destination = newDestination;
     }
 
+    public void ReceiveShip(Ship ship)
+    {
+        Ship = ship;
+        UpdateState(DockState.Occupied);
+    }
+
     public void AssignShip(Ship ship)
     {
         Ship = ship;
@@ -88,15 +97,17 @@ public class DockData
 {
     public string dockName;
     public DockState dockState;
+    public DockID dockID;
     public Ship ship;
     public Planet destination;
     public List<Resource> resourcesInShip;
     public float buildTimeLeft;
 
-    public DockData(string dockName)
+    public DockData(string dockName, DockID dockID)
     {
         this.dockName = dockName;
         dockState = DockState.Locked;
+        this.dockID = dockID;
         ship = null;
     }
 
@@ -104,6 +115,7 @@ public class DockData
     {
         dockName = dock.dockName;
         dockState = dock.DockState;
+        dockID = dock.DockID;
         ship = dock.Ship;
         destination = dock.Destination;
         
@@ -113,4 +125,9 @@ public class DockData
         if (dock.TripClock != null)
             buildTimeLeft = dock.TripClock.TimeLeft();
     }
+}
+
+public enum DockID
+{
+    A, B, C, D
 }

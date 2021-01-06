@@ -71,4 +71,9 @@ public class ManufactoryUIManager : Singleton<ManufactoryUIManager>
     {
         navController.Pop();
     }
+
+    public void Btn_UpgradeInstitution()
+    {
+        Settlement.Instance.Manufactory.Upgrade();
+    }
 }

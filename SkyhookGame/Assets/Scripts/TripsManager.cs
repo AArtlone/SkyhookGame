@@ -44,12 +44,12 @@ public class TripsManager : PersistentSingleton<TripsManager>
         tripToFinish.Arrived();
     }
 
-    public void StartNewTrip(Planet planetOfOrigin, Planet destination, int timeToDestination, Ship ship)
+    public void StartNewTrip(Planet planetOfOrigin, Planet destination, int timeToDestination, Ship ship, Dock destinationDock)
     {
         if (AllTrips == null)
             AllTrips = new List<Trip>();
 
-        AllTrips.Add(new Trip(planetOfOrigin, destination, timeToDestination, ship));
+        AllTrips.Add(new Trip(planetOfOrigin, destination, timeToDestination, ship, destinationDock));
     }
 }
 
@@ -61,16 +61,18 @@ public class Trip
     public Planet destination;
     public int timeToDestination;
     public Ship ship;
+    public Dock destinationDock;
 
     public TripClock TripClock { get; private set; }
     private TravelClockFactory travelFactory;
 
-    public Trip (Planet planetOfOrigin, Planet destination, int timeToDestination, Ship ship)
+    public Trip (Planet planetOfOrigin, Planet destination, int timeToDestination, Ship ship, Dock destinationDock)
     {
         this.planetOfOrigin = planetOfOrigin;
         this.destination = destination;
         this.timeToDestination = timeToDestination;
         this.ship = ship;
+        this.destinationDock = destinationDock;
 
         var watchFactory = new WatchFactory();
         travelFactory = watchFactory.CreateTravelFactory();
@@ -84,7 +86,38 @@ public class Trip
 
         if (destination == Settlement.Instance.Planet)
         {
-            Settlement.Instance.CosmicPort.LandShip(ship);
+            Settlement.Instance.CosmicPort.TestLandShip(this);
         }
+        else
+        {
+            ChangeOtherCosmicPortDocksData();
+            ChangeOtherSettlementResources();
+        }
+    }
+
+    private void ChangeOtherCosmicPortDocksData()
+    {
+        List<Dock> destinationDocks = PlayerDataManager.Instance.GetDocksByPlanet(destination);
+
+        foreach (var dock in destinationDocks)
+        {
+            if (dock.DockID != destinationDock.DockID)
+                continue;
+
+            dock.ReceiveShip(ship);
+        }
+
+        int cosmicPortLevel = Settlement.Instance.CosmicPort.LevelModule.Level;
+        var newDocksData = new List<DockData>(destinationDocks.Count);
+        destinationDocks.ForEach(d => newDocksData.Add(new DockData(d)));
+
+        var cosmicPortData = new CosmicPortData(cosmicPortLevel, newDocksData);
+
+        PlayerDataManager.Instance.PlayerData.SaveCosmicPortData(destination, cosmicPortData);
+    }
+
+    private void ChangeOtherSettlementResources()
+    {
+        PlayerDataManager.Instance.PlayerData.SaveSettlementResources(destination, ship.resourcesModule);
     }
 }

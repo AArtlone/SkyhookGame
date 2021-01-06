@@ -2,10 +2,8 @@
 
 public class ShipPrefab : MonoBehaviour
 {
-    public System.Action<Ship> onLanded;
+    public System.Action<Trip> onLanded;
 
-    //[SerializeField] private float targetY = default;
-    //[SerializeField] private float landingTargetY = default;
     [SerializeField] private float timeToTarget = default;
 
     [Space(5f)]
@@ -17,6 +15,7 @@ public class ShipPrefab : MonoBehaviour
     private ShipFlier shipFlier;
 
     private Ship shipToLand;
+    private Trip tripToEnd;
     private bool landing;
 
     private void Update()
@@ -34,7 +33,7 @@ public class ShipPrefab : MonoBehaviour
 
         if (shipFlier.ReachedDestination())
         {
-            onLanded?.Invoke(shipToLand);
+            onLanded?.Invoke(tripToEnd);
             Destroy(gameObject);
         }
     }
@@ -61,6 +60,19 @@ public class ShipPrefab : MonoBehaviour
         landing = true;
 
         var shipSprite = Resources.Load<Sprite>($"Sprites/Ships/{ship.shipType}");
+        shipSpriteRend.sprite = shipSprite;
+
+        boosterSpriteRend.enabled = false;
+
+        shipFlier = new ShipFlier(transform.position.y, targetY, timeToTarget, landingCurve);
+    }
+
+    public void TestLand(Trip trip, float targetY)
+    {
+        tripToEnd = trip;
+        landing = true;
+
+        var shipSprite = Resources.Load<Sprite>($"Sprites/Ships/{trip.ship.shipType}");
         shipSpriteRend.sprite = shipSprite;
 
         boosterSpriteRend.enabled = false;

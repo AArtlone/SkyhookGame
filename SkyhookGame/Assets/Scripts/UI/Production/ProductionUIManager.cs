@@ -38,4 +38,9 @@ public class ProductionUIManager : Singleton<ProductionUIManager>
 	{
 		navigationController.Pop();
 	}
+
+	public void Btn_UpgradeInstitution()
+	{
+		Settlement.Instance.Production.Upgrade();
+	}
 }

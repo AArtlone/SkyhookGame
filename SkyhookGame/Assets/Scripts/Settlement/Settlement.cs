@@ -56,7 +56,7 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
     private void SaveDataIsNull()
     {
         ResourcesModule = new ResourcesModule();
-        ResourcesModule.resources.ForEach(r => r.ChangeAmount(5000));
+        ResourcesModule.resources.ForEach(r => r.ChangeAmount(100));
     }
 
     public void SetTestResources(int testAmount)
@@ -112,5 +112,14 @@ public class SettlementData
         this.manufactoryData = manufactoryData;
         this.starLabsData = starLabsData;
         this.resources = resources;
+    }
+
+    public SettlementData(SettlementData oldSettlementData, List<Resource> newResources)
+    {
+        planet = oldSettlementData.planet;
+        cosmicPortData = oldSettlementData.cosmicPortData;
+        manufactoryData = oldSettlementData.manufactoryData;
+        starLabsData = oldSettlementData.starLabsData;
+        resources = newResources;
     }
 }

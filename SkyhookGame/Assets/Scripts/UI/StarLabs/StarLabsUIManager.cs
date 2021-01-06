@@ -37,4 +37,9 @@ public class StarLabsUIManager : Singleton<StarLabsUIManager>
 	{
 		navigationController.Pop();
 	}
+
+	public void Btn_UpgradeInstitution()
+	{
+		Settlement.Instance.StarLabs.Upgrade();
+	}
 }

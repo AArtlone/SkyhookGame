@@ -1,5 +1,6 @@
 ﻿using MyUtilities;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerDataManager : PersistentSingleton<PlayerDataManager>
@@ -62,5 +63,27 @@ public class PlayerDataManager : PersistentSingleton<PlayerDataManager>
         });
 
         IOUtility<PlayerData>.LoadData("PlayerData", callback);
+    }
+
+    public List<Dock> GetDocksByPlanet(Planet planet)
+    {
+        List<DockData> docksData = new List<DockData>();
+        switch (planet)
+        {
+            case Planet.Earth:
+                docksData = PlayerData.earthData.cosmicPortData.docksData;
+            break;
+            case Planet.Moon:
+                docksData = PlayerData.moonData.cosmicPortData.docksData;
+                break;
+            case Planet.Mars:
+                docksData = PlayerData.marsData.cosmicPortData.docksData;
+                break;
+        }
+
+        List<Dock> result = new List<Dock>(docksData.Count);
+        docksData.ForEach(d => result.Add(new Dock(d)));
+        
+        return result;
     }
 }

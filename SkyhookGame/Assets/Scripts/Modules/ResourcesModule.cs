@@ -34,6 +34,14 @@ public class ResourcesModule
         }
     }
 
+    public void AAA(ResourcesModule resourcesModule)
+    {
+        foreach (var resource in resourcesModule.resources)
+        {
+            IncreaseResource(resource.ResourceType, resource.Amount);
+        }
+    }
+
     public int GetResourceAmount(ResourcesDSID resourceType)
     {
         foreach (var resource in resources)
