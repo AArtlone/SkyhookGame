@@ -118,6 +118,6 @@ public class Trip
 
     private void ChangeOtherSettlementResources()
     {
-        PlayerDataManager.Instance.PlayerData.SaveSettlementResources(destination, ship.resourcesModule);
+        PlayerDataManager.Instance.PlayerData.SaveSettlementResources(destination, ship.resourcesModule.resources);
     }
 }

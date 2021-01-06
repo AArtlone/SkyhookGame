@@ -71,7 +71,7 @@ public class PlayerData
         }
     }
 
-    public void SaveSettlementResources(Planet planet, ResourcesModule resourcesModule)
+    public void SaveSettlementResources(Planet planet, List<Resource> resources)
     {
         SettlementData oldData = null;
 
@@ -92,22 +92,8 @@ public class PlayerData
 
         List<Resource> newResources = new List<Resource>(oldData.resources);
 
-        foreach (var v in newResources)
-        {
-            UnityEngine.Debug.Log(v.ResourceType.ToString() + " | " + v.Amount);
-        }
-
         for (int i = 0; i < newResources.Count; i++)
-        {
-            newResources[i].ChangeAmount(resourcesModule.resources[i].Amount);
-        }
-
-        UnityEngine.Debug.Log("----------------------");
-
-        foreach (var v in newResources)
-        {
-            UnityEngine.Debug.Log(v.ResourceType.ToString() + " | " + v.Amount);
-        }
+            newResources[i].ChangeAmount(resources[i].Amount);
 
         var newSettlementData = new SettlementData(oldData, newResources);
 
