@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class CosmicPortAssignShipSelectableController : StorageSelectableController
+﻿public class CosmicPortAssignShipSelectableController : StorageSelectableController
 {
     private Dock dockToAssignTo;
 
@@ -9,7 +7,7 @@ public class CosmicPortAssignShipSelectableController : StorageSelectableControl
         dockToAssignTo = dock;
     }
 
-    protected override void OnCellPressed()
+    protected override void OnCellPressed(ShipsDSID shipType)
     {
         var ship = GetSelectedCell().data.ship;
 

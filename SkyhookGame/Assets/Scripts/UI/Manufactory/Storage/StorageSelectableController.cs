@@ -10,12 +10,15 @@ public class StorageSelectableController : SelectableController<StorageCell, Sto
     {
         base.Cell_OnCellPress(cell);
 
-        OnCellPressed();
+        OnCellPressed(cell.data.ship.shipType);
     }
 
     // For override purpose
-    protected virtual void OnCellPressed()
+    protected virtual void OnCellPressed(ShipsDSID shipType)
     {
+        if (shipType == ShipsDSID.Skyhook)
+            return;
+
         ShowAssignShipToDockView();
     }
 

@@ -9,5 +9,7 @@ public class StudiesManager : Singleton<StudiesManager>
     protected override void Awake()
     {
         SetInstance(this);
+
+        CompletedStudies.Add(StudyCode.B);
     }
 }

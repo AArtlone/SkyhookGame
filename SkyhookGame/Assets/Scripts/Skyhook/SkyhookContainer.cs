@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MyUtilities.GUI;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SkyhookContainer : BaseTouchController
@@ -70,7 +71,20 @@ public class SkyhookContainer : BaseTouchController
 
     protected override void OnTouch()
     {
-        print("aaa");
-        // Open storage
+        int skyhooksInStorage = Settlement.Instance.Manufactory.SkyhooksInStorage;
+
+        if (skyhooksInStorage == 0)
+            ShowNoSkyhooksPopUp();
+        else
+            SkyhookManager.Instance.SpawnSkyhook(this);
+    }
+
+    private void ShowNoSkyhooksPopUp()
+    {
+        var description = "There are no Skyhooks in the storage";
+
+        var buttonText = "Ok";
+
+        PopUpManager.CreateSingleButtonTextPopUp(description, buttonText);
     }
 }

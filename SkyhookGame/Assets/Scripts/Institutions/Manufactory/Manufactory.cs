@@ -12,15 +12,16 @@ public class Manufactory : Institution<ManufactoryData>
     [SerializeField] private Vector2Int storageCapacityRange = default;
 
     [SerializeField] private float buildDuration = default;
-    public float BuildDuration { get { return buildDuration; } }
 
     public List<ManufactoryTask> ManufactoryTasks { get; private set; } = new List<ManufactoryTask>();
     public List<Ship> ShipsInStorage { get; private set; } = new List<Ship>();
+    public float BuildDuration { get { return buildDuration; } }
+    public int SkyhooksInStorage { get; private set; }
+
+    private List<ManufactoryTask> tasksToRemove; // A list of task to remove at the end of the frame
 
     private int storageCapacity;
     private int tasksCapacity;
-
-    private List<ManufactoryTask> tasksToRemove; // A list of task to remove at the end of the frame
 
     private IEnumerator Start()
     {
@@ -94,6 +95,12 @@ public class Manufactory : Institution<ManufactoryData>
 
         // Set ShipsInStorage
         ShipsInStorage = new List<Ship>(data.shipsInStorageData);
+
+        foreach (var storageItem in ShipsInStorage)
+        {
+            if (storageItem.shipType == ShipsDSID.Skyhook)
+                SkyhooksInStorage++;
+        }
     }
 
     protected override void UpdateVariables()
@@ -114,6 +121,9 @@ public class Manufactory : Institution<ManufactoryData>
     private void DoneBuildingShip(ManufactoryTask task)
     {
         var ship = task.shipToProduce;
+
+        if (ship.shipType == ShipsDSID.Skyhook)
+            SkyhooksInStorage++;
 
         ShipsInStorage.Add(ship);
 
@@ -141,6 +151,37 @@ public class Manufactory : Institution<ManufactoryData>
         ManufactoryTasks.Add(manufactoryTask);
 
         onManufactoryTasksChange?.Invoke();
+    }
+
+    public void RemoveSkyhook()
+    {
+        if (SkyhooksInStorage == 0)
+            return;
+
+        foreach (var storageItem in ShipsInStorage)
+        {
+            if (storageItem.shipType == ShipsDSID.Skyhook)
+            {
+                //TODO: make this a method
+                ShipsInStorage.Remove(storageItem);
+                onShipsInStorageChange?.Invoke();
+                return;
+            }
+        }
+    }
+    /// <summary>
+    /// A list of ships in the storage with Skyhooks
+    /// </summary>
+    /// <returns></returns>
+    public List<Ship> GetOnlyShips()
+    {
+        List<Ship> result = new List<Ship>(ShipsInStorage.Count);
+
+        foreach (var storageItem in ShipsInStorage)
+            if (storageItem.shipType != ShipsDSID.Skyhook)
+                result.Add(storageItem);
+
+        return result;
     }
 
     public bool CanBuild()

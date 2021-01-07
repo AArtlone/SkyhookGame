@@ -1,59 +1,48 @@
-﻿using System.Collections.Generic;
+﻿using MyUtilities;
 using UnityEngine;
 
-public class SkyhookManager : MonoBehaviour
+public class SkyhookManager : Singleton<SkyhookManager>
 {
-    [SerializeField] private List<SkyhookContainer> allContainers = default;
-
     [SerializeField] private Skyhook skyhookPrefab = default;
 
-    private void Awake()
+    protected override void Awake()
     {
         if (skyhookPrefab == null)
         {
             Debug.LogWarning($"Skyhook prefab is not assigned in the editor on {gameObject.name} gameobject");
             enabled = false;
+            return;
         }
+
+        SetInstance(this);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            SpawnSkyhook(0);
-        }
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    SpawnSkyhook(0);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SpawnSkyhook(1);
-        }
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    SpawnSkyhook(1);
+        //}
     }
 
-    public void UnlockSkyhookContainer(int index)
+    public void UnlockSkyhookContainer(SkyhookContainer container)
     {
-        if (index > allContainers.Count - 1)
-        {
-            Debug.LogWarning("Index is out of allContainers range");
-            return;
-        }
-
-        allContainers[index].gameObject.SetActive(true);
+        container.gameObject.SetActive(true);
     }
 
-    public void SpawnSkyhook(int index)
+    public void SpawnSkyhook(SkyhookContainer container)
     {
-        if (index > allContainers.Count - 1)
-        {
-            Debug.LogWarning("Index is out of allContainers range");
-            return;
-        }
-
-        var container = allContainers[index];
-
         var skyhook = Instantiate(skyhookPrefab, container.transform);
 
         skyhook.Initialize(container);
 
         container.DisableBlueprint();
+
+        Settlement.Instance.Manufactory.RemoveSkyhook();
     }
 }
