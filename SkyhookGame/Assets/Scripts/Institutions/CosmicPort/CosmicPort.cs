@@ -45,7 +45,6 @@ public class CosmicPort : Institution<CosmicPortData>
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            RunSmokeAnimation();
             //ManufactoryUIManager _man = ManufactoryUIManager.Instance as ManufactoryUIManager;
             //print(_man.AssignShipToDock);
             
