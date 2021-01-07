@@ -1,4 +1,5 @@
 ﻿using MyUtilities.GUI;
+using System.Collections;
 using UnityEngine;
 
 public abstract class BaseInstitutionUIManager : MonoBehaviour
@@ -38,14 +39,20 @@ public abstract class BaseInstitutionUIManager : MonoBehaviour
     {
         navigationController.Pop();
 
-        if (IsNavStackEmpty())
-            ToggleIsUIDisplayed(false);
+        StartCoroutine(CheckIfStackIsEmptyCo());
     }
 
     private bool IsNavStackEmpty()
     {
-        // return navigationController.IsStackEmpty();
-        return false;
+        return navigationController.IsNavStackEmpty();
+    }
+
+    private IEnumerator CheckIfStackIsEmptyCo()
+    {
+        yield return new WaitForSeconds(.6f);
+
+        if (IsNavStackEmpty())
+            ToggleIsUIDisplayed(false);
     }
     #endregion
 }

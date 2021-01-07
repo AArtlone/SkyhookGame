@@ -18,6 +18,8 @@ public class StarLabsUIManager : BaseInstitutionUIManager
 
 	public override void Btn_ShowView()
 	{
+		base.Btn_ShowView();
+
 		preview.SetActive(false);
 		navigationController.Push(starLabsViewController);
 	}
