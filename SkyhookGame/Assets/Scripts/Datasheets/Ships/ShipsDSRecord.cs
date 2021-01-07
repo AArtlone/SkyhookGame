@@ -10,6 +10,7 @@ public class ShipsDSRecord: DSRecordBase<ShipsDSID>
 	public int weightCapacity;
 	public int reqAluminium;
 	public int reqPlatinum;
+	public StudyCode reqStudy;
 
 	public ShipsDSRecord(string[] csvFileLine)
 	{
@@ -20,5 +21,6 @@ public class ShipsDSRecord: DSRecordBase<ShipsDSID>
 		weightCapacity= int.Parse(csvFileLine[4]);
 		reqAluminium = int.Parse(csvFileLine[5]);
 		reqPlatinum = int.Parse(csvFileLine[6]);
+		reqStudy = (StudyCode)Enum.Parse(typeof(StudyCode), csvFileLine[7]);
 	}
 }

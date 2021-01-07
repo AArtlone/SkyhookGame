@@ -20,6 +20,7 @@ MonoBehaviour:
     weightCapacity: 20
     reqAluminium: 1000
     reqPlatinum: 1000
+    reqStudy: 0
   - recordID: 1
     shipName: Cargo B
     price: 2000
@@ -27,6 +28,7 @@ MonoBehaviour:
     weightCapacity: 40
     reqAluminium: 2000
     reqPlatinum: 2000
+    reqStudy: 0
   - recordID: 2
     shipName: Craft
     price: 5000
@@ -34,3 +36,12 @@ MonoBehaviour:
     weightCapacity: 50
     reqAluminium: 5000
     reqPlatinum: 5000
+    reqStudy: 0
+  - recordID: 3
+    shipName: Skyhool
+    price: 10000
+    mass: 100
+    weightCapacity: 0
+    reqAluminium: 10000
+    reqPlatinum: 10000
+    reqStudy: 1

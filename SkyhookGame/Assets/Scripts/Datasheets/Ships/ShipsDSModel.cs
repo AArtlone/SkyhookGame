@@ -1,6 +1,5 @@
 using MyUtilities.DataSheets;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class ShipsDSModel: DSModelBase<ShipsDSRecord, ShipsDSID>
 {
@@ -17,8 +16,16 @@ public class ShipsDSModel: DSModelBase<ShipsDSRecord, ShipsDSID>
 
 		List<ShipRecipe> result = new List<ShipRecipe>(shipRecords.Count);
 
-        foreach (var shipRecord in shipRecords)
+        foreach (ShipsDSRecord shipRecord in shipRecords)
+		{
+			if (shipRecord.reqStudy != StudyCode.None)
+            {
+				if (!StudiesManager.Instance.CompletedStudies.Contains(shipRecord.reqStudy))
+					continue;
+            }
+
 			result.Add(new ShipRecipe(shipRecord.recordID, shipRecord.shipName, shipRecord.price, shipRecord.mass, shipRecord.reqAluminium, shipRecord.reqPlatinum));
+		}
 
 		return result;
 	}

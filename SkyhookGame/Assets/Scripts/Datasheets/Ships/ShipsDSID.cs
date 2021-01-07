@@ -2,5 +2,6 @@ public enum ShipsDSID
 {
 	CargoA,
 	CargoB,
-	Craft
+	Craft,
+	Skyhook
 }
