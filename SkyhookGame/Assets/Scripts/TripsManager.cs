@@ -86,7 +86,7 @@ public class Trip
 
         if (destination == Settlement.Instance.Planet)
         {
-            Settlement.Instance.CosmicPort.TestLandShip(this);
+            Settlement.Instance.CosmicPort.LandShip(this);
         }
         else
         {

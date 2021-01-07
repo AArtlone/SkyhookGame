@@ -7,6 +7,8 @@ public class CosmicPort : Institution<CosmicPortData>
 {
     public Action onUpgrade;
 
+    private static readonly int ANIMATOR_SMOKE = Animator.StringToHash("Idle");
+
     [Header("Cosmic Port")]
     [SerializeField] private Vector2Int availableDocksRange = default;
     [SerializeField] private Vector2Int loadSpeedRange = default;
@@ -18,6 +20,9 @@ public class CosmicPort : Institution<CosmicPortData>
     [SerializeField] private ShipPrefab shipPrefab = default;
     [SerializeField] private Transform shipToLaunchContainer = default;
     [SerializeField] private Transform shipToLandContainer = default;
+    
+    [Space(5f)]
+    [SerializeField] private GameObject smokeObject = default;
 
     public float DockBuildTime { get { return dockBuildTime; } }
 
@@ -40,6 +45,7 @@ public class CosmicPort : Institution<CosmicPortData>
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            RunSmokeAnimation();
             //ManufactoryUIManager _man = ManufactoryUIManager.Instance as ManufactoryUIManager;
             //print(_man.AssignShipToDock);
             
@@ -181,15 +187,12 @@ public class CosmicPort : Institution<CosmicPortData>
 
     public void LaunchShip(Dock launchingDock, Dock destinationDock, Planet destination)
     {
+        smokeObject.SetActive(true);
+
         landLaunchManager.LaunchShip(launchingDock, destinationDock, destination, LevelModule.Level);
     }
 
-    //public void LandShip(Ship ship)
-    //{
-    //    landLaunchManager.LandShip(ship);
-    //}
-
-    public void TestLandShip(Trip trip)
+    public void LandShip(Trip trip)
     {
         landLaunchManager.LandShip(trip);
     }

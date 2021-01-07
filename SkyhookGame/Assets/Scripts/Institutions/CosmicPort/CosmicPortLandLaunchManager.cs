@@ -55,7 +55,7 @@ public class CosmicPortLandLaunchManager
         }
 
         spawnedShipPrefab = Object.Instantiate(shipPrefab, landShipContainer);
-        spawnedShipPrefab.TestLand(trip, launchShipContainer.position.y);
+        spawnedShipPrefab.Land(trip, launchShipContainer.position.y);
         spawnedShipPrefab.onLanded += OnLanded;
 
         SetToBusy();
