@@ -40,7 +40,9 @@ public class CosmicPort : Institution<CosmicPortData>
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            AllDocks.ForEach(d => Debug.Log(d.DockID));
+            //ManufactoryUIManager _man = ManufactoryUIManager.Instance as ManufactoryUIManager;
+            //print(_man.AssignShipToDock);
+            
             //var shipToLand = new Ship(ShipsDSID.CargoA, "SomeShip", 100);
             //LandShip(shipToLand);
         }
@@ -58,8 +60,8 @@ public class CosmicPort : Institution<CosmicPortData>
 
             dock.UpdateState(DockState.Empty);
 
-            CosmicPortUIManager.Instance.DocksViewController.ChangeData();
-            ManufactoryUIManager.Instance.AssignShipToDock.ChangeData();
+            InstitutionsUIManager.CosmicPortUIManager.DocksViewController.ChangeData();
+            InstitutionsUIManager.ManufactoryUIManager.AssignShipToDock.ChangeData();
         }
     }
 
@@ -204,6 +206,8 @@ public class CosmicPort : Institution<CosmicPortData>
 
         return emptyDocks;
     }
+
+    private InstitutionsUIManager InstitutionsUIManager { get { return InstitutionsUIManager.Instance; } }
 }
 
 [Serializable]

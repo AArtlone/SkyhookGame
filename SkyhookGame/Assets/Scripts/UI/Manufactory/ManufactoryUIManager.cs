@@ -1,16 +1,9 @@
-﻿using MyUtilities;
-using MyUtilities.GUI;
+﻿using MyUtilities.GUI;
 using UnityEngine;
 
-public class ManufactoryUIManager : Singleton<ManufactoryUIManager>
+public class ManufactoryUIManager : BaseInstitutionUIManager
 {
-    [Space(10f)]
-    [SerializeField] private GameObject preview = default;
-    [SerializeField] private GameObject upgradeView = default;
-    [SerializeField] private GameObject manufactoryView = default;
-
     [Header("Navigation Controllers")]
-    [SerializeField] private NavigationController navigationController = default;
     [SerializeField] private NavigationController tabsNavigationController = default; //Navigation controller that is responsible for handling views of the TabGroup
 
     [Header("View Controllers")]
@@ -27,23 +20,22 @@ public class ManufactoryUIManager : Singleton<ManufactoryUIManager>
 
     protected override void Awake()
     {
-        SetInstance(this);
+        base.Awake();
 
-        preview.SetActive(false);
-        upgradeView.SetActive(false);
-        manufactoryView.gameObject.SetActive(false);
+        manufactoryViewController.gameObject.SetActive(false);
     }
 
-    public void Btn_ShowManufactoryView()
+    public override void Btn_UpgradeInstitution()
     {
+        Settlement.Instance.Manufactory.Upgrade();
+    }
+
+    public override void Btn_ShowView()
+    {
+        base.Btn_ShowView();
+
         preview.SetActive(false);
         navigationController.Push(manufactoryViewController);
-    }
-
-    public void Btn_ShowUpgradeView()
-    {
-        preview.SetActive(false);
-        upgradeView.SetActive(true);
     }
 
     public void ShowAssignShipToDockView()
@@ -67,13 +59,10 @@ public class ManufactoryUIManager : Singleton<ManufactoryUIManager>
     }
 
     // For editor reference
+    // This Back method overload is need to be able to pass in different navigation controllers
+    // This is needed because Manufactory UI makes use of multiple navigation controllers
     public void Back(NavigationController navController)
     {
         navController.Pop();
-    }
-
-    public void Btn_UpgradeInstitution()
-    {
-        Settlement.Instance.Manufactory.Upgrade();
     }
 }

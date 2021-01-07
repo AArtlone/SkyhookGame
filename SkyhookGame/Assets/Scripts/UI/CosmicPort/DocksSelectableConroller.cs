@@ -9,16 +9,16 @@ public class DocksSelectableConroller : SelectableController<DocksCell, DocksCel
         switch (cell.data.dock.DockState)
         {
             case DockState.Unlocked:
-                DocksViewController.ShowBuildDockView();
+                CosmicPortUIManager.DocksViewController.ShowBuildDockView();
                 break;
             case DockState.Empty:
-                DocksViewController.ShowAssignShipView();
+                CosmicPortUIManager.DocksViewController.ShowAssignShipView();
                 break;
             case DockState.Occupied:
-                CosmicPortUIManager.Instance.ShowSendShipView(GetSelectedCell().data.dock);
+                CosmicPortUIManager.ShowSendShipView(GetSelectedCell().data.dock);
                 break;
         }
     }
 
-    private DocksViewController DocksViewController { get { return CosmicPortUIManager.Instance.DocksViewController; } }
+    private CosmicPortUIManager CosmicPortUIManager { get { return InstitutionsUIManager.Instance.CosmicPortUIManager; } }
 }

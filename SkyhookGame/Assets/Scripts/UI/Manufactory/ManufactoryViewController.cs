@@ -7,7 +7,7 @@ public class ManufactoryViewController : ViewController
 
     private void TabGroup_OnTabSelection(ViewController selectedView)
     {
-        ManufactoryGUIManager.ShowTabPage(selectedView);
+        InstitutionsUIManager.Instance.ManufactoryUIManager.ShowTabPage(selectedView);
     }
 
     public override void ViewWillAppear()
@@ -23,6 +23,4 @@ public class ManufactoryViewController : ViewController
 
         tabGroup.onTabSelection -= TabGroup_OnTabSelection;
     }
-
-    private ManufactoryUIManager ManufactoryGUIManager { get { return ManufactoryUIManager.Instance; } }
 }

@@ -1,46 +1,26 @@
-﻿using MyUtilities;
-using MyUtilities.GUI;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ProductionUIManager : Singleton<ProductionUIManager>
+public class ProductionUIManager : BaseInstitutionUIManager
 {
-	[Space(10f)]
-	[SerializeField] private GameObject preview = default;
-	[SerializeField] private GameObject upgradeView = default;
-
-	[Header("Navigation Controllers")]
-	[SerializeField] private NavigationController navigationController = default;
     [SerializeField] private ProductionViewController productionViewController = default;
 
 	protected override void Awake()
 	{
-		SetInstance(this);
+		base.Awake();
 
-		preview.SetActive(false);
-		upgradeView.SetActive(false);
 		productionViewController.gameObject.SetActive(false);
 	}
 
-	public void Btn_ShowProductionView()
-	{
-		preview.SetActive(false);
-		navigationController.Push(productionViewController);
-	}
-
-
-	public void Btn_ShowUpgradeView()
-	{
-		preview.SetActive(false);
-		upgradeView.SetActive(true);
-	}
-
-	public void Back()
-	{
-		navigationController.Pop();
-	}
-
-	public void Btn_UpgradeInstitution()
+	public override void Btn_UpgradeInstitution()
 	{
 		Settlement.Instance.Production.Upgrade();
+	}
+
+	public override void Btn_ShowView()
+	{
+		base.Btn_ShowView();
+
+		preview.SetActive(false);
+		navigationController.Push(productionViewController);
 	}
 }

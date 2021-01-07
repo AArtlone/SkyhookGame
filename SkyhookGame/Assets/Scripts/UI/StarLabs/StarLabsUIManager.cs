@@ -1,45 +1,24 @@
-﻿using MyUtilities;
-using MyUtilities.GUI;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class StarLabsUIManager : Singleton<StarLabsUIManager>
+public class StarLabsUIManager : BaseInstitutionUIManager
 {
-	[Space(10f)]
-	[SerializeField] private GameObject preview = default;
-	[SerializeField] private GameObject upgradeView = default;
-
-	[Header("Navigation Controllers")]
-	[SerializeField] private NavigationController navigationController = default;
 	[SerializeField] private StarLabsViewController starLabsViewController = default;
 
 	protected override void Awake()
 	{
-		SetInstance(this);
+		base.Awake();
 
-		preview.SetActive(false);
-		upgradeView.SetActive(false);
 		starLabsViewController.gameObject.SetActive(false);
 	}
 
-	public void Btn_ShowStarLabsView()
+	public override void Btn_UpgradeInstitution()
+	{
+		Settlement.Instance.StarLabs.Upgrade();
+	}
+
+	public override void Btn_ShowView()
 	{
 		preview.SetActive(false);
 		navigationController.Push(starLabsViewController);
-	}
-
-	public void Btn_ShowUpgradeView()
-	{
-		preview.SetActive(false);
-		upgradeView.SetActive(true);
-	}
-
-	public void Back()
-	{
-		navigationController.Pop();
-	}
-
-	public void Btn_UpgradeInstitution()
-	{
-		Settlement.Instance.StarLabs.Upgrade();
 	}
 }

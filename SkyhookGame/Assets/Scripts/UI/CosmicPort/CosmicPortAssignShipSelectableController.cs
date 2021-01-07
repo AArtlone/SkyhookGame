@@ -17,6 +17,6 @@ public class CosmicPortAssignShipSelectableController : StorageSelectableControl
 
         Manufactory.RemoveShipFromStorage(ship);
 
-        CosmicPortUIManager.Instance.Back();
+        InstitutionsUIManager.Instance.CosmicPortUIManager.Back();
     }
 }

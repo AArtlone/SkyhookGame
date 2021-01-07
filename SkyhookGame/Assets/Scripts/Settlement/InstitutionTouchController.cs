@@ -23,6 +23,8 @@ public class InstitutionTouchController : MonoBehaviour
 
     private void Update()
 	{
+		print(InstitutionsUIManager.Instance.IsUIDisplayed);
+
 		if (preview.activeSelf) return;
 
 		if (Application.isEditor)

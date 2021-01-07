@@ -136,7 +136,7 @@ public class SendShipViewController : ViewController
                 // We need to substract the required fuel from the total fuel
                 dock.Ship.resourcesModule.IncreaseResource(ResourcesDSID.Fuel, -sendShipManager.CalculateReqFuel());
 
-                CosmicPortUIManager.Instance.Back();
+                InstitutionsUIManager.Instance.CosmicPortUIManager.Back();
 
                 Settlement.Instance.CosmicPort.LaunchShip(dock, destinationDock, selectedDestination);
 

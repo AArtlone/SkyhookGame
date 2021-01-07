@@ -1,16 +1,8 @@
-﻿using MyUtilities;
-using MyUtilities.GUI;
+﻿using MyUtilities.GUI;
 using UnityEngine;
 
-public class CosmicPortUIManager : Singleton<CosmicPortUIManager>
+public class CosmicPortUIManager : BaseInstitutionUIManager
 {
-    [Space(10f)]
-    [SerializeField] private GameObject preview = default;
-    [SerializeField] private GameObject upgradeView = default;
-
-    [Header("Navigation Controllers")]
-    [SerializeField] private NavigationController navigationController = default;
-
     [Header("View Controllers")]
     [SerializeField] private DocksViewController docksViewController = default;
     [SerializeField] private CosmicPortAssignShipViewController cosmicPortStorageViewController = default;
@@ -21,23 +13,22 @@ public class CosmicPortUIManager : Singleton<CosmicPortUIManager>
 
     protected override void Awake()
     {
-        SetInstance(this);
+        base.Awake();
 
-        preview.SetActive(false);
-        upgradeView.SetActive(false);
         docksViewController.gameObject.SetActive(false);
     }
 
-    public void Btn_ShowCosmicPortView()
+    public override void Btn_UpgradeInstitution()
     {
-        preview.SetActive(false);
-        navigationController.Push(docksViewController);
+        Settlement.Instance.CosmicPort.Upgrade();
     }
 
-    public void Btn_ShowUpgradeView()
+    public override void Btn_ShowView()
     {
+        base.Btn_ShowView();
+
         preview.SetActive(false);
-        upgradeView.SetActive(true);
+        navigationController.Push(docksViewController);
     }
 
     public void ShowCosmicPortAssignShipView()
@@ -52,18 +43,12 @@ public class CosmicPortUIManager : Singleton<CosmicPortUIManager>
         navigationController.Push(sendShipViewController);
     }
 
-    public void Back()
-    {
-        navigationController.Pop();
-    }
 
+    // For editor reference
+    // This Back method overload is need to be able to pass in different navigation controllers
+    // This is needed because Manufactory UI makes use of multiple navigation controllers
     public void Back(NavigationController navController)
     {
         navController.Pop();
-    }
-
-    public void Btn_UpgradeInstitution()
-    {
-        Settlement.Instance.CosmicPort.Upgrade();
     }
 }

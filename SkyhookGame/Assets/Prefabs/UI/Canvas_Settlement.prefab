@@ -1015,6 +1015,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ManufactoryUI
       objectReference: {fileID: 0}
+    - target: {fileID: 2238785866008377661, guid: 80aa89bc8f712bd4f908404d4e507775,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Btn_UpgradeInstitution
+      objectReference: {fileID: 0}
     - target: {fileID: 2238785866081690219, guid: 80aa89bc8f712bd4f908404d4e507775,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1459,6 +1464,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2227880991167172130}
+    - target: {fileID: 146489746917760769, guid: f0ef41f93a758a542a26c6d1ec0ff751,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Btn_ShowView
+      objectReference: {fileID: 0}
     - target: {fileID: 146489748414808805, guid: f0ef41f93a758a542a26c6d1ec0ff751,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1610,6 +1620,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6580795037598486892}
+    - target: {fileID: 979919929759286977, guid: fec7793a8115b5c48b694832812bf72d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Btn_ShowView
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fec7793a8115b5c48b694832812bf72d, type: 3}
 --- !u!224 &142644141780280822 stripped
@@ -1751,6 +1766,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8980332964338203278}
+    - target: {fileID: 3623267180335941429, guid: aa5175a408a4ad64cb18bc04c3391493,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Btn_ShowView
+      objectReference: {fileID: 0}
     - target: {fileID: 3623267181379264690, guid: aa5175a408a4ad64cb18bc04c3391493,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
