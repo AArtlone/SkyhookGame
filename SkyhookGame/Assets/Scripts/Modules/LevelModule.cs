@@ -14,11 +14,19 @@ public class LevelModule
 
     public void IncreaseLevel()
     {
+        if (Level >= maxLevel)
+            return;
+
         Level++;
     }
 
     public int Evaluate(Vector2Int range)
     {
         return animClass.Evaluate(Level, minLevel, maxLevel, range.x, range.y);
+    }
+
+    public void SetLevel(int level)
+    {
+        Level = level;
     }
 }

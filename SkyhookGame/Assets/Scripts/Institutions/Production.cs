@@ -1,37 +1,45 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Production : Institution
+public class Production : Institution<ProductionData>
 {
     [SerializeField] private Vector2Int incremetalRateRange = default;
-    
-    private List<Resource> unlockedResources;
 
     private int incrementalRate;
 
-    public override void Upgrade()
+    #region Institution Overrides
+    protected override ProductionData GetInstitutionSaveData()
     {
-        base.Upgrade();
-
-        UpdateVariables();
-
-        DebugVariables();
+        throw new System.NotImplementedException();
     }
 
-    protected override void InitializeMethod()
+    public override ProductionData CreatSaveData()
     {
-        UpdateVariables();
+        throw new System.NotImplementedException();
+    }
 
-        DebugVariables();
+    public override void SetSavableData(ProductionData data)
+    {
+        throw new System.NotImplementedException();
     }
 
     protected override void UpdateVariables()
     {
+        base.UpdateVariables();
+
         incrementalRate = LevelModule.Evaluate(incremetalRateRange);
     }
 
     protected override void DebugVariables()
     {
-        Debug.Log("New production incremental rate = " + incrementalRate);
+    }
+    #endregion
+}
+
+[System.Serializable]
+public class ProductionData : InstitutionData
+{
+    public ProductionData(int institutionLevel)
+    {
+        this.institutionLevel = institutionLevel;
     }
 }

@@ -1,17 +1,33 @@
-﻿public class Resource
+﻿using System;
+using UnityEngine;
+
+[Serializable]
+public class Resource
 {
-    public ResourceType ResourceType { get; private set; }
+    public Action<int> onAmountChanged;
 
-    public int Amount { get; private set; }
+    [SerializeField] private ResourcesDSID resourceType;
+    public ResourcesDSID ResourceType { get { return resourceType; } }
 
-    public Resource(ResourceType resourceType, int amount)
+    [SerializeField] private int amount;
+    public int Amount { get { return amount; } }
+
+    public Resource(ResourcesDSID resourceID)
     {
-        ResourceType = resourceType;
-        Amount = amount;
+        resourceType = resourceID;
     }
 
-    public void AddResource(int valueToAdd)
+    public void ChangeAmount(int valueToAdd)
     {
-        Amount += valueToAdd;
+        amount += valueToAdd;
+
+        onAmountChanged?.Invoke(amount);
+    }
+
+    public void SetAmount(int value)
+    {
+        amount = value;
+
+        onAmountChanged?.Invoke(amount);
     }
 }

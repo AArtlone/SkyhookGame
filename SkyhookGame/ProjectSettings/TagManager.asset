@@ -6,6 +6,9 @@ TagManager:
   tags:
   - StarsContainer
   - PopUpContainer
+  - TabGroup
+  - Pages
+  - TooltipContainer
   layers:
   - Default
   - TransparentFX
@@ -15,10 +18,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Background
+  - Institution
+  - DoubleTap
+  - SkyhookContainer
   - 
   - 
   - 

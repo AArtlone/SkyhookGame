@@ -18,7 +18,7 @@ public class AssignShipToDockSelectableController : SelectableController<AssignS
 
         cell.data.dock.AssignShip(shipToAssign);
 
-        ManufactoryGUIManager.Instance.PopTopViewController();
+        InstitutionsUIManager.Instance.ManufactoryUIManager.PopTopViewController();
 
         Manufactory.RemoveShipFromStorage(shipToAssign);
     }

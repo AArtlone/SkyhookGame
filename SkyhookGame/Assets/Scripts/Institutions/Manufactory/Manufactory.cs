@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Manufactory : Institution
+public class Manufactory : Institution<ManufactoryData>
 {
     public Action onShipsInStorageChange;
     public Action onManufactoryTasksChange;
@@ -10,11 +11,7 @@ public class Manufactory : Institution
     [SerializeField] private Vector2Int tasksCapacityRange = default;
     [SerializeField] private Vector2Int storageCapacityRange = default;
 
-    [SerializeField] private List<ShipRecipe> shipRecipes = default;
-
     [SerializeField] private float buildDuration = default;
-
-    public List<ShipRecipe> ShipRecipes { get { return shipRecipes; } }
     public float BuildDuration { get { return buildDuration; } }
 
     public List<ManufactoryTask> ManufactoryTasks { get; private set; } = new List<ManufactoryTask>();
@@ -24,6 +21,13 @@ public class Manufactory : Institution
     private int tasksCapacity;
 
     private List<ManufactoryTask> tasksToRemove; // A list of task to remove at the end of the frame
+
+    private IEnumerator Start()
+    {
+        yield return SceneLoader.Instance.WaitForLoading();
+
+        InitializeMethod();
+    }
 
     private void Update()
     {
@@ -47,24 +51,55 @@ public class Manufactory : Institution
         });
     }
 
-    public override void Upgrade()
+    #region Institution Overrides
+    protected override ManufactoryData GetInstitutionSaveData()
     {
-        base.Upgrade();
+        var playerData = PlayerDataManager.Instance.PlayerData;
+        SettlementData settlementData = null;
 
-        UpdateVariables();
 
-        DebugVariables();
+        if (playerData != null)
+            settlementData = playerData.GetSettlementData(Settlement.Instance.Planet);
+
+        var data = settlementData == null ? null : settlementData.manufactoryData;
+
+        return data;
     }
 
-    protected override void InitializeMethod()
+    public override ManufactoryData CreatSaveData()
     {
-        UpdateVariables();
+        if (ShipsInStorage == null)
+            return null;
 
-        DebugVariables();
+        // Create ShipsInStorageData
+        var shipsData = new List<Ship>(ShipsInStorage);
+
+        var tasksData = new List<ManufactoryTaskData>(ManufactoryTasks.Count);
+        ManufactoryTasks.ForEach(t => tasksData.Add(new ManufactoryTaskData(t)));
+
+        // Create ManufactoryData
+        var saveData = new ManufactoryData(LevelModule.Level, shipsData, tasksData);
+
+        return saveData;
+    }
+
+    public override void SetSavableData(ManufactoryData data)
+    {
+        // Set Levels
+        LevelModule.SetLevel(data.institutionLevel);
+
+        // Set ManufactorTasks
+        ManufactoryTasks = new List<ManufactoryTask>(data.tasksData.Count);
+        data.tasksData.ForEach(d => ManufactoryTasks.Add(new ManufactoryTask(d)));
+
+        // Set ShipsInStorage
+        ShipsInStorage = new List<Ship>(data.shipsInStorageData);
     }
 
     protected override void UpdateVariables()
     {
+        base.UpdateVariables();
+
         storageCapacity = LevelModule.Evaluate(storageCapacityRange);
         tasksCapacity = LevelModule.Evaluate(tasksCapacityRange);
     }
@@ -74,10 +109,11 @@ public class Manufactory : Institution
         Debug.Log("New Storage Capacity number = " + storageCapacity);
         Debug.Log("New Tasks Capacity number = " + tasksCapacity);
     }
+    #endregion
 
     private void DoneBuildingShip(ManufactoryTask task)
     {
-        var ship = new Ship(task.shipToProduce.shipName);
+        var ship = task.shipToProduce;
 
         ShipsInStorage.Add(ship);
 
@@ -98,7 +134,7 @@ public class Manufactory : Institution
 
     public void StartBuildingShip(ShipRecipe shipRecipe)
     {
-        var ship = new Ship(shipRecipe.shipName);
+        var ship = new Ship(shipRecipe.shipID, shipRecipe.shipName, shipRecipe.shipMass);
 
         var manufactoryTask = new ManufactoryTask(ship);
 
@@ -117,6 +153,18 @@ public class Manufactory : Institution
         // We need to add the ships that are already in storage to the ships that are buing built, sine they will take the space in storage when they are done building
         return ManufactoryTasks.Count + ShipsInStorage.Count < storageCapacity;
     }
+}
 
-    private ManufactoryGUIManager ManufactoryGUIManager { get { return ManufactoryGUIManager.Instance; } }
+[Serializable]
+public class ManufactoryData : InstitutionData
+{
+    public List<Ship> shipsInStorageData;
+    public List<ManufactoryTaskData> tasksData;
+
+    public ManufactoryData(int institutionLevel, List<Ship> shipsInStorageData, List<ManufactoryTaskData> tasksData)
+    {
+        this.institutionLevel = institutionLevel;
+        this.shipsInStorageData = shipsInStorageData;
+        this.tasksData = tasksData;
+    }
 }

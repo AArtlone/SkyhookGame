@@ -1,27 +1,64 @@
 ﻿using UnityEngine;
 
-public abstract class Institution : MonoBehaviour
+[RequireComponent(typeof(InstitutionTouchController))]
+public abstract class Institution<T> : MonoBehaviour, ISavable<T> where T : InstitutionData
 {
+    [Header("Institution")]
     [SerializeField] private LevelModule levelModule = default;
+    [SerializeField] private SpriteUpgradeModule spriteUpgradeModule = default;
 
     public LevelModule LevelModule { get { return levelModule; } }
 
     public InstitutionType InstitutionType { get; private set; }
 
-    protected virtual void Awake()
-    {
-        InitializeMethod();
-    }
-
     public virtual void Upgrade()
     {
         levelModule.IncreaseLevel();
+
+        UpdateVariables();
+        //DebugVariables();
     }
 
-    protected abstract void InitializeMethod();
+    protected virtual void InitializeMethod()
+    {
+        var institutionData = GetInstitutionSaveData();
+
+        if (institutionData == null)
+        {
+            Debug.LogWarning($"Institution data is null");
+            SaveDataIsNull();
+        }
+        else
+            SetSavableData(institutionData);
+
+        UpdateVariables();
+        //DebugVariables();
+    }
+
+    /// <summary>
+    /// Override this method to get the T from the PlayerData
+    /// </summary>
+    /// <returns></returns>
+    protected abstract T GetInstitutionSaveData();
+
+    protected virtual void SaveDataIsNull() { }
+
+    public abstract T CreatSaveData();
+
+    public abstract void SetSavableData(T data);
+
     /// <summary>
     /// Updates instituion's variables based on the institution level
     /// </summary>
-    protected abstract void UpdateVariables();
+    protected virtual void UpdateVariables()
+    {
+        spriteUpgradeModule.SetSprite(levelModule.Level);
+    }
+
     protected abstract void DebugVariables();
+}
+
+public class InstitutionData
+{
+    public int institutionLevel;
 }

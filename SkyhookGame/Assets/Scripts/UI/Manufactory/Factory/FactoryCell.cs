@@ -6,13 +6,23 @@ public class FactoryCell : SelectableCell<FactoryCellData>
 {
     [SerializeField] private TextMeshProUGUI nameText = default; 
     [SerializeField] private TextMeshProUGUI priceText = default; 
-    [SerializeField] private TextMeshProUGUI reqResourcesText = default;
+    [SerializeField] private TextMeshProUGUI reqAluminiumText = default;
+    [SerializeField] private TextMeshProUGUI reqPlatinumText = default;
+
+    private const string NamePrefix = "Name: ";
+    private const string PricePrefix = "Price: ";
+    private const string AluminiumPrefix = "Aluminium: ";
+    private const string PlatinumPrefix = "Platinum: ";
 
     public override void Refresh()
     {
-        nameText.text = data.shipRecipe.name;
-        priceText.text = data.shipRecipe.price.ToString();
-        reqResourcesText.text = data.shipRecipe.reqResources.ToString();
+        nameText.text = NamePrefix + data.shipRecipe.shipName;
+
+        priceText.text = PricePrefix + data.shipRecipe.price.ToString();
+
+        reqAluminiumText.text = AluminiumPrefix + data.shipRecipe.reqAluminium.ToString();
+
+        reqPlatinumText.text = PlatinumPrefix + data.shipRecipe.reqPlatinum.ToString();
     }
 }
 

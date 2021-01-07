@@ -18,11 +18,10 @@ public class DocksViewController : ViewController
     {
         base.ViewWillAppear();
 
-        SetDocksDataSet();
-
         selectableController.SetButtonsInteractable(false);
-
         CosmicPort.onUpgrade += CosmicPort_OnUpgrade;
+
+        SetDocksDataSet();
     }
 
     public override void ViewWillDisappear()
@@ -35,13 +34,6 @@ public class DocksViewController : ViewController
             return;
 
         CosmicPort.onUpgrade -= CosmicPort_OnUpgrade;
-    }
-
-    public override void ViewFocused()
-    {
-        base.ViewFocused();
-
-        selectableController.SetButtonsInteractable(true);
     }
 
     public void ChangeData()
@@ -66,7 +58,7 @@ public class DocksViewController : ViewController
 
     public void ShowAssignShipView()
     {
-        CosmicPortGUIManager.Instance.ShowCosmicPortAssignShipView();
+        InstitutionsUIManager.Instance.CosmicPortUIManager.ShowCosmicPortAssignShipView();
     }
 
     private void CloseBuildDockView()
