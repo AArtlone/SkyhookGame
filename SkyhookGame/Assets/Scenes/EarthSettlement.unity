@@ -127,18 +127,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 142644140677559192}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &158575651 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 452029568441579144, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-    type: 3}
-  m_PrefabInstance: {fileID: 861285826}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c2b70379de49234086193b1f1bb3ed2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &194280992
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,18 +677,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &687831109 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 687831109, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
-    type: 3}
-  m_PrefabInstance: {fileID: 861285826}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c2b70379de49234086193b1f1bb3ed2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &723398281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,9 +1017,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98cb5b0deea9d4e42b9e5972a4e9ea38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allContainers:
-  - {fileID: 158575651}
-  - {fileID: 687831109}
   skyhookPrefab: {fileID: 8524898982796420550, guid: f8f4a708fa337564d8f4ac32f8ff6148,
     type: 3}
 --- !u!4 &1556993158
