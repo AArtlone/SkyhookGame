@@ -1,6 +1,6 @@
 ﻿public enum StudyCode
 {
     None,
-    AAA,
-    BBB
+    B,
+    BA
 }
