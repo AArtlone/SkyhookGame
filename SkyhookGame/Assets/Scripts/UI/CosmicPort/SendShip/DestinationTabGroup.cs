@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SendShipViewTabGroup : TabGroup
+public class DestinationTabGroup : TabGroup
 {
     public System.Action<Planet> onDestinationChanged;
     
@@ -23,7 +23,7 @@ public class SendShipViewTabGroup : TabGroup
 
         for (int i = 0; i < tabButtons.Count; i++)
         {
-            SendShipViewTabButton _button = (SendShipViewTabButton)tabButtons[i];
+            DestinationTabButton _button = (DestinationTabButton)tabButtons[i];
 
             Sprite icon = Resources.Load<Sprite>($"Sprites/PlanetIcons/{displayedDestinations[i]}");
             
@@ -58,7 +58,7 @@ public class SendShipViewTabGroup : TabGroup
 
     public void SelectDestination(Planet destination)
     {
-        var correspondingTabButton = Smth(destination);
+        var correspondingTabButton = GetCorrespondingTabButton(destination);
 
         if (correspondingTabButton == null)
         {
@@ -74,11 +74,11 @@ public class SendShipViewTabGroup : TabGroup
         SelectTab(tabButtons[0]);
     }
 
-    private TabButton Smth(Planet destination)
+    private TabButton GetCorrespondingTabButton(Planet destination)
     {
         foreach (var v in tabButtons)
         {
-            SendShipViewTabButton _button = (SendShipViewTabButton)v;
+            DestinationTabButton _button = (DestinationTabButton)v;
 
             if (_button.assignedPlanet == destination)
                 return v;

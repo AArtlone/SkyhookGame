@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SendShipViewTabButton : TabButton
+public class DestinationTabButton : TabButton
 {
     [SerializeField] private Image icon = default;
 

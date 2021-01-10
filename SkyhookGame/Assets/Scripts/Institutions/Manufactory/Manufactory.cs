@@ -164,6 +164,7 @@ public class Manufactory : Institution<ManufactoryData>
             {
                 //TODO: make this a method
                 ShipsInStorage.Remove(storageItem);
+                SkyhooksInStorage--;
                 onShipsInStorageChange?.Invoke();
                 return;
             }
