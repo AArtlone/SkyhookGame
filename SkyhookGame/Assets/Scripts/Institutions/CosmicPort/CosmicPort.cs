@@ -7,8 +7,6 @@ public class CosmicPort : Institution<CosmicPortData>
 {
     public Action onUpgrade;
 
-    private static readonly int ANIMATOR_SMOKE = Animator.StringToHash("Idle");
-
     [Header("Cosmic Port")]
     [SerializeField] private Vector2Int availableDocksRange = default;
     [SerializeField] private Vector2Int loadSpeedRange = default;
@@ -29,6 +27,7 @@ public class CosmicPort : Institution<CosmicPortData>
     public List<Dock> AllDocks { get; private set; }
 
     private CosmicPortLandLaunchManager landLaunchManager;
+    private CosmicPortSkyhookLandLaunchManager skyhookLandLaunchManager;
 
     private int availableDocks;
     private int loadSpeed;
@@ -83,6 +82,7 @@ public class CosmicPort : Institution<CosmicPortData>
         base.InitializeMethod();
 
         landLaunchManager = new CosmicPortLandLaunchManager(this, shipPrefab, shipToLaunchContainer, shipToLandContainer);
+        skyhookLandLaunchManager = new CosmicPortSkyhookLandLaunchManager();
 
         UpdateDocksAvailability();
     }
@@ -184,11 +184,15 @@ public class CosmicPort : Institution<CosmicPortData>
         dock.StartBuilding();
     }
 
-    public void LaunchShip(Dock launchingDock, Dock destinationDock, Planet destination)
+    public void LaunchShip(Dock launchingDock, Dock destinationDock, Planet destination, LaunchMethod launchMethod)
     {
-        smokeObject.SetActive(true);
-
-        landLaunchManager.LaunchShip(launchingDock, destinationDock, destination, LevelModule.Level);
+        if (launchMethod == LaunchMethod.Regular)
+        {
+            smokeObject.SetActive(true);
+            landLaunchManager.LaunchShip(launchingDock, destinationDock, destination, LevelModule.Level);
+        }
+        else
+            skyhookLandLaunchManager.LaunchShip(launchingDock, destinationDock);
     }
 
     public void LandShip(Trip trip)

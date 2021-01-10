@@ -59,34 +59,23 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
         ResourcesModule.resources.ForEach(r => r.ChangeAmount(100));
     }
 
-    public void SetTestResources(int testAmount)
-    {
-        ResourcesModule.resources.ForEach(r => r.SetAmount(testAmount));
-    }
-
-    public void AddExperience(int amount)
-    {
-        experienceModule.Increase(amount);
-
-        Debug.Log(experienceModule.Experience);
-    }
-
     public void ReceiveResources(ResourcesModule resourcesToReceive)
     {
         foreach (var resource in resourcesToReceive.resources)
             ResourcesModule.IncreaseResource(resource.ResourceType, resource.Amount);
     }
 
-    public SettlementData CreateSaveData()
+    public SettlementData CreatSaveData()
     {
-        var cosmicPortData = CosmicPort.CreateSaveData();
-        var manufactoryData = Manufactory.CreateSaveData();
-        var starLabsData = StarLabs.CreateSaveData();
-		//var productionData = Production.CreateSaveData();
+        var cosmicPortData = CosmicPort.CreatSaveData();
+        var manufactoryData = Manufactory.CreatSaveData();
+        var starLabsData = StarLabs.CreatSaveData();
 
-		var resources = ResourcesModule.resources;
-        
-        var settlementData = new SettlementData(planet, cosmicPortData, manufactoryData, starLabsData, resources);
+        var resources = ResourcesModule.resources;
+
+        var studiesSaveData = StudiesManager.Instance.CreatSaveData();
+
+        var settlementData = new SettlementData(planet, cosmicPortData, manufactoryData, starLabsData, studiesSaveData, resources);
 
         return settlementData;
     }
@@ -104,16 +93,16 @@ public class SettlementData
     public CosmicPortData cosmicPortData;
     public ManufactoryData manufactoryData;
     public StarLabsData starLabsData;
-	public ProductionData productionData;
+    public StudiesSaveData studiesSaveData;
     public List<Resource> resources;
 
-    public SettlementData(Planet planet, CosmicPortData cosmicPortData, ManufactoryData manufactoryData, StarLabsData starLabsData, List<Resource> resources)
+    public SettlementData(Planet planet, CosmicPortData cosmicPortData, ManufactoryData manufactoryData, StarLabsData starLabsData, StudiesSaveData studiesSaveData, List<Resource> resources)
     {
         this.planet = planet;
         this.cosmicPortData = cosmicPortData;
         this.manufactoryData = manufactoryData;
         this.starLabsData = starLabsData;
-		//this.productionData = productionData;
+        this.studiesSaveData = studiesSaveData;
         this.resources = resources;
     }
 

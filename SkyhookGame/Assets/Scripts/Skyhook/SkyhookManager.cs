@@ -1,9 +1,19 @@
 ﻿using MyUtilities;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SkyhookManager : Singleton<SkyhookManager>
 {
+    [SerializeField] private SkyhookContainer leftContainer = default;
+    [SerializeField] private SkyhookContainer rightContainer = default;
+
+    [Space(5f)]
     [SerializeField] private Skyhook skyhookPrefab = default;
+
+    public bool SkyhookIsInstalled { get { return InstalledSkyhooks.Count != 0; } }
+
+    public List<Skyhook> InstalledSkyhooks { get; private set; } = new List<Skyhook>(2);
 
     protected override void Awake()
     {
@@ -17,17 +27,31 @@ public class SkyhookManager : Singleton<SkyhookManager>
         SetInstance(this);
     }
 
-    private void Update()
+    private void Start()
     {
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    SpawnSkyhook(0);
-        //}
+        StudiesManager.Instance.onInitialized += StudiesManager_OnInit;
+    }
 
-        //if (Input.GetKeyDown(KeyCode.S))
-        //{
-        //    SpawnSkyhook(1);
-        //}
+    private void StudiesManager_OnInit()
+    {
+        StudiesManager.Instance.onInitialized -= StudiesManager_OnInit;
+
+        List<StudyCode> completedStudies = StudiesManager.Instance.CompletedStudies;
+
+        foreach (var completedStudy in completedStudies)
+        {
+            if (completedStudy == StudyCode.B)
+            {
+                UnlockSkyhookContainer(leftContainer);
+                continue;
+            }
+
+            if (completedStudy == StudyCode.BA)
+            {
+                UnlockSkyhookContainer(rightContainer);
+                return;
+            }
+        }
     }
 
     public void UnlockSkyhookContainer(SkyhookContainer container)
@@ -38,6 +62,8 @@ public class SkyhookManager : Singleton<SkyhookManager>
     public void SpawnSkyhook(SkyhookContainer container)
     {
         var skyhook = Instantiate(skyhookPrefab, container.transform);
+        
+        InstalledSkyhooks.Add(skyhook);
 
         skyhook.Initialize(container);
 

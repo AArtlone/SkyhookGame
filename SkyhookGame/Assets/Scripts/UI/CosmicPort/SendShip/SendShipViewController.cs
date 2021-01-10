@@ -19,8 +19,8 @@ public class SendShipViewController : ViewController
 
     [Space(10f)]
     [SerializeField] private MyButton sendButton = default;
-    [SerializeField] private SendShipViewTabGroup tabGroup = default;
-
+    [SerializeField] private DestinationTabGroup destinationTabGroup = default;
+    [SerializeField] private LaunchMethodTabGroup launchMethodTabGroup = default;
 
     private SendShipManager sendShipManager;
 
@@ -28,6 +28,7 @@ public class SendShipViewController : ViewController
     private List<ResourceAdjuster> resourceAdjusters;
 
     private Planet selectedDestination;
+    private LaunchMethod selectedLaunchMethod;
 
     public override void ViewWillBeFocused()
     {
@@ -40,22 +41,28 @@ public class SendShipViewController : ViewController
 
         sendButton.SetInteractable(sendShipManager.CanLaunch(GetCurrentFuelAmount()));
 
-        tabGroup.onDestinationChanged += TabGroup_OnDestinationChanged;
+        destinationTabGroup.onDestinationChanged += TabGroup_OnDestinationChanged;
+        launchMethodTabGroup.onLaunchTypeChanged += LaunchTabGroup_OnMethodChanged;
 
-        if (!tabGroup.IsInitialized)
-            tabGroup.Initialize();
+        if (!destinationTabGroup.IsInitialized)
+            destinationTabGroup.Initialize();
+
+        if (!launchMethodTabGroup.IsInitialized)
+            launchMethodTabGroup.Initialize();
+
+        launchMethodTabGroup.ToggleSkyhookButton();
 
         if (dock.Destination != Settlement.Instance.Planet)
-            tabGroup.SelectDestination(dock.Destination);
+            destinationTabGroup.SelectDestination(dock.Destination);
         else
-            tabGroup.SelectFirstDestination();
+            destinationTabGroup.SelectFirstDestination();
     }
 
     public override void ViewWillBeUnfocused()
     {
         base.ViewWillBeUnfocused();
 
-        tabGroup.onDestinationChanged -= TabGroup_OnDestinationChanged;
+        destinationTabGroup.onDestinationChanged -= TabGroup_OnDestinationChanged;
     }
 
     public void AssignDock(Dock dock)
@@ -78,6 +85,14 @@ public class SendShipViewController : ViewController
         {
             selectedDestination = newDestination;
             dock.SetDestination(newDestination);
+        }
+    }
+
+    private void LaunchTabGroup_OnMethodChanged(LaunchMethod newLaunchMethod)
+    {
+        if (selectedLaunchMethod != newLaunchMethod)
+        {
+            selectedLaunchMethod = newLaunchMethod;
         }
     }
 
@@ -138,7 +153,7 @@ public class SendShipViewController : ViewController
 
                 InstitutionsUIManager.Instance.CosmicPortUIManager.Back();
 
-                Settlement.Instance.CosmicPort.LaunchShip(dock, destinationDock, selectedDestination);
+                Settlement.Instance.CosmicPort.LaunchShip(dock, destinationDock, selectedDestination, selectedLaunchMethod);
 
                 // reserve this dock
                 destinationDock.UpdateState(DockState.Reserved);
@@ -151,6 +166,19 @@ public class SendShipViewController : ViewController
         string text = "No docks can receive the ship";
         PopUpManager.CreateSingleButtonTextPopUp(text, "Ok");
         return;
+    }
+
+    private Dock GetEmptyDestinationDock()
+    {
+        List<Dock> destinationDocks = PlayerDataManager.Instance.GetDocksByPlanet(selectedDestination);
+
+        foreach (var dock in destinationDocks)
+        {
+            if (dock.DockState == DockState.Empty)
+                return dock;
+        }
+
+        return null;
     }
 
     private void ReserveDock(List<Dock> docksToSave)

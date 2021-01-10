@@ -3,6 +3,7 @@
 public class Skyhook : MonoBehaviour
 {
     public bool IsNotOnScreen { get; private set; } = false;
+    public bool IsBusy { get; private set; } = false;
 
     private Vector3 startTrackingVector;
     private Vector3 endTrackingVector;
@@ -46,5 +47,10 @@ public class Skyhook : MonoBehaviour
         float dist = Vector3.Distance(vectorToCompare, transform.up);
 
         return dist < .1f;
+    }
+
+    public void LaunchShip()
+    {
+        print("launching");
     }
 }

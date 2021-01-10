@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CosmicPortLandLaunchManager
 {
-    public bool IsLandingOrLaunching { get; private set; }
+    private bool isLandingOrLaunching;
 
     private Queue<CosmicPortQueueElement> shipsQueue;
 
@@ -28,7 +28,7 @@ public class CosmicPortLandLaunchManager
 
     public void LaunchShip(Dock launchingDock, Dock destinationDock, Planet destination, int level)
     {
-        if (IsLandingOrLaunching)
+        if (isLandingOrLaunching)
         {
             AddToQueue(LandOrLaunch.Launch, launchingDock, destinationDock, destination);
             return;
@@ -48,7 +48,7 @@ public class CosmicPortLandLaunchManager
 
     public void LandShip(Trip trip)
     {
-        if (IsLandingOrLaunching)
+        if (isLandingOrLaunching)
         {
             AddToQueue(LandOrLaunch.Land, trip);
             return;
@@ -93,7 +93,7 @@ public class CosmicPortLandLaunchManager
 
     private void HandleNextQueueElement()
     {
-        IsLandingOrLaunching = false;
+        isLandingOrLaunching = false;
 
         if (shipsQueue.Count == 0)
             return;
@@ -129,7 +129,7 @@ public class CosmicPortLandLaunchManager
 
     public void SetToBusy()
     {
-        IsLandingOrLaunching = true;
+        isLandingOrLaunching = true;
     }
 
     private int GetTimeToDestination(Planet destination)
