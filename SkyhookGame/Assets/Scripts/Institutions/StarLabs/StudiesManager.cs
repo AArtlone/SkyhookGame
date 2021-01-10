@@ -6,71 +6,75 @@ using UnityEngine;
 
 public class StudiesManager : Singleton<StudiesManager>, ISavable<StudiesSaveData>
 {
-    public Action onInitialized;
+	public Action onInitialized;
 
-    [HideInInspector] public List<StudyCode> CompletedStudies = new List<StudyCode>();
+	[HideInInspector] public List<StudyCode> CompletedStudies = new List<StudyCode>();
 
-    protected override void Awake()
-    {
-        SetInstance(this);
+	protected override void Awake()
+	{
+		SetInstance(this);
 
-        //CompletedStudies.Add(StudyCode.B);
-    }
+		//CompletedStudies.Add(StudyCode.B);
+	}
 
-    private IEnumerator Start()
-    {
-        yield return SceneLoader.Instance.WaitForLoading();
+	private IEnumerator Start()
+	{
+		yield return SceneLoader.Instance.WaitForLoading();
 
-        InitializeMethod();
-    }
+		InitializeMethod();
+	}
 
-    private void InitializeMethod()
-    {
-        var settlementData = PlayerDataManager.Instance.PlayerData.GetSettlementData(Settlement.Instance.Planet);
+	private void InitializeMethod()
+	{
+		var settlementData = PlayerDataManager.Instance.PlayerData.GetSettlementData(Settlement.Instance.Planet);
 
-        if (settlementData == null)
-            return;
+		if (settlementData == null)
+			return;
 
-        if (settlementData.studiesSaveData == null)
-            return;
+		if (settlementData.studiesSaveData == null)
+			return;
 
-        print(settlementData.studiesSaveData);
+		print(settlementData.studiesSaveData);
 
-        SetSavableData(settlementData.studiesSaveData);
+		SetSavableData(settlementData.studiesSaveData);
 
-        onInitialized?.Invoke();
-    }
+		onInitialized?.Invoke();
+	}
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            CompletedStudies.Add(StudyCode.B);
-        }
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			CompletedStudies.Add(StudyCode.B);
+		}
 
-        foreach (var v in CompletedStudies)
-            print(v);
-    }
+		foreach (var v in CompletedStudies)
+			print(v);
+	}
 
-    public StudiesSaveData CreatSaveData()
-    {
-        return new StudiesSaveData(CompletedStudies);
-    }
+	public StudiesSaveData CreatSaveData()
+	{
+		return new StudiesSaveData(CompletedStudies);
+	}
 
-    public void SetSavableData(StudiesSaveData data)
-    {
-        CompletedStudies = new List<StudyCode>(data.completedStudies);
-    }
+	public void SetSavableData(StudiesSaveData data)
+	{
+		CompletedStudies = new List<StudyCode>(data.completedStudies);
+	}
+
+	public StudiesSaveData CreateSaveData()
+	{
+		throw new NotImplementedException();
+	}
 }
 
 [System.Serializable]
-public class StudiesSaveData 
+public class StudiesSaveData
 {
-    public List<StudyCode> completedStudies;
+	public List<StudyCode> completedStudies;
 
-    public StudiesSaveData(List<StudyCode> completedStudies)
-    {
-        this.completedStudies = completedStudies;
-    }
+	public StudiesSaveData(List<StudyCode> completedStudies)
+	{
+		this.completedStudies = completedStudies;
+	}
 }
-
