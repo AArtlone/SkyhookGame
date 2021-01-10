@@ -1429,7 +1429,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preview: {fileID: 0}
   upgradeView: {fileID: 2238785866768450515}
-  manufactoryView: {fileID: 2238785867210876189}
   navigationController: {fileID: 2238785865440013729}
   tabsNavigationController: {fileID: 2238785867157351245}
   manufactoryViewController: {fileID: 2238785867210876161}
