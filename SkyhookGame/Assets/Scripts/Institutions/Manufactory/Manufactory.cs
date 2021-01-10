@@ -67,7 +67,7 @@ public class Manufactory : Institution<ManufactoryData>
         return data;
     }
 
-    public override ManufactoryData CreatSaveData()
+    public override ManufactoryData CreateSaveData()
     {
         if (ShipsInStorage == null)
             return null;

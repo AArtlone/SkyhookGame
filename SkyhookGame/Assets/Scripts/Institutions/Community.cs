@@ -20,7 +20,7 @@ public class Community : Institution<CommunityData>
         throw new System.NotImplementedException();
     }
 
-    public override CommunityData CreatSaveData()
+    public override CommunityData CreateSaveData()
     {
         throw new System.NotImplementedException();
     }

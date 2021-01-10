@@ -21,7 +21,12 @@ public class PlayerDataManager : PersistentSingleton<PlayerDataManager>
         LoadData();
     }
 
-    private void Application_quitting()
+	private void Start()
+	{
+		ProductionManager.Instance.ImportSettlementsData();
+	}
+
+	private void Application_quitting()
     {
         SaveSettlementData(Settlement.Instance.Planet, new Action(() => { SaveData(PlayerData); }));
     }
@@ -31,7 +36,7 @@ public class PlayerDataManager : PersistentSingleton<PlayerDataManager>
         if (PlayerData == null)
             PlayerData = new PlayerData();
 
-        PlayerData.SaveSettlementData(planet, Settlement.Instance.CreatSaveData());
+        PlayerData.SaveSettlementData(planet, Settlement.Instance.CreateSaveData());
 
         callback?.Invoke();
     }
@@ -60,7 +65,7 @@ public class PlayerDataManager : PersistentSingleton<PlayerDataManager>
 
             PlayerData = result;
             SceneLoader.Instance.RemoveWaiter(this);
-        });
+		});
 
         IOUtility<PlayerData>.LoadData("PlayerData", callback);
     }

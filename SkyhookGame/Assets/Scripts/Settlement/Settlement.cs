@@ -77,13 +77,14 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
             ResourcesModule.IncreaseResource(resource.ResourceType, resource.Amount);
     }
 
-    public SettlementData CreatSaveData()
+    public SettlementData CreateSaveData()
     {
-        var cosmicPortData = CosmicPort.CreatSaveData();
-        var manufactoryData = Manufactory.CreatSaveData();
-        var starLabsData = StarLabs.CreatSaveData();
+        var cosmicPortData = CosmicPort.CreateSaveData();
+        var manufactoryData = Manufactory.CreateSaveData();
+        var starLabsData = StarLabs.CreateSaveData();
+		//var productionData = Production.CreateSaveData();
 
-        var resources = ResourcesModule.resources;
+		var resources = ResourcesModule.resources;
         
         var settlementData = new SettlementData(planet, cosmicPortData, manufactoryData, starLabsData, resources);
 
@@ -103,6 +104,7 @@ public class SettlementData
     public CosmicPortData cosmicPortData;
     public ManufactoryData manufactoryData;
     public StarLabsData starLabsData;
+	public ProductionData productionData;
     public List<Resource> resources;
 
     public SettlementData(Planet planet, CosmicPortData cosmicPortData, ManufactoryData manufactoryData, StarLabsData starLabsData, List<Resource> resources)
@@ -111,6 +113,7 @@ public class SettlementData
         this.cosmicPortData = cosmicPortData;
         this.manufactoryData = manufactoryData;
         this.starLabsData = starLabsData;
+		//this.productionData = productionData;
         this.resources = resources;
     }
 

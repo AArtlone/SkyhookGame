@@ -105,7 +105,7 @@ public class CosmicPort : Institution<CosmicPortData>
         InitializeNewDocks();
     }
 
-    public override CosmicPortData CreatSaveData()
+    public override CosmicPortData CreateSaveData()
     {
         if (AllDocks == null)
             return null;
