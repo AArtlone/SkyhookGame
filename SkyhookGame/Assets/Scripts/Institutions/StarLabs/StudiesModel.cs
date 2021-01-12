@@ -166,7 +166,10 @@ public class StudiesModel : ScriptableObject
 	{
 		var csv_data =
 			Resources.Load<TextAsset>("Datasheets/StarLabs/skills").text;
-		var lines = csv_data.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries); ;
+		var lines = csv_data.Split(
+				new char[] { '\r', '\n' },
+				StringSplitOptions.RemoveEmptyEntries
+		);
 
 		var studiesObjects = new List<Dictionary<string, string>>();
 		for (int i = 1; i < lines.Length - 1; i++)
