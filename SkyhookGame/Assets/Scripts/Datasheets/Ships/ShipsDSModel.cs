@@ -25,7 +25,7 @@ public class ShipsDSModel: DSModelBase<ShipsDSRecord, ShipsDSID>
 					continue;
             }
 
-			result.Add(new ShipRecipe(shipRecord.recordID, shipRecord.shipName, shipRecord.price, shipRecord.mass, shipRecord.reqAluminium, shipRecord.reqPlatinum));
+			result.Add(new ShipRecipe(shipRecord.recordID, shipRecord.shipName));
 		}
 
 		return result;

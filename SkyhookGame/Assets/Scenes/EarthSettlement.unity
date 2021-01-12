@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455e55ed166575f4ab075e515f46d914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipsModel: {fileID: 11400000, guid: 59629ecbc6df3184ea28f2f7ed2140b7, type: 2}
+  shipsModel: {fileID: 0}
   resourcesModel: {fileID: 11400000, guid: 982e5f806d1ba9e44810e7d0f40a9bbf, type: 2}
   studiesModel: {fileID: 11400000, guid: 12a91c045c965974e8eb2dd9407952a5, type: 2}
 --- !u!4 &394586568
@@ -1997,6 +1997,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: d96bcb2884f013e43b74cf21b2c1b4a7,
         type: 3}
+    - target: {fileID: 2833353960194083446, guid: 63a9a059f38ff6f4387c31758ece86f4,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2833353960194083446, guid: 63a9a059f38ff6f4387c31758ece86f4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2833353960194083446, guid: 63a9a059f38ff6f4387c31758ece86f4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2833353960194083446, guid: 63a9a059f38ff6f4387c31758ece86f4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2959547090917937334, guid: 63a9a059f38ff6f4387c31758ece86f4,
         type: 3}
       propertyPath: m_AnchorMin.y

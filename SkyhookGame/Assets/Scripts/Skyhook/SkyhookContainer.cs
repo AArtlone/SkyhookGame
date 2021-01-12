@@ -112,6 +112,8 @@ public class SkyhookContainer : BaseTouchController
 
         this.shipPrefab = Instantiate(shipPrefab, skyhook.ShipContainer);
 
+        this.shipPrefab.AssignShipSrite(sendShipData.launchingDock.Ship.shipType);
+
         skyhook.onReachedLaunchPoint += Skyhook_OnReachedLaunchPoint;
 
         hasShipAssigned = true;

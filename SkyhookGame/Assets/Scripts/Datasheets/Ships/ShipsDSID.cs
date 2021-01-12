@@ -1,7 +1,7 @@
 public enum ShipsDSID
 {
-	CargoA,
-	CargoB,
-	Craft,
+	FalconHeavy,
+	TRex,
+	Moravec,
 	Skyhook
 }

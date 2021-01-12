@@ -6,14 +6,18 @@ using UnityEngine;
 
 public class SendShipViewController : ViewController
 {
-    private const string MassText = "Mass: ";
+    private const string CurrentNonFuelText = "Current non fuel: ";
+    private const string MaxNonFuelMassText = "Max non fuel mass: ";
+    private const string CurrentFuelText = "Current fuel: ";
     private const string ReqFuelText = "Req Fuel: ";
 
     [SerializeField] private CosmicPortUIManager cosmicPortUIManager = default;
 
     [Space(10f)]
     [SerializeField] private TextMeshProUGUI shipNameText = default;
-    [SerializeField] private TextMeshProUGUI shipMassText = default;
+    [SerializeField] private TextMeshProUGUI currentNonFuel = default;
+    [SerializeField] private TextMeshProUGUI maxNonFuelMassText = default;
+    [SerializeField] private TextMeshProUGUI currentFuel = default;
     [SerializeField] private TextMeshProUGUI reqFuelText = default;
 
     [Space(10f)]
@@ -37,7 +41,9 @@ public class SendShipViewController : ViewController
     {
         base.ViewWillBeFocused();
 
-        sendButton.SetInteractable(sendShipManager.CanLaunch(GetCurrentFuelAmount()));
+        SetShipVisuals();
+
+        sendButton.SetInteractable(sendShipManager.CanLaunch(GetCurrentFuelAmount(), selectedLaunchMethod == LaunchMethod.Skyhook));
 
         destinationTabGroup.onDestinationChanged += TabGroup_OnDestinationChanged;
         launchMethodTabGroup.onLaunchTypeChanged += LaunchTabGroup_OnMethodChanged;
@@ -62,9 +68,13 @@ public class SendShipViewController : ViewController
         //shipImage.sprite = shipSprite;
 
         shipNameText.text = dock.Ship.shipName;
-        shipMassText.text = MassText + dock.Ship.shipMass.ToString();
+        currentFuel.text = CurrentFuelText;
+        
+        int s = dock.Ship.shipMass / 10;
+        maxNonFuelMassText.text = MaxNonFuelMassText + (s).ToString();
+        print(s);
 
-        reqFuelText.text = ReqFuelText + sendShipManager.CalculateReqFuel().ToString();
+        reqFuelText.text = ReqFuelText + sendShipManager.CalculateReqFuel(selectedLaunchMethod == LaunchMethod.Skyhook).ToString();
     }
 
     public override void ViewWillBeUnfocused()
@@ -107,10 +117,10 @@ public class SendShipViewController : ViewController
 
     private void ResourceAdjuster_OnResourceChange()
     {
-        shipMassText.text = MassText + sendShipManager.CalculateTotalMass().ToString();
-        reqFuelText.text = ReqFuelText + sendShipManager.CalculateReqFuel().ToString();
+        currentNonFuel.text = CurrentNonFuelText + sendShipManager.GetCurrentNonFuel().ToString();
+        reqFuelText.text = ReqFuelText + sendShipManager.CalculateReqFuel(selectedLaunchMethod == LaunchMethod.Skyhook).ToString();
 
-        sendButton.SetInteractable(sendShipManager.CanLaunch(GetCurrentFuelAmount()));
+        sendButton.SetInteractable(sendShipManager.CanLaunch(GetCurrentFuelAmount(), selectedLaunchMethod == LaunchMethod.Skyhook));
     }
 
     private void CreateResourceAdjusters()
@@ -118,10 +128,10 @@ public class SendShipViewController : ViewController
         resourceAdjusters = new List<ResourceAdjuster>(dock.Ship.resourcesModule.resources.Count);
         dock.Ship.resourcesModule.resources.ForEach(r => CreateResourceAdjuster(r));
 
-        if (dock.Ship.shipType.Equals(ShipsDSID.Craft))
-        {
-            // ADD humans adjuster
-        }
+        //if (dock.Ship.shipType.Equals(ShipsDSID.Craft))
+        //{
+        //    // ADD humans adjuster
+        //}
     }
 
     private void CreateResourceAdjuster(Resource resource)
@@ -158,7 +168,7 @@ public class SendShipViewController : ViewController
             if (destinationDock.DockState == DockState.Empty)
             {
                 // We need to substract the required fuel from the total fuel
-                dock.Ship.resourcesModule.IncreaseResource(ResourcesDSID.Fuel, -sendShipManager.CalculateReqFuel());
+                dock.Ship.resourcesModule.IncreaseResource(ResourcesDSID.Fuel, -sendShipManager.CalculateReqFuel(selectedLaunchMethod == LaunchMethod.Skyhook));
 
                 InstitutionsUIManager.Instance.CosmicPortUIManager.Back();
 

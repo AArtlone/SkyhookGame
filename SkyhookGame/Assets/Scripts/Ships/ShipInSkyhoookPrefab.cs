@@ -74,7 +74,7 @@ public class ShipInSkyhoookPrefab : MonoBehaviour
         LandFromSkyhook();
     }
 
-    private void AssignShipSrite(ShipsDSID shipID)
+    public void AssignShipSrite(ShipsDSID shipID)
     {
         var shipSprite = Resources.Load<Sprite>($"Sprites/Ships/{shipID}");
         shipSpriteRend.sprite = shipSprite;

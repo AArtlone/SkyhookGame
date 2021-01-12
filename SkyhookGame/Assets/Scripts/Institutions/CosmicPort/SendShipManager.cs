@@ -12,17 +12,22 @@ public class SendShipManager
         this.resourceAdjusters = resourceAdjusters;
     }
 
-    public int CalculateTotalMass()
+    public int GetCurrentNonFuel()
     {
-        int result = ship.shipMass;
+        int result = 0;
 
         foreach (var v in resourceAdjusters)
+        {
+            if (v.ResourceType == ResourcesDSID.Fuel)
+                continue;
+
             result += GetResourceTotalWeight(v.Amount, v.ResourceType);
+        }
 
         return result;
     }
 
-    public int CalculateReqFuel()
+    public int CalculateReqFuel(bool viaSkyhook)
     {
         int shipMass = ship.shipMass;
         int totalCargoWeight = 0;
@@ -37,7 +42,7 @@ public class SendShipManager
 
     public float GetReqFuel(int totalWeight)
     {
-        return .25f * totalWeight;
+        return .75f * totalWeight;
     }
 
     public int GetResourceTotalWeight(int amount, ResourcesDSID resourceType)
@@ -47,11 +52,11 @@ public class SendShipManager
         return amount * massOfOneUnit;
     }
 
-    public bool CanLaunch(int currentFuelAmount)
+    public bool CanLaunch(int currentFuelAmount, bool viaSkyhook)
     {
         // Check if has enough fuel
         bool canSend;
-        canSend = currentFuelAmount >= CalculateReqFuel();
+        canSend = currentFuelAmount >= CalculateReqFuel(viaSkyhook);
 
         return canSend;
     }
