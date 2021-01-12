@@ -39,7 +39,7 @@ public class CosmicPortLandLaunchManager
 
         SetToBusy();
 
-        TripsManager.Instance.StartNewTrip(Settlement.Instance.Planet, GetTimeToDestination(sendShipData.destination), sendShipData.launchingDock.Ship, sendShipData.destinationDock);
+        TripsManager.Instance.StartNewTrip(Settlement.Instance.Planet, sendShipData.destination, GetTimeToDestination(sendShipData.destination), sendShipData.launchingDock.Ship, sendShipData.destinationDock);
 
         sendShipData.launchingDock.RemoveShip();
 
@@ -134,7 +134,7 @@ public class CosmicPortLandLaunchManager
 
     private int GetTimeToDestination(Planet destination)
     {
-        return 5;
+        return 8;
     }
 }
 

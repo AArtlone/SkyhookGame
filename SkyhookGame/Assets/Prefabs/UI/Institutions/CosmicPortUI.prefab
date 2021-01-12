@@ -586,7 +586,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d0abaa4cf81c25640af23750d4d2cf5b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 01cdf1795823c68449a0dda625106143, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -609,6 +609,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 8102690411800665281}
+  selectectedSprite: {fileID: 21300000, guid: d0abaa4cf81c25640af23750d4d2cf5b, type: 3}
+  unSelectectedSprite: {fileID: 21300000, guid: 01cdf1795823c68449a0dda625106143,
+    type: 3}
 --- !u!1 &5900120365565940702
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,7 +1447,7 @@ MonoBehaviour:
   outTransitions:
   - {fileID: 6532867286371302429}
   - {fileID: 6532867286371302428}
-  cosmicPortUIManager: {fileID: 0}
+  cosmicPortUIManager: {fileID: 6532867286380797621}
   shipNameText: {fileID: 6532867286147507231}
   shipMassText: {fileID: 6532867286800667426}
   reqFuelText: {fileID: 6532867286071603103}
@@ -5723,7 +5726,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d96bcb2884f013e43b74cf21b2c1b4a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2477fba73620a34439a665b644167e72, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5746,3 +5749,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 2624160737503024754}
+  selectectedSprite: {fileID: 21300000, guid: d96bcb2884f013e43b74cf21b2c1b4a7, type: 3}
+  unSelectectedSprite: {fileID: 21300000, guid: 2477fba73620a34439a665b644167e72,
+    type: 3}

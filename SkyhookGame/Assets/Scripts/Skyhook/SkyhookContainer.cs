@@ -122,7 +122,7 @@ public class SkyhookContainer : BaseTouchController
         skyhook.onReachedLaunchPoint -= Skyhook_OnReachedLaunchPoint;
 
         Planet currentPlanet = Settlement.Instance.Planet;
-        TripsManager.Instance.StartNewTrip(currentPlanet, GetTimeToDestination(sendShipData.destination), sendShipData.launchingDock.Ship, sendShipData.destinationDock);
+        TripsManager.Instance.StartNewTrip(currentPlanet, sendShipData.destination, GetTimeToDestination(sendShipData.destination), sendShipData.launchingDock.Ship, sendShipData.destinationDock);
 
         sendShipData.launchingDock.RemoveShip();
 
@@ -160,6 +160,6 @@ public class SkyhookContainer : BaseTouchController
 
     private int GetTimeToDestination(Planet destination)
     {
-        return 5;
+        return 8;
     }
 }
