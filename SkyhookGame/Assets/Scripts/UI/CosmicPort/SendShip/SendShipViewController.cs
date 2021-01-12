@@ -162,7 +162,8 @@ public class SendShipViewController : ViewController
 
                 InstitutionsUIManager.Instance.CosmicPortUIManager.Back();
 
-                Settlement.Instance.CosmicPort.LaunchShip(dock, destinationDock, selectedDestination, selectedLaunchMethod);
+                var sendShipData = new SendShipData(dock, destinationDock, selectedDestination);
+                Settlement.Instance.CosmicPort.LaunchShip(sendShipData, selectedLaunchMethod);
 
                 // reserve this dock
                 destinationDock.UpdateState(DockState.Reserved);
@@ -208,6 +209,9 @@ public class SendShipViewController : ViewController
 
     private void ReserveDock(List<Dock> docksToSave)
     {
+        //TODO: remove return when done testing
+        return;
+
         int cosmicPortLevel = Settlement.Instance.CosmicPort.LevelModule.Level;
         var newDocksData = new List<DockData>(docksToSave.Count);
         docksToSave.ForEach(d => newDocksData.Add(new DockData(d)));

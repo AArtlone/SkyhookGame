@@ -20,7 +20,8 @@ public class ShipsDSModel: DSModelBase<ShipsDSRecord, ShipsDSID>
 		{
 			if (shipRecord.reqStudy != StudyCode.None)
             {
-				if (!StudiesManager.Instance.CompletedStudies.Contains(shipRecord.reqStudy))
+				bool containReqStudy = StudiesManager.Instance.CompletedStudies.Contains(shipRecord.reqStudy);
+				if (!containReqStudy)
 					continue;
             }
 

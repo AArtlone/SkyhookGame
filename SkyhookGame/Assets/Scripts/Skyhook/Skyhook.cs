@@ -1,55 +1,81 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Skyhook : MonoBehaviour
 {
-	public bool IsNotOnScreen { get; private set; } = false;
-	public bool IsBusy { get; private set; } = false;
+    public Action onReachedLaunchPoint;
+    public Action onReachedLandingPoint;
 
-	private Vector3 startTrackingVector;
-	private Vector3 endTrackingVector;
+    [SerializeField] private Transform shipContainer = default;
 
-	private bool rotatingRight;
+    public Transform ShipContainer { get { return shipContainer; } }
 
-	private float rotSpeed = 20f;
+    public bool IsNotOnScreen { get; private set; } = false;
+    public bool IsBusy { get; private set; } = false;
 
-	private void Update()
-	{
-		HandleRotation();
+    private Vector3 startTrackingVector;
+    private Vector3 endTrackingVector;
+    private Vector3 launchPointVector;
+    private Vector3 landingPointVector;
 
-		HandleIsNotOnScreenToggle();
-	}
+    private bool rotatingRight;
 
-	public void Initialize(SkyhookContainer container)
-	{
-		gameObject.SetActive(true);
+    private float rotSpeed = 20f;
 
-		startTrackingVector = container.StartTrackingVector;
-		endTrackingVector = container.EndTrackingVector;
+    private void Update()
+    {
+        HandleRotation();
 
-		rotatingRight = container.FacingRightSideOfTheScreen;
-	}
+        HandleIsNotOnScreenToggle();
+        HandleOnReachedLaunchPointToggle();
+        HandleOnReachedLandingPointToggle();
 
-	private void HandleRotation()
-	{
-		float rotValue = rotatingRight ? rotSpeed : -rotSpeed;
+        print(transform.up);
+    }
 
-		transform.Rotate(new Vector3(0, 0, rotValue * Time.deltaTime));
-	}
+    public void Initialize(SkyhookContainer container)
+    {
+        gameObject.SetActive(true);
 
-	private void HandleIsNotOnScreenToggle()
-	{
-		if (!IsNotOnScreen && CheckIfRotationIsEqual(startTrackingVector))
-			IsNotOnScreen = true;
-		else if (IsNotOnScreen && CheckIfRotationIsEqual(endTrackingVector))
-			IsNotOnScreen = false;
-	}
+        startTrackingVector = container.StartTrackingVector;
+        endTrackingVector = container.EndTrackingVector;
+        launchPointVector = container.LaunchPointVector;
+        landingPointVector = container.LandingPointVector;
 
-	private bool CheckIfRotationIsEqual(Vector3 vectorToCompare)
-	{
-		float dist = Vector3.Distance(vectorToCompare, transform.up);
+        rotatingRight = container.FacingRightSideOfTheScreen;
+    }
 
-		return dist < .1f;
-	}
+    private void HandleRotation()
+    {
+        float rotValue = rotatingRight ? rotSpeed : -rotSpeed;
 
-	public void LaunchShip() { }
+        transform.Rotate(new Vector3(0, 0, rotValue * Time.deltaTime));
+    }
+
+    private void HandleIsNotOnScreenToggle()
+    {
+        if (!IsNotOnScreen && CheckIfRotationIsEqual(startTrackingVector))
+            IsNotOnScreen = true;
+        else if (IsNotOnScreen && CheckIfRotationIsEqual(endTrackingVector))
+            IsNotOnScreen = false;
+    }
+
+    private void HandleOnReachedLaunchPointToggle()
+    {
+        if (CheckIfRotationIsEqual(launchPointVector))
+            onReachedLaunchPoint?.Invoke();
+    }
+
+    private void HandleOnReachedLandingPointToggle()
+    {
+        if (CheckIfRotationIsEqual(landingPointVector))
+            onReachedLandingPoint?.Invoke();
+    }
+
+    private bool CheckIfRotationIsEqual(Vector3 vectorToCompare)
+    {
+        float dist = Vector3.Distance(vectorToCompare, transform.up);
+
+        return dist < .1f;
+    }
 }

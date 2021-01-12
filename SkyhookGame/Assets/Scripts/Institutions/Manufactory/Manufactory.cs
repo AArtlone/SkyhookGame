@@ -107,6 +107,8 @@ public class Manufactory : Institution<ManufactoryData>
     {
         base.UpdateVariables();
 
+        Debug.Log("CosmicPort level: " + LevelModule.Level);
+
         storageCapacity = LevelModule.Evaluate(storageCapacityRange);
         tasksCapacity = LevelModule.Evaluate(tasksCapacityRange);
     }

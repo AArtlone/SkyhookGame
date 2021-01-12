@@ -22,6 +22,11 @@ public class ShipPrefab : MonoBehaviour
 
     private void Update()
     {
+        HandleRegularFlying();
+    }
+
+    private void HandleRegularFlying()
+    {
         if (shipFlier == null)
             return;
 
@@ -49,11 +54,7 @@ public class ShipPrefab : MonoBehaviour
     {
         fireObject.SetActive(true);
 
-        var shipSprite = Resources.Load<Sprite>($"Sprites/Ships/{shipID}");
-        shipSpriteRend.sprite = shipSprite;
-
-        var boosterSprite = Resources.Load<Sprite>($"Sprites/Boosters/booster_{institutionLevel - 1}");
-        boosterSpriteRend.sprite = boosterSprite;
+        AssignShipSrite(shipID);
 
         shipFlier = new ShipFlier(transform.position.y, targetY, timeToTarget, movementCurve);
     }
@@ -69,5 +70,11 @@ public class ShipPrefab : MonoBehaviour
         boosterSpriteRend.enabled = false;
 
         shipFlier = new ShipFlier(transform.position.y, targetY, timeToTarget, landingCurve);
+    }
+
+    private void AssignShipSrite(ShipsDSID shipID)
+    {
+        var shipSprite = Resources.Load<Sprite>($"Sprites/Ships/{shipID}");
+        shipSpriteRend.sprite = shipSprite;
     }
 }

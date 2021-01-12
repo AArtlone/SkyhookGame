@@ -4,6 +4,9 @@ public class ShipFlier
 {
     public bool Launched { get; private set; }
 
+    private Vector2 startPos;
+    private Vector2 targetPos;
+
     private float startY;
     private float targetY;
     private float timeToTarget;
@@ -74,5 +77,10 @@ public class ShipFlierV2
         normTime = flyTime / timeToTarget;
 
         return Vector2.Lerp(startPos, targetPos, normTime);
+    }
+
+    public bool ReachedDestination()
+    {
+        return flyTime >= timeToTarget;
     }
 }

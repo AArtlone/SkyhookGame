@@ -16,6 +16,7 @@ public class CosmicPort : Institution<CosmicPortData>
 
     [Space(5f)]
     [SerializeField] private ShipPrefab shipPrefab = default;
+    [SerializeField] private ShipInSkyhoookPrefab shipInSkyhoookPrefab = default;
     [SerializeField] private Transform shipToLaunchContainer = default;
     [SerializeField] private Transform shipToLandContainer = default;
     
@@ -82,7 +83,7 @@ public class CosmicPort : Institution<CosmicPortData>
         base.InitializeMethod();
 
         landLaunchManager = new CosmicPortLandLaunchManager(this, shipPrefab, shipToLaunchContainer, shipToLandContainer);
-        skyhookLandLaunchManager = new CosmicPortSkyhookLandLaunchManager();
+        skyhookLandLaunchManager = new CosmicPortSkyhookLandLaunchManager(shipInSkyhoookPrefab);
 
         UpdateDocksAvailability();
     }
@@ -123,7 +124,13 @@ public class CosmicPort : Institution<CosmicPortData>
     public override void SetSavableData(CosmicPortData data)
     {
         // Set Levels
-        LevelModule.SetLevel(data.institutionLevel);
+        print("Level is " + data.institutionLevel);
+        int institutionLevel = data.institutionLevel;
+
+        if (institutionLevel == 0)
+            institutionLevel = 1;
+
+        LevelModule.SetLevel(institutionLevel);
 
         // Set Docks
         AllDocks = new List<Dock>(data.docksData.Count);
@@ -184,15 +191,15 @@ public class CosmicPort : Institution<CosmicPortData>
         dock.StartBuilding();
     }
 
-    public void LaunchShip(Dock launchingDock, Dock destinationDock, Planet destination, LaunchMethod launchMethod)
+    public void LaunchShip(SendShipData sendShipData, LaunchMethod launchMethod)
     {
         if (launchMethod == LaunchMethod.Regular)
         {
             smokeObject.SetActive(true);
-            landLaunchManager.LaunchShip(launchingDock, destinationDock, destination, LevelModule.Level);
+            landLaunchManager.LaunchShip(sendShipData, LevelModule.Level);
         }
         else
-            skyhookLandLaunchManager.LaunchShip(launchingDock, destinationDock);
+            skyhookLandLaunchManager.TryToLaunchShip(sendShipData);
     }
 
     public void LandShip(Trip trip)
@@ -225,5 +232,19 @@ public class CosmicPortData : InstitutionData
     {
         this.institutionLevel = institutionLevel;
         this.docksData = docksData;
+    }
+}
+
+public struct SendShipData
+{
+    public Dock launchingDock;
+    public Dock destinationDock;
+    public Planet destination;
+
+    public SendShipData(Dock launchingDock, Dock destinationDock, Planet destination)
+    {
+        this.launchingDock = launchingDock;
+        this.destinationDock = destinationDock;
+        this.destination = destination;
     }
 }

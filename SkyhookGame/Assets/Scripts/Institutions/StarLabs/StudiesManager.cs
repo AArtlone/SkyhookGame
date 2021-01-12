@@ -45,11 +45,11 @@ public class StudiesManager : Singleton<StudiesManager>, ISavable<StudiesSaveDat
 	{
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			CompletedStudies.Add(StudyCode.B);
-		}
+			Settlement.Instance.SetTestResourcesAmount(1000);
 
-		foreach (var v in CompletedStudies)
-			print(v);
+			if (!CompletedStudies.Contains(StudyCode.B))
+				CompletedStudies.Add(StudyCode.B);
+		}
 	}
 
 	public StudiesSaveData CreatSaveData()

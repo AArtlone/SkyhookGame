@@ -27,8 +27,7 @@ public class LaunchMethodTabGroup : TabGroup
 
     public void ToggleSkyhookButton()
     {
-        if (!SkyhookManager.Instance.SkyhookIsInstalled)
-            tabButtons[1].gameObject.SetActive(false);
+        tabButtons[1].gameObject.SetActive(SkyhookManager.Instance.SkyhookIsInstalled);
     }
 
     public override void SelectTab(TabButton tabButton)

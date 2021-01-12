@@ -1,5 +1,4 @@
 ﻿using MyUtilities;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,9 +10,9 @@ public class SkyhookManager : Singleton<SkyhookManager>
     [Space(5f)]
     [SerializeField] private Skyhook skyhookPrefab = default;
 
-    public bool SkyhookIsInstalled { get { return InstalledSkyhooks.Count != 0; } }
+    public bool SkyhookIsInstalled { get { return ContainersWithSkyhooks.Count != 0; } }
 
-    public List<Skyhook> InstalledSkyhooks { get; private set; } = new List<Skyhook>(2);
+    public List<SkyhookContainer> ContainersWithSkyhooks { get; private set; } = new List<SkyhookContainer>(2);
 
     protected override void Awake()
     {
@@ -61,13 +60,9 @@ public class SkyhookManager : Singleton<SkyhookManager>
 
     public void SpawnSkyhook(SkyhookContainer container)
     {
-        var skyhook = Instantiate(skyhookPrefab, container.transform);
+        container.EnableSkyhook();
         
-        InstalledSkyhooks.Add(skyhook);
-
-        skyhook.Initialize(container);
-
-        container.DisableBlueprint();
+        ContainersWithSkyhooks.Add(container);
 
         Settlement.Instance.Manufactory.RemoveSkyhook();
     }

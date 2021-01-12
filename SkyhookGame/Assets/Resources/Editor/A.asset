@@ -16,4 +16,4 @@ MonoBehaviour:
   - name: Earth
     sceneAsset: {fileID: 102900000, guid: c025f280358b2bd4fa84003d21ea62a4, type: 3}
   - name: Moon
-    sceneAsset: {fileID: 102900000, guid: 48bf862b1db881f4a87c752aaadbd109, type: 3}
+    sceneAsset: {fileID: 102900000, guid: 4fc0250a70011254aa7941ad762a6a83, type: 3}

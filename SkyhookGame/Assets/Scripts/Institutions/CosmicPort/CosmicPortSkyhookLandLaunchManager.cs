@@ -1,22 +1,54 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CosmicPortSkyhookLandLaunchManager
 {
-    private List<Skyhook> installedSkyhooks;
+    private Queue<CosmicPortQueueElement> shipsQueue;
 
-    public void LaunchShip(Dock launchingDock, Dock destinationDock)
+    private ShipInSkyhoookPrefab shipPrefab;
+
+    public CosmicPortSkyhookLandLaunchManager(ShipInSkyhoookPrefab shipPrefab)
     {
-        installedSkyhooks = SkyhookManager.Instance.InstalledSkyhooks;
+        shipsQueue = new Queue<CosmicPortQueueElement>();
 
-        foreach (var skyhook in installedSkyhooks)
+        this.shipPrefab = shipPrefab;
+    }
+
+    public void TryToLaunchShip(SendShipData sendShipData)
+    {
+        var container = GetContainerToSpawn();
+
+        if (container == null)
         {
-            if (skyhook.IsNotOnScreen && !skyhook.IsBusy)
-            {
-               // skyhook.LaunchShip();
-                return;
-            }
+            AddToQueue(LandOrLaunch.Launch, sendShipData);
+            return;
         }
+
+        container.SpawnShipForLaunch(shipPrefab, sendShipData);
+    }
+
+    public void AddToQueue(LandOrLaunch landOrLaunch, SendShipData sendShipData)
+    {
+        shipsQueue.Enqueue(new CosmicPortQueueElement(landOrLaunch, sendShipData));
+    }
+
+    public void AddToQueue(LandOrLaunch landOrLaunch, Trip trip)
+    {
+        shipsQueue.Enqueue(new CosmicPortQueueElement(landOrLaunch, trip));
+    }
+
+    private SkyhookContainer GetContainerToSpawn()
+    {
+        foreach (var container in SkyhookManager.Instance.ContainersWithSkyhooks)
+        {
+            bool canLaunch = container.CanSpawnShipForLaunch();
+
+            Debug.Log("CanLaunch:" + canLaunch);
+
+            if (canLaunch)
+                return container;
+        }
+
+        return null;
     }
 }

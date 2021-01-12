@@ -59,6 +59,12 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
         ResourcesModule.resources.ForEach(r => r.ChangeAmount(100));
     }
 
+    public void SetTestResourcesAmount(int testAmoubt)
+    {
+        foreach (var resource in ResourcesModule.resources)
+            resource.ChangeAmount(testAmoubt);
+    }
+
     public void ReceiveResources(ResourcesModule resourcesToReceive)
     {
         foreach (var resource in resourcesToReceive.resources)
