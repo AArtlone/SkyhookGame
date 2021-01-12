@@ -21,7 +21,7 @@ public class ManufactoryTabGroup : TabGroup
         }
 
         // Base.Initialize() call SelectTab
-        // We need to initialize viewcontrollers list before SelectTab is called 
+        // We need to initialize viewcontrollers list before SelectTab is called
         base.Initialize();
     }
 

@@ -3,11 +3,14 @@ using System;
 
 public class StarLabsSelectableController : SelectableController<StudyCell, StudyCellData>
 {
+	private SelectableCell<StudyCellData> pressedStudyCell;
+
     protected override void Cell_OnCellPress(SelectableCell<StudyCellData> cell)
     {
         base.Cell_OnCellPress(cell);
+		pressedStudyCell = cell;
 
-        print(cell.data.study.studyType);
+		print(cell.data.study.studyType);
         print(cell.data.study.GetCode());
 
         CreateUnlockPopUp(cell.data.study);
@@ -15,7 +18,7 @@ public class StarLabsSelectableController : SelectableController<StudyCell, Stud
 
     private void CreateUnlockPopUp(Study study)
     {
-        if (Settlement.Instance.StarLabs.CheckIfStudyIsUnlocked(study.GetCode()))
+        if (StudiesManager.Instance.CheckIfStudyIsUnlocked(study.GetCode()))
         {
             CreateCannotUnlockPopUp();
             return;
@@ -26,8 +29,13 @@ public class StarLabsSelectableController : SelectableController<StudyCell, Stud
         string button2Text = "No";
         Action button1Callback = new Action(() =>
         {
-            Settlement.Instance.StarLabs.UnlockStudy(study.GetCode());
-        });
+			StudiesManager.Instance.UnlockStudy(
+				(StudyCode)Enum.Parse(typeof(StudyCode),
+				study.GetCode())
+			);
+
+			pressedStudyCell.Refresh();
+		});
 
         PopUpManager.CreateDoubleButtonTextPopUp(text,
             button1Text,
@@ -38,7 +46,7 @@ public class StarLabsSelectableController : SelectableController<StudyCell, Stud
     private void CreateCannotUnlockPopUp()
     {
 
-        string text = $"This study is already unlocked?";
+        string text = $"This study is already unlocked.";
         string button1Text = "Ok";
 
         PopUpManager.CreateSingleButtonTextPopUp(text,

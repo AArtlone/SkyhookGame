@@ -41,15 +41,15 @@ public class StudiesManager : Singleton<StudiesManager>, ISavable<StudiesSaveDat
 		onInitialized?.Invoke();
 	}
 
-	private void Update()
+	public void UnlockStudy(StudyCode type)
 	{
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			Settlement.Instance.SetTestResourcesAmount(1000);
+		if (!CompletedStudies.Contains(type))
+			CompletedStudies.Add(type);
+	}
 
-			if (!CompletedStudies.Contains(StudyCode.B))
-				CompletedStudies.Add(StudyCode.B);
-		}
+	public bool CheckIfStudyIsUnlocked(string type)
+	{
+		return CompletedStudies.Contains((StudyCode)Enum.Parse(typeof(StudyCode), type));
 	}
 
 	public StudiesSaveData CreatSaveData()
@@ -59,7 +59,7 @@ public class StudiesManager : Singleton<StudiesManager>, ISavable<StudiesSaveDat
 
 	public void SetSavableData(StudiesSaveData data)
 	{
-		CompletedStudies = new List<StudyCode>(data.completedStudies);
+		CompletedStudies = new List<StudyCode>(data.CompletedStudies);
 	}
 
 	public StudiesSaveData CreateSaveData()
@@ -71,10 +71,10 @@ public class StudiesManager : Singleton<StudiesManager>, ISavable<StudiesSaveDat
 [System.Serializable]
 public class StudiesSaveData
 {
-	public List<StudyCode> completedStudies;
+	public List<StudyCode> CompletedStudies;
 
-	public StudiesSaveData(List<StudyCode> completedStudies)
+	public StudiesSaveData(List<StudyCode> CompletedStudies)
 	{
-		this.completedStudies = completedStudies;
+		this.CompletedStudies = CompletedStudies;
 	}
 }

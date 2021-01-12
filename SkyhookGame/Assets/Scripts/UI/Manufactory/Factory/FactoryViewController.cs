@@ -7,9 +7,9 @@ public class FactoryViewController : ViewController
     [SerializeField] private FactorySelectableController selectableController = default;
     [SerializeField] private BuildShipView buildShipView = default;
 
-    public override void ViewWillAppear()
+    public override void ViewWillBeFocused()
     {
-        base.ViewWillAppear();
+        base.ViewWillBeFocused();
 
         SetManufactoryDataSet();
     }

@@ -12,7 +12,10 @@ public class StudyCell : SelectableCell<StudyCellData>
     {
         code.text = data.study.title;
 
-		portrait.sprite = Resources.Load<Sprite>($"UI/Icons/Studies/{data.study.portrait}");
+		if (StudiesManager.Instance.CheckIfStudyIsUnlocked(data.study.GetCode()))
+		{
+			portrait.sprite = Resources.Load<Sprite>($"UI/Icons/Studies/{data.study.portrait}");
+		}
 	}
 }
 
