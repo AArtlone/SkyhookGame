@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,13 +20,9 @@ public class StarLabs : Institution<StarLabsData>
 
     public void UnlockStudy(string type)
     {
-        if (!unlockedStudies.Contains(type))
-            unlockedStudies.Add(type);
-    }
-
-    public bool CheckIfStudyIsUnlocked(string type)
-    {
-        return unlockedStudies.Contains(type);
+		StudiesManager.Instance.UnlockStudy(
+			(StudyCode)Enum.Parse(typeof(StudyCode), type)
+		);
     }
 
     #region Institution Overrides

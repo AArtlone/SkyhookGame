@@ -39,13 +39,13 @@ public class SkyhookManager : Singleton<SkyhookManager>
 
         foreach (var completedStudy in completedStudies)
         {
-            if (completedStudy == StudyCode.B)
+            if (completedStudy == StudyCode.AA)
             {
                 UnlockSkyhookContainer(leftContainer);
                 continue;
             }
 
-            if (completedStudy == StudyCode.BA)
+            if (completedStudy == StudyCode.AB)
             {
                 UnlockSkyhookContainer(rightContainer);
                 return;
