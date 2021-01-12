@@ -29,8 +29,6 @@ public class Skyhook : MonoBehaviour
         HandleIsNotOnScreenToggle();
         HandleOnReachedLaunchPointToggle();
         HandleOnReachedLandingPointToggle();
-
-        print(transform.up);
     }
 
     public void Initialize(SkyhookContainer container)
