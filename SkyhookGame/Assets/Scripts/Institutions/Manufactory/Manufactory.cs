@@ -27,7 +27,8 @@ public class Manufactory : Institution<ManufactoryData>
     {
         yield return SceneLoader.Instance.WaitForLoading();
 
-        InitializeMethod();
+
+		InitializeMethod();
     }
 
     private void Update()

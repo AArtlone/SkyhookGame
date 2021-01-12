@@ -1,8 +1,7 @@
-﻿using System.Collections;
+﻿using MyUtilities;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using MyUtilities;
-using System;
 
 public class ProductionManager : PersistentSingleton<ProductionManager>
 {
