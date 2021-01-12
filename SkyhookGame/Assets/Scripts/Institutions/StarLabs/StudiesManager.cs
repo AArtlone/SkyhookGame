@@ -53,7 +53,10 @@ public class StudiesManager : Singleton<StudiesManager>, ISavable<StudiesSaveDat
 	public void UnlockStudy(StudyCode type)
 	{
 		if (!CompletedStudies.Contains(type))
+        {
 			CompletedStudies.Add(type);
+			onInitialized?.Invoke();
+		}
 	}
 
 	public bool CheckIfStudyIsUnlocked(string type)

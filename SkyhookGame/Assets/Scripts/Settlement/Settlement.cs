@@ -56,7 +56,7 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
     private void SaveDataIsNull()
     {
         ResourcesModule = new ResourcesModule();
-        ResourcesModule.resources.ForEach(r => r.ChangeAmount(1000));
+        ResourcesModule.resources.ForEach(r => r.ChangeAmount(5000));
     }
 
     public void SetTestResourcesAmount(int testAmoubt)
