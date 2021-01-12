@@ -69,7 +69,7 @@ public class SendShipManager
 
         // Check if has enough fuel
         bool canSend;
-        canSend = currentFuelAmount == reqFuel;
+        canSend = currentFuelAmount >= reqFuel;
 
         return canSend;
     }

@@ -24,6 +24,12 @@ public class StudiesManager : Singleton<StudiesManager>, ISavable<StudiesSaveDat
 		InitializeMethod();
 	}
 
+    private void Update()
+    {
+		if (Input.GetKeyDown(KeyCode.Space))
+			UnlockStudy(StudyCode.AA);
+    }
+
     private void InitializeMethod()
 	{
 		if (PlayerDataManager.Instance.PlayerData == null)

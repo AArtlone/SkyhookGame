@@ -126,7 +126,8 @@ public class SendShipViewController : ViewController
 
         currentFuel.text = CurrentFuelText + sendShipManager.GetCurrentFuel().ToString();
 
-        sendButton.SetInteractable(sendShipManager.CanLaunch(GetCurrentFuelAmount(), selectedLaunchMethod == LaunchMethod.Skyhook, dock.Ship.shipType));
+        bool canLaunch = sendShipManager.CanLaunch(GetCurrentFuelAmount(), selectedLaunchMethod == LaunchMethod.Skyhook, dock.Ship.shipType);
+        sendButton.SetInteractable(canLaunch);
     }
 
     private void SetReqFuel()
