@@ -10,7 +10,7 @@ public class SendShipViewController : ViewController
     private const string CurrentNonFuelText = "Current non fuel: ";
     private const string MaxNonFuelMassText = "Max non fuel mass: ";
     private const string CurrentFuelText = "Current fuel: ";
-    private const string ReqFuelText = "Req Fuel: ";
+    private const string ReqFuelText = "Required Fuel: ";
 
     [SerializeField] private CosmicPortUIManager cosmicPortUIManager = default;
 
@@ -47,7 +47,7 @@ public class SendShipViewController : ViewController
 
         SetShipVisuals();
 
-        sendButton.SetInteractable(sendShipManager.CanLaunch(GetCurrentFuelAmount(), selectedLaunchMethod == LaunchMethod.Skyhook));
+        sendButton.SetInteractable(sendShipManager.CanLaunch(GetCurrentFuelAmount(), selectedLaunchMethod == LaunchMethod.Skyhook, dock.Ship.shipType));
 
         destinationTabGroup.onDestinationChanged += TabGroup_OnDestinationChanged;
         launchMethodTabGroup.onLaunchTypeChanged += LaunchTabGroup_OnMethodChanged;
@@ -75,13 +75,10 @@ public class SendShipViewController : ViewController
         currentNonFuel.text = CurrentNonFuelText + 0.ToString();
         currentFuel.text = CurrentFuelText + 0;
         
-        int s = dock.Ship.shipMass / 10;
-        maxNonFuelMassText.text = MaxNonFuelMassText + (s).ToString();
-        print(s);
+        int maxNonFuel = dock.Ship.shipMass / 10;
+        maxNonFuelMassText.text = MaxNonFuelMassText + (maxNonFuel).ToString();
 
-        bool viaSkyhook = selectedLaunchMethod == LaunchMethod.Skyhook;
-        ShipsDSID shipID = dock.Ship.shipType;
-        reqFuelText.text = ReqFuelText + DSModelManager.Instance.ShipsModel.GetReqFuel(shipID, viaSkyhook);
+        SetReqFuel();
     }
 
     public override void ViewWillBeUnfocused()
@@ -119,15 +116,24 @@ public class SendShipViewController : ViewController
         if (selectedLaunchMethod != newLaunchMethod)
         {
             selectedLaunchMethod = newLaunchMethod;
+            SetReqFuel();
         }
     }
 
     private void ResourceAdjuster_OnResourceChange()
     {
         currentNonFuel.text = CurrentNonFuelText + sendShipManager.GetCurrentNonFuel().ToString();
-        reqFuelText.text = ReqFuelText + sendShipManager.CalculateReqFuel(selectedLaunchMethod == LaunchMethod.Skyhook).ToString();
 
-        sendButton.SetInteractable(sendShipManager.CanLaunch(GetCurrentFuelAmount(), selectedLaunchMethod == LaunchMethod.Skyhook));
+        currentFuel.text = CurrentFuelText + sendShipManager.GetCurrentFuel().ToString();
+
+        sendButton.SetInteractable(sendShipManager.CanLaunch(GetCurrentFuelAmount(), selectedLaunchMethod == LaunchMethod.Skyhook, dock.Ship.shipType));
+    }
+
+    private void SetReqFuel()
+    {
+        bool viaSkyhook = selectedLaunchMethod == LaunchMethod.Skyhook;
+        ShipsDSID shipID = dock.Ship.shipType;
+        reqFuelText.text = ReqFuelText + DSModelManager.Instance.ShipsModel.GetReqFuel(shipID, viaSkyhook);
     }
 
     private void CreateResourceAdjusters()
@@ -175,7 +181,7 @@ public class SendShipViewController : ViewController
             if (destinationDock.DockState == DockState.Empty)
             {
                 // We need to substract the required fuel from the total fuel
-                dock.Ship.resourcesModule.IncreaseResource(ResourcesDSID.Fuel, -sendShipManager.CalculateReqFuel(selectedLaunchMethod == LaunchMethod.Skyhook));
+                //dock.Ship.resourcesModule.IncreaseResource(ResourcesDSID.Fuel, -sendShipManager.CalculateReqFuel(selectedLaunchMethod == LaunchMethod.Skyhook));
 
                 InstitutionsUIManager.Instance.CosmicPortUIManager.Back();
 

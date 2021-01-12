@@ -24,7 +24,7 @@ public class StudiesManager : Singleton<StudiesManager>, ISavable<StudiesSaveDat
 		InitializeMethod();
 	}
 
-	private void InitializeMethod()
+    private void InitializeMethod()
 	{
 		if (PlayerDataManager.Instance.PlayerData == null)
 			return;

@@ -16,29 +16,40 @@ public class SendShipManager
     {
         int result = 0;
 
-        foreach (var v in resourceAdjusters)
+        foreach (var resource in resourceAdjusters)
         {
-            if (v.ResourceType == ResourcesDSID.Fuel)
+            if (resource.ResourceType == ResourcesDSID.Fuel)
                 continue;
 
-            result += GetResourceTotalWeight(v.Amount, v.ResourceType);
+            result += GetResourceTotalWeight(resource.Amount, resource.ResourceType);
         }
 
         return result;
     }
 
-    public int CalculateReqFuel(bool viaSkyhook)
+    public int GetCurrentFuel()
     {
-        int shipMass = ship.shipMass;
-        int totalCargoWeight = 0;
+        foreach (var resource in resourceAdjusters)
+        {
+            if (resource.ResourceType == ResourcesDSID.Fuel)
+                return resource.Amount;
+        }
 
-        foreach (var v in resourceAdjusters)
-            totalCargoWeight += GetResourceTotalWeight(v.Amount, v.ResourceType);
-
-        float reqFuel = GetReqFuel(shipMass + totalCargoWeight);
-
-        return (int)reqFuel;
+        return 0;
     }
+
+    //public int CalculateReqFuel(bool viaSkyhook)
+    //{
+    //    int shipMass = ship.shipMass;
+    //    int totalCargoWeight = 0;
+
+    //    foreach (var v in resourceAdjusters)
+    //        totalCargoWeight += GetResourceTotalWeight(v.Amount, v.ResourceType);
+
+    //    float reqFuel = GetReqFuel(shipMass + totalCargoWeight);
+
+    //    return (int)reqFuel;
+    //}
 
     public float GetReqFuel(int totalWeight)
     {
@@ -52,11 +63,13 @@ public class SendShipManager
         return amount * massOfOneUnit;
     }
 
-    public bool CanLaunch(int currentFuelAmount, bool viaSkyhook)
+    public bool CanLaunch(int currentFuelAmount, bool viaSkyhook, ShipsDSID shipID)
     {
+        int reqFuel = DSModelManager.Instance.ShipsModel.GetReqFuel(shipID, viaSkyhook);
+
         // Check if has enough fuel
         bool canSend;
-        canSend = currentFuelAmount >= CalculateReqFuel(viaSkyhook);
+        canSend = currentFuelAmount == reqFuel;
 
         return canSend;
     }
