@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455e55ed166575f4ab075e515f46d914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipsModel: {fileID: 0}
+  shipsModel: {fileID: 11400000, guid: 59629ecbc6df3184ea28f2f7ed2140b7, type: 2}
   resourcesModel: {fileID: 11400000, guid: 982e5f806d1ba9e44810e7d0f40a9bbf, type: 2}
   studiesModel: {fileID: 11400000, guid: 12a91c045c965974e8eb2dd9407952a5, type: 2}
 --- !u!4 &394586568
@@ -728,6 +728,11 @@ PrefabInstance:
       propertyPath: preview
       value: 
       objectReference: {fileID: 118257126}
+    - target: {fileID: 2149845903019143672, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
+        type: 3}
+      propertyPath: preview
+      value: 
+      objectReference: {fileID: 1455534795}
     - target: {fileID: 5582465063722602343, guid: 4ab4aa54969bb7f4c80e9b44ad88281a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -930,6 +935,12 @@ MonoBehaviour:
 --- !u!1 &1316673131 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 142644141780280819, guid: 63a9a059f38ff6f4387c31758ece86f4,
+    type: 3}
+  m_PrefabInstance: {fileID: 142644140677559192}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1455534795 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5976752791771243212, guid: 63a9a059f38ff6f4387c31758ece86f4,
     type: 3}
   m_PrefabInstance: {fileID: 142644140677559192}
   m_PrefabAsset: {fileID: 0}
@@ -2136,6 +2147,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 3479941954143072939, guid: 63a9a059f38ff6f4387c31758ece86f4,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3479941954143072939, guid: 63a9a059f38ff6f4387c31758ece86f4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3479941954143072939, guid: 63a9a059f38ff6f4387c31758ece86f4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3479941954143072939, guid: 63a9a059f38ff6f4387c31758ece86f4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3510438952344518337, guid: 63a9a059f38ff6f4387c31758ece86f4,
         type: 3}

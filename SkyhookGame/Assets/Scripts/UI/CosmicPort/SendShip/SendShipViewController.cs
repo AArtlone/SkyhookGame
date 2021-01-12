@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SendShipViewController : ViewController
 {
@@ -19,6 +20,9 @@ public class SendShipViewController : ViewController
     [SerializeField] private TextMeshProUGUI maxNonFuelMassText = default;
     [SerializeField] private TextMeshProUGUI currentFuel = default;
     [SerializeField] private TextMeshProUGUI reqFuelText = default;
+
+    [Space(5f)]
+    [SerializeField] private Image shipImage = default;
 
     [Space(10f)]
     [SerializeField] private RectTransform adjustersContainer = default;
@@ -64,17 +68,20 @@ public class SendShipViewController : ViewController
 
     private void SetShipVisuals()
     {
-        //var shipSprite = Resources.Load<Sprite>($"Sprites/Ships/{dock.ship.shipType}");
-        //shipImage.sprite = shipSprite;
+        var shipSprite = Resources.Load<Sprite>($"Sprites/Ships/{dock.Ship.shipType}");
+        shipImage.sprite = shipSprite;
 
         shipNameText.text = dock.Ship.shipName;
-        currentFuel.text = CurrentFuelText;
+        currentNonFuel.text = CurrentNonFuelText + 0.ToString();
+        currentFuel.text = CurrentFuelText + 0;
         
         int s = dock.Ship.shipMass / 10;
         maxNonFuelMassText.text = MaxNonFuelMassText + (s).ToString();
         print(s);
 
-        reqFuelText.text = ReqFuelText + sendShipManager.CalculateReqFuel(selectedLaunchMethod == LaunchMethod.Skyhook).ToString();
+        bool viaSkyhook = selectedLaunchMethod == LaunchMethod.Skyhook;
+        ShipsDSID shipID = dock.Ship.shipType;
+        reqFuelText.text = ReqFuelText + DSModelManager.Instance.ShipsModel.GetReqFuel(shipID, viaSkyhook);
     }
 
     public override void ViewWillBeUnfocused()

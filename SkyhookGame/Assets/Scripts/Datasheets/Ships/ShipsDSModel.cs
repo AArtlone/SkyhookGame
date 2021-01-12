@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class ShipsDSModel: DSModelBase<ShipsDSRecord, ShipsDSID>
 {
+	private const int SkyhookFuelReducage = 86;
+
 	protected override ShipsDSRecord CreateRecord(string[] csvFileLine)
 	{
 		var result = new ShipsDSRecord(csvFileLine);
@@ -30,4 +32,20 @@ public class ShipsDSModel: DSModelBase<ShipsDSRecord, ShipsDSID>
 
 		return result;
 	}
+
+	public int GetReqFuel(ShipsDSID shipID, bool viaSkyhook)
+    {
+		foreach (var record in GetAllRecords())
+        {
+			if (record.recordID == shipID)
+            {
+				if (!viaSkyhook)
+					return record.maxFuel;
+				else
+					return record.maxFuel / SkyhookFuelReducage; 
+            }
+        }
+
+		return 0;
+    }
 }
