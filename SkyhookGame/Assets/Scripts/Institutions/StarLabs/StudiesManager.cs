@@ -26,6 +26,9 @@ public class StudiesManager : Singleton<StudiesManager>, ISavable<StudiesSaveDat
 
 	private void InitializeMethod()
 	{
+		if (PlayerDataManager.Instance.PlayerData == null)
+			return;
+
 		var settlementData = PlayerDataManager.Instance.PlayerData.GetSettlementData(Settlement.Instance.Planet);
 
 		if (settlementData == null)

@@ -2,5 +2,6 @@
 {
     None,
 	AA,
-	AB
+	AB,
+	DA
 }
