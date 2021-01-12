@@ -1208,8 +1208,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7932275273872774490}
-        m_MethodName: Pop
+      - m_Target: {fileID: 3835207221132209291}
+        m_MethodName: Back
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

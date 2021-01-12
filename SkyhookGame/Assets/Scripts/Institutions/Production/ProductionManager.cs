@@ -72,6 +72,7 @@ public class ProductionManager : PersistentSingleton<ProductionManager>
 	{
 		for (int i = 0; i < productionUIManagers.Count; i++)
 		{
+			if (productionUIManagers[i] == null) { continue; }
 			if (!productionUIManagers[i].gameObject.activeSelf) { return; }
 
 			productionUIManagers[i].RefreshInventoryPanels();
