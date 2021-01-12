@@ -362,7 +362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateMethod: 1
   otherBackgroundImage: 1
-  backgroundImage: {fileID: 0}
+  backgroundImage: {fileID: 2949199149977029235}
   buttonText: {fileID: 0}
   idleSprite: {fileID: 0}
   hoverSprite: {fileID: 0}
