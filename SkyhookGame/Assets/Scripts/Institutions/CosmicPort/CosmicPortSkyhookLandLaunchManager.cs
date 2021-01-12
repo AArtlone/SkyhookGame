@@ -14,7 +14,7 @@ public class CosmicPortSkyhookLandLaunchManager
         {
             if (skyhook.IsNotOnScreen && !skyhook.IsBusy)
             {
-                skyhook.LaunchShip();
+               // skyhook.LaunchShip();
                 return;
             }
         }
