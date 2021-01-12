@@ -13,21 +13,6 @@ MonoBehaviour:
   m_Name: StudiesModel
   m_EditorClassIdentifier: 
   allStudies:
-  - studyType: 0
-    title: Production
-    description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
-      dui. Donec rutrum congue leo eget malesuada.
-    locked: 1
-  - studyType: 0
-    title: Double fuel extraction
-    description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
-      dui. Donec rutrum congue leo eget malesuada.
-    locked: 1
-  - studyType: 0
-    title: Double platinum extraction
-    description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
-      dui. Donec rutrum congue leo eget malesuada.
-    locked: 1
   - studyType: 3
     title: Skyhooks
     description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
@@ -40,6 +25,10 @@ MonoBehaviour:
     locked: 1
   - studyType: 3
     title: Extra Skyhook 2
+    description: 
+    locked: 1
+  - studyType: 0
+    title: Production
     description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
       dui. Donec rutrum congue leo eget malesuada.
     locked: 1
