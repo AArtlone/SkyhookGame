@@ -34,11 +34,6 @@ public class SendShipViewController : ViewController
     {
         base.ViewWillBeFocused();
 
-        shipNameText.text = dock.Ship.shipName;
-        shipMassText.text = MassText + dock.Ship.shipMass.ToString();
-
-        reqFuelText.text = ReqFuelText + sendShipManager.CalculateReqFuel().ToString();
-
         sendButton.SetInteractable(sendShipManager.CanLaunch(GetCurrentFuelAmount()));
 
         destinationTabGroup.onDestinationChanged += TabGroup_OnDestinationChanged;
@@ -56,6 +51,17 @@ public class SendShipViewController : ViewController
             destinationTabGroup.SelectDestination(dock.Destination);
         else
             destinationTabGroup.SelectFirstDestination();
+    }
+
+    private void SetShipVisuals()
+    {
+        //var shipSprite = Resources.Load<Sprite>($"Sprites/Ships/{dock.ship.shipType}");
+        //shipImage.sprite = shipSprite;
+
+        shipNameText.text = dock.Ship.shipName;
+        shipMassText.text = MassText + dock.Ship.shipMass.ToString();
+
+        reqFuelText.text = ReqFuelText + sendShipManager.CalculateReqFuel().ToString();
     }
 
     public override void ViewWillBeUnfocused()
