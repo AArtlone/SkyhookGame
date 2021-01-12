@@ -1,4 +1,5 @@
 ﻿using MyUtilities.GUI;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class SendShipViewController : ViewController
 {
     private const string MassText = "Mass: ";
     private const string ReqFuelText = "Req Fuel: ";
+
+    [SerializeField] private CosmicPortUIManager cosmicPortUIManager = default;
 
     [Space(10f)]
     [SerializeField] private TextMeshProUGUI shipNameText = default;
@@ -172,6 +175,22 @@ public class SendShipViewController : ViewController
         string text = "No docks can receive the ship";
         PopUpManager.CreateSingleButtonTextPopUp(text, "Ok");
         return;
+    }
+
+    public void Btn_ClearDock()
+    {
+
+        string text = $"Do you really want to clear the dock and destroy the ship?";
+        string button1Text = "Yes";
+        string button2Text = "No";
+        Action button1Callback = new Action(() =>
+        {
+            dock.RemoveShip();
+
+            cosmicPortUIManager.Back();
+        });
+
+        PopUpManager.CreateDoubleButtonTextPopUp(text, button1Text, button2Text, button1Callback);
     }
 
     private Dock GetEmptyDestinationDock()
