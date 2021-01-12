@@ -11,6 +11,8 @@ public class ProductionManager : PersistentSingleton<ProductionManager>
 	/// </summary>
 	private List<SettlementData> settlementsData = new List<SettlementData>();
 
+	private List<ProductionUIManager> productionUIManagers = new List<ProductionUIManager>();
+
 	private float counter = 1;
 
 	protected override void Awake()
@@ -54,7 +56,26 @@ public class ProductionManager : PersistentSingleton<ProductionManager>
 				int valueToAdd = institutionLevel * 5; // TODO: Change it to a non-linear value
 
 				resource.ChangeAmount(valueToAdd);
+				RefreshInventories();
 			}
+		}
+	}
+
+	public void AddUIManager(ProductionUIManager manager)
+	{
+		if (!productionUIManagers.Contains(manager))
+		{
+			productionUIManagers.Add(manager);
+		}
+	}
+
+	private void RefreshInventories()
+	{
+		for (int i = 0; i < productionUIManagers.Count; i++)
+		{
+			if (!productionUIManagers[i].gameObject.activeSelf) { return; }
+
+			productionUIManagers[i].RefreshInventoryPanels();
 		}
 	}
 }

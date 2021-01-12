@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7463948232465892224}
   - component: {fileID: 2698499765526231369}
+  - component: {fileID: 3626246718661390476}
   m_Layer: 5
   m_Name: ResourceEntry
   m_TagString: Untagged
@@ -63,6 +64,21 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &3626246718661390476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412156554134991948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb2670b18ce442444a87e5e88329cea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceType: 0
+  amountLabel: {fileID: 3728151305974259087}
+  incrementLabel: {fileID: 2929575566300438361}
 --- !u!1 &2908908154754295532
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +90,7 @@ GameObject:
   - component: {fileID: 7596453500363206456}
   - component: {fileID: 8630738565614309415}
   m_Layer: 5
-  m_Name: QuantityRow
+  m_Name: AmountRow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,7 +154,7 @@ GameObject:
   - component: {fileID: 6114928391600568662}
   - component: {fileID: 3728151305974259087}
   m_Layer: 5
-  m_Name: Quantity
+  m_Name: Amount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -345,7 +361,7 @@ GameObject:
   - component: {fileID: 37481309974605477}
   - component: {fileID: 2929575566300438361}
   m_Layer: 5
-  m_Name: QuantityPerSec
+  m_Name: IncrementPerSec
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

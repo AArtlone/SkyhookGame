@@ -572,6 +572,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3626246718661390476, guid: 2e5d2c453f09cd34e970e7afef3d6c2d,
+        type: 3}
+      propertyPath: resourceType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4654616186283551926, guid: 2e5d2c453f09cd34e970e7afef3d6c2d,
         type: 3}
       propertyPath: m_Sprite
@@ -782,6 +787,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626246718661390476, guid: 2e5d2c453f09cd34e970e7afef3d6c2d,
+        type: 3}
+      propertyPath: resourceType
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4654616186283551926, guid: 2e5d2c453f09cd34e970e7afef3d6c2d,
         type: 3}
@@ -994,6 +1004,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3626246718661390476, guid: 2e5d2c453f09cd34e970e7afef3d6c2d,
+        type: 3}
+      propertyPath: resourceType
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6608415458972290310, guid: 2e5d2c453f09cd34e970e7afef3d6c2d,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1198,6 +1213,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626246718661390476, guid: 2e5d2c453f09cd34e970e7afef3d6c2d,
+        type: 3}
+      propertyPath: resourceType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4654616186283551926, guid: 2e5d2c453f09cd34e970e7afef3d6c2d,
         type: 3}
@@ -1409,6 +1429,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626246718661390476, guid: 2e5d2c453f09cd34e970e7afef3d6c2d,
+        type: 3}
+      propertyPath: resourceType
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4654616186283551926, guid: 2e5d2c453f09cd34e970e7afef3d6c2d,
         type: 3}

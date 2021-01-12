@@ -1270,6 +1270,9 @@ MonoBehaviour:
   upgradeView: {fileID: 2616864392642723882}
   navigationController: {fileID: 7932275273872774490}
   productionViewController: {fileID: 1025827218994072804}
+  settlement: {fileID: 0}
+  inventoryList: {fileID: 7936883974309949912}
+  inventoryUpgradesList: {fileID: 7051839850627759094}
 --- !u!1 &7309908103020727540
 GameObject:
   m_ObjectHideFlags: 0
@@ -4733,15 +4736,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 488a3f05bcc050a4987252d3440bda15, type: 3}
---- !u!224 &2974396361665110099 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4993652326293080962, guid: 488a3f05bcc050a4987252d3440bda15,
+--- !u!1 &7051839850627759094 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 997269232613822503, guid: 488a3f05bcc050a4987252d3440bda15,
     type: 3}
   m_PrefabInstance: {fileID: 7785081008289999825}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &7798244510303473099 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 14293645700408858, guid: 488a3f05bcc050a4987252d3440bda15,
+    type: 3}
+  m_PrefabInstance: {fileID: 7785081008289999825}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7936883974309949912 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 157432482961021449, guid: 488a3f05bcc050a4987252d3440bda15,
+    type: 3}
+  m_PrefabInstance: {fileID: 7785081008289999825}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &2974396361665110099 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4993652326293080962, guid: 488a3f05bcc050a4987252d3440bda15,
     type: 3}
   m_PrefabInstance: {fileID: 7785081008289999825}
   m_PrefabAsset: {fileID: 0}

@@ -361,6 +361,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResourceUpgradeEntry (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4721331138559957822, guid: d7b42c651394868439ba520b7af03803,
+        type: 3}
+      propertyPath: resourceType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5483611591309825815, guid: d7b42c651394868439ba520b7af03803,
         type: 3}
       propertyPath: m_Sprite
@@ -551,6 +556,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ResourceUpgradeEntry (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4721331138559957822, guid: d7b42c651394868439ba520b7af03803,
+        type: 3}
+      propertyPath: resourceType
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5483611591309825815, guid: d7b42c651394868439ba520b7af03803,
         type: 3}
@@ -743,6 +753,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResourceUpgradeEntry
       objectReference: {fileID: 0}
+    - target: {fileID: 4721331138559957822, guid: d7b42c651394868439ba520b7af03803,
+        type: 3}
+      propertyPath: resourceType
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7344580749378557081, guid: d7b42c651394868439ba520b7af03803,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -927,6 +942,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ResourceUpgradeEntry (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4721331138559957822, guid: d7b42c651394868439ba520b7af03803,
+        type: 3}
+      propertyPath: resourceType
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5483611591309825815, guid: d7b42c651394868439ba520b7af03803,
         type: 3}
@@ -1118,6 +1138,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ResourceUpgradeEntry (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4721331138559957822, guid: d7b42c651394868439ba520b7af03803,
+        type: 3}
+      propertyPath: resourceType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5483611591309825815, guid: d7b42c651394868439ba520b7af03803,
         type: 3}
