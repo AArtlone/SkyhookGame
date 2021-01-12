@@ -42,7 +42,7 @@ public class StarLabs : Institution<StarLabsData>
         return data;
     }
 
-    public override StarLabsData CreatSaveData()
+    public override StarLabsData CreateSaveData()
     {
         var saveData = new StarLabsData(LevelModule.Level, unlockedStudies);
         return saveData;

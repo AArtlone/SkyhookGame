@@ -1,6 +1,6 @@
 ﻿public interface ISavable<T>
 {
-    T CreatSaveData();
+    T CreateSaveData();
 
     void SetSavableData(T data);
 }

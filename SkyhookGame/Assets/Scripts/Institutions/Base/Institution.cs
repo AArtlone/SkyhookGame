@@ -43,7 +43,7 @@ public abstract class Institution<T> : MonoBehaviour, ISavable<T> where T : Inst
 
     protected virtual void SaveDataIsNull() { }
 
-    public abstract T CreatSaveData();
+    public abstract T CreateSaveData();
 
     public abstract void SetSavableData(T data);
 

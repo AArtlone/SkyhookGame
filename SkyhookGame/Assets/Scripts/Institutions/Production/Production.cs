@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Production : Institution<ProductionData>
 {
@@ -12,7 +13,7 @@ public class Production : Institution<ProductionData>
         throw new System.NotImplementedException();
     }
 
-    public override ProductionData CreatSaveData()
+    public override ProductionData CreateSaveData()
     {
         throw new System.NotImplementedException();
     }
@@ -38,8 +39,14 @@ public class Production : Institution<ProductionData>
 [System.Serializable]
 public class ProductionData : InstitutionData
 {
-    public ProductionData(int institutionLevel)
+	/// <summary>
+	/// The current state (amount) of each resource type
+	/// </summary>
+	private List<Resource> resources;
+
+    public ProductionData(int institutionLevel, List<Resource> resources)
     {
         this.institutionLevel = institutionLevel;
+		this.resources = resources;
     }
 }
