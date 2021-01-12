@@ -32,7 +32,10 @@ public class StarLabsViewController : ViewController
     {
         List<StudyCellData> dataSet = new List<StudyCellData>(studies.Count);
 
-        studies.ForEach(s => dataSet.Add(new StudyCellData(s)));
+		for (int i = 1; i < studies.Count; i++)
+		{
+			dataSet.Add(new StudyCellData(studies[i]));
+		}
 
         selectableController.SetDataSet(dataSet);
     }
