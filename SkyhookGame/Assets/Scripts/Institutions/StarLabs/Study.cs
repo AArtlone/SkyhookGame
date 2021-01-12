@@ -11,6 +11,7 @@ public class Study
 	/// </summary>
 	public string title;
 	public string description;
+	public string portrait;
 	// As in if you can start researching it.
 	public bool locked = true;
 	// As in if you can start researching it.

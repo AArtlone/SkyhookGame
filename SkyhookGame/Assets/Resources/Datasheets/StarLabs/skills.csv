@@ -1,11 +1,11 @@
-﻿Code,Title,Description,Requirements
-A,Settlement production,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,10 humans
-AA,Double fuel extraction,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,15 humans
-AB,Double platinum extraction,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,15 humans
-B,Settlement skyhooks,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,10 humans
-BA,Extra Skyhook 1,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,15 humans
-BAA,Extra Skyhook 2,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,20 humans
-C,Settlement Capacity,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,10 humans
-D,Settlement Trips,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,10 humans
-DA,Settlement Ships,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,15 humans
-E,Settlement Expansion,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,10 humans
+﻿Code,Title,Description,Requirements,Portrait
+A,Skyhooks,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,10 humans,
+AA,Orbit Removal,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,15 humans,orbit_removal
+AB,Skyhook Technology,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,15 humans,skyhook_technology
+B,Settlement skyhooks,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,10 humans,
+BA,Extra Skyhook 1,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,15 humans,
+BAA,Extra Skyhook 2,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,20 humans,
+C,Settlement Capacity,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,10 humans,
+D,Settlement Trips,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,10 humans,
+DA,Settlement Ships,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,15 humans,
+E,Settlement Expansion,Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.,10 humans,
