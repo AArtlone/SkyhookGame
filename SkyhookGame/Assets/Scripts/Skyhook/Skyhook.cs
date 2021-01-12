@@ -21,10 +21,12 @@ public class Skyhook : MonoBehaviour
 
     public void Initialize(SkyhookContainer container)
     {
+        gameObject.SetActive(true);
+
         startTrackingVector = container.StartTrackingVector;
         endTrackingVector = container.EndTrackingVector;
 
-        this.rotatingRight = container.FacingRightSideOfTheScreen;
+        rotatingRight = container.FacingRightSideOfTheScreen;
     }
 
     private void HandleRotation()
@@ -47,10 +49,5 @@ public class Skyhook : MonoBehaviour
         float dist = Vector3.Distance(vectorToCompare, transform.up);
 
         return dist < .1f;
-    }
-
-    public void LaunchShip()
-    {
-        print("launching");
     }
 }
