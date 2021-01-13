@@ -29,6 +29,7 @@ public class SkyhookManager : Singleton<SkyhookManager>
     private void Start()
     {
         StudiesManager.Instance.onInitialized += StudiesManager_OnInit;
+        StudiesManager.Instance.onStudyCompleted += StudiesManager_OnStudyCompleted;
     }
 
     private void StudiesManager_OnInit()
@@ -50,6 +51,21 @@ public class SkyhookManager : Singleton<SkyhookManager>
                 UnlockSkyhookContainer(rightContainer);
                 return;
             }
+        }
+    }
+
+    private void StudiesManager_OnStudyCompleted(StudyCode studyCode)
+    {
+        if (studyCode == StudyCode.AA)
+        {
+            UnlockSkyhookContainer(leftContainer);
+            return;
+        }
+
+        if (studyCode == StudyCode.AB)
+        {
+            UnlockSkyhookContainer(rightContainer);
+            return;
         }
     }
 

@@ -50,5 +50,20 @@ public class ShipsDSModel: DSModelBase<ShipsDSRecord, ShipsDSID>
         }
 
 		return 0;
-    }
+	}
+
+
+	public int GetMaxNoFuel(ShipsDSID shipID)
+	{
+		foreach (var record in GetAllRecords())
+		{
+			if (record.recordID == shipID)
+			{
+				return record.maxNonFuel;
+			}
+		}
+
+		return 0;
+	}
+
 }

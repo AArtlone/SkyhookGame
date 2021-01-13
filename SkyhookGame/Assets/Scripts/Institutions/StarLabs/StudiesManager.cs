@@ -7,6 +7,7 @@ using UnityEngine;
 public class StudiesManager : Singleton<StudiesManager>, ISavable<StudiesSaveData>
 {
 	public Action onInitialized;
+	public Action<StudyCode> onStudyCompleted;
 
 	[HideInInspector] public List<StudyCode> CompletedStudies = new List<StudyCode>();
 
@@ -23,12 +24,6 @@ public class StudiesManager : Singleton<StudiesManager>, ISavable<StudiesSaveDat
 
 		InitializeMethod();
 	}
-
-    private void Update()
-    {
-		if (Input.GetKeyDown(KeyCode.Space))
-			UnlockStudy(StudyCode.AA);
-    }
 
     private void InitializeMethod()
 	{
@@ -55,7 +50,7 @@ public class StudiesManager : Singleton<StudiesManager>, ISavable<StudiesSaveDat
 		if (!CompletedStudies.Contains(type))
         {
 			CompletedStudies.Add(type);
-			onInitialized?.Invoke();
+			onStudyCompleted?.Invoke(type);
 		}
 	}
 

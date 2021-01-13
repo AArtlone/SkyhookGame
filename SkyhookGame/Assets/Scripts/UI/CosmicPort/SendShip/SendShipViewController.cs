@@ -41,6 +41,8 @@ public class SendShipViewController : ViewController
     private Planet selectedDestination;
     private LaunchMethod selectedLaunchMethod;
 
+    public int CurrentNoFuelAmount { get; private set; }
+
     public override void ViewWillBeFocused()
     {
         base.ViewWillBeFocused();
@@ -64,18 +66,30 @@ public class SendShipViewController : ViewController
             destinationTabGroup.SelectDestination(dock.Destination);
         else
             destinationTabGroup.SelectFirstDestination();
+
+        ToggleSendButton();
     }
 
     private void SetShipVisuals()
     {
-        var shipSprite = Resources.Load<Sprite>($"Sprites/Ships/{dock.Ship.shipType}");
+        var ship = dock.Ship;
+
+        var shipSprite = Resources.Load<Sprite>($"Sprites/Ships/{ship.shipType}");
         shipImage.sprite = shipSprite;
 
-        shipNameText.text = dock.Ship.shipName;
-        currentNonFuel.text = CurrentNonFuelText + 0.ToString();
-        currentFuel.text = CurrentFuelText + 0;
+        shipNameText.text = ship.shipName;
         
-        int maxNonFuel = dock.Ship.shipMass / 10;
+        if (sendShipManager == null)
+            currentNonFuel.text = CurrentNonFuelText + 0.ToString();
+        else
+            currentNonFuel.text = CurrentNonFuelText + sendShipManager.GetCurrentNonFuel();
+
+        if (sendShipManager == null)
+            currentFuel.text = CurrentFuelText + 0.ToString();
+        else
+            currentFuel.text = CurrentFuelText + sendShipManager.GetCurrentFuel();
+
+        int maxNonFuel = DSModelManager.Instance.ShipsModel.GetMaxNoFuel(ship.shipType);
         maxNonFuelMassText.text = MaxNonFuelMassText + (maxNonFuel).ToString();
 
         SetReqFuel();
@@ -86,6 +100,9 @@ public class SendShipViewController : ViewController
         base.ViewWillBeUnfocused();
 
         destinationTabGroup.onDestinationChanged -= TabGroup_OnDestinationChanged;
+
+        //Reseting tabs selections
+        selectedLaunchMethod = LaunchMethod.Regular;
     }
 
     public void AssignDock(Dock dock)
@@ -100,6 +117,8 @@ public class SendShipViewController : ViewController
         CreateResourceAdjusters();
 
         sendShipManager = new SendShipManager(dock.Ship, resourceAdjusters);
+
+        CurrentNoFuelAmount = 0;
     }
 
     private void TabGroup_OnDestinationChanged(Planet newDestination)
@@ -108,6 +127,8 @@ public class SendShipViewController : ViewController
         {
             selectedDestination = newDestination;
             dock.SetDestination(newDestination);
+
+            ToggleSendButton();
         }
     }
 
@@ -117,7 +138,15 @@ public class SendShipViewController : ViewController
         {
             selectedLaunchMethod = newLaunchMethod;
             SetReqFuel();
+
+            ToggleSendButton();
         }
+    }
+
+    private void ToggleSendButton()
+    {
+        bool canLaunch = sendShipManager.CanLaunch(GetCurrentFuelAmount(), selectedLaunchMethod == LaunchMethod.Skyhook, dock.Ship.shipType);
+        sendButton.SetInteractable(canLaunch);
     }
 
     private void ResourceAdjuster_OnResourceChange()
@@ -128,6 +157,10 @@ public class SendShipViewController : ViewController
 
         bool canLaunch = sendShipManager.CanLaunch(GetCurrentFuelAmount(), selectedLaunchMethod == LaunchMethod.Skyhook, dock.Ship.shipType);
         sendButton.SetInteractable(canLaunch);
+
+        CurrentNoFuelAmount = sendShipManager.GetCurrentNonFuel();
+
+        print($"{nameof(CurrentNoFuelAmount)}:" + CurrentNoFuelAmount);
     }
 
     private void SetReqFuel()
@@ -157,7 +190,12 @@ public class SendShipViewController : ViewController
         }
 
         ResourceAdjuster resourceAdjuster = Instantiate(resourceAdjusterPrefab, adjustersContainer);
-        resourceAdjuster.SetUpAdjuster(resource);
+
+        if (resource.ResourceType == ResourcesDSID.Fuel)
+            resourceAdjuster.SetUpAdjuster(resource, 30, this);
+        else
+            resourceAdjuster.SetUpAdjuster(resource, true, DSModelManager.Instance.ShipsModel.GetMaxNoFuel(dock.Ship.shipType), this);
+        
         resourceAdjuster.onResourceChange += ResourceAdjuster_OnResourceChange;
 
         resourceAdjusters.Add(resourceAdjuster);
