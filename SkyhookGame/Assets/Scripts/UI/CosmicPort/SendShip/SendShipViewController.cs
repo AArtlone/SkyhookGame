@@ -100,6 +100,11 @@ public class SendShipViewController : ViewController
         base.ViewWillBeUnfocused();
 
         destinationTabGroup.onDestinationChanged -= TabGroup_OnDestinationChanged;
+    }
+
+    public override void ViewDisappeared()
+    {
+        base.ViewDisappeared();
 
         //Reseting tabs selections
         selectedLaunchMethod = LaunchMethod.Regular;
