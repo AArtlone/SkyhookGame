@@ -25,6 +25,7 @@ public class StudiesManager : Singleton<StudiesManager>, ISavable<StudiesSaveDat
 		InitializeMethod();
 	}
 
+	// This is a function (testing github webhook to discord)
     private void InitializeMethod()
 	{
 		if (PlayerDataManager.Instance.PlayerData == null)
