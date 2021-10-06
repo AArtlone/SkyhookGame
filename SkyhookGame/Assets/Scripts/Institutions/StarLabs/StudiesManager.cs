@@ -38,8 +38,6 @@ public class StudiesManager : Singleton<StudiesManager>, ISavable<StudiesSaveDat
 		if (settlementData.studiesSaveData == null)
 			return;
 
-		print(settlementData.studiesSaveData);
-
 		SetSavableData(settlementData.studiesSaveData);
 
 		onInitialized?.Invoke();
