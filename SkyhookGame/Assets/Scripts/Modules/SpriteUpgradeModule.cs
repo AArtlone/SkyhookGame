@@ -15,6 +15,12 @@ public class SpriteUpgradeModule
     {
         int index = level - 1;
 
+        if (index < 0)
+        {
+            Debug.LogError("AAAAAAAAAAAAAAAAAA");
+            return;
+        }
+
         if (spriteRenderer == null)
         {
             Debug.LogWarning("SpriteRenderer is null");

@@ -12,13 +12,20 @@ public class ShipPrefab : MonoBehaviour
     [SerializeField] private AnimationCurve movementCurve = default;
     [SerializeField] private AnimationCurve landingCurve = default;
 
+    [Space(5f)]
+    [SerializeField] private GameObject fireObject = default;
+
     private ShipFlier shipFlier;
 
-    private Ship shipToLand;
     private Trip tripToEnd;
     private bool landing;
 
     private void Update()
+    {
+        HandleRegularFlying();
+    }
+
+    private void HandleRegularFlying()
     {
         if (shipFlier == null)
             return;
@@ -45,29 +52,14 @@ public class ShipPrefab : MonoBehaviour
 
     public void Launch(ShipsDSID shipID, int institutionLevel, float targetY)
     {
-        var shipSprite = Resources.Load<Sprite>($"Sprites/Ships/{shipID}");
-        shipSpriteRend.sprite = shipSprite;
+        fireObject.SetActive(true);
 
-        var boosterSprite = Resources.Load<Sprite>($"Sprites/Boosters/booster_{institutionLevel - 1}");
-        boosterSpriteRend.sprite = boosterSprite;
+        AssignShipSrite(shipID);
 
         shipFlier = new ShipFlier(transform.position.y, targetY, timeToTarget, movementCurve);
     }
 
-    public void Land(Ship ship, float targetY)
-    {
-        shipToLand = ship;
-        landing = true;
-
-        var shipSprite = Resources.Load<Sprite>($"Sprites/Ships/{ship.shipType}");
-        shipSpriteRend.sprite = shipSprite;
-
-        boosterSpriteRend.enabled = false;
-
-        shipFlier = new ShipFlier(transform.position.y, targetY, timeToTarget, landingCurve);
-    }
-
-    public void TestLand(Trip trip, float targetY)
+    public void Land(Trip trip, float targetY)
     {
         tripToEnd = trip;
         landing = true;
@@ -78,5 +70,11 @@ public class ShipPrefab : MonoBehaviour
         boosterSpriteRend.enabled = false;
 
         shipFlier = new ShipFlier(transform.position.y, targetY, timeToTarget, landingCurve);
+    }
+
+    private void AssignShipSrite(ShipsDSID shipID)
+    {
+        var shipSprite = Resources.Load<Sprite>($"Sprites/Ships/{shipID}");
+        shipSpriteRend.sprite = shipSprite;
     }
 }

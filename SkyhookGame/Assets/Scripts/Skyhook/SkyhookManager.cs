@@ -1,59 +1,85 @@
-﻿using System.Collections.Generic;
+﻿using MyUtilities;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class SkyhookManager : MonoBehaviour
+public class SkyhookManager : Singleton<SkyhookManager>
 {
-    [SerializeField] private List<SkyhookContainer> allContainers = default;
+    [SerializeField] private SkyhookContainer leftContainer = default;
+    [SerializeField] private SkyhookContainer rightContainer = default;
 
+    [Space(5f)]
     [SerializeField] private Skyhook skyhookPrefab = default;
 
-    private void Awake()
+    public bool SkyhookIsInstalled { get { return ContainersWithSkyhooks.Count != 0; } }
+
+    public List<SkyhookContainer> ContainersWithSkyhooks { get; private set; } = new List<SkyhookContainer>(2);
+
+    protected override void Awake()
     {
         if (skyhookPrefab == null)
         {
             Debug.LogWarning($"Skyhook prefab is not assigned in the editor on {gameObject.name} gameobject");
             enabled = false;
-        }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            SpawnSkyhook(0);
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SpawnSkyhook(1);
-        }
-    }
-
-    public void UnlockSkyhookContainer(int index)
-    {
-        if (index > allContainers.Count - 1)
-        {
-            Debug.LogWarning("Index is out of allContainers range");
             return;
         }
 
-        allContainers[index].gameObject.SetActive(true);
+        SetInstance(this);
     }
 
-    public void SpawnSkyhook(int index)
+    private void Start()
     {
-        if (index > allContainers.Count - 1)
+        StudiesManager.Instance.onInitialized += StudiesManager_OnInit;
+        StudiesManager.Instance.onStudyCompleted += StudiesManager_OnStudyCompleted;
+    }
+
+    private void StudiesManager_OnInit()
+    {
+        StudiesManager.Instance.onInitialized -= StudiesManager_OnInit;
+
+        List<StudyCode> completedStudies = StudiesManager.Instance.CompletedStudies;
+
+        foreach (var completedStudy in completedStudies)
         {
-            Debug.LogWarning("Index is out of allContainers range");
+            if (completedStudy == StudyCode.AA)
+            {
+                UnlockSkyhookContainer(leftContainer);
+                continue;
+            }
+
+            if (completedStudy == StudyCode.AB)
+            {
+                UnlockSkyhookContainer(rightContainer);
+                return;
+            }
+        }
+    }
+
+    private void StudiesManager_OnStudyCompleted(StudyCode studyCode)
+    {
+        if (studyCode == StudyCode.AA)
+        {
+            UnlockSkyhookContainer(leftContainer);
             return;
         }
 
-        var container = allContainers[index];
+        if (studyCode == StudyCode.AB)
+        {
+            UnlockSkyhookContainer(rightContainer);
+            return;
+        }
+    }
 
-        var skyhook = Instantiate(skyhookPrefab, container.transform);
+    public void UnlockSkyhookContainer(SkyhookContainer container)
+    {
+        container.gameObject.SetActive(true);
+    }
 
-        skyhook.Initialize(container);
+    public void SpawnSkyhook(SkyhookContainer container)
+    {
+        container.EnableSkyhook();
+        
+        ContainersWithSkyhooks.Add(container);
 
-        container.DisableBlueprint();
+        Settlement.Instance.Manufactory.RemoveSkyhook();
     }
 }

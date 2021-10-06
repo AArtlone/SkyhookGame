@@ -16,13 +16,39 @@ public class ResourceAdjuster : MonoBehaviour
     public int Amount { get; private set; }
     public ResourcesDSID ResourceType { get; private set; }
 
-    private const int increaser = 10;
+    private const int defaultIncreaserAmount = 10;
+    private int increaser;
 
     private Resource resource;
 
-    public void SetUpAdjuster(Resource resource)
+    private bool hasIncreaseLimit;
+    private int increaseLimitAmount;
+
+    private SendShipViewController sendShipViewController;
+
+    public void SetUpAdjuster(Resource resource, SendShipViewController sendShipViewController)
+    {
+        SetUp(resource, defaultIncreaserAmount, sendShipViewController);
+    }
+
+    public void SetUpAdjuster(Resource resource, int incrementAmount, SendShipViewController sendShipViewController)
+    {
+        SetUp(resource, incrementAmount, sendShipViewController);
+    }
+
+    public void SetUpAdjuster(Resource resource, bool increaseLimit, int increaseLimitAmount, SendShipViewController sendShipViewController)
+    {
+        hasIncreaseLimit = increaseLimit;
+        this.increaseLimitAmount = increaseLimitAmount;
+
+        SetUp(resource, defaultIncreaserAmount, sendShipViewController);
+    }
+
+    private void SetUp(Resource resource, int incrementAmount, SendShipViewController sendShipViewController)
     {
         this.resource = resource;
+        this.increaser = incrementAmount;
+        this.sendShipViewController = sendShipViewController;
 
         var icon = Resources.Load<Sprite>($"UI/Icons/Resources/{resource.ResourceType}");
         this.icon.sprite = icon;
@@ -57,6 +83,9 @@ public class ResourceAdjuster : MonoBehaviour
         int resourceAmount = Settlement.Instance.ResourcesModule.GetResourceAmount(ResourceType);
 
         if (resourceAmount < increaser)
+            return;
+
+        if (hasIncreaseLimit && (increaser + sendShipViewController.CurrentNoFuelAmount) > increaseLimitAmount)
             return;
 
         Amount += increaser;

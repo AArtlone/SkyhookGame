@@ -84,9 +84,12 @@ public class Trip
     {
         onArrived?.Invoke();
 
+        if (destinationDock.DockState == DockState.Empty)
+            return;
+
         if (destination == Settlement.Instance.Planet)
         {
-            Settlement.Instance.CosmicPort.TestLandShip(this);
+            Settlement.Instance.CosmicPort.LandShip(this);
         }
         else
         {

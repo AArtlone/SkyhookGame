@@ -1,11 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Skyhook : MonoBehaviour
 {
+    public Action onReachedLaunchPoint;
+    public Action onReachedLandingPoint;
+
+    [SerializeField] private Transform shipContainer = default;
+
+    public Transform ShipContainer { get { return shipContainer; } }
+
     public bool IsNotOnScreen { get; private set; } = false;
+    public bool IsBusy { get; private set; } = false;
 
     private Vector3 startTrackingVector;
     private Vector3 endTrackingVector;
+    private Vector3 launchPointVector;
+    private Vector3 landingPointVector;
 
     private bool rotatingRight;
 
@@ -16,14 +27,20 @@ public class Skyhook : MonoBehaviour
         HandleRotation();
 
         HandleIsNotOnScreenToggle();
+        HandleOnReachedLaunchPointToggle();
+        HandleOnReachedLandingPointToggle();
     }
 
     public void Initialize(SkyhookContainer container)
     {
+        gameObject.SetActive(true);
+
         startTrackingVector = container.StartTrackingVector;
         endTrackingVector = container.EndTrackingVector;
+        launchPointVector = container.LaunchPointVector;
+        landingPointVector = container.LandingPointVector;
 
-        this.rotatingRight = container.FacingRightSideOfTheScreen;
+        rotatingRight = container.FacingRightSideOfTheScreen;
     }
 
     private void HandleRotation()
@@ -39,6 +56,18 @@ public class Skyhook : MonoBehaviour
             IsNotOnScreen = true;
         else if (IsNotOnScreen && CheckIfRotationIsEqual(endTrackingVector))
             IsNotOnScreen = false;
+    }
+
+    private void HandleOnReachedLaunchPointToggle()
+    {
+        if (CheckIfRotationIsEqual(launchPointVector))
+            onReachedLaunchPoint?.Invoke();
+    }
+
+    private void HandleOnReachedLandingPointToggle()
+    {
+        if (CheckIfRotationIsEqual(landingPointVector))
+            onReachedLandingPoint?.Invoke();
     }
 
     private bool CheckIfRotationIsEqual(Vector3 vectorToCompare)

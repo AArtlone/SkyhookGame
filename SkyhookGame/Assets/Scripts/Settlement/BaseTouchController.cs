@@ -11,9 +11,16 @@ public abstract class BaseTouchController : MonoBehaviour
 
     protected abstract void Update();
 
+    protected bool IsInputDisabled { get; private set; }
+
     protected virtual void Awake()
     {
         onTouch += OnTouch;
+    }
+
+    protected void DisableInput()
+    {
+        IsInputDisabled = true;
     }
 
     protected void HandleEditorInput()

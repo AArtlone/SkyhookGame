@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 126171b6f393d3a44b69f71133507e34, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0766f5c6c6d0a174a98fe2a1f7f83502, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2456099761804322897}
-  - component: {fileID: 191885771687708799}
+  - component: {fileID: 1720403737858044646}
   m_Layer: 0
   m_Name: FlyingFromSkyhookShipPrefab
   m_TagString: Untagged
@@ -113,7 +113,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &191885771687708799
+--- !u!114 &1720403737858044646
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,66 +122,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8365931126433413607}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bae0b739b33147f48bc503978c2b8998, type: 3}
+  m_Script: {fileID: 11500000, guid: 24f37263a75ab7b4a86bf44bcaf822e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToTarget: 3
   shipSpriteRend: {fileID: 903831656319873519}
-  boosterSpriteRend: {fileID: 0}
-  movementCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.6249696
-      value: 0.097473845
-      inSlope: 0.38105053
-      outSlope: 0.38105053
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.12142152
-      outWeight: 0.23249361
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 3.3828452
-      outSlope: 3.3828452
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.03494197
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  landingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2.7770257
-      outSlope: 2.7770257
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.036605656
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0.15786704
-      outSlope: 0.15786704
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.1347754
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4

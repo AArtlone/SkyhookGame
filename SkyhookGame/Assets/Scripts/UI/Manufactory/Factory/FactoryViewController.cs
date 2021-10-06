@@ -7,9 +7,9 @@ public class FactoryViewController : ViewController
     [SerializeField] private FactorySelectableController selectableController = default;
     [SerializeField] private BuildShipView buildShipView = default;
 
-    public override void ViewWillAppear()
+    public override void ViewWillBeFocused()
     {
-        base.ViewWillAppear();
+        base.ViewWillBeFocused();
 
         SetManufactoryDataSet();
     }
@@ -31,7 +31,7 @@ public class FactoryViewController : ViewController
 
         if (!canStore)
         {
-            PopUpManager.CreateSingleButtonTextPopUp("The ship cannot be built because there wont be enough space in the storage", "Ok", new System.Action(() => { }));
+            PopUpManager.CreateSingleButtonTextPopUp("The ship cannot be built because there wont be enough space in the storage", "Ok");
             return;
         }
 
@@ -41,12 +41,7 @@ public class FactoryViewController : ViewController
 
             var buttonText = "Ok";
 
-            var callback = new System.Action(() =>
-            {
-                print("Hello World");
-            });
-
-            PopUpManager.CreateSingleButtonTextPopUp(description, buttonText, callback);
+            PopUpManager.CreateSingleButtonTextPopUp(description, buttonText);
             return;
         }
 

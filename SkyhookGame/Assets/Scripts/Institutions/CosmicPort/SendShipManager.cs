@@ -12,32 +12,48 @@ public class SendShipManager
         this.resourceAdjusters = resourceAdjusters;
     }
 
-    public int CalculateTotalMass()
+    public int GetCurrentNonFuel()
     {
-        int result = ship.shipMass;
+        int result = 0;
 
-        foreach (var v in resourceAdjusters)
-            result += GetResourceTotalWeight(v.Amount, v.ResourceType);
+        foreach (var resource in resourceAdjusters)
+        {
+            if (resource.ResourceType == ResourcesDSID.Fuel)
+                continue;
+
+            result += GetResourceTotalWeight(resource.Amount, resource.ResourceType);
+        }
 
         return result;
     }
 
-    public int CalculateReqFuel()
+    public int GetCurrentFuel()
     {
-        int shipMass = ship.shipMass;
-        int totalCargoWeight = 0;
+        foreach (var resource in resourceAdjusters)
+        {
+            if (resource.ResourceType == ResourcesDSID.Fuel)
+                return resource.Amount;
+        }
 
-        foreach (var v in resourceAdjusters)
-            totalCargoWeight += GetResourceTotalWeight(v.Amount, v.ResourceType);
-
-        float reqFuel = GetReqFuel(shipMass + totalCargoWeight);
-
-        return (int)reqFuel;
+        return 0;
     }
+
+    //public int CalculateReqFuel(bool viaSkyhook)
+    //{
+    //    int shipMass = ship.shipMass;
+    //    int totalCargoWeight = 0;
+
+    //    foreach (var v in resourceAdjusters)
+    //        totalCargoWeight += GetResourceTotalWeight(v.Amount, v.ResourceType);
+
+    //    float reqFuel = GetReqFuel(shipMass + totalCargoWeight);
+
+    //    return (int)reqFuel;
+    //}
 
     public float GetReqFuel(int totalWeight)
     {
-        return .25f * totalWeight;
+        return .75f * totalWeight;
     }
 
     public int GetResourceTotalWeight(int amount, ResourcesDSID resourceType)
@@ -47,11 +63,13 @@ public class SendShipManager
         return amount * massOfOneUnit;
     }
 
-    public bool CanLaunch(int currentFuelAmount)
+    public bool CanLaunch(int currentFuelAmount, bool viaSkyhook, ShipsDSID shipID)
     {
+        int reqFuel = DSModelManager.Instance.ShipsModel.GetReqFuel(shipID, viaSkyhook);
+
         // Check if has enough fuel
         bool canSend;
-        canSend = currentFuelAmount >= CalculateReqFuel();
+        canSend = currentFuelAmount >= reqFuel;
 
         return canSend;
     }

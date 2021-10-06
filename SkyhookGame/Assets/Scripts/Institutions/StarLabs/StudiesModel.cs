@@ -83,6 +83,8 @@ public class StudiesModel : ScriptableObject
 			// since that title is the study type either way.
 			study.studyType = (StudyType)Enum.Parse(typeof(StudyType), currentStudy.title);
 		}
+
+		SetStudiesPortraits();
 	}
 
 	private void SetStudiesDetails()
@@ -159,4 +161,41 @@ public class StudiesModel : ScriptableObject
 
 		return result;
     }
+
+	public void SetStudiesPortraits()
+	{
+		var csv_data =
+			Resources.Load<TextAsset>("Datasheets/StarLabs/skills").text;
+		var lines = csv_data.Split(
+				new char[] { '\r', '\n' },
+				StringSplitOptions.RemoveEmptyEntries
+		);
+
+		var studiesObjects = new List<Dictionary<string, string>>();
+		for (int i = 1; i < lines.Length - 1; i++)
+		{
+			var propertiesList = lines[i].Split(',');
+			var obj = new Dictionary<string, string>();
+
+			obj.Add("Code", propertiesList[0]);
+			obj.Add("Title", propertiesList[1]);
+			obj.Add("Description", propertiesList[2]);
+			obj.Add("Requirements", propertiesList[3]);
+			obj.Add("Portrait", propertiesList[4]);
+
+			studiesObjects.Add(obj);
+		}
+
+		for (int i = 0; i < allStudies.Count; i++)
+		{
+			for (int j = 0; j < studiesObjects.Count; j++)
+			{
+				if (allStudies[i].GetCode() == studiesObjects[j]["Code"])
+				{
+					allStudies[i].description = studiesObjects[j]["Description"];
+					allStudies[i].portrait = studiesObjects[j]["Portrait"];
+				}
+			}
+		}
+	}
 }

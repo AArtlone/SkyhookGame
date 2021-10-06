@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CosmicPortLandLaunchManager
 {
-    public bool IsLandingOrLaunching { get; private set; }
-
     private Queue<CosmicPortQueueElement> shipsQueue;
 
     private MonoBehaviour mono;
@@ -15,6 +13,8 @@ public class CosmicPortLandLaunchManager
 
     private Transform launchShipContainer;
     private Transform landShipContainer;
+
+    private bool isLandingOrLaunching;
 
     public CosmicPortLandLaunchManager(MonoBehaviour mono, ShipPrefab shipPrefab, Transform launchShipContainer, Transform landShipContainer)
     {
@@ -26,36 +26,36 @@ public class CosmicPortLandLaunchManager
         this.landShipContainer = landShipContainer;
     }
 
-    public void LaunchShip(Dock launchingDock, Dock destinationDock, Planet destination, int level)
+    public void LaunchShip(SendShipData sendShipData, int level)
     {
-        if (IsLandingOrLaunching)
+        if (isLandingOrLaunching)
         {
-            AddToQueue(LandOrLaunch.Launch, launchingDock, destinationDock, destination);
+            AddToQueue(LandOrLaunch.Launch, sendShipData);
             return;
         }
 
         ShipPrefab ship = Object.Instantiate(shipPrefab, launchShipContainer);
-        ship.Launch(launchingDock.Ship.shipType, level, landShipContainer.position.y);
+        ship.Launch(sendShipData.launchingDock.Ship.shipType, level, landShipContainer.position.y);
 
         SetToBusy();
 
-        TripsManager.Instance.StartNewTrip(Settlement.Instance.Planet, destination, GetTimeToDestination(destination), launchingDock.Ship, destinationDock);
+        TripsManager.Instance.StartNewTrip(Settlement.Instance.Planet, sendShipData.destination, GetTimeToDestination(sendShipData.destination), sendShipData.launchingDock.Ship, sendShipData.destinationDock);
 
-        launchingDock.RemoveShip();
+        sendShipData.launchingDock.RemoveShip();
 
         mono.StartCoroutine(HandleNextQueueElementCo());
     }
 
     public void LandShip(Trip trip)
     {
-        if (IsLandingOrLaunching)
+        if (isLandingOrLaunching)
         {
             AddToQueue(LandOrLaunch.Land, trip);
             return;
         }
 
         spawnedShipPrefab = Object.Instantiate(shipPrefab, landShipContainer);
-        spawnedShipPrefab.TestLand(trip, launchShipContainer.position.y);
+        spawnedShipPrefab.Land(trip, launchShipContainer.position.y);
         spawnedShipPrefab.onLanded += OnLanded;
 
         SetToBusy();
@@ -93,7 +93,7 @@ public class CosmicPortLandLaunchManager
 
     private void HandleNextQueueElement()
     {
-        IsLandingOrLaunching = false;
+        isLandingOrLaunching = false;
 
         if (shipsQueue.Count == 0)
             return;
@@ -111,15 +111,15 @@ public class CosmicPortLandLaunchManager
         else
         {
             int cosmicPortLevel = Settlement.Instance.CosmicPort.LevelModule.Level;
-            LaunchShip(nextElement.launchDock, nextElement.destinationDock, nextElement.destination, cosmicPortLevel);
+            LaunchShip(nextElement.sendShipData, cosmicPortLevel);
 
             shipsQueue.Dequeue();
         }
     }
 
-    public void AddToQueue(LandOrLaunch landOrLaunch, Dock launchDock, Dock destinationDock, Planet destination)
+    public void AddToQueue(LandOrLaunch landOrLaunch, SendShipData sendShipData)
     {
-        shipsQueue.Enqueue(new CosmicPortQueueElement(landOrLaunch, launchDock, destinationDock, destination));
+        shipsQueue.Enqueue(new CosmicPortQueueElement(landOrLaunch, sendShipData));
     }
 
     public void AddToQueue(LandOrLaunch landOrLaunch, Trip trip)
@@ -129,29 +129,25 @@ public class CosmicPortLandLaunchManager
 
     public void SetToBusy()
     {
-        IsLandingOrLaunching = true;
+        isLandingOrLaunching = true;
     }
 
     private int GetTimeToDestination(Planet destination)
     {
-        return 5;
+        return 8;
     }
 }
 
 public class CosmicPortQueueElement
 {
     public LandOrLaunch landOrLaunch;
-    public Dock launchDock;
-    public Dock destinationDock;
-    public Planet destination;
+    public SendShipData sendShipData;
     public Trip trip;
 
-    public CosmicPortQueueElement(LandOrLaunch landOrLaunch, Dock launchDock, Dock destinationDock, Planet destination)
+    public CosmicPortQueueElement(LandOrLaunch landOrLaunch, SendShipData sendShipData)
     {
         this.landOrLaunch = landOrLaunch;
-        this.launchDock = launchDock;
-        this.destinationDock = destinationDock;
-        this.destination = destination;
+        this.sendShipData = sendShipData;
     }
 
     public CosmicPortQueueElement(LandOrLaunch landOrLaunch, Trip trip)

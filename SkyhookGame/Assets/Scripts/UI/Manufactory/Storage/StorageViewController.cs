@@ -33,7 +33,7 @@ public class StorageViewController : ViewController
             SetStoragDataSet();
     }
 
-    private void SetStoragDataSet()
+    protected virtual void SetStoragDataSet()
     {
         List<Ship> shipsInStorage = Manufactory.ShipsInStorage;
 
@@ -44,5 +44,5 @@ public class StorageViewController : ViewController
         selectableController.SetDataSet(dataSet);
     }
 
-    private Manufactory Manufactory { get { return Settlement.Instance.Manufactory; } }
+    protected Manufactory Manufactory { get { return Settlement.Instance.Manufactory; } }
 }

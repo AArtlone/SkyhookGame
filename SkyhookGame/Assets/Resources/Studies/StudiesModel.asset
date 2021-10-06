@@ -13,53 +13,51 @@ MonoBehaviour:
   m_Name: StudiesModel
   m_EditorClassIdentifier: 
   allStudies:
-  - studyType: 0
-    title: Production
-    description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
-      dui. Donec rutrum congue leo eget malesuada.
-    locked: 1
-  - studyType: 0
-    title: Double fuel extraction
-    description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
-      dui. Donec rutrum congue leo eget malesuada.
-    locked: 1
-  - studyType: 0
-    title: Double platinum extraction
-    description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
-      dui. Donec rutrum congue leo eget malesuada.
-    locked: 1
   - studyType: 3
     title: Skyhooks
     description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
       dui. Donec rutrum congue leo eget malesuada.
+    portrait: 
     locked: 1
   - studyType: 3
-    title: Extra Skyhook 1
+    title: Orbit Removal
     description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
       dui. Donec rutrum congue leo eget malesuada.
+    portrait: orbit_removal
     locked: 1
   - studyType: 3
-    title: Extra Skyhook 2
+    title: Skyhook Technology
     description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
       dui. Donec rutrum congue leo eget malesuada.
+    portrait: skyhook_technology
+    locked: 1
+  - studyType: 0
+    title: Production
+    description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
+      dui. Donec rutrum congue leo eget malesuada.
+    portrait: 
     locked: 1
   - studyType: 4
     title: 'Capacity '
     description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
       dui. Donec rutrum congue leo eget malesuada.
+    portrait: 
     locked: 1
   - studyType: 1
     title: Trips
     description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
       dui. Donec rutrum congue leo eget malesuada.
+    portrait: 
     locked: 1
   - studyType: 1
     title: Settlement Ships
     description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
       dui. Donec rutrum congue leo eget malesuada.
+    portrait: 
     locked: 1
   - studyType: 2
     title: Expansion
     description: Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
       dui. Donec rutrum congue leo eget malesuada.
+    portrait: 
     locked: 1

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class ShipsDSModel: DSModelBase<ShipsDSRecord, ShipsDSID>
 {
+	private const float SkyhookFuelReducage = .86f;
+
 	protected override ShipsDSRecord CreateRecord(string[] csvFileLine)
 	{
 		var result = new ShipsDSRecord(csvFileLine);
@@ -20,13 +22,48 @@ public class ShipsDSModel: DSModelBase<ShipsDSRecord, ShipsDSID>
 		{
 			if (shipRecord.reqStudy != StudyCode.None)
             {
-				if (!StudiesManager.Instance.CompletedStudies.Contains(shipRecord.reqStudy))
+				bool containReqStudy = StudiesManager.Instance.CompletedStudies.Contains(shipRecord.reqStudy);
+				if (!containReqStudy)
 					continue;
             }
 
-			result.Add(new ShipRecipe(shipRecord.recordID, shipRecord.shipName, shipRecord.price, shipRecord.mass, shipRecord.reqAluminium, shipRecord.reqPlatinum));
+			result.Add(new ShipRecipe(shipRecord.recordID, shipRecord.shipName));
 		}
 
 		return result;
 	}
+
+	public int GetReqFuel(ShipsDSID shipID, bool viaSkyhook)
+    {
+		foreach (var record in GetAllRecords())
+        {
+			if (record.recordID == shipID)
+            {
+				if (!viaSkyhook)
+					return record.maxFuel;
+				else 
+				{
+					int reduced = (int)(record.maxFuel * SkyhookFuelReducage);
+					return record.maxFuel - reduced;
+				}
+			}
+        }
+
+		return 0;
+	}
+
+
+	public int GetMaxNoFuel(ShipsDSID shipID)
+	{
+		foreach (var record in GetAllRecords())
+		{
+			if (record.recordID == shipID)
+			{
+				return record.maxNonFuel;
+			}
+		}
+
+		return 0;
+	}
+
 }

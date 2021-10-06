@@ -16,14 +16,19 @@ public class CosmicPort : Institution<CosmicPortData>
 
     [Space(5f)]
     [SerializeField] private ShipPrefab shipPrefab = default;
+    [SerializeField] private ShipInSkyhoookPrefab shipInSkyhoookPrefab = default;
     [SerializeField] private Transform shipToLaunchContainer = default;
     [SerializeField] private Transform shipToLandContainer = default;
+    
+    [Space(5f)]
+    [SerializeField] private GameObject smokeObject = default;
 
     public float DockBuildTime { get { return dockBuildTime; } }
 
     public List<Dock> AllDocks { get; private set; }
 
     private CosmicPortLandLaunchManager landLaunchManager;
+    private CosmicPortSkyhookLandLaunchManager skyhookLandLaunchManager;
 
     private int availableDocks;
     private int loadSpeed;
@@ -78,6 +83,7 @@ public class CosmicPort : Institution<CosmicPortData>
         base.InitializeMethod();
 
         landLaunchManager = new CosmicPortLandLaunchManager(this, shipPrefab, shipToLaunchContainer, shipToLandContainer);
+        skyhookLandLaunchManager = new CosmicPortSkyhookLandLaunchManager(shipInSkyhoookPrefab);
 
         UpdateDocksAvailability();
     }
@@ -100,7 +106,7 @@ public class CosmicPort : Institution<CosmicPortData>
         InitializeNewDocks();
     }
 
-    public override CosmicPortData CreatSaveData()
+    public override CosmicPortData CreateSaveData()
     {
         if (AllDocks == null)
             return null;
@@ -118,7 +124,13 @@ public class CosmicPort : Institution<CosmicPortData>
     public override void SetSavableData(CosmicPortData data)
     {
         // Set Levels
-        LevelModule.SetLevel(data.institutionLevel);
+        print("Level is " + data.institutionLevel);
+        int institutionLevel = data.institutionLevel;
+
+        if (institutionLevel == 0)
+            institutionLevel = 1;
+
+        LevelModule.SetLevel(institutionLevel);
 
         // Set Docks
         AllDocks = new List<Dock>(data.docksData.Count);
@@ -179,17 +191,18 @@ public class CosmicPort : Institution<CosmicPortData>
         dock.StartBuilding();
     }
 
-    public void LaunchShip(Dock launchingDock, Dock destinationDock, Planet destination)
+    public void LaunchShip(SendShipData sendShipData, LaunchMethod launchMethod)
     {
-        landLaunchManager.LaunchShip(launchingDock, destinationDock, destination, LevelModule.Level);
+        if (launchMethod == LaunchMethod.Regular)
+        {
+            smokeObject.SetActive(true);
+            landLaunchManager.LaunchShip(sendShipData, LevelModule.Level);
+        }
+        else
+            skyhookLandLaunchManager.TryToLaunchShip(sendShipData);
     }
 
-    //public void LandShip(Ship ship)
-    //{
-    //    landLaunchManager.LandShip(ship);
-    //}
-
-    public void TestLandShip(Trip trip)
+    public void LandShip(Trip trip)
     {
         landLaunchManager.LandShip(trip);
     }
@@ -219,5 +232,19 @@ public class CosmicPortData : InstitutionData
     {
         this.institutionLevel = institutionLevel;
         this.docksData = docksData;
+    }
+}
+
+public struct SendShipData
+{
+    public Dock launchingDock;
+    public Dock destinationDock;
+    public Planet destination;
+
+    public SendShipData(Dock launchingDock, Dock destinationDock, Planet destination)
+    {
+        this.launchingDock = launchingDock;
+        this.destinationDock = destinationDock;
+        this.destination = destination;
     }
 }

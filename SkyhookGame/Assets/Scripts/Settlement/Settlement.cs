@@ -56,19 +56,13 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
     private void SaveDataIsNull()
     {
         ResourcesModule = new ResourcesModule();
-        ResourcesModule.resources.ForEach(r => r.ChangeAmount(100));
+        ResourcesModule.resources.ForEach(r => r.ChangeAmount(5000));
     }
 
-    public void SetTestResources(int testAmount)
+    public void SetTestResourcesAmount(int testAmoubt)
     {
-        ResourcesModule.resources.ForEach(r => r.SetAmount(testAmount));
-    }
-
-    public void AddExperience(int amount)
-    {
-        experienceModule.Increase(amount);
-
-        Debug.Log(experienceModule.Experience);
+        foreach (var resource in ResourcesModule.resources)
+            resource.ChangeAmount(testAmoubt);
     }
 
     public void ReceiveResources(ResourcesModule resourcesToReceive)
@@ -77,15 +71,18 @@ public class Settlement : Singleton<Settlement>, ISavable<SettlementData>
             ResourcesModule.IncreaseResource(resource.ResourceType, resource.Amount);
     }
 
-    public SettlementData CreatSaveData()
+    public SettlementData CreateSaveData()
     {
-        var cosmicPortData = CosmicPort.CreatSaveData();
-        var manufactoryData = Manufactory.CreatSaveData();
-        var starLabsData = StarLabs.CreatSaveData();
-
+        var cosmicPortData = CosmicPort.CreateSaveData();
+        var manufactoryData = Manufactory.CreateSaveData();
+        var starLabsData = StarLabs.CreateSaveData();
+		// FIXME: temporary (will modify since the resources are updated directly from the playerDataManager's settlements data
+		var productionData = new ProductionData(0, new List<Resource>());
         var resources = ResourcesModule.resources;
-        
-        var settlementData = new SettlementData(planet, cosmicPortData, manufactoryData, starLabsData, resources);
+
+        var studiesSaveData = StudiesManager.Instance.CreatSaveData();
+
+        var settlementData = new SettlementData(planet, cosmicPortData, manufactoryData, starLabsData, studiesSaveData, productionData, resources);
 
         return settlementData;
     }
@@ -103,14 +100,18 @@ public class SettlementData
     public CosmicPortData cosmicPortData;
     public ManufactoryData manufactoryData;
     public StarLabsData starLabsData;
+	public ProductionData productionData;
+    public StudiesSaveData studiesSaveData;
     public List<Resource> resources;
 
-    public SettlementData(Planet planet, CosmicPortData cosmicPortData, ManufactoryData manufactoryData, StarLabsData starLabsData, List<Resource> resources)
+    public SettlementData(Planet planet, CosmicPortData cosmicPortData, ManufactoryData manufactoryData, StarLabsData starLabsData, StudiesSaveData studiesSaveData, ProductionData productionData, List<Resource> resources)
     {
         this.planet = planet;
         this.cosmicPortData = cosmicPortData;
         this.manufactoryData = manufactoryData;
         this.starLabsData = starLabsData;
+        this.studiesSaveData = studiesSaveData;
+		this.productionData = productionData;
         this.resources = resources;
     }
 
